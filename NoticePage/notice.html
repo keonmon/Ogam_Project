@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지페이지</title>
+    <link rel="stylesheet" type="text/css" href="/css/notice.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="top-menu">
+                <ul>
+                    <li>
+                        <div id="mainImg">
+                            <a href="#">
+                                <img src="/Img/logoImg.png" />
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span> <i class="fa-solid fa-users-rectangle"></i></span>
+                            <span>내 일기장</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span> <i class="fa-solid fa-table"></i></span>
+                            <span>친구의 일기장</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span> <i class="fa-solid fa-house-user"></i></span>
+                            <span>오늘의 일기장</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li>
+                        대표 : 이건희
+                    </li>
+                    <li>
+                        대표번호 : 010 - 1111 - 1111
+                    </li>
+                    <li>
+                        개인정보취급방침
+                    </li>
+                    <li>
+                        이용약관
+                    </li>
+                    <li>
+                        COPYRIGHT 2022 BY diary. <br />
+                        All Rights Reserved.
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <main class="bodyContainer">
+            <div class="menubar">
+                <div id="left-menu">
+                    <span id="writeDiary">
+                        <a href="#">감정 작성하기</a>
+                    </span>
+                </div>
+                <div id="rigth-menu">
+                    <span class="board">
+                        <a href="#">
+                            <span>공지</span>
+                        </a>
+                    </span>
+                    <span class="notifi">
+                        <a href="#">
+                            <i class="fa-regular fa-comment-dots"></i>
+                        </a>
+                    </span>
+                    <span>
+                        <img src="/img/food1.jpg" id="user_img">
+                    </span>
+                    <span class="login">
+                        <a href="#">
+                            <span>로그인</span>
+                        </a>
+                    </span>
+                    <span class="logout">
+                        <a href="#">
+                            <span>로그아웃</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="contents">
+                <div>
+                    <p>공지</p>
+                </div>
+                <div class="notice">
+                    <div>공지합니다</div>
+                    <div><i class="fa-sharp fa-solid fa-arrow-down"></i></div>
+                </div>
+                <!-- <ul class="notice">
+                    <li>
+                        <a href="#">MENU</a>
+                        <ul class="notice_sub">
+                            <li><a href="#">SUB MENU</a></li>
+                            <li><a href="#">SUB MENU</a></li>
+                        </ul>
+                    </li>
+                </ul> -->
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".notice ul.notice_sub").hide();
+            $(".notice ul.notice li").click(function () {
+                $("ul", this).slideToggle("fast");
+            });
+        });
+    </script>
+</body>
+
+</html>
