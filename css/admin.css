@@ -1,0 +1,197 @@
+/* 전체 스타일 */
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+}
+
+/* 사이드바 스타일 */
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 960px;
+}
+
+.bodyContainer{
+    width: 100%;
+}
+
+.sidebar li{
+    list-style: none;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: left;
+    padding: 30px 0px;
+    /* border-bottom: 2px solid #908BE8; */
+}
+
+.sidebar li:first-child {
+    padding: 0px;
+}
+
+.top-menu li:hover{
+    background-color: #d1cef2;
+}
+
+.footer{
+    flex-direction: column;
+    margin-top: auto;
+}
+.footer li{
+    justify-content: center;
+    font-size: 15px;
+    font-weight: none;
+    text-align: center;
+    color: #B7B6B6;
+    padding: 5px 0px;
+    border-bottom: none;
+    background-color: none;
+}
+
+
+
+/* 사이드바 메인 이미지 */
+#mainImg {
+    width: 280px;
+}
+#mainImg img{
+    width: 100%;
+}
+
+.sidebar span:first-child{
+    margin-left: 40px;
+}
+.sidebar span:last-child{
+    margin-left: 30px;
+    color: #13056C;
+}
+
+/* 바디콘테이너 스타일 */
+.bodyContainer{
+    background-color: #f1f1f1; 
+}
+
+/* 메뉴바 스타일 */
+.menubar{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 20px auto;
+    width: 95%;
+    height: 110px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+#left-menu {
+    display: flex;
+    width: 100%;
+}
+
+#rigth-menu {
+    display: flex;
+    height: 100%;
+}
+
+.menubar span{
+    display: flex;
+    justify-content: space-around;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+/*일기작성*/
+#writeDiary {
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #ccbbf0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#writeDiary a{
+    color: white;
+}
+
+/* 공지 스타일 */
+.board{
+    font-size: 2em;
+    font-weight: bold;
+    color: #13056C;
+}
+.board:hover {
+    transform: translateY(-10px);
+    transition-duration: 2s;
+}
+
+/* 알림 스타일 */
+.notifi{
+    font-size: 2em;
+    font-weight: bold;
+    color: #13056C;
+}
+
+/* 이미지 스타일 */
+#user_img{
+    width: 80%;
+    height: 80%;
+    border: 1px solid gainsboro;
+    border-radius: 50%;
+    background-color: white;
+}
+
+/* 로그인 스타일 */
+.login{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #13056C;
+}
+
+/* 로그아웃 스타일 */
+.logout{
+    display: none;
+}
+
+/*title*/
+#title {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-align: center;
+    color: #13056C;
+    width: 160px;
+}
+
+/* 콘텐츠 스타일 */
+
+.contents{
+    display: flex;
+    justify-content: space-around;
+}
+
+/*content*/
+.col2-1{
+    /* border: 1px solid black; */
+    width: 220px;
+    height: 170px;
+    border-radius: 10%;
+    background-color: white;
+    box-shadow: 0px 1px 2px gray;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+/*middel menu*/
+.col2-1 i {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
