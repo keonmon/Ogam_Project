@@ -4,20 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자모드</title>
-    <link rel="stylesheet" type="text/css" href="./css/admin.css" />
-    <link rel="stylesheet" type="text/css" href="./css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script>
         $(document).ready(function() {
-            $(".adminHeader").load("./adminHeader.html");
+            $(".adminHeader").load("./adminHeadMenu.html");
+            $(".adminSide").load("./adminSideMenu.html");
         })
     </script>
 </head>
 
 <body>
     <div id="wrap">
-        <div class="adminHeader"></div>
+        <span class="adminSide"></span>
+        <span class="adminHeader"></span>
     </div>
 </body>
 
