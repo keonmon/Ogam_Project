@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">   
+    $(document).ready( function() { 
+        $(".sidebar").load("./sidebar.html");     
+        $(".menubar").load("./menubar.html"); 
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar"></aside>
+        <main class="bodyContainer">
+            <div class="menubar"></div>            
+            <div class="content">
+                <div>여긴 댓글 관리</div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
