@@ -13,11 +13,13 @@
     display: flex;
     flex-direction: column;
     width: 280px;
-    height: 960px;
+    height: 100vh;
+    min-height: 900px;
 }
 
 .bodyContainer{
-    width: 100%;
+    width: 100vw;
+    min-width: 900px;
 }
 
 .sidebar li{
@@ -40,6 +42,7 @@
 .footer{
     flex-direction: column;
     margin-top: auto;
+    margin-bottom: 20px;
 }
 .footer li{
     justify-content: center;
@@ -68,11 +71,13 @@
 .sidebar span:last-child{
     margin-left: 30px;
     color: #13056C;
+    min-width: 900px;
 }
 
 /* 바디콘테이너 스타일 */
 .bodyContainer{
     background-color: #f1f1f1; 
+    min-width: 600px;
 }
 
 /* 메뉴바 스타일 */
@@ -82,7 +87,7 @@
     align-items: center;
     margin: 20px auto;
     width: 95%;
-    height: 110px;
+    height: 75px;
     border-radius: 15px;
     background-color: white;
 }
