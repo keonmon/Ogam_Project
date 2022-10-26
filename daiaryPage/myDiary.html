@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my_diary</title>
+    <link rel="stylesheet" type="text/css" href="../css/test.css" />
+    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link href="../css/myDiary.css" rel="stylesheet">
+    <link href="../css/scrollModules.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <aside class="sidebar">
+            <div class="top-menu">
+                <ul>
+                    <li>
+                        <div id="mainImg">
+                            <a href="../user_main.html">
+                                <img src="../Img/logoImg.png" />
+                            </a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="./myDiary.html">
+                            <span> <i class="fa-solid fa-users-rectangle"></i></span>
+                            <span>내 일기장</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span> <i class="fa-solid fa-table"></i></span>
+                            <span>친구의 일기장</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span> <i class="fa-solid fa-house-user"></i></span>
+                            <span>오늘의 일기장</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li>
+                        대표 : 이건희
+                    </li>
+                    <li>
+                        대표번호 : 010 - 1111 - 1111
+                    </li>
+                    <li>
+                        개인정보취급방침
+                    </li>
+                    <li>
+                        이용약관
+                    </li>
+                    <li>
+                        COPYRIGHT 2022 BY diary. <br />
+                        All Rights Reserved.
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <main class="bodyContainer">
+            <div class="menubar">
+                <div id="left-menu">
+                    <span id="writeDiary">
+                        <a href="#">감정 작성하기</a>
+                    </span>
+                </div>
+                <div id="rigth-menu">
+                    <span class="board">
+                        <a href="#">
+                            <span>공지</span>
+                        </a>
+                    </span>
+                    <span class="notifi">
+                        <a href="#">
+                            <i class="fa-regular fa-comment-dots"></i>
+                        </a>
+                    </span>
+                    <span>
+                        <img src="../img/logoImg.png" id="user_img">
+                    </span>
+                    <span class="login">
+                        <a href="#">
+                            <span>로그인</span>
+                        </a>
+                    </span>
+                    <span class="logout">
+                        <a href="#">
+                            <span>로그아웃</span>
+                        </a>
+                    </span>
+                </div>
+            </div>
+            <div class="contents">
+                <!-- ====================contents 영역======================= -->
+                <article>
+                    <!-- 최근 내 감정 -->
+                    <div class="my_currDiarys">
+                    <div class="mod1_Outline_shdw">
+                        <div class="mod1_Outline">
+                            <div class="mod1_Outline2">
+                                <div class="mod1_grey"></div>
+                                <div class="mod1_titleBg">
+                                    <span class="mod1_titleFont">최근 내 감정</span>
+                                </div>
+                            </div>
+                            <div class="mod1_slider_me slider">
+                                <div class="mod1_innerSlide">
+                                    <!-- 최대 10개 의 mod1_innerContents
+                                        10 * ( width:230px + margin-right:20px ) -->
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_nick">김길동</span>
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
+                                                <span class="mod1_d_imoji">🥰</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 여기 이하는 반복임(더미) -->
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
+                                                <span class="mod1_d_imoji">😥</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
+                                                <span class="mod1_d_imoji">😩</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
+                                                <span class="mod1_d_imoji">🤬</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
+                                                <span class="mod1_d_imoji">😻</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
+                                                <span class="mod1_d_imoji">🥰</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
+                                                <span class="mod1_d_imoji">😥</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
+                                                <span class="mod1_d_imoji">😩</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
+                                                <span class="mod1_d_imoji">🤬</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
+                                                <span class="mod1_d_imoji">😻</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 더미데이터 종료 -->
+                                    
+                                </div><!-- /innerSlide -->
+
+                            </div>
+                        </div>
+                    </div> <!-- /module1 -->
+                </div><!-- /최근 내 감정 -->
+                <!-- 내 감정 캘린더 -->
+                <div class="my_calendar">
+                    <div class="mod1_Outline_shdw">
+                        <div class="mod1_Outline">
+                            <div class="mod1_Outline2">
+                                <div class="mod1_grey"></div>
+                                <div class="mod1_titleBg">
+                                    <span class="mod1_titleFont">내 감정 달력</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /내 감정 캘린더 -->
+
+                <!-- 랜덤 감정 -->
+                <div class="rand_Diary">
+                    <div class="mod1_Outline_shdw">
+                        <div class="mod1_Outline">
+                            <div class="mod1_Outline2">
+                                <div class="mod1_grey"></div>
+                                <div class="mod1_titleBg">
+                                    <span class="mod1_titleFont">친구의 감정</span>
+                                </div>
+                            </div>
+                            <div class="mod1_slider_frnd slider">
+                                <div class="mod1_innerSlide">
+                                    <!-- 최대 10개 의 mod1_innerContents
+                                        10 * ( width:230px + margin-right:20px ) -->
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_nick">김길동</span>
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
+                                                <span class="mod1_d_imoji">🥰</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 여기 이하는 반복임(더미) -->
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
+                                                <span class="mod1_d_imoji">😥</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
+                                                <span class="mod1_d_imoji">😩</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
+                                                <span class="mod1_d_imoji">🤬</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
+                                                <span class="mod1_d_imoji">😻</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
+                                                <span class="mod1_d_imoji">🥰</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
+                                                <span class="mod1_d_imoji">😥</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
+                                                <span class="mod1_d_imoji">😩</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
+                                                <span class="mod1_d_imoji">🤬</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mod1_innerContents">
+                                        <div class="mod1_d_bg">
+                                            <div class="mod1_d_set">
+                                                <span class="mod1_d_date">10. 16. Sun</span>
+                                                <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
+                                                <span class="mod1_d_imoji">😻</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 더미데이터 종료 -->
+                                    
+                                </div><!-- /innerSlide -->
+
+                            </div>
+                        </div>
+
+                    </div> <!-- /module1 -->
+                </div><!-- 친구의 감정 -->
+
+
+
+                <!-- 내 감정 스크롤 -->
+                <script>
+                    /* 상하 스크롤 슬라이더 */
+                    const sliderY = document.querySelector('.mod1_slider_me');
+                    let isMouseDownY = false;
+                    let startY, scrollTop;
+
+                    sliderY.addEventListener('mousedown', (e) => {
+                        isMouseDownY = true;
+                        sliderY.classList.add('active');
+
+                        startY = e.pageY - sliderY.offsetLeft;
+                        scrollTop = sliderY.scrollTop;
+                    });
+
+                    sliderY.addEventListener('mouseleave', () => {
+                        isMouseDownY = false;
+                        sliderY.classList.remove('active');
+                    });
+
+                    sliderY.addEventListener('mouseup', () => {
+                        isMouseDownY = false;
+                        sliderY.classList.remove('active');
+                    });
+
+                    sliderY.addEventListener('mousemove', (e) => {
+                        if (!isMouseDownY) return;
+
+                        e.preventDefault();
+                        const y = e.pageY - sliderY.offsetLeft;
+                        const walk = (y - startY) * 1;
+                        sliderY.scrollTop = scrollTop - walk;
+                    });
+                </script>
+                <!-- 친구 감정 스크롤 -->
+                <script>
+                    /* 상하 스크롤 슬라이더 */
+                    const sliderY2 = document.querySelector('.mod1_slider_frnd');
+                    let isMouseDownY2 = false;
+                    let startY2, scrollTop2;
+
+                    sliderY2.addEventListener('mousedown', (e) => {
+                        isMouseDownY2 = true;
+                        sliderY2.classList.add('active');
+
+                        startY2 = e.pageY - sliderY2.offsetLeft;
+                        scrollTop2 = sliderY2.scrollTop;
+                    });
+
+                    sliderY2.addEventListener('mouseleave', () => {
+                        isMouseDownY2 = false;
+                        sliderY2.classList.remove('active');
+                    });
+
+                    sliderY2.addEventListener('mouseup', () => {
+                        isMouseDownY2 = false;
+                        sliderY2.classList.remove('active');
+                    });
+
+                    sliderY2.addEventListener('mousemove', (e) => {
+                        if (!isMouseDownY2) return;
+
+                        e.preventDefault();
+                        const y = e.pageY - sliderY2.offsetLeft;
+                        const walk = (y - startY2) * 1;
+                        sliderY2.scrollTop = scrollTop2 - walk;
+                    });
+                </script>
+
+                </article>
+            </div>
+            <!-- ==================== / contents 영역======================= -->
+            
+        </main>
+    </div>
+</body>
+
+</html>
