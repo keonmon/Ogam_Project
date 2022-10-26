@@ -28,7 +28,7 @@
     font-weight: bold;
     text-align: left;
     padding: 30px 0px;
-    border-bottom: 2px solid #908BE8;
+    /* border-bottom: 2px solid #908BE8; */
 }
 
 .sidebar li:first-child {
@@ -71,13 +71,12 @@
 .sidebar span:last-child{
     margin-left: 30px;
     color: #13056C;
-    min-width: 900px;
 }
 
 /* 바디콘테이너 스타일 */
 .bodyContainer{
     background-color: #f1f1f1; 
-    min-width: 600px;
+    min-width: 900px;
 }
 
 /* 메뉴바 스타일 */
@@ -146,7 +145,6 @@
 }
 
 /* 이미지 스타일 */
-
 #user_img{
     width: 80%;
     height: 80%;
@@ -167,93 +165,38 @@
     display: none;
 }
 
+/*title*/
+#title {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-align: center;
+    color: #13056C;
+    width: 160px;
+}
+
 /* 콘텐츠 스타일 */
 
-.notice_title{
+.contents{
     display: flex;
-    justify-content: center;
-    font-size: 35px;
-    font-weight: bold;
+    justify-content: space-around;
+    height: 88vh;
 }
 
-/* 공지 박스 스타일 */
-.notice-title p{
-    display: flex;
-    justify-content: center;
-    font-size: 40px;
-    margin-top: 0px;
-}
-.notice-container{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-.notice-content{
-    display: flex;
-    justify-content: start;
+/*content*/
+.col2-1{
+    /* border: 1px solid black; */
+    width: 220px;
+    height: 170px;
+    border-radius: 10%;
+    background-color: white;
+    box-shadow: 0px 1px 2px gray;
     font-size: 25px;
-    color: black;
-    width: 100%;
+    text-align: center;
+    padding-top: 20px;
 }
 
-
-.dropbtn_icon{
-    font-family : 'Material Icons';
-}
-.dropbtn div:first-child{
-    width: 92%;
-}
-.dropdown{
-    margin-bottom: 20px;
-}
-.dropbtn{
-    display : flex;
-    margin: auto;
-    border : 2px solid rgb(94, 94, 94);
-    border-radius : 15px;
-    background-color: #fcfcfc;
-    font-weight: 400;
-    color : rgb(124, 124, 124);
-    padding : 12px;
-    width :80rem;
-    height: 80px;
-    align-items: center;
-    text-align: left;
-    font-size : 12px;
-    z-index :1;
-}
-.dropdown-content{
-    display : none;
-    font-weight: 400;
-    background-color: #fcfcfc;
-    border-radius: 8px;
-    width: 100%;
-    height : 100%;
-    box-shadow: 0px 0px 10px 3px rgba(190, 190, 190, 0.6);
-}
-.dropbtn_click{
-    display: flex;
-    font-size: 16px;
-    color : black;
-    cursor: pointer;
-}
-/* 내용보기 스타일 */
-.dropdown-content::-webkit-scrollbar{
-    height : 10px;
-}
-.dropdown-content::-webkit-scrollbar-thumb{
-    border-radius : 2px;
-    background-color :rgb(194, 194, 194)
-}
-.show{
-    display : block;
-    margin: 0px auto 20px;
-    width: 80rem;
-    max-height: 20rem;
-    text-decoration: none;
-    color : rgb(37, 37, 37);
-    font-size: 18px;
-    padding : 20px;
-    overflow-y: auto;   
-
+/*middel menu*/
+.col2-1 i {
+    font-size: 50px;
+    margin-bottom: 10px;
 }
