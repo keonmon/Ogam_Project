@@ -28,7 +28,7 @@
     font-weight: bold;
     text-align: left;
     padding: 30px 0px;
-    border-bottom: 2px solid #908BE8;
+    /* border-bottom: 2px solid #908BE8; */
 }
 
 .sidebar li:first-child {
@@ -71,13 +71,12 @@
 .sidebar span:last-child{
     margin-left: 30px;
     color: #13056C;
-    min-width: 900px;
 }
 
 /* 바디콘테이너 스타일 */
 .bodyContainer{
     background-color: #f1f1f1; 
-    min-width: 600px;
+    min-width: 900px;
 }
 
 /* 메뉴바 스타일 */
@@ -166,22 +165,38 @@
     display: none;
 }
 
-/* 콘텐츠 스타일 */
-
-.contents div:first-child{
-    display: flex;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: bold;
+/*title*/
+#title {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-align: center;
+    color: #13056C;
+    width: 160px;
 }
 
-.notice{
+/* 콘텐츠 스타일 */
+
+.contents{
     display: flex;
-    margin: 20px auto 0px;
-    padding: 10px 5px;
-    border: 1px solid black;
-    width: 70%;
-    height: 100px;
-    background-color: rgb(190, 190, 190);
-    border-radius: 15px;
+    justify-content: space-around;
+    height: 88vh;
+}
+
+/*content*/
+.col2-1{
+    /* border: 1px solid black; */
+    width: 220px;
+    height: 170px;
+    border-radius: 10%;
+    background-color: white;
+    box-shadow: 0px 1px 2px gray;
+    font-size: 25px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+/*middel menu*/
+.col2-1 i {
+    font-size: 50px;
+    margin-bottom: 10px;
 }

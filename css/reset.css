@@ -2,6 +2,11 @@ html, body, h1, input, select {
     font-family:'Apple SD Gothic Neo', arial, sans-serif
 }
 
+html, body {
+    padding :0;
+    margin :0;
+}
+
 body, h1 {
     font-size:14px;
 }

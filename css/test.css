@@ -14,11 +14,13 @@
     display: flex;
     flex-direction: column;
     width: 280px;
-    height: 960px;
+    height: 100vh;
+    min-height: 900px;
 }
 
 .bodyContainer{
-    width: 100%;
+    width: 100vw;
+    min-width: 900px;
 }
 
 .sidebar li{
@@ -41,6 +43,7 @@
 .footer{
     flex-direction: column;
     margin-top: auto;
+    margin-bottom: 20px;
 }
 .footer li{
     justify-content: center;
@@ -83,7 +86,7 @@
     align-items: center;
     margin: 20px auto;
     width: 95%;
-    height: 110px;
+    height: 75px;
     border-radius: 15px;
     background-color: white;
 }
@@ -166,4 +169,5 @@
 
 .contents{
     display: flex;
+    height: 88vh;
 }
