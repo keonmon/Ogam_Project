@@ -9,6 +9,7 @@
 
 /* 사이드바 스타일 */
 
+
 .sidebar{
     display: flex;
     flex-direction: column;
