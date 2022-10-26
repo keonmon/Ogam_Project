@@ -62,7 +62,7 @@
 .contents article .mod2_titleBg {
     background-color: #ba99ff;
     width: 100%;
-    height: 70px;
+    height: 60px;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -76,13 +76,14 @@
     color: #ffffff;
     width: 100%;
     height: 100%;
-    line-height: 70px;
+    line-height: 60px;
     position: relative;
     display : inline-block;
     margin:0 auto;
     top:0px;
     font-family: Inter;
     text-align: center;
+    font-weight: bold;
     font-size: 30px;
 }
 
@@ -104,7 +105,7 @@
     height: 100%;
     position: absolute;
     left: 0px;
-    top: 89px;
+    top: 80px;
 }
 
 .contents article .active {
@@ -143,6 +144,18 @@
     top: 15px;
 }
 
+.contents article .mod2_d_nick {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 100px;
+    right: 5px;
+    font-family: Work Sans;
+    text-align: right;
+    font-size: 15px;
+    font-weight: bold;;
+}
+
 .contents article .mod2_d_date {
     width: 100%;
     height: 100%;
@@ -176,17 +189,18 @@
 /* 작은 스크롤 감싸는 div*/
 
 .contents .my_currDiarys {
-    display: inline-block;
+    display: block;
     width: 49%;
-    height: 60%;
+    height: 58%;
     position: relative;
     top: 20px;
+    float:left;
 }
 
 .contents .frnd_currDiary {
-    display: inline-block;
+    display: block;
     width: 49%;
-    height: 60%;
+    height: 58%;
     position: relative;
     top: 20px;
     float: right;
@@ -246,7 +260,7 @@
 .contents article .mod1_titleBg {
     background-color: #ba99ff;
     width: 100%;
-    height: 70px;
+    height: 60px;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -261,19 +275,20 @@
     color: #ffffff;
     width: 100%;
     height: 100%;
-    line-height: 70px;
+    line-height: 60px;
     position: relative;
     display : inline-block;
     margin:0 auto;
     top:0px;
     font-family: Inter;
     text-align: center;
+    font-weight: bold;
     font-size: 30px;
 }
 
-/* .contents article .mod1_slider {
+/* .contents article .slider {
     width: 100%;
-    height: 327px;
+    height: 100%;
     position: relative;
     left: 0px;
     top: 0px;
@@ -283,11 +298,14 @@
 } */
 
 .contents article .mod1_innerSlide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     width: 90%;
-    height: 1500px;
+    height: 1200px;
     position: absolute;
     left: 0px;
-    top: 89px;
+    top: 65px;
     margin: 0 5%;
 }
 
@@ -327,6 +345,18 @@
     top: 10px;
 }
 
+
+.contents article .mod1_d_nick {
+    width: auto;
+    position: absolute;
+    bottom: 0px;
+    left: 75px;
+    font-family: Work Sans;
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 .contents article .mod1_d_date {
     width: 100%;
     position: absolute;
@@ -339,8 +369,8 @@
 }
 
 .contents article .mod1_d_diary {
-    width: 78%;
-    right: 0px;
+    width: auto;
+    left: 80px;
     position: absolute;
     font-family: Work Sans;
     text-align: left;

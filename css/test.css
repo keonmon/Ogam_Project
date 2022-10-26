@@ -14,12 +14,12 @@
     display: flex;
     flex-direction: column;
     width: 280px;
-    height: 100vh;
-    min-height: 900px;
+    height: 99vh;
+    min-height: 650px;
 }
 
 .bodyContainer{
-    width: 100vw;
+    width: 99vw;
     min-width: 900px;
 }
 
