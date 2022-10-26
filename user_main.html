@@ -102,7 +102,8 @@
             <div class="contents">
                 <!-- ====================contents 영역======================= -->
                 <article>
-
+                    
+                    <!-- 모두의 감정 -->
                     <div class="mod2_Outline_shdw">
                         <div class="mod2_Outline">
                             <div class="mod2_Outline2">
@@ -118,6 +119,7 @@
                                     <div class="mod2_innerContents">
                                         <div class="mod2_d_bg">
                                             <div class="mod2_d_set">
+                                                <span class="mod2_d_nick">김길동</span>
                                                 <span class="mod2_d_date">10. 16. Sun</span>
                                                 <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
                                                 <span class="mod2_d_imoji">🥰</span>
@@ -213,7 +215,6 @@
                         </div>
                     </div><!-- /moduOutline -->
 
-
                     <!-- 최근 내 감정 -->
                     <div class="my_currDiarys">
                         <div class="mod1_Outline_shdw">
@@ -224,13 +225,14 @@
                                         <span class="mod1_titleFont">최근 내 감정</span>
                                     </div>
                                 </div>
-                                <div class="mod1_slider slider">
+                                <div class="mod1_slider_me slider">
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
                                         <div class="mod1_innerContents">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
+                                                    <span class="mod1_d_nick">김길동</span>
                                                     <span class="mod1_d_date">10. 16. Sun</span>
                                                     <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
                                                     <span class="mod1_d_imoji">🥰</span>
@@ -328,7 +330,6 @@
                         </div> <!-- /module1 -->
                     </div><!-- /최근 내 감정 -->
 
-
                     <!-- 친구의 감정 -->
                     <div class="frnd_currDiary">
                         <div class="mod1_Outline_shdw">
@@ -339,13 +340,14 @@
                                         <span class="mod1_titleFont">친구의 감정</span>
                                     </div>
                                 </div>
-                                <div class="mod1_slider slider">
+                                <div class="mod1_slider_frnd slider">
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
                                         <div class="mod1_innerContents">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
+                                                    <span class="mod1_d_nick">김길동</span>
                                                     <span class="mod1_d_date">10. 16. Sun</span>
                                                     <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
                                                     <span class="mod1_d_imoji">🥰</span>
@@ -444,8 +446,7 @@
                         </div> <!-- /module1 -->
                     </div><!-- 친구의 감정 -->
 
-
-
+                    <!-- 모두 감정 스크롤-->
                     <script>
                         /* 좌우 스크롤 슬라이더 */
                         const slider = document.querySelector('.mod2_slider');
@@ -479,10 +480,10 @@
                             slider.scrollLeft = scrollLeft - walk;
                         });
                     </script>
-                    
+                    <!-- 내 감정 스크롤 -->
                     <script>
                         /* 상하 스크롤 슬라이더 */
-                        const sliderY = document.querySelector('.mod1_slider');
+                        const sliderY = document.querySelector('.mod1_slider_me');
                         let isMouseDownY = false;
                         let startY, scrollTop;
     
@@ -511,6 +512,40 @@
                             const y = e.pageY - sliderY.offsetLeft;
                             const walk = (y - startY) * 1;
                             sliderY.scrollTop = scrollTop - walk;
+                        });
+                    </script>
+                    <!-- 친구 감정 스크롤 -->
+                    <script>
+                        /* 상하 스크롤 슬라이더 */
+                        const sliderY2 = document.querySelector('.mod1_slider_frnd');
+                        let isMouseDownY2 = false;
+                        let startY2, scrollTop2;
+    
+                        sliderY2.addEventListener('mousedown', (e) => {
+                            isMouseDownY2 = true;
+                            sliderY2.classList.add('active');
+    
+                            startY2 = e.pageY - sliderY2.offsetLeft;
+                            scrollTop2 = sliderY2.scrollTop;
+                        });
+    
+                        sliderY2.addEventListener('mouseleave', () => {
+                            isMouseDownY2 = false;
+                            sliderY2.classList.remove('active');
+                        });
+    
+                        sliderY2.addEventListener('mouseup', () => {
+                            isMouseDownY2 = false;
+                            sliderY2.classList.remove('active');
+                        });
+    
+                        sliderY2.addEventListener('mousemove', (e) => {
+                            if (!isMouseDownY2) return;
+    
+                            e.preventDefault();
+                            const y = e.pageY - sliderY2.offsetLeft;
+                            const walk = (y - startY2) * 1;
+                            sliderY2.scrollTop = scrollTop2 - walk;
                         });
                     </script>
 
