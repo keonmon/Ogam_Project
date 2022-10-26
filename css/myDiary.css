@@ -10,17 +10,26 @@
 .contents .my_currDiarys {
     display: block;
     width: 49%;
-    height: 58%;
+    height: 90%;
     position: relative;
     top: 20px;
     float:left;
 }
 
-.contents .frnd_currDiary {
+.contents .my_calendar {
     display: block;
     width: 49%;
-    height: 58%;
+    height: 45%;
     position: relative;
     top: 20px;
+    float: right;
+}
+
+.contents .rand_Diary {
+    display: block;
+    width: 49%;
+    height: 43%;
+    position: relative;
+    top: 35px;
     float: right;
 }
