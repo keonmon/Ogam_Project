@@ -1,0 +1,93 @@
+/* 검색하기 */
+.searchTap {
+    position:relative;
+    margin-top: 5%;
+    margin-left: 32%;
+}
+
+.searchList {
+    width: 15%;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2vw;
+    font-weight: bold;
+    
+}
+
+.searchInput {
+    width: 40%;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+.searchBtn {
+    width: 60px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    text-align: center;
+    font-size: 1.2vw;
+    font-weight: bold;
+}
+
+/* 테이블 디자인 */
+.table{
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    top: 15%;
+    width: 95%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-radius: 15px !important;
+    background-color: white;
+}
+
+/* 행 장식 */
+.table th {
+    position : sticky;
+    top: 0;
+    padding: 30px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2vw;
+    background: #908BE8;
+    color: #FFFFFF;
+}
+
+.table td {
+    padding: 20px;
+    width: 100%;
+    font-size: 1vw;
+    text-align: center;
+}
+
+.table tbody tr:nth-child(2n-1){
+    background-color: #ECEBFF;
+}
+
+
+/* 테이블 컬럼 */
+input[type=checkbox] {
+    zoom: 2;
+}
+
+/* 하단 버튼 */
+.footerBtn {
+    display: inline-block; 
+    float: right;
+    padding: 35px;
+    font-size: 1vw;
+    text-decoration: none;
+    color:black"
+}
+
+.noticeBtn {
+    margin-right: 20px;
+}
+

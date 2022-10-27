@@ -1,26 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">    
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">   
-    $(document).ready( function() { 
-        $(".sidebar").load("./sidebar.html");     
-        $(".menubar").load("./menubar.html"); 
-    });
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../css/adminList.css" />
+    <script type="text/javascript" src="../js/adminList.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>    
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".sidebar").load("./sidebar.html");
+        $(".menubar").load("./menubar.html");
+      });
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <aside class="sidebar"></aside>
-        <main class="bodyContainer">
-            <div class="menubar"></div>            
-            <div class="content">
-                <div>여긴 일기장 관리</div>
-            </div>
-        </main>
+      <aside class="sidebar"></aside>
+      <main class="bodyContainer">
+        <div class="menubar"></div>
+        <div class="content">
+          <div class="searchTap">
+            <form action="#" method="get">
+              <select class="searchList" id="searchType" name="searchType">
+                <option value="open" selected>공개/비공개</option>
+                <option value="emotion">감정</option>
+                <option value="email">이메일</option>
+                <option value="nick">닉네임</option>
+              </select>
+              <input
+                class="searchInput"
+                type="text"
+                id="searchKeyword"
+                name="searchKeyword"
+                placeholder="해당 정보를 입력해주세요."
+                value=""
+              />
+
+              <input type="submit" class="searchBtn" value="검색" />
+            </form>
+          </div>
+          <!-- 테이블 -->
+          <div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>
+                    <input
+                      type="checkbox"
+                      name="check"
+                      value="selectall"
+                      onclick="selectAll(this)"
+                    />
+                  </th>
+                  <th>공개/비공개</th>
+                  <th>감정 분류</th>
+                  <th>이모지</th>
+                  <th>작성자 이메일</th>
+                  <th>닉네임</th>
+                  <th>일기</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>공개</td>
+                  <td>기쁨</td>
+                  <td>이모지</td>
+                  <td>aaa@aaa.com</td>
+                  <td>하이하이</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>공개</td>
+                  <td>슬픔</td>
+                  <td>이모지</td>
+                  <td>bbb@bbb.com</td>
+                  <td>바이바이</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>비공개</td>
+                  <td>행복</td>
+                  <td>이모지</td>
+                  <td>ccc@ccc.com</td>
+                  <td>굿바잉2</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>공개</td>
+                  <td>기쁨</td>
+                  <td>이모지</td>
+                  <td>aaa@aaa.com</td>
+                  <td>하이하이</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>공개</td>
+                  <td>슬픔</td>
+                  <td>이모지</td>
+                  <td>bbb@bbb.com</td>
+                  <td>바이바이</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>비공개</td>
+                  <td>행복</td>
+                  <td>이모지</td>
+                  <td>ccc@ccc.com</td>
+                  <td>굿바잉</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>비공개</td>
+                  <td>행복</td>
+                  <td>이모지</td>
+                  <td>ccc@ccc.com</td>
+                  <td>굿바잉2</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>공개</td>
+                  <td>기쁨</td>
+                  <td>이모지</td>
+                  <td>aaa@aaa.com</td>
+                  <td>하이하이</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>공개</td>
+                  <td>슬픔</td>
+                  <td>이모지</td>
+                  <td>bbb@bbb.com</td>
+                  <td>바이바이</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" name="check" /></td>
+                  <td>비공개</td>
+                  <td>행복</td>
+                  <td>이모지</td>
+                  <td>ccc@ccc.com</td>
+                  <td>굿바잉</td>
+                  <td><a href="#" target="_blank">이동</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- 테이블 end-->
+          <div class="footerBtn">
+            <span class="deleteBtn"><a href="#"><i class="fa-solid fa-trash"></i>선택 삭제</a></span>            
+          </div>
+        </div>
+        <!-- content end -->
+      </main>
     </div>
-</body>
+  </body>
 </html>
