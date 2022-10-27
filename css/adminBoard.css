@@ -1,0 +1,100 @@
+.content {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    padding: 20px 30px;
+    /* border: 5px solid red; */
+}
+
+/* 공지글 판*/
+#board {
+    width: 970px;
+    height: 700px;
+    /* border: 1px solid black; */
+    border-radius: 30px;
+    background-color: #D9D9D9;
+    box-shadow: 0px 2px 5px gray;
+}
+
+/* 제목, 공개여부 칸 */
+#board_top{
+    display: flex;
+    justify-content: space-between;
+    /* border: 3px solid red; */
+    height: 95px;
+    padding: 0px 40px;
+}
+
+.titles {
+    font-size: 1.7em;
+    display: flex;
+    align-items: center;
+}
+
+/* 제목 작성 칸 */
+.titles input[type="text"] {
+    width: 670px;
+    height: 38px;
+    margin-left: 10px;
+    border: none;
+    box-shadow: inset 0px 1px 6px gray;
+    border-radius: 7px;
+    font-size: 1em;
+    outline-color: #e4d8ff;
+}
+
+/* 공개 여부*/
+.titles input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    box-shadow: inset -1px 1px 5px gray;
+    border-radius: 5px;
+    background-color: white;
+    appearance: none;
+}
+
+.titles input[type="checkbox"]:checked {
+    background-color: #d6c4ff;
+    border: none;
+  }
+
+  /* 공지 내용 부분 */
+#board_middle {
+    padding: 0px 40px;
+    /* border: 5px solid red; */
+    height: 610px;
+}
+
+#board_middle textarea {
+    width: 100%;
+    height: 94%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset -1px 1px 5px gray;
+    outline-color: #e4d8ff;
+}
+
+
+/* 공지 저장 버튼*/
+#board_bottom {
+    display: flex;
+    justify-content: center;
+    /* border: 5px solid red; */
+    width: 100%;
+    margin-top: 20px;
+}
+
+#board_bottom input{
+    width: 100px;
+    height: 50px;
+    font-size: 1.3em;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 0px 2px 5px gray;
+}
+
+#board_bottom input:hover {
+    background-color: #a4cdfa;
+}

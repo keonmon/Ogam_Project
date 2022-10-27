@@ -1,0 +1,116 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+/* 팝업창 */
+#wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.line {
+    display: flex;
+    flex-direction: column;
+    border: 10px solid #dde4fd;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+/* title */
+#top {
+    margin-bottom: 10px;
+}
+
+#title {
+    font-size: 1em;
+    font-weight: 650;
+}
+
+/* middle */
+#middle {
+    display: flex;
+    flex-direction: column;
+    margin-left: 7px;
+}
+
+.box {
+    padding: 0px 10px 10px 10px;
+    display: flex; 
+    text-align: right;
+    justify-content: start;
+}
+
+/* 프로필 사진 */
+.box:first-child img {
+    border: 1px solid black;
+    margin-left: 8px;
+    width: 50px;
+    height: 60px;
+}
+
+/* 프로필 사진 */
+#sTitle {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 0px 20px;
+    width: 30px;
+    /* border: 3px solid red; */
+    font-size: 0.7em;
+  }
+
+/* 나머지 타이틀 */
+.sTitle {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    font-size: 0.7em;
+    width: 65px;
+    /* border: 3px solid red; */
+  }
+
+/* 소개글 박스 */
+.box input,
+.box textarea {
+    border-radius: 4px;
+    width: 100%;
+    font-size: 0.1em;
+    border: 1px solid black;
+    margin-left: 27px;
+}
+
+.box:nth-child(2) {
+    height: 40px;
+}
+
+.box input,
+.box textarea:focus {
+    outline-color: #b5c2f2;
+}
+
+/* 이메일 박스 */
+.box input[type="text"] {
+    height: 20px;
+}
+
+/* 생년 월일 */
+.box:nth-child(5) .sTitle {
+    width: 50px;
+    justify-content: flex-end;
+}
+
+#member_birth1 {
+    width: 20%;
+    margin-left: 27px;
+}
+
+#member_birth2,
+#member_birth3 {
+    width: 20%;
+    margin-left: 20px;
+}
+
