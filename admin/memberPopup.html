@@ -4,58 +4,72 @@
     <link rel="stylesheet" href="../css/popup.css" />
     <meta charset="UTF-8">
     <title>회원정보 확인 팝업</title>
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="wrap">
-        <div class="line">
-            <div id="top">
-                <span id="title">회원프로필</span>
+        <form action="#" method="post">
+            <div class="line">
+                <div id="top">
+                    <span id="title">회원프로필</span>
+                </div>
+                <div id="middle">
+                    <span class="box">
+                        <div id="sTitle" >프로필 사진</div> 
+                        <img src="../Img/profile.jpeg" id="member_image" /> <!-- 여기에 사진 넣어줌-->
+                    </span>
+                    <span class="box" >
+                        <span class="sTitle">소개글</span> 
+                        <textarea type="text" id="member_intro" value="asdfasdf" >안녕하세옹 저의 일기장입니다</textarea>
+                    </span>
+                    <span class="box" >
+                        <div class="sTitle">이메일</div> 
+                        <input type="text" id="member_email" value="" readonly />
+                    </span>
+                    <span class="box" >
+                        <div class="sTitle">닉네임</div> 
+                        <input type="text" id="member_nick" value="" readonly />
+                    </span>
+                    <span class="box" >
+                        <div class="sTitle">생년월일</div> 
+                        <input type="text" id="member_birth1" value="" readonly />
+                        <input type="text" id="member_birth2" value="" readonly />
+                        <input type="text" id="member_birth3" value="" readonly />
+                    </span>
+                    <span class="box" >
+                        <div class="sTitle">휴대폰번호</div> 
+                        <input type="text" id="member_nick" value="" readonly />
+                    </span>
+                    <span class="box" >
+                        <div class="sTitle">신고 횟수</div> 
+                        <input type="text" id="black_count" value="" readonly />
+                    </span>
+                    <span class="box" >
+                        <div class="chkBox">
+                            <input type="radio" name="member_ blackYn" class="black_radio"/>
+                            <div class="chkBox1-1">
+                                <span class="sTitle" >정지 계정</span>
+                                <span id="icon1"></span>
+                            </div>
+                        </div>
+                        <div class="chkBox">
+                            <input type="radio" name="member_ blackYn" class="black_radio"/>
+                            <div class="chkBox1-1">
+                                <span class="sTitle">활성 계정</span>
+                                <span id="icon2"></span>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="box" >
+                        <div class="sTitle">정지 사유</div> 
+                        <input type="text" id="member_black_reason" value="" readonly />
+                    </span>
+                </div>
+                <div id="saveBtn">
+                    <input type="submit" class="infoSave" value="정보 저장"/>
+                </div>
             </div>
-            <div id="middle">
-                <span class="box">
-                    <div id="sTitle" >프로필 사진</div> 
-                    <img src="../Img/profile.jpeg" id="member_image" /> <!-- 여기에 사진 넣어줌-->
-                </span>
-                <span class="box" >
-                    <span class="sTitle">소개글</span> 
-                    <textarea type="text" id="member_intro" value="asdfasdf" >안녕하세옹 저의 일기장입니다</textarea>
-                </span>
-                <span class="box" >
-                    <div class="sTitle">이메일</div> 
-                    <input type="text" id="member_email" value="" readonly />
-                </span>
-                <span class="box" >
-                    <div class="sTitle">닉네임</div> 
-                    <input type="text" id="member_nick" value="" readonly />
-                </span>
-                <span class="box" >
-                    <div class="sTitle">생년월일</div> 
-                    <input type="text" id="member_birth1" value="" readonly />
-                    <input type="text" id="member_birth2" value="" readonly />
-                    <input type="text" id="member_birth3" value="" readonly />
-                </span>
-                <span class="box" >
-                    <div class="sTitle">휴대폰번호</div> 
-                    <input type="text" id="member_nick" value="" readonly />
-                </span>
-                <span class="box" >
-                    <div class="sTitle">신고 횟수</div> 
-                    <input type="text" id="black_count" value="" readonly />
-                </span>
-                <span class="box" >
-                     <div class="chkBox">
-                         정지계정
-                         <input type="radio" name="blackYn" value="y"/>
-                         <!-- 아이콘 -->
-                     </div>
-                     <div class="chkBox">
-                         활성계정
-                         <input type="radio" name="blackYn" value="n"/>
-                         <!-- 아이콘 -->
-                     </div>
-                </span>
-            </div>
-        </div>
+        </form>
     </div>
 
     <script>
