@@ -5,13 +5,18 @@
     <title>팝업창 호출하려고 만든 페이지</title>
     <script>
 
-        function show() {
-            window.open("memberPopup.html", "a" , "width=700px, height= 750px");
+        function show1() {
+            window.open("memberPopup.html", "a" , "width=500, heigth=750");
+        }
+
+        function show2() {
+            window.open("commentPopup.html", "a" , "width=500, heigth=750");
         }
 
     </script>
 </head>
 <body>
-    <input type="button" value="call popup" onclick="show()"/>
+    <input type="button" value="call popup" onclick="show1()"/>
+    <input type="button" value="call popup" onclick="show2()"/>
 </body>
 </html>
