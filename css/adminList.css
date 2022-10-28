@@ -77,6 +77,27 @@ input[type=checkbox] {
     zoom: 2;
 }
 
+/* 성별 아이콘 */
+.iconM::before {
+    content: "\f007";
+    font: var(--fa-font-solid);
+}
+.iconF::before {
+    content: "\f182";
+    font: var(--fa-font-solid);
+}
+
+/* 정지 아이콘 */
+.icon1::before {
+    content: "\f023";
+    font: var(--fa-font-solid);
+}
+.icon2::before {
+    content: "\f3c1";
+    font: var(--fa-font-solid);
+}
+
+
 /* 하단 버튼 */
 .footerBtn {
     display: inline-block; 
