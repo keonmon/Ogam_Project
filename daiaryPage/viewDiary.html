@@ -8,7 +8,7 @@
     <title>my_diary</title>
     <link rel="stylesheet" type="text/css" href="../css/test.css" />
     <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-    <link href="../css/writeDiary.css" rel="stylesheet">
+    <link href="../css/viewDiary.css" rel="stylesheet">
     <link href="../css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -102,68 +102,44 @@
             </div>
             <div class="contents">
                 <!-- ====================contents 영역======================= -->
-                <article class="writeArea">
-                    <div class="writeOutline">
-                        
-                        <div class="writeBg"></div>
+                <article class="viewArea">
+                    <div class="writeDate">
+                        <span>10. 16. Sun</span>
+                        <div class="selectedEmoji">🤗</div>
+                    </div>
+                    <div class="viewOutline">
+                        <form>
+                            <div class="viewBg"></div>
 
-                        <div class="currDate">
-                            <span>10. 16. Sun</span>
-                        </div>
 
-                        <div class="innerOutline">
-                            <div class="innerBg"></div>
-
-                            <div class="titles">
-                                <span class="title">오늘의 감정</span>
-                                <span class="subtitle">오늘 당신이 느낀 감정을 선택하세요.</span>
-                            </div>
-
-                            <div class="emoSelectBox">
-                                <select class="select" name="emotions">
-                                    <option value="joy" >기쁨</span>
-                                    <option value="love" >사랑</span>
-                                    <option value="sad" >슬픔</span>
-                                    <option value="gloomy" >우울</span>
-                                    <option value="hard" >힘듦</span>
-                                    <option value="angry" >분노</span>
-                                </select>
-                            </div>
-
-                            <div class="emojiListBox">
-                                <div class="emojiListBg"></div>
-                                <div class="emojiList">
-                                    <span>😊</span>
-                                    <span>😁</span>
-                                    <span>😍</span>
-                                    <span>🥳</span>
-                                    <span>😺</span>
-                                    <span>😸</span>
-                                    <span>😽</span>
-                                    <span>😝</span>
-                                    <span>🤗</span>
-                                    <spna>🤭</span>
+                            <div class="innerOutline">
+                                <div class="innerBg">
+                                    <img src="../img/diaryBgImg.jpg" class="bgImg"/>
                                 </div>
-                            </div>
-                            <div class="selectedEmoji">
-                                <span>🤗</span>
-                            </div>
-                        </div>
-                        <div class="buttons">
-                            <div class="before">
-                                <span class="beforeFont">이전</span>
-                            </div>
-                            <div class="next">
-                                <span class="nextFont">다음</span>
-                            </div>
-                        </div>
 
+                                
+                            
+                                <div class="diaryNote">
+                                    
+                                        <textarea cols="100" rows="auto" onfocus="resize(this)" onblur="resize(this)" onkeydown="resize(this)" onkeyup="resize(this)" autofocus="autofocus" spellcheck="false"  >여기는 작성된 글 영역 이러한 저러한 일이 있었는데 기분이 너무 좋구만~~!!(수정 불가)ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</textarea>
+                                    
+                                </div>
+                                
+                                
+                            </div>
+                            
+                        </form>
                     </div>
 
                 </article>
             </div>
             <!-- ==================== / contents 영역======================= -->
-
+            <script>
+                function resize(obj) {
+                  obj.style.height = "1px";
+                  obj.style.height = (12+obj.scrollHeight)+"px";
+                }
+            </script>
         </main>
     </div>
 </body>

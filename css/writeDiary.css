@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'InkLipquid';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 .writeArea{
     position:relative;
     display: block;
@@ -12,17 +26,23 @@
     position: relative;
     overflow: hidden;
 }
+
+.writeOutline form{
+    width: 100%;
+    height: 100%;
+}
+
 .writeBg {
-width: 100%;
-height: 100%;
-background: #4e4e4e;
-opacity: 1;
-position: absolute;
-border-top-left-radius: 20px;
-border-top-right-radius: 20px;
-border-bottom-left-radius: 20px;
-border-bottom-right-radius: 20px;
-overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: #4e4e4e;
+    opacity: 1;
+    position: absolute;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
 }
 
 .currDate {
@@ -30,7 +50,7 @@ overflow: hidden;
     height: 12%;
     position: relative;
     display: block;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     font-weight: Bold;
     font-size: 34px;
     text-align: right;
@@ -44,7 +64,7 @@ overflow: hidden;
     display: block;
     bottom: 10px;
     left: 15%;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     font-weight: Bold;
     font-size: 34px;
     text-align: right;
@@ -91,21 +111,22 @@ overflow: hidden;
     width: 100%;
     position: relative;
     display: block;
-    font-family: Work Sans;
-    font-weight: Bold;
+    font-family: 'Pretendard-Regular';
     font-size: 48px;
     text-align: center;
+    font-weight: bold;
 }
 
 .subtitle {
-width: 100%;
-color: #5f5f5f;
-position: relative;
-display: block;
-font-family: Work Sans;
-font-weight: Bold;
-font-size: 24px;
-text-align: center;
+    
+    width: 100%;
+    color: #5f5f5f;
+    position: relative;
+    display: block;
+    font-family: 'Pretendard-Regular';
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .emoSelectBox {
@@ -118,10 +139,15 @@ text-align: center;
 }
 
 .select {
-    width: 10%;
+    width: 7%;
     height: 100%;
-    background: #e0e0e0;
+    background: #424242;
     position: relative;
+    text-align: center;
+    font-family: 'Pretendard-Regular';
+    font-size: 20px;
+    color: #ebebeb;
+    font-weight: bold;
 }
 
 
@@ -190,7 +216,7 @@ text-align: center;
     line-height: 40px;
     color: #ffffff;
     position: relative;
-    font-family: Inter;
+    font-family: 'Pretendard-Regular';
     font-size: 20px;
     font-weight: bold;
 }
@@ -210,7 +236,62 @@ text-align: center;
     line-height: 40px;
     color: #ffffff;
     position: relative;
-    font-family: Inter;
+    font-family: 'Pretendard-Regular';
     font-size: 20px;
     font-weight: bold;
+}
+.diaryNote{
+    margin: 0 auto;
+    display: block;
+    z-index: 1;
+    margin-top: 20px;
+    width: 70%;
+    height: 40%;
+    position: relative;
+    border: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #5f5f5f;
+}
+
+.diaryNote textarea{
+    width: 100%;
+    height: 100%;
+    font-size: 50px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #f8f8f8;
+    background-color: #5f5f5f;
+    border:0;
+    font-family: 'InkLipquid';
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    resize: none;
+    letter-spacing :5px;
+    word-spacing:0px;
+    line-height:70px
+}
+
+.diaryNote textarea:focus {
+    outline: none;
+}
+
+.selectImg{
+    width: 100px;
+    height: 40px;
+    background: #ba9aff;
+    position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+.inputFile{
+    display:none;
 }
