@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>팝업창 호출하려고 만든 페이지</title>
-    <script>
 
-        function show1() {
-            window.open("memberPopup.html", "a" , "width=500, heigth=750");
-        }
-
-        function show2() {
-            window.open("commentPopup.html", "a" , "width=500, heigth=750");
-        }
+    <script type="text/javascript">
+        //팝업창 오픈하여 데이터 전송
+        
+        function openPopup( ) {
+        
+            window.open("memberPopup.html", "popOpen", 
+            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=500px,height=750px'] );
+            
+            iniform.target="popOpen";
+            iniform.action="memberPopup.html";
+            
+            iniform.submit( );
+            
+            }
 
     </script>
 </head>
 <body>
-    <input type="button" value="call popup" onclick="show1()"/>
+    <input type="button" value="popOpen" onclick="openPopup( )"/>
     <input type="button" value="call popup" onclick="show2()"/>
 </body>
 </html>
