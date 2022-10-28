@@ -1,0 +1,161 @@
+@font-face {
+    font-family: 'InkLipquid';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.viewArea{
+    position:relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.writeDate {
+    width: 100%;
+    height: 5%;
+    position: relative;
+    display: block;
+    font-family: 'Pretendard-Regular';
+    font-weight: Bold;
+    font-size: 34px;
+    text-align: left;
+    left: 3%;
+    bottom: 1%;
+}
+
+.writeDate span{
+    width: 247px;
+    color: #4e4e4e;
+    position: relative;
+    display: inline;
+    bottom: 0;
+    font-family: 'Pretendard-Regular';
+    font-weight: Bold;
+    font-size: 34px;
+}
+
+.selectedEmoji {
+    width: 7%;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0px 4px 4px #00000040;
+    font-family: Work Sans;
+    font-size: 30px;
+}
+
+
+.viewOutline {
+    margin: 0 auto;
+    width: 95%;
+    height: 98%;
+    position: relative;
+    overflow: hidden;
+}
+
+.viewOutline form{
+    width: 100%;
+    height: 100%;
+}
+
+.viewBg {
+    width: 100%;
+    height: 95%;
+    background: #4e4e4e;
+    opacity: 1;
+    position: absolute;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+}
+
+
+
+.innerOutline {
+    width: 83%;
+    height: 67%;
+    opacity: 1;
+    margin-top: 3%;
+    position: absolute;
+    display: inline-block;
+    left: 8%;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.innerBg {
+    width: 100%;
+    height: 100%;
+    background: #ebebeb;
+    opacity: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+}
+
+.innerBg img{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.diaryNote{
+    display: flex;
+    margin: 0 auto;
+    z-index: 1;
+    width: 70%;
+    height: 100%;
+    position: relative;
+    border: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    align-items: center;
+}
+
+.diaryNote textarea{
+    width: 100%;
+    font-size: 50px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #f8f8f8;
+    background-color: #5f5f5f00;
+    border:0;
+    font-family: 'InkLipquid';
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    resize: none;
+    letter-spacing :5px;
+    word-spacing:0px;
+    line-height:70px;
+    overflow-y: hidden;
+}
+
+.diaryNote textarea:focus {
+    outline: none;
+}
+
