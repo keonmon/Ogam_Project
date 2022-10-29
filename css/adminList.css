@@ -92,9 +92,18 @@ input[type=checkbox] {
     content: "\f023";
     font: var(--fa-font-solid);
 }
+
+.icon1:hover {
+    cursor: pointer;
+}
+
 .icon2::before {
     content: "\f3c1";
     font: var(--fa-font-solid);
+}
+
+.icon2:hover {
+    cursor: pointer;
 }
 
 
@@ -110,5 +119,12 @@ input[type=checkbox] {
 
 .noticeBtn {
     margin-right: 20px;
+}
+
+/* 댓글 너무 길면 뒤는 ...으로 보이게 */
+.replyBox {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 

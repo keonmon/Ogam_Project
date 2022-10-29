@@ -1,7 +1,7 @@
 function memberPopup( ) {
         
     window.open("memberPopup.html", "memberPopup", 
-    ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=625px'] );
+    ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=750px'] );
     
     iniform.target="memberPopup";
     iniform.action="memberPopup.html";
