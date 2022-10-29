@@ -12,6 +12,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'KyoboHand';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .writeArea{
     position:relative;
     display: block;
@@ -198,6 +205,7 @@
     justify-content: space-around;
     margin: 0 auto;
     align-items: center;
+    gap: 15%;
 }
 
 .before {
@@ -241,39 +249,38 @@
     font-weight: bold;
 }
 .diaryNote{
+    display: flex;
     margin: 0 auto;
-    display: block;
     z-index: 1;
-    margin-top: 20px;
     width: 70%;
-    height: 40%;
+    height: 50%;
     position: relative;
     border: 20px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: #5f5f5f;
+    align-items: center;
 }
 
 .diaryNote textarea{
     width: 100%;
-    height: 100%;
-    font-size: 50px;
-    letter-spacing: 0.5px;
+    max-height: 135%;
+    font-size: 40px;
     text-align: center;
-    color: #f8f8f8;
-    background-color: #5f5f5f;
-    border:0;
-    font-family: 'InkLipquid';
+    color: #404040;
+    background-color: #5f5f5f00;
+    border: 0;
+    font-family: 'KyoboHand';
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     resize: none;
-    letter-spacing :5px;
-    word-spacing:0px;
-    line-height:70px
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    line-height: 40px;
+    overflow-y: hidden;
 }
 
 .diaryNote textarea:focus {
@@ -284,12 +291,14 @@
     width: 100px;
     height: 40px;
     background: #ba9aff;
-    position: relative;
+    position: absolute;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     text-align: center;
+    top: 6%;
+    right: 15%;
     cursor: pointer;
 }
 .inputFile{

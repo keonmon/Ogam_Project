@@ -1,4 +1,26 @@
 
+@font-face {
+    font-family: 'InkLipquid';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KyoboHand';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 /* 모두의 감정 */
 .contents article .mod2_Outline_shdw {
     box-shadow: 0px 4px 4px #00000040;
@@ -76,7 +98,7 @@
     display : inline-block;
     margin:0 auto;
     top:0px;
-    font-family: Inter;
+    font-family: 'Pretendard-Regular';
     text-align: center;
     font-weight: bold;
     font-size: 30px;
@@ -86,8 +108,6 @@
     width: 100%;
     height: 100%;
     position: relative;
-    left: 0px;
-    top: 0px;
     overflow: hidden;
     user-select: none;
     cursor: pointer;
@@ -141,11 +161,10 @@
 
 .contents article .mod2_d_nick {
     width: 100%;
-    height: 100%;
     position: absolute;
     top: 100px;
     right: 5px;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     text-align: right;
     font-size: 15px;
     font-weight: bold;;
@@ -153,11 +172,10 @@
 
 .contents article .mod2_d_date {
     width: 100%;
-    height: 100%;
     position: absolute;
     top: 120px;
     right: 5px;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     text-align: right;
     font-size: 15px;
     font-weight: bold;;
@@ -166,16 +184,16 @@
 .contents article .mod2_d_diary {
     position: absolute;
     top: 0px;
-    font-family: Work Sans;
+    font-family: 'KyoboHand';
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .contents article .mod2_d_imoji {
     position: relative;
     left: -10px;
     top: 90px;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     font-size: 45px;
 }
 
@@ -254,7 +272,7 @@
     display : inline-block;
     margin:0 auto;
     top:0px;
-    font-family: Inter;
+    font-family: 'Pretendard-Regular';
     text-align: center;
     font-weight: bold;
     font-size: 30px;
@@ -296,6 +314,7 @@
     transition: 0.5s;
     margin-bottom: 20px;
 }
+
 .contents article .mod1_innerContents:hover{
     transform: scale(1.05);
 }
@@ -325,7 +344,7 @@
     position: absolute;
     bottom: 0px;
     left: 75px;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     text-align: left;
     font-size: 15px;
     font-weight: bold;
@@ -336,7 +355,7 @@
     position: absolute;
     bottom: 0px;
     right: 4px;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     text-align: right;
     font-size: 25px;
     font-weight: bold;
@@ -346,13 +365,17 @@
     width: auto;
     left: 80px;
     position: absolute;
-    font-family: Work Sans;
+    font-family: 'KyoboHand';
     text-align: left;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .contents article .mod1_d_imoji {
     position: relative;
-    font-family: Work Sans;
+    font-family: 'Pretendard-Regular';
     font-size: 50px;
+}
+
+a{
+    color:#282828;
 }

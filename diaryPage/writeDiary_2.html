@@ -115,23 +115,16 @@
                                 <div class="innerBg"></div>
 
                                 <div class="titles">
-                                    <span class="title">배경 선택</span>
-                                    <span class="subtitle">오늘 당신이 느낀 감정을 배경으로 표현하세요.</span>
-                                    <span class="subtitle">(배경 미선택 시 기본 배경)</span>
+                                    <span class="title">오늘의 감정</span>
+                                    <span class="subtitle">오늘 당신이 느낀 감정을 기록하세요.</span>
                                 </div>
                                 <div class="selectedEmoji">
                                     <span>🤗</span>
                                 </div>
+
                                 <div class="diaryNote">
-                                    <textarea cols="100" rows="50" autofocus="autofocus" spellcheck="false" readonly="readonly" maxlength="200">여기는 일기 영역(수정 불가)</textarea>
+                                    <textarea cols="100" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" onkeypress="if(event.keyCode==13)return false" autofocus="autofocus" spellcheck="false" maxlength="150" placeholder=" 당신의 감정을 이곳에 적어보세요!!! (최대 150자 & 줄바꿈 제한)"></textarea>
                                 </div>
-                                <div class="buttons">
-                                    <div class="selectImg" onclick="selectImg()">
-                                        <span class="beforeFont">사진 선택</span>
-                                    </div>
-                                </div>
-                                <input type="file" class="inputFile" accept=".jpg, .png">
-                                
                             </div>
                             <div class="buttons">
                                 <a href="javascript:window.history.go(-1);">
@@ -139,9 +132,8 @@
                                         <span class="beforeFont">이전</span>
                                     </div>
                                 </a>
-                                
                                 <!-- 나중에 submit으로 변경 -->
-                                <a href="./viewDiary.html">
+                                <a href="./writeDiary_3.html">
                                     <div class="next">
                                         <span class="nextFont">다음</span>
                                     </div>
@@ -154,9 +146,24 @@
             </div>
             <!-- ==================== / contents 영역======================= -->
             <script>
-                function selectImg() {
-                    document.querySelector(".inputFile").click();
+                // 줄에 따른 textarea의 길이 변경
+                function resize(obj) {
+                  obj.style.height = "1px";
+                  obj.style.height = (12+obj.scrollHeight)+"px";
                 }
+
+                // 줄 수 제한 (현재 줄바꿈 제한)
+                // onkeydown="return limitLines(this, event)"
+                function limitLines(obj,e){
+                    // // 현재 textarea에 입력된 줄 수
+                    // let numberOfLines = (obj.value.match(/\n/g)||[]).length+1;
+                    // let maxRows = obj.rows; // textarea에 선언된 row 수
+
+                    if(e.which == 13 ){
+                        return false;
+                    }
+                }
+                
             </script>
         </main>
     </div>
