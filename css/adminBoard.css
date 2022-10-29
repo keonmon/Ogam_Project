@@ -1,7 +1,7 @@
 .content {
     display: flex;
     justify-content: center;
-    height: 100%;
+    /* height: 100%; */
     padding: 20px 30px;
     /* border: 5px solid red; */
 }
@@ -39,7 +39,8 @@
     border: none;
     box-shadow: inset 0px 1px 6px gray;
     border-radius: 7px;
-    font-size: 1em;
+    font-size: 1.2vw;
+    font-weight: bold;
     outline-color: #e4d8ff;
 }
 
@@ -73,6 +74,8 @@
     border-radius: 5px;
     box-shadow: inset -1px 1px 5px gray;
     outline-color: #e4d8ff;
+    font-size: 1.1vw;
+    font-weight: bold;
 }
 
 
@@ -88,6 +91,7 @@
 #board_bottom input{
     width: 100px;
     height: 50px;
+    margin-right: 10px;
     font-size: 1.3em;
     background-color: white;
     border-radius: 10px;

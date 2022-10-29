@@ -3,7 +3,7 @@
 <head>
     <link rel="stylesheet" href="../css/popup.css" />
     <meta charset="UTF-8">
-    <title>회원정보 확인 팝업</title>
+    <title>회원정보 확인</title>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -16,11 +16,11 @@
                 <div id="middle">
                     <span class="box">
                         <div id="sTitle" >프로필 사진</div> 
-                        <img src="../Img/profile.jpeg" id="member_image" /> <!-- 여기에 사진 넣어줌-->
+                        <img src="../Img/profile.jpeg" id="member_profile" /> <!-- 여기에 사진 넣어줌-->
                     </span>
                     <span class="box" >
                         <span class="sTitle">소개글</span> 
-                        <textarea type="text" id="member_intro" value="asdfasdf" >안녕하세옹 저의 일기장입니다</textarea>
+                        <textarea type="text" id="member_intro" value="intro" readonly>안녕하세옹 저의 일기장입니다</textarea>
                     </span>
                     <span class="box" >
                         <div class="sTitle">이메일</div> 
@@ -38,7 +38,7 @@
                     </span>
                     <span class="box" >
                         <div class="sTitle">휴대폰번호</div> 
-                        <input type="text" id="member_nick" value="" readonly />
+                        <input type="text" id="member_phone" value="" readonly />
                     </span>
                     <span class="box" >
                         <div class="sTitle">신고 횟수</div> 
@@ -62,7 +62,7 @@
                     </span>
                     <span class="box" >
                         <div class="sTitle">정지 사유</div> 
-                        <input type="text" id="member_black_reason" value="" readonly />
+                        <input type="text" id="member_black_reason" value=""/>
                     </span>
                 </div>
                 <div id="saveBtn">
@@ -72,8 +72,5 @@
         </form>
     </div>
 
-    <script>
-        
-    </script>
 </body>
 </html>
