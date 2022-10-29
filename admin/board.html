@@ -20,9 +20,14 @@
             <div class="content">
                 <form action="./noticeList.html" method="get" >
                     <div id="board">
-                        <div id="board_top">
-                            <span class="titles">제목: <input type="text" id="board_title" /></span>
-                            <span class="titles">공개 <input type="checkbox" id="board_yn" value="y" /></span>
+                        <div id="boardBox">
+                            <span class="titles">
+                                <span>제목: </span>
+                                <input type="text" id="board_title" class="boardTitle"/>
+                            </span>
+                            <span class="titles">공개
+                                <input type="checkbox" id="board_yn" class="openChk"/>
+                            </span>
                         </div>
                         <div id="board_middle">
                             <textarea  id="board_contents"></textarea>
@@ -30,7 +35,7 @@
                     </div>
                     <div id="board_bottom">
                         <input type="submit" value="저장"/>
-                        <input type="button" onclick="history.back();" value="뒤로가기"/>
+                        <input type="button" onclick="history.back();" value="취소"/>
                     </div>
                 </form>
             </div>
