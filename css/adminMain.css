@@ -1,3 +1,25 @@
+@font-face {
+    font-family: 'InkLipquid';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'KyoboHand';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 .content {
     display: flex;
     flex-direction: column;
@@ -8,7 +30,7 @@
     margin: 0 auto;
 }
 
-/* 상단 버튼 메뉴 css*/
+/* 상단 메뉴 css*/
 #mCol1 {
     display: flex;
     width: 100%;
@@ -29,6 +51,7 @@
     box-shadow: 0px 2px 5px gray;
     border-radius: 30px;
     background-color: white;
+    font-family: 'Pretendard-Regular';
     font-size: 2.3rem;
     font-weight: 600;
     color: #13056C;
