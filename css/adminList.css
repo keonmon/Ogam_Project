@@ -1,18 +1,26 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* 검색하기 */
 .searchTap {
     position:relative;
     margin-top: 5%;
-    margin-left: 32%;
+    margin-left: 30%;
+    font-family: 'Pretendard-Regular';
 }
 
 .searchList {
-    width: 15%;
+    width: 18%;
     height: 50px;
     border-radius: 10px;
     text-align: center;
     font-size: 1.2vw;
     font-weight: bold;
-    
+    font-family: 'Pretendard-Regular';
 }
 
 .searchInput {
@@ -22,6 +30,7 @@
     text-align: center;
     font-size: 1.2vw;
     font-weight: bold;
+    font-family: 'Pretendard-Regular';
 }
 
 .searchBtn {
@@ -32,6 +41,7 @@
     text-align: center;
     font-size: 1.2vw;
     font-weight: bold;
+    font-family: 'Pretendard-Regular';
 }
 
 /* 테이블 디자인 */
@@ -46,6 +56,7 @@
     border-collapse: collapse;
     border-radius: 15px !important;
     background-color: white;
+    font-family: 'Pretendard-Regular';
 }
 
 /* 행 장식 */
