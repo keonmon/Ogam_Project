@@ -170,12 +170,12 @@
     width: 100%;
     height: 100%;
     background: #424242;
-    position: relative;
+    position: absolute;
     overflow: hidden;
 }
 
 .emojiList {
-    width: 100%;
+    width: auto;
     display: flex;
     position: absolute;
     top: 23%;
@@ -187,6 +187,23 @@
     flex-direction: row;
 }
 
+.emojiList span{
+    opacity:.5;
+}
+
+.selected{
+    opacity: 1 !important;
+}
+
+@keyframes emojiAnimation{
+    0%{  scale:0%;  rotate:60deg;}
+    40%{ scale:110%;rotate:-10deg;}
+    60%{ scale:80%; rotate:7deg;}
+    75%{ scale:102%;rotate:-2deg;}
+    90%{ scale:90%; rotate:5deg;}
+    100%{scale:100%;rotate:0deg;}
+}
+
 .selectedEmoji {
     width: 100%;
     position: relative;
@@ -194,6 +211,12 @@
     font-family: Work Sans;
     font-size: 96px;
     text-align: center;
+}
+
+.animation{
+    animation-name: emojiAnimation ;
+    animation-duration:0.5s ;
+    animation-timing-function:ease-out;
 }
 
 
@@ -304,3 +327,19 @@
 .inputFile{
     display:none;
 }
+
+.emojiSlider{
+    position:relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    user-select: none;
+    cursor: pointer;
+}
+.contents article .active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+  }
+
+
+
