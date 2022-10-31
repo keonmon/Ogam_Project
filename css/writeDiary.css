@@ -81,15 +81,19 @@
     margin: 0 auto;
     width: 76%;
     height: 75%;
+    min-height: 480px;
     opacity: 1;
     position: relative;
-    display: block;
+    display: flex;
+    gap: 2%;
     left: 0px;
     overflow: hidden;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 .innerBg {
@@ -147,6 +151,7 @@
 
 .select {
     width: 7%;
+    min-width: 70px;
     height: 100%;
     background: #424242;
     position: relative;
@@ -204,6 +209,12 @@
     100%{scale:100%;rotate:0deg;}
 }
 
+@keyframes emojiAnimation2{
+    0%{  rotate:10deg;}
+    50%{rotate:-10deg;}
+    100%{  rotate:10deg;}
+}
+
 .selectedEmoji {
     width: 100%;
     position: relative;
@@ -211,12 +222,20 @@
     font-family: Work Sans;
     font-size: 96px;
     text-align: center;
+    margin-bottom: 4%;
 }
 
 .animation{
     animation-name: emojiAnimation ;
     animation-duration:0.5s ;
     animation-timing-function:ease-out;
+}
+
+.animation2{
+    animation-name: emojiAnimation2 ;
+    animation-duration:2s ;
+    animation-timing-function:ease-in-out;
+    animation-iteration-count:infinite;
 }
 
 
@@ -284,6 +303,8 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     align-items: center;
+    overflow:hidden;
+    margin-bottom: 4%;
 }
 
 .diaryNote textarea{
@@ -302,7 +323,7 @@
     resize: none;
     letter-spacing: 0px;
     word-spacing: 0px;
-    line-height: 40px;
+    line-height: 35px;
     overflow-y: hidden;
 }
 
