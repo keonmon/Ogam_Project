@@ -112,20 +112,21 @@
     position: absolute;
     z-index: 1;
     right: 0%;
-    color: #b7b6b6;
+    color: #252525;
     padding: 10px 15px 10px 15px;
     cursor: pointer;
 }
 
 .likeButton{
-    color:#ebebeb;
+    color:#252525;
     font-size:45px; 
     z-index: 1;
     position: absolute;
     font-family: 'KyoboHand';
     right:0%;
     bottom: 0%;
-    padding: 5px 20px 5px 20px;
+    margin: 5px 20px 5px 20px;
+    cursor: pointer;
 }
 .likeit{
     color:red
@@ -146,12 +147,17 @@
     overflow: hidden;
 }
 
-.innerBg img{
-    position: absolute;
+.innerImg {
+    position: relative;
+    display: inline-block;
     width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    height: 100%;
+    background : url(../Img/bgSample3.jpg);
+    background-size: cover;
+    background-position: center;
+    scale: 101%;
+    filter:blur(1px);
+    opacity: .5;
 }
 
 
@@ -174,7 +180,7 @@
     width: 100%;
     font-size: 40px;
     text-align: center;
-    color: #404040;
+    color: #252525;
     background-color: #5f5f5f00;
     border:0;
     font-family: 'KyoboHand';
@@ -223,7 +229,7 @@
     font-size: 30px;
     padding:6px 25px 6px 25px;
     font-family: 'KyoboHand';
-    color:#4e4e4e;
+    color:#252525;
 }
 
 input:focus{
@@ -245,6 +251,7 @@ input:focus{
     text-align: center;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 /* 스크롤 */
@@ -338,7 +345,7 @@ input:focus{
     right: 5px;
     font-family: 'Pretendard-Regular';
     text-align: right;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;;
 }
 

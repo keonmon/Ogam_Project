@@ -17,6 +17,8 @@
             $(".sidebar").load("/user_sidebar.html");
             $(".menubar").load("/user_menubar.html");
         });
+        
+  
     </script>
 </head>
 
@@ -34,23 +36,26 @@
                             <div class="writeBg"></div>
 
                             <div class="currDate">
-                                <span>10. 16. Sun</span>
+                                <span>22. 10. 16. Sun</span>
                             </div>
                             
                             <div class="selectImg" onclick="selectImg()">
                                 <span class="beforeFont">사진 선택</span>
                             </div>
-                            <input type="file" class="inputFile" accept=".jpg, .png">
+                            <input type="file" class="inputFile" accept=".jpg, .png" onchange="readImg(this)">
                             
 
                             <div class="innerOutline">
-                                <div class="innerBg"></div>
+                                <div class="innerBg">
+                                    <div class="innerImg"></div>
+                                        <!-- <img class="innerImg"/> -->
+                                </div>
 
                                 <div class="titles">
                                     <span class="title">배경 선택</span>
                                     <span class="subtitle">오늘 당신이 느낀 감정을 배경으로 표현하세요.(배경 미선택 시 기본 배경)</span>
                                 </div>
-                                <div class="selectedEmoji">
+                                <div class="selectedEmoji animation2">
                                     <span>🤗</span>
                                 </div>
                                 <div class="diaryNote">
@@ -79,6 +84,32 @@
             </div>
             <!-- ==================== / contents 영역======================= -->
             <script>
+                let innerImg = document.querySelector(".innerImg");
+
+                function readImg(input){
+                    if(input.files && input.files[0]){
+                        const reader = new FileReader()
+
+                        reader.onload = (e)=>{
+                            innerImg.style.backgroundImage = `url(${e.target.result})`;
+                            // innerImg.src = e.target.result;
+                        }   
+                        reader.readAsDataURL(input.files[0]);
+                    }else{
+                        innerImg.style.backgroundImage = "";
+                        // innerImg.src="";
+
+                    }
+                    // let selectedFile = document.querySelector(".inputFile").value;
+                    // let innerBgImg = document.querySelector(".innerImg");
+                    
+                    // innerBgImg.src = selectedFile;
+                }
+                function selectedImg(e){
+                    let selectedFile = e.target.value;
+                   
+                }
+
                 function selectImg() {
                     document.querySelector(".inputFile").click();
                 }
@@ -86,6 +117,22 @@
                   obj.style.height = "1px";
                   obj.style.height = (12+obj.scrollHeight)+"px";
                 }
+
+                // 현재일자 포맷 변경 후 적용
+                const WEEKDAY = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                let today = new Date();
+                
+                function makeYYMMDD(today){
+                    let year = String(today.getFullYear()).substring(2,4);
+                    let month = today.getMonth()+1;
+                    let date = today.getDate();
+                    let week = WEEKDAY[today.getDay()];
+                    month=month<10?'0'+month:month;
+                    date=date<10?'0'+date:date;
+                    return `${year}. ${month}. ${date}. ${week}`;
+                }
+                document.querySelector(".currDate span").innerHTML = makeYYMMDD(today)
+                
             </script>
         </main>
     </div>

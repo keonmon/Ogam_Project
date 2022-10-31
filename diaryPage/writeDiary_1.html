@@ -48,12 +48,12 @@
 
                                 <div class="emoSelectBox">
                                     <select class="select" name="emotions">
-                                        <option value="joy" >기쁨</span>
-                                        <option value="love" >사랑</span>
-                                        <option value="sad" >슬픔</span>
-                                        <option value="gloomy" >우울</span>
-                                        <option value="hard" >힘듦</span>
-                                        <option value="angry" >분노</span>
+                                        <option value="기쁨" >기쁨</span>
+                                        <option value="사랑" >사랑</span>
+                                        <option value="슬픔" >슬픔</span>
+                                        <option value="우울" >우울</span>
+                                        <option value="힘듦" >힘듦</span>
+                                        <option value="분노" >분노</span>
                                     </select>
                                 </div>
 
@@ -130,6 +130,7 @@
                     slider.scrollLeft = scrollLeft - walk;
                 });
             </script>
+
             <script>
                 const emojiList =  document.querySelectorAll(".emojiList span")
                 const giantEmojiSpan = document.querySelector(".selectedEmoji span")
@@ -161,6 +162,21 @@
                         
                     })  
                 }
+
+                // 현재일자 포맷 변경 후 적용
+                const WEEKDAY = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                let today = new Date();
+                
+                function makeYYMMDD(today){
+                    let year = String(today.getFullYear()).substring(2,4);
+                    let month = today.getMonth()+1;
+                    let date = today.getDate();
+                    let week = WEEKDAY[today.getDay()];
+                    month=month<10?'0'+month:month;
+                    date=date<10?'0'+date:date;
+                    return `${year}. ${month}. ${date}. ${week}`;
+                }
+                document.querySelector(".currDate span").innerHTML = makeYYMMDD(today)
                 
             </script>
         </main>
