@@ -89,6 +89,21 @@
                         return false;
                     }
                 }
+
+                // 현재일자 포맷 변경 후 적용
+                const WEEKDAY = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                let today = new Date();
+                
+                function makeYYMMDD(today){
+                    let year = String(today.getFullYear()).substring(2,4);
+                    let month = today.getMonth()+1;
+                    let date = today.getDate();
+                    let week = WEEKDAY[today.getDay()];
+                    month=month<10?'0'+month:month;
+                    date=date<10?'0'+date:date;
+                    return `${year}. ${month}. ${date}. ${week}`;
+                }
+                document.querySelector(".currDate span").innerHTML = makeYYMMDD(today)
                 
             </script>
         </main>
