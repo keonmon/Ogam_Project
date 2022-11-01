@@ -162,7 +162,7 @@
 .contents article .mod2_d_nick {
     width: 100%;
     position: absolute;
-    top: 100px;
+    top: 110px;
     right: 5px;
     font-family: 'Pretendard-Regular';
     text-align: right;
@@ -173,7 +173,7 @@
 .contents article .mod2_d_date {
     width: 100%;
     position: absolute;
-    top: 120px;
+    top: 135px;
     right: 5px;
     font-family: 'Pretendard-Regular';
     text-align: right;
@@ -344,7 +344,7 @@
     width: auto;
     position: absolute;
     bottom: 0px;
-    left: 75px;
+    left: 80px;
     font-family: 'Pretendard-Regular';
     text-align: left;
     font-size: 15px;

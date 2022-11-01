@@ -42,7 +42,7 @@
                             <div class="selectImg" onclick="selectImg()">
                                 <span class="beforeFont">사진 선택</span>
                             </div>
-                            <input type="file" class="inputFile" accept=".jpg, .png" onchange="readImg(this)">
+                            <input type="file" class="inputFile" accept="image/jpg,image/jpeg,image/png " onchange="fileCheck(this)">
                             
 
                             <div class="innerOutline">
@@ -84,6 +84,30 @@
             </div>
             <!-- ==================== / contents 영역======================= -->
             <script>
+
+                const inputFile = document.querySelector(".inputFile")
+
+                // 이미지 검증
+                function fileCheck(input){
+                    let imgFile = inputFile.value.toLowerCase();
+                    let fileForm = /(.*?)\.(jpg|jpeg|png|bmp)$/;
+                    let maxSize = 5 * 1024 * 1024;
+                    let fileSize;
+
+                    if(imgFile != "" && imgFile != null) {
+                        fileSize = inputFile.files[0].size;
+                        
+                        if(!imgFile.match(fileForm)) {
+                            alert("이미지 파일만 업로드 가능합니다");
+                            return;
+                        } else if(fileSize >= maxSize) {
+                            alert("파일 사이즈는 5MB까지 가능");
+                            return;
+                        }
+                    }
+                    readImg(input)
+                }
+                // 이미지 preview
                 let innerImg = document.querySelector(".innerImg");
 
                 function readImg(input){
@@ -95,24 +119,25 @@
                             // innerImg.src = e.target.result;
                         }   
                         reader.readAsDataURL(input.files[0]);
+                
                     }else{
                         innerImg.style.backgroundImage = "";
+                        inputFile.value = "";
                         // innerImg.src="";
-
                     }
+                    
                     // let selectedFile = document.querySelector(".inputFile").value;
                     // let innerBgImg = document.querySelector(".innerImg");
                     
                     // innerBgImg.src = selectedFile;
                 }
-                function selectedImg(e){
-                    let selectedFile = e.target.value;
-                   
+
+                // 사진선택 버튼 클릭시 숨겨진 input이 클릭되도록
+                function selectImg() {
+                    inputFile.click();
                 }
 
-                function selectImg() {
-                    document.querySelector(".inputFile").click();
-                }
+                // textarea 크기 자동화
                 function resize(obj) {
                   obj.style.height = "1px";
                   obj.style.height = (12+obj.scrollHeight)+"px";
