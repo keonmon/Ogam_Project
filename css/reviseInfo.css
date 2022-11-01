@@ -56,9 +56,12 @@ body {
 
 .pTitle {
     width: 60px;
-    font-size: 1.3rem;
+    font-size: 20px;
     text-align: end;
-    margin-left: 12px;
+    margin-right: 50px;
+    margin-left: 1.5vw;
+    padding: 4px;
+    flex-direction: column;
 }
 
 #imgBlock {
@@ -66,6 +69,9 @@ body {
     width: 10vw;
     height: 10vw;
     border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
 }
 
 .photo input {
@@ -73,9 +79,9 @@ body {
 }
 
 #imgBlock img{
-    width: 140px;
-    height: 140px;
-    border: 1px solid black;
+    width: 9.5vw;
+    height: 9.5vw;
+    /* border: 1px solid black; */
 }
 
 /* 소개글 */
@@ -90,8 +96,9 @@ body {
 .iTitle {
     font-size: 1.3rem;
     text-align: end;
-    width: 4rem;
-    margin-left: 16px;
+    width: 78px;
+    margin-left: 19px;
+    margin-right: 2.9vw;
 }
 
 textarea {
@@ -104,7 +111,11 @@ textarea {
 
 .eTitle {
     font-size: 1.3rem;
-    margin-left: 18px;
+    width: 55px;
+    min-width: 55px;
+    height: 40px;
+    margin-left: 24px;
+    margin-right: 3.1vw;
 }
 
 .part1 {
@@ -120,22 +131,56 @@ textarea {
 .selectBox {
     width: 15vw;
     height: 40px;
-    font-size: 1.3rem;
+    font-size: 1.1vw;
     text-align: center;
 }
 
 /* 비밀번호 */
-#password {
+.password {
     display: flex;
     margin-top: 20px;
     align-items: center;
 }
 
 .pwTitle {
-    font-size: 1.3rem;
+    font-size: 20px;
+    width: 70px;
+    min-width: 70px;
+    margin-left: 17px;
+    text-align: end;
 }
 
+#member_repw,
 #member_pw {
+    margin-left: 2.6vw;
     height: 40px;
-    width: 100%;
+    width: 37vw;
 }
+
+
+/* 닉네임 */
+.nickName {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.nTitle {
+    font-size: 20px;
+    width: 70px;
+    min-width: 70px;
+    margin-left: 35px;
+    margin-right: 29px;
+
+}
+
+#member_nick {
+    width: 10vw;
+    height: 40px;
+    font-size: 1.1rem;
+    margin-right: 10px;
+}
+
+/* 생년월일 */
+
+

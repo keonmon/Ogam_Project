@@ -177,7 +177,10 @@
                             </div>
                             <div id="middle">
                                 <div id="profile">
-                                    <div class="pTitle">프로필 사진</div>
+                                    <span>
+                                        <div class="pTitle">프로필</div>
+                                        <div class="pTitle">사진</div>
+                                    </span>
                                     <div class="photo">
                                         <span id="imgBlock"></span>
                                         <span><input type="file" onchange="click_img(event)" accept="image/*" id="member_image"/></span>
@@ -202,9 +205,27 @@
                                         </span>
                                     </span>
                                 </div>
-                                <div id="password">
+                                <div class="password">
                                     <span class="pwTitle">비밀번호</span>
                                     <span><input type="password" id="member_pw" onchange=""/></span>
+                                </div>
+                                <div class="password">
+                                    <span>
+                                        <div class="pwTitle">비밀번호</div>
+                                        <div class="pwTitle">재확인</div>
+                                    </span>
+                                    <span><input type="password" id="member_repw" onchange=""/></span>
+                                </div>
+                                <div class="nickName">
+                                    <div class="nTitle">닉네임</div>
+                                    <span><input type="text" id="member_nick" onchange=""/></span>
+                                    <span><input type="submit" id="doubleChk" value="중복확인" /></span>
+                                </div>
+                                <div class="birthday">
+                                    <div class="bTitle">생년월일</div>
+                                    <span><input type="text" class="member_birth"/></span>
+                                    <span><input type="text" class="member_birth" /></span>
+                                    <span><input type="text" class="member_birth"/></span>
                                 </div>
                             </div>
                        </div>
