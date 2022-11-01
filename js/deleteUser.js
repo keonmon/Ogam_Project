@@ -9,3 +9,4 @@ function closeModal() {
     let modalContainer = document.querySelector(".modalContainer");
     modalContainer.style.display = "none";
 }
+
