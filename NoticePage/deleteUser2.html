@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Inter&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/deleteUser.css" />
+    <script type="text/javascript" src="../js/deleteUser.js"></script>
+  </head>
+  <body>
+    <p onclick="delete_Modal()">탈퇴하기2</p>
+    <!-- modal 2 -->
+    <div id="modal" class="modalContainer">
+      <div class="wrapModal">
+        <div class="sideLine">
+          <div class="outLine"></div>
+          <div class="inLine"></div>
+        </div>
+        <div>
+          <span class="hTitle">탈퇴하기</span>
+          <span class="closeBtn" onclick="closeModal()">🗙</span>
+        </div>
+        <span class="deleteGuide">
+          <p>
+            회원탈퇴를 신청하기 전에 <strong>안내 사항</strong>을 꼭 확인해
+            주세요.
+          </p>
+          <p>
+            - 탈퇴 시, 등록한 게시물은
+            <strong style="color: red">전체 삭제</strong>됩니다.
+          </p>
+        </span>
+        <div class="line"></div>
+
+        <!-- form -->
+        <form action="../user_main.html" method="post">
+          <div class="deleteBox">
+            <span class="deleteTitle">왜 떠나..?</span>
+            <textarea
+              class="reasonInput"
+              type="text"
+              id="deleteInput"
+              placeholder="떠나는 이유를 적어 주세요... 😥"
+            ></textarea>
+          </div>
+          <button type="submit" class="deleteBtn">탈퇴하기 😥</button>
+          <!-- <a href="../user_main.html" class="deleteBtn">탈퇴하기 😥</a> -->
+        </form>
+        <!-- form end -->
+
+      </div>
+    </div>
+    <!-- modal2 end -->
+  </body>
+</html>
