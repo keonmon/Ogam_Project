@@ -1,0 +1,118 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #DCE0ED;
+    background-color: #DCE0ED;
+    width: 620px;
+    height: 680px;
+    margin: auto;
+}
+
+.wrapper {
+    border: 1px solid white;
+    background-color: white;
+    width: 97%;
+    height: 97%;
+    margin: 10px auto;
+}
+
+.wrapper p{
+    font-size: 30px;
+    text-align: center;
+    margin: auto;
+}
+
+label{
+    text-align: end;
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.checkId {
+    border-bottom: 2px solid #908be8;
+    font-weight: bold;
+    font-size: 30px;
+    width: 80%;
+    height: 50%;
+    margin: auto;
+}
+
+.checkPw{
+    font-weight: bold;
+    font-size: 30px;
+    width: 80%;
+    height: 50%;
+    margin: auto;
+}
+
+.birthday {
+    display: block;
+    margin: auto;
+    padding: 10px;
+}
+
+.birthday input{
+    width: 100px;
+    height: 20px;
+    margin-top: 10%;
+}
+
+.phoneNum {
+    display: block;
+    margin: 5% auto 5%;
+    padding: 10px;
+}
+
+/*#birth {
+   text-align: center;
+    padding: 5px;
+    width: 100px;
+    size: 20px;
+    margin: auto;
+}
+
+#phonenum {
+    border-width: medium;
+    padding: 10px;
+    size: 20px;
+    margin: auto;
+} */
+
+.id_submitBtn{
+    display: block;
+    margin-left: 100px;
+    margin-top: 5%;
+    width: 50%;
+
+}
+
+.id_submitBtn button{
+    background-color: #a7baff;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    width: 300px;
+    height: 30px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.pw_Reissue{
+    display: block;
+    margin-left: 100px;
+    margin-top: 15%;
+    width: 50%;
+}
+
+.pw_Reissue button{
+    background-color: #a7baff;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    width: 300px;
+    height: 30px;
+    margin: auto;
+    cursor: pointer;
+}
