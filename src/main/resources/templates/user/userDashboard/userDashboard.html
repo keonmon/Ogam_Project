@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ogam_user_dashboard</title>
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/test.css" />
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/reset.css" />
-    <link href="/src/main/resources/static/css/user_main.css" rel="stylesheet">
-    <link href="/src/main/resources/static/css/scrollModules.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link href="/css/user_main.css" rel="stylesheet">
+    <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".sidebar").load("./user_sidebar.html");
-            $(".menubar").load("./user_menubar.html");
+            $(".sidebar").load("/frag/user/user_sidebar.html");
+            $(".menubar").load("/frag/user/user_menubar.html");
         });
     </script>
 </head>
@@ -149,7 +149,7 @@
                                 <div class="mod1_Outline2">
                                     <div class="mod1_grey"></div>
                                     <div class="mod1_titleBg">
-                                        <a href="./diaryPage/myDiary.html">
+                                        <a href="/myDiary">
                                             <span class="mod1_titleFont">최근 내 감정</span>
                                         </a>
                                     </div>
@@ -158,7 +158,7 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
-                                        <a href="./diaryPage/viewDiary.html">
+                                        <a href="/viewDiary">
                                             <div class="mod1_innerContents">
                                                 <div class="mod1_d_bg">
                                                     <div class="mod1_d_set">

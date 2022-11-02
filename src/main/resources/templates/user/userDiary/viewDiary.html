@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my_diary</title>
-    <link rel="stylesheet" type="text/css" href="../css/test.css" />
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
-    <link href="../css/viewDiary.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link href="/css/viewDiary.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
     <script>
         // iframe 자동 height 조절
@@ -19,8 +19,8 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".sidebar").load("/user_sidebar.html");
-            $(".menubar").load("/user_menubar.html");
+            $(".sidebar").load("/frag/user/user_sidebar.html");
+            $(".menubar").load("/frag/user/user_menubar.html");
         });
     </script>
     
@@ -294,8 +294,8 @@
                      * 본인/타인 컨텐츠 비교 후 해당 모달html 결정
                     */
 
-                    open("./modal/view_otherContents.html")
-                    //open("./modal/view_myContents.html")
+                    open("/modal/view_otherContents.html")
+                    //open("/modal/view_myContents.html")
                 });
 
                 const replyMenu_click = document.querySelectorAll(".replyMenu");
@@ -306,8 +306,8 @@
                         /* ajax
                         
                         */
-                        open("./modal/view_otherContents.html")
-                        //open("./modal/view_myContents.html");
+                        open("/modal/view_otherContents.html")
+                        //open("/modal/view_myContents.html");
                     })
                 }
 
