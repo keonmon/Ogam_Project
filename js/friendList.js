@@ -29,3 +29,39 @@ for (let i = 0; i < addBtn.length; i++) {
         complete[i].style.display = "block";
     })
 }
+
+// 다크모드
+const btn_theme = document.querySelector(".btn_theme");
+const body = document.body;
+const mode = localStorage.getItem('darkMode');
+
+btn_theme.addEventListener("click", () =>{
+    body.classList.toggle("dark");
+
+    // body태그에 darkMode localStorage에 넣고 빼기
+    if(body.classList.contains('dark')) {
+        activateDarkMode();
+        localStorage.setItem("darkMode","enabled");
+    } else {
+        deactivateDarkMode();
+        localStorage.setItem("darkMode","disabled");
+    }
+});
+
+if(mode === "enabled") {
+    activateDarkMode();
+} else if (mode == "disabled") {
+    deactivateDarkMode();
+}
+
+function activateDarkMode() {
+    body.classList.add("dark");
+    btn_theme.classList.remove('fa-moon');
+    btn_theme.classList.add('fa-sun');
+}
+
+function deactivateDarkMode() {
+    body.classList.remove("dark");
+    btn_theme.classList.add('fa-moon');
+    btn_theme.classList.remove('fa-sun');
+}
