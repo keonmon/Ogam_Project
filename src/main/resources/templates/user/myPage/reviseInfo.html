@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
-    <link rel="stylesheet" type="text/css" href="../css/friendList.css" />
-    <link rel="stylesheet" type="text/css" href="../css/reviseInfo.css" />
-    <link rel="stylesheet" type="text/css" href="../css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/friendList.css" />
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/reviseInfo.css" />
+    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/reset.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 
@@ -195,38 +195,43 @@
                                     <span class="part1">
                                         <span><input type="email" id="member_email" class="emailBox"/></span>
                                         @
-                                        <span>
-                                            <select class="selectBox" onchange="">
-                                                <option value="">선택입력</option>
-                                                <option value="naver.com">naver.com</option>
-                                                <option value="daum.net">daum.net</option>
-                                                <option value="google.com">google.com</option>
-                                            </select>
-                                        </span>
+                                        <select class="selectBox" onchange="">
+                                            <option value="">선택입력</option>
+                                            <option value="naver.com">naver.com</option>
+                                            <option value="daum.net">daum.net</option>
+                                            <option value="google.com">google.com</option>
+                                        </select>
                                     </span>
                                 </div>
                                 <div class="password">
                                     <span class="pwTitle">비밀번호</span>
-                                    <span><input type="password" id="member_pw" onchange=""/></span>
+                                    <input type="password" id="member_pw" onchange=""/>
                                 </div>
                                 <div class="password">
                                     <span>
                                         <div class="pwTitle">비밀번호</div>
                                         <div class="pwTitle">재확인</div>
                                     </span>
-                                    <span><input type="password" id="member_repw" onchange=""/></span>
+                                    <input type="password" id="member_repw" onchange=""/>
                                 </div>
                                 <div class="nickName">
                                     <div class="nTitle">닉네임</div>
-                                    <span><input type="text" id="member_nick" onchange=""/></span>
-                                    <span><input type="submit" id="doubleChk" value="중복확인" /></span>
+                                    <input type="text" id="member_nick" onchange=""/>
+                                    <input type="submit" id="doubleChk" value="중복확인" />
                                 </div>
                                 <div class="birthday">
                                     <div class="bTitle">생년월일</div>
-                                    <span><input type="text" class="member_birth"/></span>
-                                    <span><input type="text" class="member_birth" /></span>
-                                    <span><input type="text" class="member_birth"/></span>
+                                    <input type="text" id="member_birth1"/>
+                                    <input type="text" id="member_birth2" />
+                                    <input type="text" id="member_birth3"/>
                                 </div>
+                                <!-- 휴대폰 인증 -->
+                                <div class="phone">
+                                    <div class="phTitle">휴대폰번호</div>
+                                    <input type="text" id="member_phone" placeholder="전화번호 입력"/>
+                                    <input type="submit" value="인증번호 받기" />
+                                </div>
+                                
                             </div>
                        </div>
                     </form>
@@ -235,8 +240,8 @@
             </div>
         </main>
     </div>
-    <script src="../js/friendList.js" type="text/javascript"></script>
-    <script src="../js/reviseInfo.js" type="text/javascript"></script>
+    <script src="/src/main/resources/static/js/friendList.js" type="text/javascript"></script>
+    <script src="/src/main/resources/static/js/reviseInfo.js" type="text/javascript"></script>
 </body>
 
 </html>
