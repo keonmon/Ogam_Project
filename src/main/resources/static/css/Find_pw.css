@@ -1,0 +1,64 @@
+.container {
+    position: absolute;
+    border: 1px solid #DCE0ED;
+    background-color: #DCE0ED;
+    width: 550px;
+    height: 350px;
+    top: 33.3%;
+    left: 33.3%;
+    margin: auto;
+}
+
+ .wrapper {
+    position: absolute;
+    border: 1px solid white;
+    background-color: white;
+    width:500px;
+    height:300px;
+    left:32%;
+    top:50%;
+    margin-left:-150px;
+    margin-top:-150px;
+    text-align: center;
+}  
+
+.sendPw p{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    margin: auto;
+} 
+
+.text {
+    position: absolute;
+    left: 42%;
+    top: 90%;
+    margin-left:-150px;
+    margin-top:-150px;
+}
+
+.text p {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px;
+    margin: auto;
+} 
+
+.loginbtn{ 
+    position: absolute;
+    left: 60%;
+    top: 120%;
+    margin-left:-150px;
+    margin-top:-150px;
+}
+
+.loginbtn button {
+    background-color: #a7baff;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    width: 200px;
+    height: 30px;
+    cursor: pointer;
+}

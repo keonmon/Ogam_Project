@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/adminMain.css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">   
+    $(document).ready( function() { 
+        $(".sidebar").load("./sidebar.html");     
+        $(".menubar").load("./menubar.html"); 
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar"></aside>
+        <main class="bodyContainer">
+            <div class="menubar"></div>
+            <div class="content">
+                <div id="mCol1">
+                    <div class="mCol1-1">
+                        <i class="fa-solid fa-user"></i> 이용 사용자
+                        <div style="color: red;">8명</div> <!--여기에 이용자 수 -->
+                    </div>
+                    <div class="mCol1-1">
+                        <i class="fa-solid fa-user-slash"></i> 탈퇴한 회원
+                        <div style="color: red;">8명</div> <!--여기에 탈퇴한 회원 -->
+                    </div>
+                    <div class="mCol1-1">
+                        <i class="fa-sharp fa-solid fa-book-medical"></i> 일기 등록
+                        <div style="color: red;">54개</div> <!--여기에 일기 등록-->
+                    </div>
+                    <div class="mCol1-1">
+                        <i class="fa-sharp fa-solid fa-handcuffs"></i> 신고 내용
+                        <div style="color: red;">12개</div> <!--여기에 신고 내용-->
+                    </div>
+                </div>
+                <div class="mCol2">
+                    <div id="chart"> <!--일기 등록 건수 그래프-->
+                        <iframe src="./chart/diaryChart.html"></iframe>
+                        <iframe src="./chart/emotionChart.html"></iframe>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

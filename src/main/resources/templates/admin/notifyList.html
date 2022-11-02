@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/adminList.css" />
+    <script type="text/javascript" src="../js/adminList.js"></script>
+    <script type="text/javascript" src="../js/popup.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">   
+    $(document).ready( function() { 
+        $(".sidebar").load("./sidebar.html");     
+        $(".menubar").load("./menubar.html"); 
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar"></aside>
+        <main class="bodyContainer">
+            <div class="menubar"></div>            
+            <div class="content">
+                <div class="searchTap">
+                  <form action="#" method="get">
+                    <select class="searchList" id="searchType" name="searchType">
+                      <option value="category" selected>카테고리</option>
+                      <option value="sort">신고 분류</option>
+                      <option value="reporters">신고자 이메일</option>
+                      <option value="respondents">피신고자 이메일</option>
+                      <option value="date">신고일</option>
+                    </select>
+                    <input
+                      class="searchInput"
+                      type="text"
+                      id="searchKeyword"
+                      name="searchKeyword"
+                      placeholder="해당 정보를 입력해주세요."
+                      value=""
+                    />
+      
+                    <input type="submit" class="searchBtn" value="검색" />
+                  </form>
+                </div>
+                <!-- 테이블 -->
+                <div>                  
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>
+                          <input
+                            type="checkbox"
+                            name="check"
+                            value="selectall"
+                            onclick="selectAll(this)"
+                          />
+                        </th>
+                        <th>카테고리</th>
+                        <th>신고 분류</th>
+                        <th>신고자 이메일</th>
+                        <th>피신고자 이메일</th>
+                        <th>신고일</th>
+                        <th>컨텐츠 확인</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>일기</td>
+                        <td>욕설</td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td>22-10-27</td>
+                        <td><a onclick="diaryPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>일기</td>
+                        <td>욕설</td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">ccc@ccc.com</a></td>
+                        <td>22-10-26</td>
+                        <td><a onclick="diaryPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>댓글</td>
+                        <td>욕설</td>
+                        <td><a onclick="memberPopup( )">abcd@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td>22-10-26</td>
+                        <td><a onclick="commentPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>댓글</td>
+                        <td>부적합</td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">acac@acac.com</a></td>
+                        <td>22-10-26</td>
+                        <td><a onclick="commentPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>일기</td>
+                        <td>욕설</td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td>22-10-25</td>
+                        <td><a onclick="diaryPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>일기</td>
+                        <td>욕설</td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">ccc@ccc.com</a></td>
+                        <td>22-10-25</td>
+                        <td><a onclick="diaryPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>댓글</td>
+                        <td>욕설</td>
+                        <td><a onclick="memberPopup( )">abcd@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td>22-10-24</td>
+                        <td><a onclick="commentPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>댓글</td>
+                        <td>부적합</td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">acac@acac.com</a></td>
+                        <td>22-10-23</td>
+                        <td><a onclick="commentPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>댓글</td>
+                        <td>욕설</td>
+                        <td><a onclick="memberPopup( )">abcd@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td>22-10-22</td>
+                        <td><a onclick="commentPopup( )">보기</a></td>
+                      </tr>
+                      <tr>
+                        <td><input type="checkbox" name="check" /></td>
+                        <td>댓글</td>
+                        <td>부적합</td>
+                        <td><a onclick="memberPopup( )">bbb@aaa.com</a></td>
+                        <td><a onclick="memberPopup( )">acac@acac.com</a></td>
+                        <td>22-10-20</td>
+                        <td><a onclick="commentPopup( )">보기</a></td>
+                      </tr>
+                    </tbody>
+                  </table>                  
+                </div>
+                <!-- 테이블 end-->
+                <div class="footerBtn">
+                  <span class="deleteBtn"><a href="#"><i class="fa-solid fa-trash"></i>선택 삭제</a></span>            
+                </div>
+              </div>
+            <!-- content end -->
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,186 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Pretendard-Regular';
+}
+
+.contents {
+    padding: 20px 0px;
+}
+
+#wrap {
+    width: 60%;
+    height: auto 100vw;
+}
+
+.base {
+    background-color: white;
+    border: 20px solid #dde4fd;
+    width: 100%;
+    height: 850px;
+    padding: 40px 30px;
+}
+
+#top {
+    margin-bottom: 20px;
+}
+
+#middle {
+    display: flex;
+    flex-direction: column;
+    /* padding: 0px 50px; */
+}
+
+/* 프로필 사진 */
+#myTitle {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.photo {
+    display: flex;
+    align-items: flex-end;
+}
+
+#profile {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
+
+}
+
+.pTitle {
+    width: 60px;
+    font-size: 20px;
+    text-align: end;
+    margin-right: 50px;
+    margin-left: 1.5vw;
+    padding: 4px;
+    flex-direction: column;
+}
+
+#imgBlock {
+    display: flex;
+    width: 10vw;
+    height: 10vw;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.photo input {
+    font-size: 1rem;
+}
+
+#imgBlock img{
+    width: 9.5vw;
+    height: 9.5vw;
+    /* border: 1px solid black; */
+}
+
+/* 소개글 */
+#email,
+#intro {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.iTitle {
+    font-size: 1.3rem;
+    text-align: end;
+    width: 78px;
+    margin-left: 19px;
+    margin-right: 2.9vw;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    font-size: 1.3rem;
+}
+
+/* 이메일 */
+
+.eTitle {
+    font-size: 1.3rem;
+    width: 55px;
+    min-width: 55px;
+    height: 40px;
+    margin-left: 24px;
+    margin-right: 3.1vw;
+}
+
+.part1 {
+    display: flex;
+    align-items: center;
+}
+
+.emailBox {
+    width: 15vw;
+    height: 40px;
+}
+
+.selectBox {
+    width: 15vw;
+    height: 40px;
+    font-size: 1.1vw;
+    text-align: center;
+}
+
+/* 비밀번호 */
+.password {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.pwTitle {
+    font-size: 20px;
+    width: 70px;
+    min-width: 70px;
+    margin-left: 17px;
+    text-align: end;
+}
+
+#member_repw,
+#member_pw {
+    margin-left: 2.6vw;
+    height: 40px;
+    width: 37vw;
+}
+
+
+/* 닉네임 */
+.nickName {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.nTitle {
+    font-size: 20px;
+    width: 70px;
+    min-width: 70px;
+    margin-left: 35px;
+    margin-right: 29px;
+
+}
+
+#member_nick {
+    width: 10vw;
+    height: 40px;
+    font-size: 1.1rem;
+    margin-right: 10px;
+}
+
+/* 생년월일 */
+
+

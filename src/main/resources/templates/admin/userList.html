@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/adminList.css" />
+    <script type="text/javascript" src="../js/adminList.js"></script>
+    <script type="text/javascript" src="../js/popup.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">   
+    $(document).ready( function() { 
+        $(".sidebar").load("./sidebar.html");     
+        $(".menubar").load("./menubar.html"); 
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar"></aside>
+        <main class="bodyContainer">
+            <div class="menubar"></div>  
+
+            <div class="content">
+                <div>
+                    <div class="searchTap">
+                        <form action="#" method="get">
+                            <select class="searchList" id="searchType" name="searchType">
+                                <option value="email" selected>이메일</option>
+                                <option value="nick">닉네임</option>
+                                <option value="phone">전화번호</option>
+                            </select>                                
+                            <input class="searchInput" type="text" id="searchKeyword" name="searchKeyword" 
+                                    placeholder="해당 정보를 입력해주세요." value="">    
+
+                            <input type="submit" class="searchBtn" value="검색"/>
+                            
+                        </form>
+                    </div>
+                    <!-- 테이블 -->
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>이메일</th>
+                                    <th>닉네임</th>
+                                    <th>생년월일</th>
+                                    <th>전화번호</th>
+                                    <th>성별</th>
+                                    <th>정지유무</th>
+                                </tr>                                
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>111@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconM"></i></td>
+                                    <td><span class="icon1" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>222@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconF"></i></td>
+                                    <td><span class="icon2" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>333@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconF"></i></td>
+                                    <td><span class="icon1" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconM"></i></td>
+                                    <td><span class="icon1" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconF"></i></td>
+                                    <td><span class="icon1" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconM"></i></td>
+                                    <td><span class="icon1" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconM"></i></td>
+                                    <td><span class="icon2" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconM"></i></td>
+                                    <td><span class="icon2" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconF"></i></td>
+                                    <td><span class="icon2" onclick="memberPopup( )"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="iconF"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>444@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                                <tr>
+                                    <td>bbb@bbb.com</td>
+                                    <td>a</td>
+                                    <td>2022-10-24</td>
+                                    <td>010-2222-2222</td>
+                                    <td><i class="fa-solid fa-user-tie"></i></td>
+                                    <td>정지유무</td>
+                                </tr>
+                            </tbody>
+                        </table>   
+                    </div>
+                    <!-- 테이블 end--> 
+                </div>                
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>
