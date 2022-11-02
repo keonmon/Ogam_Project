@@ -5,9 +5,8 @@
 
 .container{
     display: flex;
+    position: relative;
 }
-
-/* 사이드바 스타일 */
 
 .sidebar{
     display: flex;
@@ -40,7 +39,6 @@
 }
 
 .footer{
-    flex-direction: column;
     margin-top: auto;
     margin-bottom: 20px;
 }
@@ -269,7 +267,7 @@
 
 /* 이미지 스타일 */
 #user_img{
-    width: 80%;
+    width: 60%;
     height: 80%;
     border: 1px solid gainsboro;
     border-radius: 50%;
@@ -416,7 +414,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    background: #636363b3;
+    background: #000000b3;
 }
 
 .wrapModal {
