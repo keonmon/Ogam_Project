@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class Admin_UserController {
 
-    @RequestMapping("/main")
+    @RequestMapping("/main1")
     public String main() {
 
         return "admin/main";
     }
-// 야이 이거 왜 안돼!!
+
     @RequestMapping("/reply")
     public String reply() {
         return "admin/replyList";
