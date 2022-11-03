@@ -1,25 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/adminList.css" />
-    <script type="text/javascript" src="/src/main/resources/static/js/adminList.js"></script>
-    <script type="text/javascript" src="/src/main/resources/static/js/popup.js"></script>
+    <title>[관리자] 신고 목록</title>
+    <link rel="stylesheet" type="text/css" href="css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="css/adminList.css" />
+    <script type="text/javascript" src="js/adminList.js"></script>
+    <script type="text/javascript" src="js/popup.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">   
-    $(document).ready( function() { 
-        $(".sidebar").load("./sidebar.html");     
-        $(".menubar").load("./menubar.html"); 
-    });
-    </script>
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <aside class="sidebar"></aside>
-        <main class="bodyContainer">
-            <div class="menubar"></div>            
+      <aside th:replace="~{admin/sidebar :: sidebar }"></aside>
+      <main class="bodyContainer">
+        <div th:replace="~{admin/menubar :: menubar }"></div>
             <div class="content">
                 <div class="searchTap">
                   <form action="#" method="get">
