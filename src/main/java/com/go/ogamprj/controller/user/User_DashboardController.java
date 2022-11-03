@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class User_DashboardController {
 
-    @RequestMapping("/dashboard")
+    @RequestMapping("/")
     public String dashboard(){
         return "user/userDashboard/userDashboard";
     }
