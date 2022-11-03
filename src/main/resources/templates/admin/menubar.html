@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>관리자 계정</title>
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/test.css" />
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/admin.css" />
-    <link rel="stylesheet" type="text/css" href="/src/main/resources/static/css/adminList.js" />
+    <title>[관리자]</title>
+    <link rel="stylesheet" type="text/css" href="css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="css/adminList.js" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="menubar">
+    <div class="menubar" th:fragment="menubar">
         <div id="left-menu">
             <div id="adminTitle">
                 <a href="#">
@@ -34,7 +30,6 @@
                 </a>
             </span>
         </div>
-    </div>        
-    
+    </div>
 </body>
 </html>

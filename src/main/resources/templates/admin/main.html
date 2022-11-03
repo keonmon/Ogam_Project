@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <title>[관리자] 메인</title>
+    <link rel="stylesheet" type="text/css" href="css/admin.css" />
     <link rel="stylesheet" type="text/css" href="css/adminMain.css" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">   
-    $(document).ready( function() { 
-        $(".sidebar").load("./sidebar.html");     
-        $(".menubar").load("./menubar.html"); 
-    });
-    </script>
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <aside class="sidebar"></aside>
+        <aside th:replace="~{admin/sidebar :: sidebar }"></aside>
         <main class="bodyContainer">
-            <div class="menubar"></div>
+            <div th:replace="~{admin/menubar :: menubar }"></div>
             <div class="content">
                 <div id="mCol1">
                     <div class="mCol1-1">
