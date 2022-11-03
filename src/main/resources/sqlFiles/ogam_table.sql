@@ -1,0 +1,358 @@
+
+-- ▶▶▶▶▶ 앵간하면 건들지 말것 ( 조심쓰 ) ◀◀◀◀◀◀
+-- 테이블 및 컬럼 수정시 반드시 기록할 것
+
+-- member.member_date -> default sysdate로 수정
+-- diary.bgimg_seq -> null로 수정
+-- emotions.emoji -> 다시 varchar2(50)으로 수정함...
+
+-------------------------------------------------
+--DROP TABLE BGIMAGE;
+
+--DROP TABLE BLACKLIST_DIARY;
+--DROP TABLE BLACKLIST_REPLY;
+--DROP TABLE BOARD;
+--DROP TABLE DELETED_DIARY;
+--DROP TABLE DELETED_REPLY;
+
+--DROP TABLE DIARY;
+--DROP TABLE DIARY_LIKE;
+--DROP TABLE EMOTIONS;
+--DROP TABLE FRIEND_APPLY;
+--DROP TABLE FRIEND_SEND;
+--DROP TABLE MEMBER;
+--DROP TABLE NOTIFI;
+--DROP TABLE REPLY;
+-------------------------------------------------
+
+CREATE TABLE MEMBER (
+	member_email	varchar2(100)	PRIMARY KEY	NOT NULL,
+	member_pw	varchar2(100)		NULL,
+	member_nick	varchar2(50)	UNIQUE	NOT NULL,
+	member_birth	date		NULL,
+	member_phone	varchar2(50)		NULL,
+	member_gender	varchar2(10)		NULL,
+	member_adminyn	varchar2(2)	DEFAULT 'n'	NULL,
+	member_blackYn	varchar2(2)	DEFAULT 'n'	NOT NULL,
+	member_black_reason	varchar2(200)		NULL,
+	member_date	date	DEFAULT sysdate	NULL,
+	member_image	varchar2(100)		NULL,
+	member_intro	varchar2(200)		NULL,
+	member_quited	date		NULL,
+	member_quited_reason	varchar2(200)		NULL
+);
+
+COMMENT ON COLUMN MEMBER.member_adminyn IS '값이 y면 관리자계정';
+COMMENT ON COLUMN MEMBER.member_blackYn IS '값이 y면 정지계정';
+--USER TABLE
+
+CREATE TABLE DIARY (
+	diary_seq	number	DEFAULT diary_seq.nextval PRIMARY KEY	NOT NULL,
+	member_email	varchar2(100)	NOT NULL,
+	bgimg_seq	number		NULL,
+    emotion_seq 	number	NOT NULL,
+	contents	varchar2(200)		NOT NULL,
+	diary_date	date	DEFAULT sysdate	NOT NULL,
+	diary_private	varchar2(2)	DEFAULT 'n'	NOT NULL
+);
+
+--DROP TABLE reply;
+
+CREATE TABLE reply (
+	reply_seq	number	DEFAULT reply_seq.nextval PRIMARY KEY	NOT NULL,
+	diary_seq	number 	NOT NULL,
+	member_email	varchar2(100)		NOT NULL,
+	reply	varchar2(200)		NULL,
+	reply_date	date	DEFAULT sysdate	NULL
+);
+
+
+CREATE TABLE DIARY_LIKE (
+	like_seq	number	DEFAULT like_seq.nextval PRIMARY KEY	NOT NULL,
+	diary_seq	number 	NOT NULL,
+	member_email	varchar2(100)		NOT NULL
+);
+
+
+COMMENT ON COLUMN DIARY_LIKE.like_seq IS '해당 일기의 좋아요 개수는
+select count(like_seq) 
+  from diary_like';
+
+
+CREATE TABLE friend_apply (
+	fri_app_seq	number	DEFAULT fri_app_seq.nextval PRIMARY KEY	NOT NULL,
+	member_email	varchar2(100)		NOT NULL,
+	member_op_email	varchar2(100)		NULL,
+	friend_date	date	DEFAULT sysdate	NOT NULL,
+	nickname	varchar2(50)		NULL
+);
+
+
+CREATE TABLE friend_send (
+	fri_send_seq	number	DEFAULT fri_send_seq.nextval PRIMARY KEY	NOT NULL,
+	member_email	varchar2(100)		NOT NULL,
+	member_op_email	varchar2(100)		NOT NULL,
+	response	varchar2(2)		NULL,
+	send_date	date	DEFAULT sysdate	NULL,
+	yndate	date		NULL,
+	nickname	varchar2(50)		NULL
+);
+
+
+COMMENT ON COLUMN friend_apply.member_email IS '친구신청을 한 사람의 이메일';
+
+COMMENT ON COLUMN friend_send.member_op_email IS '친구신청을 받은 사람의 이메일';
+
+COMMENT ON COLUMN friend_send.response IS '친구 신청을 받은 사람의 신청 수락 여부
+수락시 : y
+거절시 : n';
+
+
+CREATE TABLE emotions (
+	emotion_seq	number DEFAULT emotion_seq.nextval	PRIMARY KEY	NOT NULL,
+	emotion	varchar2(50)		NULL,
+    emoji   varchar2(50)        NOT NULL
+);
+
+
+CREATE TABLE notifi (
+	noti_seq	number	DEFAULT noti_seq.nextval PRIMARY KEY	NOT NULL,
+	member_email	varchar2(100)		NOT NULL,
+	reply_seq	number	NOT NULL,
+	diary_seq	number	NOT NULL,
+	like_seq	number	NOT NULL,
+	fri_send_seq	number	NOT NULL,
+	noti_email	varchar2(100)		NULL,
+	noti_type	varchar2(50)		NOT NULL,
+	noti_date	date	DEFAULT sysdate	NOT NULL,
+	noti_readDate	date		NULL,
+	noti_comm	varchar2(200)		NULL,
+	nickname	varchar2(50)		NULL
+);
+
+
+COMMENT ON COLUMN notifi.noti_seq IS '고유번호';
+
+
+
+COMMENT ON COLUMN notifi.noti_type IS '- 댓글 알림 : reply
+- 좋아요 : like
+- 친구 일기 : diary
+- 친구신청 : friend_send
+- 친구 맺음 : friend_yn';
+
+
+COMMENT ON COLUMN notifi.noti_readDate IS '사용자가 확인할 경우 sysdate입력';
+
+CREATE TABLE BOARD (
+	board_seq	number	DEFAULT board_seq.nextVal PRIMARY KEY	NOT NULL,
+	board_title	varchar2(100)		NULL,
+	board_contents	varchar2(500)		NULL,
+	board_date	date	DEFAULT sysdate	NOT NULL,
+	board_yn	varchar2(2)	DEFAULT 'n'	NOT NULL
+);
+
+
+COMMENT ON COLUMN BOARD.board_date IS '공지 작성일';
+
+COMMENT ON COLUMN BOARD.board_yn IS '기본적으로 n(비공개)로 함
+공지는 신중해야 하기 떄문..!!!';
+
+CREATE TABLE Blacklist_reply (
+	blacklist_com_seq	number	DEFAULT BLACKLIST_COM_SEQ.NEXTVAL PRIMARY KEY	NOT NULL,
+	reply_seq	number	NOT NULL,
+	member_email	varchar2(100)		NOT NULL,
+	blacklist_member_email	varchar2(100)		NULL,
+	blacklist_comment	varchar2(50)		NULL,
+	blacklist_reply_date	date		NULL
+);
+
+
+
+CREATE TABLE Blacklist_diary (
+	blacklist_diary_seq	number	DEFAULT blacklist_diary_seq.NEXTVAL PRIMARY KEY	NOT NULL,
+	diary_seq	number	NOT NULL,
+	member_email	varchar2(100)		NOT NULL,
+	blacklist_user_email	varchar2(100)		NULL,
+	blacklist_comment	varchar2(50)		NULL,
+	blacklist_diary_date	date		NULL
+);
+
+
+CREATE TABLE BGIMAGE (
+	bgimg_seq	number	DEFAULT bgimg_seq.NEXTVAL PRIMARY KEY	NOT NULL,
+	bgimg_path	varchar2(100)		NULL,
+	bgimg_title	varchar2(100)		NULL
+);
+
+
+CREATE TABLE deleted_diary (
+	diary_seq	number	NOT NULL,
+	reply_del	varchar2(2)		NOT NULL
+);
+
+--DROP TABLE DELETED_DIARY;
+
+COMMENT ON COLUMN deleted_diary.reply_del IS 'member가 삭제 시 m
+관리자가 삭제 시  a';
+
+CREATE TABLE deleted_reply (
+	reply_seq	number	NOT NULL,
+	reply_del	varchar2(2)		NOT NULL
+);
+
+COMMENT ON COLUMN deleted_reply.reply_del IS 'member삭제 시 m
+관리자 삭제 시 a';
+
+
+
+ALTER TABLE DIARY ADD CONSTRAINT FK_MEMBER_TO_DIARY_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+
+ALTER TABLE DIARY ADD CONSTRAINT FK_emotions_TO_DIARY_1 FOREIGN KEY (
+	emotion_seq
+)
+REFERENCES emotions (
+	emotion_seq
+);
+
+ALTER TABLE DIARY ADD CONSTRAINT FK_BGIMAGE_TO_DIARY_1 FOREIGN KEY (
+	bgimg_seq
+)
+REFERENCES BGIMAGE (
+	bgimg_seq
+);
+
+ALTER TABLE reply ADD CONSTRAINT FK_DIARY_TO_reply_1 FOREIGN KEY (
+	diary_seq
+)
+REFERENCES DIARY (
+	diary_seq
+);
+
+ALTER TABLE reply ADD CONSTRAINT FK_MEMBER_TO_reply_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+ALTER TABLE DIARY_LIKE ADD CONSTRAINT FK_DIARY_TO_DIARY_LIKE_1 FOREIGN KEY (
+	diary_seq
+)
+REFERENCES DIARY (
+	diary_seq
+);
+
+ALTER TABLE DIARY_LIKE ADD CONSTRAINT FK_MEMBER_TO_DIARY_LIKE_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+ALTER TABLE friend_apply ADD CONSTRAINT FK_MEMBER_TO_friend_apply_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+ALTER TABLE friend_send ADD CONSTRAINT FK_MEMBER_TO_friend_send_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+ALTER TABLE notifi ADD CONSTRAINT FK_MEMBER_TO_notifi_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+
+ALTER TABLE notifi ADD CONSTRAINT FK_reply_TO_notifi_1 FOREIGN KEY (
+	reply_seq
+)
+REFERENCES reply (
+	reply_seq
+);
+
+ALTER TABLE notifi ADD CONSTRAINT FK_DIARY_TO_notifi_1 FOREIGN KEY (
+	diary_seq
+)
+REFERENCES DIARY (
+	diary_seq
+);
+
+
+ALTER TABLE notifi ADD CONSTRAINT FK_DIARY_LIKE_TO_notifi_1 FOREIGN KEY (
+	like_seq
+)
+REFERENCES DIARY_LIKE (
+	like_seq
+);
+
+
+ALTER TABLE notifi ADD CONSTRAINT FK_friend_send_TO_notifi_1 FOREIGN KEY (
+	fri_send_seq
+)
+REFERENCES friend_send (
+	fri_send_seq
+);
+
+ALTER TABLE Blacklist_reply ADD CONSTRAINT FK_reply_TO_Blacklist_reply_1 FOREIGN KEY (
+	reply_seq
+)
+REFERENCES reply (
+	reply_seq
+);
+
+ALTER TABLE Blacklist_reply ADD CONSTRAINT FK_MEMBER_TO_Blacklist_reply_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+ALTER TABLE Blacklist_diary ADD CONSTRAINT FK_DIARY_TO_Blacklist_diary_1 FOREIGN KEY (
+	diary_seq
+)
+REFERENCES DIARY (
+	diary_seq
+);
+
+ALTER TABLE Blacklist_diary ADD CONSTRAINT FK_MEMBER_TO_Blacklist_diary_1 FOREIGN KEY (
+	member_email
+)
+REFERENCES MEMBER (
+	member_email
+);
+
+ALTER TABLE deleted_diary ADD CONSTRAINT FK_DIARY_TO_deleted_diary_1 FOREIGN KEY (
+	diary_seq
+)
+REFERENCES DIARY (
+	diary_seq
+);
+
+ALTER TABLE deleted_reply ADD CONSTRAINT FK_reply_TO_deleted_reply_1 FOREIGN KEY (
+	reply_seq
+)
+REFERENCES reply (
+	reply_seq
+);
+
+
+--COMMIT;
+
+
+
+
