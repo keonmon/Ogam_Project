@@ -293,7 +293,7 @@
 .contents article .mod1_innerSlide {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     width: 90%;
     height: 1200px;
     position: absolute;
