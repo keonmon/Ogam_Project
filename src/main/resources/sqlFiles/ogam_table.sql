@@ -2,11 +2,16 @@
 -- ▶▶▶▶▶ 앵간하면 건들지 말것 ( 조심쓰 ) ◀◀◀◀◀◀
 -- 테이블 및 컬럼 수정시 반드시 기록할 것
 
--- member.member_date -> default sysdate로 수정
--- diary.bgimg_seq -> null로 수정
--- emotions.emoji -> 다시 varchar2(50)으로 수정함...
+-- member.member_date                                   -> default sysdate로 수정
+-- diary.bgimg_seq                                      -> null로 수정
+-- emotions.emoji                                       -> 다시 varchar2(50)으로 수정함...
+-- notifi.reply_seq, diary_seq, like_seq, fri_send_seq  -> null로 바꿈
+-- notifi, friend_apply, friend_send 테이블              -> nickname 컬럼 제거
+-- friend_apply 테이블                                   -> friend_key number not null 컬럼 추가
+-- friend_apply. MEMBER_OP_EMAIL                        -> not null로 변경
 
--------------------------------------------------
+
+----------------------------------------
 --DROP TABLE BGIMAGE;
 
 --DROP TABLE BLACKLIST_DIARY;
@@ -82,9 +87,9 @@ select count(like_seq)
 CREATE TABLE friend_apply (
 	fri_app_seq	number	DEFAULT fri_app_seq.nextval PRIMARY KEY	NOT NULL,
 	member_email	varchar2(100)		NOT NULL,
-	member_op_email	varchar2(100)		NULL,
+	member_op_email	varchar2(100)		NOT NULL,
 	friend_date	date	DEFAULT sysdate	NOT NULL,
-	nickname	varchar2(50)		NULL
+	friend_key number not null
 );
 
 
@@ -94,8 +99,7 @@ CREATE TABLE friend_send (
 	member_op_email	varchar2(100)		NOT NULL,
 	response	varchar2(2)		NULL,
 	send_date	date	DEFAULT sysdate	NULL,
-	yndate	date		NULL,
-	nickname	varchar2(50)		NULL
+	yndate	date		NULL
 );
 
 
@@ -118,16 +122,15 @@ CREATE TABLE emotions (
 CREATE TABLE notifi (
 	noti_seq	number	DEFAULT noti_seq.nextval PRIMARY KEY	NOT NULL,
 	member_email	varchar2(100)		NOT NULL,
-	reply_seq	number	NOT NULL,
-	diary_seq	number	NOT NULL,
-	like_seq	number	NOT NULL,
-	fri_send_seq	number	NOT NULL,
+	reply_seq	number	NULL,
+	diary_seq	number	NULL,
+	like_seq	number	NULL,
+	fri_send_seq	number	NULL,
 	noti_email	varchar2(100)		NULL,
 	noti_type	varchar2(50)		NOT NULL,
 	noti_date	date	DEFAULT sysdate	NOT NULL,
 	noti_readDate	date		NULL,
-	noti_comm	varchar2(200)		NULL,
-	nickname	varchar2(50)		NULL
+	noti_comm	varchar2(200)		NULL
 );
 
 
