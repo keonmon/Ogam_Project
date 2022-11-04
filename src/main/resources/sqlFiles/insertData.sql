@@ -221,7 +221,7 @@ insert into emotions(EMOJI,EMOTION) values('👿','분노');
 )
 
 -- insert diary
--- 공개 다이어리
+-- 1.공개 다이어리
 (
 insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('user1@ogam.com', 1, '오늘은 너무 행복했다! 친구와 동네에서 재미있게 놀았다!!😁😁😁😁','n');
 insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('user2@ogam.com', 7, '오늘은 길을 가다 너무 귀여운 아기 고양이를 만났어! 그 친구랑 한참을 놀다가 집에왔당!!😸','n');
@@ -235,7 +235,7 @@ insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('us
 insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('user10@ogam.com', 50, '친구랑 싸웠다. 요즘들어 날 빡치게 하는 사람들이 왤케 많지..?','n');
 )
 
--- 비공개 다이어리
+-- 2.비공개 다이어리
 (
 insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('user1@ogam.com', 43, '오늘은 너무 힘들었다... 상사 새끼 탈모왔으면.. ','y');
 insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('user2@ogam.com', 55, '지난주에 산 옷 입고 출근하는데 뜬금없이 새똥맞음... 진심 개빡','y');
@@ -249,22 +249,30 @@ insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('us
 insert into diary(MEMBER_EMAIL, EMOTION_SEQ, CONTENTS, DIARY_PRIVATE) values('user10@ogam.com', 30, '세상 우울하네 이세상','y');
 )
 
+-- insert friend_apply
+(
+insert into friend_apply(member_email, member_op_email,friend_key)
+    values('user1@ogam.com', 'user2@ogam.com', 1);
+insert into friend_apply(member_email, member_op_email,friend_key)
+    values('user2@ogam.com', 'user1@ogam.com', 1);
+)
 
 
-
-
-
-alter table emotion change emoji emoji varchar2(50)
-
-SELECT CONVERT($메시지_칼럼$, 'AL32UTF8', 'AL32UTF8')
-   FROM TB_NAME
-
-
-
-
-
-
-
+-- 각종 alter문 (여기서 적용된 alter문은 전부 ogam_table.sql에 기록함)
+(
 alter table emotions modify emoji varchar2(50)
 alter table emotions drop column emoji;
 alter table emotions add emoji varchar2(50);
+
+alter table notifi modify reply_seq null;
+alter table notifi modify DIARY_SEQ null;
+alter table notifi modify LIKE_SEQ null;
+alter table notifi modify FRI_SEND_SEQ null;
+
+alter table notifi drop column nickname;
+alter table friend_apply drop column nickname;
+alter table friend_send drop column nickname;
+
+alter table friend_apply add friend_key number not null;
+
+)
