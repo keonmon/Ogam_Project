@@ -276,3 +276,4 @@ alter table friend_send drop column nickname;
 alter table friend_apply add friend_key number not null;
 
 )
+

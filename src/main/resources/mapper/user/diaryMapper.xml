@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.go.ogamprj.mapper.DiaryMapper">
+    <!-- 내 다이어리 전부 가져오기 -->
+    <select id="oneDiarySelectAll" resultType="java.util.HashMap">
+        select m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ
+          from diary d join emotions e
+            on e.EMOTION_SEQ = d.EMOTION_SEQ
+          join member m
+            on d.MEMBER_EMAIL = m.member_email
+         where d.MEMBER_EMAIL = #{myEmail}
+    </select>
+
+    <!-- 친구 다이어리 전부 가져오기 -->
+    <select id="friendDiarySelectAll" resultType="java.util.HashMap">
+        select m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ
+          from diary d join emotions e
+            on e.EMOTION_SEQ = d.EMOTION_SEQ
+          join member m
+            on d.MEMBER_EMAIL = m.member_email
+         where d.MEMBER_EMAIL in (select MEMBER_OP_EMAIL
+                                   from friend_apply
+                                  where MEMBER_EMAIL = 'user1@ogam.com')
+         order by d.diary_seq desc
+    </select>
+</mapper>

@@ -1,15 +1,39 @@
 package com.go.ogamprj.controller.user;
 
+import com.go.ogamprj.sevice.DiaryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class User_MyDiaryController {
 
-    @RequestMapping("/myDiary")
-    public String myDiary(){
+    @Autowired
+    DiaryService diaryService;
+
+
+    @RequestMapping("/myDiary")  // http://localhost:8081/myDiary?myEmail=user1@ogam.com
+    public String myDiary(@RequestParam String myEmail,
+                          Model model){
+
+        // 내 일기 가져오기
+        List<HashMap<String, Object>> myDiaryList = diaryService.oneDiarySelectAll(myEmail);
+
+        // 친구 일기 가져오기
+        List<HashMap<String, Object>> friendDiaryList = diaryService.friendDiarySelectAll(myEmail);
+
+        model.addAttribute("myDiaryList", myDiaryList);
+        model.addAttribute("friendDiaryList", friendDiaryList);
+
         return "user/userDiary/myDiary";
     }
+
+
 
     @RequestMapping("/writeDiary1")
     public String writeDiary1(){
