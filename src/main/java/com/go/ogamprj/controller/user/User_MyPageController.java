@@ -15,13 +15,8 @@ public class User_MyPageController {
     @RequestMapping("/reviseInfo")
     public String reviseInfo() {
 
-        return "redirect:/reviseInfo";
+        return "redirect:/MyPage";
     }
 
-    @RequestMapping("/deleteuser")
-    public String deleteuser() {
-
-        return "user/myPage/deleteUser";
-    }
 
 }

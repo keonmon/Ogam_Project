@@ -6,9 +6,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class Admin_NoticeController {
 
-    @RequestMapping("/noticeList")
-    public String noticeList() {
+    @RequestMapping("/admin_noticeList")
+    public String admin_noticeList() {
 
         return "admin/noticeList";
+    }
+
+    @RequestMapping("/writeNotice")
+    public String writeNotice() {
+
+        return "admin/board";
+    }
+
+    @RequestMapping("/addnotice")
+    public String addnotice() {
+
+        return "redirect:/admin_noticeList";
     }
 }
