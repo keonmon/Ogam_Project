@@ -10,6 +10,8 @@
     <link href="/css/user_main.css" rel="stylesheet">
     <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 
 </head>
 <body>
@@ -37,9 +39,9 @@
                                 <div class="mod2_innerSlide">
                                     <!-- 최대 10개 의 mod2_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
-
-                                    <div class="mod2_innerContents" th:onclick="|location.href='/viewDiary?${randDiary.DIARY_SEQ}'|")
-                                                                    th:each="randDiary : ${randomAllDiaryList}">
+                                    <!--|location.href='/viewDiary?${randDiary.DIARY_SEQ}'|-->
+                                    <a class="mod2_innerContents" th:href="|/viewDiary?${randDiary.DIARY_SEQ}|"
+                                                                    th:each="randDiary : ${randomAllDiaryList}" >
                                         <div class="mod2_d_bg">
                                             <div class="mod2_d_set">
                                                 <span class="mod2_d_nick">[[${randDiary.MEMBER_NICK}]]</span>
@@ -48,7 +50,7 @@
                                                 <span class="mod2_d_imoji">[[${randDiary.EMOJI}]]</span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </a>
 
                                 </div><!-- /innerSlide -->
                             </div>
@@ -71,15 +73,13 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
-                                        <a th:href="|/viewDiary?${myDiary.DIARY_SEQ}|" th:each="myDiary : ${myDiaryList}">
-                                            <div class="mod1_innerContents">
-                                                <div class="mod1_d_bg">
-                                                    <div class="mod1_d_set">
-                                                        <span class="mod1_d_nick">[[${myDiary.MEMBER_NICK}]]</span>
-                                                        <span class="mod1_d_date">[[${myDiary.DIARY_DATE}]]</span>
-                                                        <span class="mod1_d_diary">[[${myDiary.CONTENTS}]]</span>
-                                                        <span class="mod1_d_imoji">[[${myDiary.EMOJI}]]</span>
-                                                    </div>
+                                        <a class="mod1_innerContents" th:href="|/viewDiary?${myDiary.DIARY_SEQ}|" th:each="myDiary : ${myDiaryList}">
+                                            <div class="mod1_d_bg">
+                                                <div class="mod1_d_set">
+                                                    <span class="mod1_d_nick">[[${myDiary.MEMBER_NICK}]]</span>
+                                                    <span class="mod1_d_date">[[${myDiary.DIARY_DATE}]]</span>
+                                                    <span class="mod1_d_diary">[[${myDiary.CONTENTS}]]</span>
+                                                    <span class="mod1_d_imoji">[[${myDiary.EMOJI}]]</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -105,20 +105,18 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
-                                        <a th:href="|/viewDiary?${friendDiary.DIARY_SEQ}|" th:each="friendDiary : ${friendDiaryList}">
-                                            <div class="mod1_innerContents">
-                                                <div class="mod1_d_bg">
-                                                    <div class="mod1_d_set">
-                                                        <span class="mod1_d_nick">[[${friendDiary.MEMBER_NICK}]]</span>
-                                                        <span class="mod1_d_date">[[${friendDiary.DIARY_DATE}]]</span>
-                                                        <span class="mod1_d_diary">[[${friendDiary.CONTENTS}]]</span>
-                                                        <span class="mod1_d_imoji">[[${friendDiary.EMOJI}]]</span>
-                                                    </div>
+                                        <a class="mod1_innerContents" th:href="|/viewDiary?${friendDiary.DIARY_SEQ}|" th:each="friendDiary : ${friendDiaryList}">
+                                            <div class="mod1_d_bg">
+                                                <div class="mod1_d_set">
+                                                    <span class="mod1_d_nick">[[${friendDiary.MEMBER_NICK}]]</span>
+                                                    <span class="mod1_d_date">[[${friendDiary.DIARY_DATE}]]</span>
+                                                    <span class="mod1_d_diary">[[${friendDiary.CONTENTS}]]</span>
+                                                    <span class="mod1_d_imoji">[[${friendDiary.EMOJI}]]</span>
                                                 </div>
                                             </div>
                                         </a>
 
-                                        
+
                                     </div><!-- /innerSlide -->
 
                                 </div>
@@ -132,35 +130,39 @@
                         /* 좌우 스크롤 슬라이더 */
                         const slider = document.querySelector('.mod2_slider');
                         let isMouseDown = false;
-                        let startX, scrollLeft;
-    
+                        let startX, scrollLeft, walk;
+                        
                         slider.addEventListener('mousedown', (e) => {
                             isMouseDown = true;
                             slider.classList.add('active');
-    
+
                             startX = e.pageX - slider.offsetLeft;
                             scrollLeft = slider.scrollLeft;
+                            walk=0; // 마우스down시 walk 0으로 초기화
                         });
-    
+
                         slider.addEventListener('mouseleave', () => {
+
                             isMouseDown = false;
                             slider.classList.remove('active');
                         });
-    
-                        slider.addEventListener('mouseup', () => {
+
+                        slider.addEventListener('mouseup', (e) => {
+                            
                             isMouseDown = false;
                             slider.classList.remove('active');
                         });
-    
+
                         slider.addEventListener('mousemove', (e) => {
                             if (!isMouseDown) return;
-    
+                        
                             e.preventDefault();
                             const x = e.pageX - slider.offsetLeft;
-                            const walk = (x - startX) * 1;
+                            walk = (x - startX) * 1;
                             slider.scrollLeft = scrollLeft - walk;
                         });
                     </script>
+
                     <!-- 내 감정 스크롤 -->
                     <script>
                         /* 상하 스크롤 슬라이더 */
@@ -174,6 +176,7 @@
     
                             startY = e.pageY - sliderY.offsetLeft;
                             scrollTop = sliderY.scrollTop;
+                            walk=0; // 마우스down시 walk 0으로 초기화
                         });
     
                         sliderY.addEventListener('mouseleave', () => {
@@ -191,10 +194,11 @@
     
                             e.preventDefault();
                             const y = e.pageY - sliderY.offsetLeft;
-                            const walk = (y - startY) * 1;
+                            walk = (y - startY) * 1;
                             sliderY.scrollTop = scrollTop - walk;
                         });
                     </script>
+
                     <!-- 친구 감정 스크롤 -->
                     <script>
                         /* 상하 스크롤 슬라이더 */
@@ -208,6 +212,7 @@
     
                             startY2 = e.pageY - sliderY2.offsetLeft;
                             scrollTop2 = sliderY2.scrollTop;
+                            walk=0; // 마우스down시 walk 0으로 초기화
                         });
     
                         sliderY2.addEventListener('mouseleave', () => {
@@ -225,11 +230,29 @@
     
                             e.preventDefault();
                             const y = e.pageY - sliderY2.offsetLeft;
-                            const walk = (y - startY2) * 1;
+                            walk = (y - startY2) * 1;
                             sliderY2.scrollTop = scrollTop2 - walk;
                         });
                     </script>
 
+                    <script>
+                        const clickHrefX = document.querySelectorAll('.mod2_innerContents')
+
+                        for(let i = 0; i < clickHrefX.length; i++){
+                            clickHrefX[i].addEventListener('click',(e)=>{
+                                if(Math.abs(walk)>20)  e.preventDefault();
+                            });
+                        };
+                        
+                        const clickHrefY = document.querySelectorAll('.mod1_innerContents')
+                        
+                        // walk가 20이상 움직이지 않으면 a태그 막기
+                        for(let i = 0; i < clickHrefY.length; i++){
+                            clickHrefY[i].addEventListener('click',(e)=>{
+                                if(Math.abs(walk)>20)  e.preventDefault();
+                            });
+                        };
+                    </script>
                 </article>
             </div>
             <!-- ==================== / contents 영역======================= -->
