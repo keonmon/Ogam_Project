@@ -15,7 +15,7 @@ public class User_MyPageController {
     @RequestMapping("/reviseInfo")
     public String reviseInfo() {
 
-        return "redirect:/reviseInfo";
+        return "redirect:/MyPage";
     }
 
 

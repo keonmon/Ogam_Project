@@ -71,6 +71,7 @@
 }
 
 #files {
+    cursor: pointer;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -119,6 +120,7 @@ textarea {
     height: 100px;
     font-size: 1.1rem;
     margin-right: 2.4vw;
+    border-radius: 5px;
 }
 
 /* 이메일 */
@@ -128,7 +130,7 @@ textarea {
     min-width: 54px;
     height: 40px;
     margin-left: 34px;
-    margin-right: 47px;
+    margin-right: 51px;
 }
 
 .part1 {
@@ -170,14 +172,14 @@ option {
     font-size: 20px;
     width: 70px;
     min-width: 70px;
-    margin-left: 17.5px;
+    margin-left: 19px;
     text-align: end;
 }
 
 #member_repw,
 #before_pw,
 #member_pw {
-    margin-left: 46px;
+    margin-left: 50px;
     height: 40px;
     width: 37vw;
     margin-right: 2.2vw;
@@ -196,7 +198,7 @@ option {
     width: 70px;
     min-width: 70px;
     margin-left: 35px;
-    margin-right: 29px;
+    margin-right: 35px;
 
 }
 
@@ -219,6 +221,7 @@ option {
     background-color: #A7BAFF;
     color: white;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 
@@ -235,7 +238,7 @@ option {
     margin-left: 19px;
     width: 70px;
     min-width: 70px;
-    margin-right: 24px;
+    margin-right: 30px;
 }
 
 #member_birth1,
@@ -256,7 +259,7 @@ option {
 }
 
 .phTitle {
-    margin-right: 30px;
+    margin-right: 35px;
     font-size: 1.3rem;
 }
 
@@ -275,6 +278,7 @@ option {
    background-color: #A7BAFF;
    color: white;
    border-radius: 3px;
+   cursor: pointer;
 }
 
 #member_phone:focus {
@@ -284,7 +288,7 @@ option {
 #double_chk_phone {
     margin-top: 20px;
     height: 40px;
-    margin-left: 133px;
+    margin-left: 140px;
     font-size: 1.1rem;
     width: 11.5vw;
 }
@@ -307,11 +311,13 @@ option {
     border: none;
     border-radius: 5px;
     color: white;
+    cursor: pointer;
 }
 
-.btn_delete a{
+.btn_delete p{
     color: gray;
     border-bottom: 1px solid gray;
+    cursor: pointer;
 }
 
 input[type="text"],
@@ -323,10 +329,15 @@ textarea:focus {
     border: 1px solid gray;
 }
 
+select {
+    cursor: pointer;
+}
+
 /* 탈퇴하기 */
 p {
     color: gray;
     border-bottom: 1px solid gray;
     width: 57px;
     font-size: 1rem;
+    cursor: pointer;
 }
