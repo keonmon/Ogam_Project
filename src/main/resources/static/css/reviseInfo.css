@@ -5,17 +5,13 @@
     font-style: normal;
 }
 
-body {
-    font-family: 'Pretendard-Regular';
-}
-
 .contents {
     padding: 20px 0px;
+    height: 62vw;
 }
 
 #wrap {
     width: 60%;
-    height: 100%;
 }
 
 .base {
@@ -33,7 +29,6 @@ body {
 #middle {
     display: flex;
     flex-direction: column;
-    /* padding: 0px 50px; */
 }
 
 /* 프로필 사진 */
@@ -68,10 +63,28 @@ body {
     display: flex;
     width: 10vw;
     height: 10vw;
-    border: 1px solid black;
+    border: 1px solid gray;
+    border-radius: 5px;
     align-items: center;
     justify-content: center;
     margin-right: 10px;
+}
+
+#files {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 35px;
+    font-size: 1.1rem;
+    border:none;
+    background-color: #A7BAFF;
+    color: white;
+    border-radius: 3px;
+}
+
+#member_image{
+    display: none;
 }
 
 .photo input {
@@ -121,21 +134,30 @@ textarea {
 .part1 {
     display: flex;
     align-items: center;
+    font-size: 1.3rem;
 }
 
 .emailBox {
-    width: 15vw;
+    width: 14vw;
     height: 40px;
     font-size: 1.1rem;
+    margin-right: 5px;
 }
 
 .selectBox {
-    width: 15vw;
+    width: 14vw;
     height: 40px;
     font-size: 1.1rem;
     text-align: center;
     margin-right: 3.4vw;
+    margin-left: 5px;
 }
+
+option {
+  background: #A7BAFF;
+  color: black;
+}
+
 
 /* 비밀번호 */
 .password {
@@ -153,6 +175,7 @@ textarea {
 }
 
 #member_repw,
+#before_pw,
 #member_pw {
     margin-left: 46px;
     height: 40px;
@@ -160,7 +183,6 @@ textarea {
     margin-right: 2.2vw;
     font-size: 1.1rem;
 }
-
 
 /* 닉네임 */
 .nickName {
@@ -179,12 +201,27 @@ textarea {
 }
 
 #member_nick {
-    width: 10vw;
+    width: 11.5vw;
     height: 40px;
     font-size: 1.1rem;
     margin-right: 10px;
     font-size: 1.1rem;
 }
+
+#member_nick:focus {
+    outline-color: #A7BAFF;
+}
+
+#nick_chk {
+    height: 35px;
+    font-size: 1.1rem;
+    border:none;
+    background-color: #A7BAFF;
+    color: white;
+    border-radius: 3px;
+}
+
+
 
 /* 생년월일 */
 .birthday {
@@ -215,6 +252,7 @@ textarea {
 .phone {
     display: flex;
     margin-top: 20px;
+    align-items: center;
 }
 
 .phTitle {
@@ -227,6 +265,20 @@ textarea {
     height: 40px;
     margin-right: 10px;
     font-size: 1.1rem;
+    width: 11.5vw;
+}
+
+#chkBtn{
+   height: 35px;
+   font-size: 1.1rem;
+   border:none;
+   background-color: #A7BAFF;
+   color: white;
+   border-radius: 3px;
+}
+
+#member_phone:focus {
+    outline-color: #A7BAFF;
 }
 
 #double_chk_phone {
@@ -234,6 +286,7 @@ textarea {
     height: 40px;
     margin-left: 133px;
     font-size: 1.1rem;
+    width: 11.5vw;
 }
 
 /* 수정완료 버튼 */
@@ -252,6 +305,7 @@ textarea {
     height: 40px;
     font-size: 1.5rem;
     border: none;
+    border-radius: 5px;
     color: white;
 }
 
@@ -260,3 +314,19 @@ textarea {
     border-bottom: 1px solid gray;
 }
 
+input[type="text"],
+input[type="password"],
+select,
+textarea:focus {
+    outline-color: #A7BAFF;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+/* 탈퇴하기 */
+p {
+    color: gray;
+    border-bottom: 1px solid gray;
+    width: 57px;
+    font-size: 1rem;
+}

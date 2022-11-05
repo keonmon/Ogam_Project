@@ -18,10 +18,5 @@ public class User_MyPageController {
         return "redirect:/reviseInfo";
     }
 
-    @RequestMapping("/deleteuser")
-    public String deleteuser() {
-
-        return "user/myPage/deleteUser";
-    }
 
 }
