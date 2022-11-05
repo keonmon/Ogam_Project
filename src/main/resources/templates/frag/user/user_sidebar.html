@@ -1,51 +1,57 @@
-<aside class="sidebar">
-    <div class="top-menu">
-        <ul>
-            <li>
-                <div id="mainImg">
-                    <a href="/dashboard">
-                        <img src="/Img/logoImg.png" />
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<th:block th:fragment="userSidebar">
+    <aside class="sidebar">
+        <div class="top-menu">
+            <ul>
+                <li>
+                    <div id="mainImg">
+                        <a href="/">
+                            <img src="/Img/logoImg.png" />
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <a href="/myDiary">
+                        <span> <i class="fa-solid fa-users-rectangle"></i></span>
+                        <span>내 일기장</span>
                     </a>
-                </div>
-            </li>
-            <li>
-                <a href="/myDiary">
-                    <span> <i class="fa-solid fa-users-rectangle"></i></span>
-                    <span>내 일기장</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span> <i class="fa-solid fa-table"></i></span>
-                    <span>친구의 일기장</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span> <i class="fa-solid fa-house-user"></i></span>
-                    <span>오늘의 일기장</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="footer">
-        <ul>
-            <li>
-                대표 : 이건희
-            </li>
-            <li>
-                대표번호 : 010 - 1111 - 1111
-            </li>
-            <li>
-                개인정보취급방침
-            </li>
-            <li>
-                이용약관
-            </li>
-            <li>
-                COPYRIGHT 2022 BY diary. <br />
-                All Rights Reserved.
-            </li>
-        </ul>
-    </div>
-</aside>
+                </li>
+                <li>
+                    <a href="#">
+                        <span> <i class="fa-solid fa-table"></i></span>
+                        <span>친구의 일기장</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span> <i class="fa-solid fa-house-user"></i></span>
+                        <span>오늘의 일기장</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer">
+            <ul>
+                <li>
+                    대표 : 이건희
+                </li>
+                <li>
+                    대표번호 : 010 - 1111 - 1111
+                </li>
+                <li>
+                    개인정보취급방침
+                </li>
+                <li>
+                    이용약관
+                </li>
+                <li>
+                    COPYRIGHT 2022 BY diary. <br />
+                    All Rights Reserved.
+                </li>
+            </ul>
+        </div>
+    </aside>
+</th:block>
+
+</html>

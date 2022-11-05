@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,9 +18,11 @@ public class User_MyDiaryController {
     DiaryService diaryService;
 
 
-    @RequestMapping("/myDiary")  // http://localhost:8081/myDiary?myEmail=user1@ogam.com
-    public String myDiary(@RequestParam String myEmail,
-                          Model model){
+    @RequestMapping("/myDiary")  // http://localhost:8081/myDiary
+    public String myDiary(HttpServletRequest request, Model model){
+
+        // 로그인유저의 세션정보 가져오기 (이메일주소)
+        String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         // 내 일기 가져오기
         List<HashMap<String, Object>> myDiaryList = diaryService.oneDiarySelectAll(myEmail);

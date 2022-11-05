@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,20 +10,14 @@
     <link href="/css/user_main.css" rel="stylesheet">
     <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".sidebar").load("/frag/user/user_sidebar.html");
-            $(".menubar").load("/frag/user/user_menubar.html");
-        });
-    </script>
+
 </head>
 <body>
     <div class="container">
 
-        <aside class="sidebar"></aside>
+        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
         <main class="bodyContainer">
-            <div class="menubar"></div>
+            <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
                 <!-- ====================contents 영역======================= -->
                 <article>
@@ -43,99 +37,18 @@
                                 <div class="mod2_innerSlide">
                                     <!-- 최대 10개 의 mod2_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
-                                    <div class="mod2_innerContents">
+
+                                    <div class="mod2_innerContents" th:onclick="|location.href='/viewDiary?${randDiary.DIARY_SEQ}'|")
+                                                                    th:each="randDiary : ${randomAllDiaryList}">
                                         <div class="mod2_d_bg">
                                             <div class="mod2_d_set">
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
-                                                <span class="mod2_d_imoji">🥰</span>
+                                                <span class="mod2_d_nick">[[${randDiary.MEMBER_NICK}]]</span>
+                                                <span class="mod2_d_date">[[${randDiary.DIARY_DATE}]]</span>
+                                                <span class="mod2_d_diary">[[${randDiary.CONTENTS}]]</span>
+                                                <span class="mod2_d_imoji">[[${randDiary.EMOJI}]]</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- 여기 이하는 반복임(더미) -->
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                <span class="mod2_d_imoji">😥</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                <span class="mod2_d_imoji">😩</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                <span class="mod2_d_imoji">🤬</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
-                                                <span class="mod2_d_imoji">😻</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
-                                                <span class="mod2_d_imoji">🥰</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                <span class="mod2_d_imoji">😥</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                <span class="mod2_d_imoji">😩</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                <span class="mod2_d_imoji">🤬</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
-                                                <span class="mod2_d_imoji">😻</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /더미데이터 종료 -->
 
                                 </div><!-- /innerSlide -->
                             </div>
@@ -158,102 +71,19 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
-                                        <a href="/viewDiary">
+                                        <a th:href="|/viewDiary?${myDiary.DIARY_SEQ}|" th:each="myDiary : ${myDiaryList}">
                                             <div class="mod1_innerContents">
                                                 <div class="mod1_d_bg">
                                                     <div class="mod1_d_set">
-                                                        <span class="mod1_d_nick">김길동</span>
-                                                        <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                        <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
-                                                        <span class="mod1_d_imoji">🥰</span>
+                                                        <span class="mod1_d_nick">[[${myDiary.MEMBER_NICK}]]</span>
+                                                        <span class="mod1_d_date">[[${myDiary.DIARY_DATE}]]</span>
+                                                        <span class="mod1_d_diary">[[${myDiary.CONTENTS}]]</span>
+                                                        <span class="mod1_d_imoji">[[${myDiary.EMOJI}]]</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </a>
-                                        <!-- 여기 이하는 반복임(더미) -->
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                    <span class="mod1_d_imoji">😥</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                    <span class="mod1_d_imoji">😩</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                    <span class="mod1_d_imoji">🤬</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
-                                                    <span class="mod1_d_imoji">😻</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
-                                                    <span class="mod1_d_imoji">🥰</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                    <span class="mod1_d_imoji">😥</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                    <span class="mod1_d_imoji">😩</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                    <span class="mod1_d_imoji">🤬</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
-                                                    <span class="mod1_d_imoji">😻</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 더미데이터 종료 -->
-                                        
+
                                     </div><!-- /innerSlide -->
 
                                 </div>
@@ -275,99 +105,19 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_nick">김길동</span>
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
-                                                    <span class="mod1_d_imoji">🥰</span>
+                                        <a th:href="|/viewDiary?${friendDiary.DIARY_SEQ}|" th:each="friendDiary : ${friendDiaryList}">
+                                            <div class="mod1_innerContents">
+                                                <div class="mod1_d_bg">
+                                                    <div class="mod1_d_set">
+                                                        <span class="mod1_d_nick">[[${friendDiary.MEMBER_NICK}]]</span>
+                                                        <span class="mod1_d_date">[[${friendDiary.DIARY_DATE}]]</span>
+                                                        <span class="mod1_d_diary">[[${friendDiary.CONTENTS}]]</span>
+                                                        <span class="mod1_d_imoji">[[${friendDiary.EMOJI}]]</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- 여기 이하는 반복임(더미) -->
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                    <span class="mod1_d_imoji">😥</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                    <span class="mod1_d_imoji">😩</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                    <span class="mod1_d_imoji">🤬</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
-                                                    <span class="mod1_d_imoji">😻</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다! 😊</span>
-                                                    <span class="mod1_d_imoji">🥰</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                    <span class="mod1_d_imoji">😥</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                    <span class="mod1_d_imoji">😩</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                    <span class="mod1_d_imoji">🤬</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mod1_innerContents">
-                                            <div class="mod1_d_bg">
-                                                <div class="mod1_d_set">
-                                                    <span class="mod1_d_date">22. 10. 16. Sun</span>
-                                                    <span class="mod1_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다! 😊</span>
-                                                    <span class="mod1_d_imoji">😻</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 더미데이터 종료 -->
+                                        </a>
+
                                         
                                     </div><!-- /innerSlide -->
 

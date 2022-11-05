@@ -45,7 +45,16 @@ public class DiaryServiceImpl implements DiaryService {
         return result;
     }
 
+    @Override
+    public List<HashMap<String, Object>> randomAllDiarySelectAll() {
 
+        // 랜덤하게 다이어리 가져오기 (10개)
+        //List<HashMap<String,Object>> randomAllDiaryList = ;
+        List<HashMap<String, Object>> result = changeDateFormat(diaryMapper.randomAllDiarySelectAll());
+        System.out.println(result);
+
+        return result;
+    }
 
 
     /**

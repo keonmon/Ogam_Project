@@ -25,4 +25,17 @@
                                   where MEMBER_EMAIL = 'user1@ogam.com')
          order by d.diary_seq desc
     </select>
+
+    <!-- 랜덤하게 다이어리 가져오기 (10개) -->
+    <select id="randomAllDiarySelectAll" resultType="java.util.HashMap">
+        select rownum, m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ
+          from diary d join emotions e
+            on e.EMOTION_SEQ = d.EMOTION_SEQ
+          join member m
+            on m.member_email = d.MEMBER_EMAIL
+         where d.DIARY_SEQ in (select ceil(DBMS_RANDOM.VALUE(1, (select max(DIARY_SEQ)
+                                                                   from diary)))DIARY_SEQ
+                                 from diary)
+           and rownum &lt;= 10
+    </select>
 </mapper>
