@@ -65,7 +65,7 @@ public class DiaryServiceImpl implements DiaryService {
      */
     public List<HashMap<String,Object>> changeDateFormat(List<HashMap<String,Object>> diaryList){
         Date diary_date;
-        SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd.EEE", Locale.ENGLISH);
+        SimpleDateFormat sdf = new SimpleDateFormat("yy. MM. dd. EEE", Locale.ENGLISH);
 
         for( int i = 0; i < diaryList.size(); i++){
             diary_date = (Date)diaryList.get(i).get("DIARY_DATE");

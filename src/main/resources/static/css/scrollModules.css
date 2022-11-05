@@ -188,6 +188,11 @@
     text-align: left;
     font-size: 16px;
     line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .contents article .mod2_d_imoji {
@@ -370,6 +375,11 @@
     text-align: left;
     font-size: 16px;
     line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .contents article .mod1_d_imoji {

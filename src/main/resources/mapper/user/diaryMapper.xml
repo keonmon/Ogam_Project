@@ -22,7 +22,7 @@
             on d.MEMBER_EMAIL = m.member_email
          where d.MEMBER_EMAIL in (select MEMBER_OP_EMAIL
                                    from friend_apply
-                                  where MEMBER_EMAIL = 'user1@ogam.com')
+                                  where MEMBER_EMAIL = #{myEmail})
          order by d.diary_seq desc
     </select>
 
