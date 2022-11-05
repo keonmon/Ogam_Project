@@ -10,4 +10,5 @@ public interface DiaryService {
 
     public List<HashMap<String,Object>> friendDiarySelectAll(String myEmail);
 
+    public List<HashMap<String,Object>> randomAllDiarySelectAll();
 }
