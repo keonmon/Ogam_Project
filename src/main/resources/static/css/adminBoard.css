@@ -10,8 +10,8 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 100%;
-    border: 1px solid black;
+    height: 41vw;
+    /*border: 1px solid black;*/
     border-radius: 30px;
     background-color: #D9D9D9;
     box-shadow: 0px 2px 5px gray;
@@ -52,7 +52,7 @@
     box-shadow: inset -1px 1px 5px gray;
     font-size: 1.5rem;
     padding: 3px;
-    outline-color: #b18fff;
+    outline-color: #A7BAFF;
 }
 
 
@@ -68,7 +68,7 @@
 }
 
 .openChk:checked {
-    background-color: #b18fff;
+    background-color: #A7BAFF;
     border: none;
   }
 
@@ -81,11 +81,11 @@
 
 #board_middle textarea {
     width: 100%;
-    height: 94%;
+    height: 34vw;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: inset -1px 1px 5px gray;
-    outline-color: #b18fff;
+    outline-color: #A7BAFF;
     font-size: 1.5rem;
     padding: 10px;
 }
