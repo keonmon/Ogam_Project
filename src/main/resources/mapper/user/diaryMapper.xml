@@ -23,19 +23,21 @@
          where d.MEMBER_EMAIL in (select MEMBER_OP_EMAIL
                                    from friend_apply
                                   where MEMBER_EMAIL = #{myEmail})
+           and diary_private = 'n'
          order by d.diary_seq desc
     </select>
 
     <!-- 랜덤하게 다이어리 가져오기 (10개) -->
     <select id="randomAllDiarySelectAll" resultType="java.util.HashMap">
         select rownum, m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ
-          from diary d join emotions e
-            on e.EMOTION_SEQ = d.EMOTION_SEQ
-          join member m
-            on m.member_email = d.MEMBER_EMAIL
-         where d.DIARY_SEQ in (select ceil(DBMS_RANDOM.VALUE(1, (select max(DIARY_SEQ)
-                                                                   from diary)))DIARY_SEQ
-                                 from diary)
-           and rownum &lt;= 10
+        from diary d join emotions e
+        on e.EMOTION_SEQ = d.EMOTION_SEQ
+        join member m
+        on m.member_email = d.MEMBER_EMAIL
+        where d.DIARY_SEQ in (select CEIL(DBMS_RANDOM.VALUE(0, (select max(DIARY_SEQ)
+                                                                  from diary)))DIARY_SEQ
+                                from DUAL CONNECT BY LEVEL 	&lt;= 20000)
+          and diary_private = 'n'
+          and rownum 	&lt;= 10
     </select>
 </mapper>
