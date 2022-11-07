@@ -1,6 +1,6 @@
 package com.go.ogamprj.serviceImpl;
 
-import com.go.ogamprj.dto.Diary;
+import com.go.ogamprj.dto.Emotions;
 import com.go.ogamprj.mapper.DiaryMapper;
 import com.go.ogamprj.sevice.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +56,13 @@ public class DiaryServiceImpl implements DiaryService {
         return result;
     }
 
+    @Override
+    public ArrayList<Emotions> getEmotions(String emotion) {
+        return diaryMapper.getEmotions(emotion);
+    }
+
+
+
 
     /**
      * 날짜 형식 바꾸기 함수
@@ -74,4 +81,9 @@ public class DiaryServiceImpl implements DiaryService {
         }
         return diaryList;
     }
+
+
+
+
+
 }

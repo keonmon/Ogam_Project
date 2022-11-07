@@ -37,7 +37,7 @@
         where d.DIARY_SEQ in (select CEIL(DBMS_RANDOM.VALUE(0, (select max(DIARY_SEQ)
                                                                   from diary)))DIARY_SEQ
                                 from DUAL CONNECT BY LEVEL 	&lt;= 20000)
-          and diary_private = 'n'
+          and d.diary_private = 'n'
           and rownum 	&lt;= 10
     </select>
 </mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 
 <head>
     <meta charset="UTF-8">
@@ -11,21 +11,15 @@
     <link href="/css/writeDiary.css" rel="stylesheet">
     <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".sidebar").load("/frag/user/user_sidebar.html");
-            $(".menubar").load("/frag/user/user_menubar.html");
-        });
-    </script>
+
 </head>
 
 <body>
     <div class="container">
 
-        <aside class="sidebar"></aside>
+        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
         <main class="bodyContainer">
-            <div class="menubar"></div>
+            <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
                 <!-- ====================contents 영역======================= -->
                 <article class="writeArea">

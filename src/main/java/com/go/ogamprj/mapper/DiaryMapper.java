@@ -1,9 +1,10 @@
 package com.go.ogamprj.mapper;
 
-import com.go.ogamprj.dto.Diary;
+import com.go.ogamprj.dto.Emotions;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,4 +20,7 @@ public interface DiaryMapper {
     public List<HashMap<String,Object>> friendDiarySelectAll(String myEmail);
 
     public List<HashMap<String,Object>> randomAllDiarySelectAll();
+
+    @Select("select * from emotions where emotion = #{emotion}")
+    public ArrayList<Emotions> getEmotions(String emotion);
 }
