@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 
 <head>
     <meta charset="UTF-8">
@@ -12,21 +12,15 @@
     <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".sidebar").load("/frag/user/user_sidebar.html");
-            $(".menubar").load("/frag/user/user_menubar.html");
-        });
-    </script>
 
 </head>
 
 <body>
     <div class="container">
 
-        <aside class="sidebar"></aside>
+        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
         <main class="bodyContainer">
-            <div class="menubar"> </div>
+            <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
                 <!-- ====================contents 영역======================= -->
                 <article class="writeArea">
@@ -48,32 +42,25 @@
 
                                 <div class="emoSelectBox">
                                     <select class="select" name="emotions">
-                                        <option value="기쁨" >기쁨</option></span>
-                                        <option value="사랑" >사랑</option></span>
-                                        <option value="슬픔" >슬픔</option></span>
-                                        <option value="우울" >우울</option></span>
-                                        <option value="힘듦" >힘듦</option></span>
-                                        <option value="분노" >분노</option></span>
+                                        <option value="기쁨" selected="selected">기쁨</option></span>
+                                        <option value="사랑">사랑</option></span>
+                                        <option value="슬픔">슬픔</option></span>
+                                        <option value="우울">우울</option></span>
+                                        <option value="힘듦">힘듦</option></span>
+                                        <option value="분노">분노</option></span>
                                     </select>
                                 </div>
-
-                                <div class="emojiListBox">
-                                    <div class="emojiListBg"></div>
-                                    <div class="emojiSlider">
-                                        <div class="emojiList">
-                                            <span>😊</span>
-                                            <span>😁</span>
-                                            <span>😍</span>
-                                            <span>🥳</span>
-                                            <span>😺</span>
-                                            <span>😸</span>
-                                            <span>😽</span>
-                                            <span>😝</span>
-                                            <span>🤗</span>
-                                            <span>🤭</span>
+                                <form action="/selectedEmoji">
+                                    <div class="emojiListBox">
+                                        <div class="emojiListBg"></div>
+                                        <div class="emojiSlider">
+                                            <div class="emojiList">
+                                                <span th:each="emotion : ${emotions}" class="imojies" th:data="${emotion.EMOTION_SEQ}">[[${emotion.EMOJI}]]</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <input hidden class="inputEmoji" name="emoji" value="">
+                                </form>
                                 <div class="selectedEmoji">
                                     <span></span>
                                 </div>
@@ -85,7 +72,7 @@
                                     </div>
                                 </a>
                                 <!-- 나중에 submit으로 변경 -->
-                                <a href="/writeDiary2" >
+                                <a href="/writeDiary2">
                                     <div class="next">
                                         <span class="nextFont">다음</span>
                                     </div>
@@ -98,10 +85,28 @@
             </div>
             <!-- ==================== / contents 영역======================= -->
             <script>
+
+                $(document).on("change", ".select", function () {
+                    let emotion = $(".select option:selected").val()
+                    $.ajax({
+                        url: '/getEmotion',
+                        type: 'post',
+                        data: {emotion: emotion},
+                    })
+                        .done(function (fragment) {
+                            $('.emojiList').replaceWith(fragment);
+                        $(document).ready(function(){
+
+                        });
+                        });
+                });
+            </script>
+
+            <script>
                 /* 좌우 스크롤 슬라이더 */
                 const slider = document.querySelector('.emojiSlider');
                 let isMouseDown = false;
-                let startX, scrollLeft;
+                let startX, scrollLeft, walk;
 
                 slider.addEventListener('mousedown', (e) => {
                     isMouseDown = true;
@@ -109,6 +114,7 @@
 
                     startX = e.pageX - slider.offsetLeft;
                     scrollLeft = slider.scrollLeft;
+                    walk=0; // 마우스down시 walk 0으로 초기화
                 });
 
                 slider.addEventListener('mouseleave', () => {
@@ -126,58 +132,69 @@
 
                     e.preventDefault();
                     const x = e.pageX - slider.offsetLeft;
-                    const walk = (x - startX) * 1;
+                    walk = (x - startX) * 1;
                     slider.scrollLeft = scrollLeft - walk;
                 });
+                const clickHrefX = document.querySelectorAll('.imojies')
+
+                // walk가 20이상 움직이지 않으면 a태그 막기
+                for(let i = 0; i < clickHrefX.length; i++){
+                    clickHrefX[i].addEventListener('click',(e)=>{
+                        if(Math.abs(walk)>20)  e.preventDefault();
+                    });
+                };
             </script>
 
             <script>
-                const emojiList =  document.querySelectorAll(".emojiList span")
+                let emojiList =  $(".imojies");
                 const giantEmojiSpan = document.querySelector(".selectedEmoji span")
                 const giantEmoji = document.querySelector(".selectedEmoji")
 
                 //로드시 0번 클릭
                 window.onload = function() {  emojiList[0].click(); }
 
-                for(let i = 0; i < emojiList.length; i++){
-                    emojiList[i].addEventListener("click",(e)=>{
-                        const selectedEmoji = e.target;
+                $(document).on('click','.imojies',(e)=>{
+                    const selectedEmoji = e.target;
+                    
 
-                        // 전체 반투명 & 선택된이모지 애니메이션 지우기
-                        for(let j = 0; j < emojiList.length; j++){
-                            emojiList[j].classList.remove("selected")
-                        }
-                        
-                        
-                        // 선택된 이모지 크게 보여주기
-                        giantEmojiSpan.innerHTML = selectedEmoji.innerHTML
-                        
-                        // 선택된 이모지 투명도 1로 
-                        e.target.classList.add("selected")
+                    // 전체 반투명 & 선택된이모지 애니메이션 지우기
+                    $('.imojies').removeClass('selected');
+                    // for(let j = 0; j < emojiList.length; j++){
+                    //     emojiList[j].classList.remove("selected")
+                    // }
 
-                        // 선택된 큰 이모지 애니메이션
-                        giantEmoji.classList.remove("animation")
-                        void giantEmoji.offsetWidth;
-                        giantEmoji.classList.add("animation")
-                        
-                    })  
-                }
+                    document.querySelector(".inputEmoji").value = e.target.getAttribute("data");
+
+                    // 선택된 이모지 크게 보여주기
+                    giantEmojiSpan.innerHTML = e.target.innerHTML
+
+                    // 선택된 이모지 투명도 1로
+                    e.target.classList.add("selected")
+
+                    // 선택된 큰 이모지 애니메이션
+                    giantEmoji.classList.remove("animation")
+                    void giantEmoji.offsetWidth;
+                    giantEmoji.classList.add("animation")
+
+                })
+            
+                
 
                 // 현재일자 포맷 변경 후 적용
                 const WEEKDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 let today = new Date();
-                
-                function makeYYMMDD(today){
-                    let year = String(today.getFullYear()).substring(2,4);
-                    let month = today.getMonth()+1;
+
+                function makeYYMMDD(today) {
+                    let year = String(today.getFullYear()).substring(2, 4);
+                    let month = today.getMonth() + 1;
                     let date = today.getDate();
                     let week = WEEKDAY[today.getDay()];
-                    month=month<10?'0'+month:month;
-                    date=date<10?'0'+date:date;
+                    month = month < 10 ? '0' + month : month;
+                    date = date < 10 ? '0' + date : date;
                     return `${year}. ${month}. ${date}. ${week}`;
                 }
                 document.querySelector(".currDate span").innerHTML = makeYYMMDD(today)
-                
+
             </script>
         </main>
     </div>

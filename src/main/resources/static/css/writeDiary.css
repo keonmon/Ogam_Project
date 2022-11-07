@@ -205,13 +205,15 @@
     font-family: Work Sans;
     font-size: 64px;
     text-align: left;
-    justify-content: space-around;
     flex-direction: row;
+    justify-content: flex-start;
+    gap: 3%;
 }
 
 .emojiList span{
     opacity:.5;
 }
+
 
 .selected{
     opacity: 1 !important;

@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class User_MyDiaryController {
@@ -36,10 +38,17 @@ public class User_MyDiaryController {
         return "user/userDiary/myDiary";
     }
 
+    @RequestMapping(value="/getEmotion", method={RequestMethod.POST})
+    public String getEmotion(@RequestParam Map<String,Object> emotion, Model model){
+        //System.out.println(diaryService.getEmotions(emotion.get("emotion").toString()));
+        model.addAttribute("emotions", diaryService.getEmotions(emotion.get("emotion").toString()));
 
+        return "user/userDiary/writeDiary1 :: .emojiList";
+    }
 
     @RequestMapping("/writeDiary1")
-    public String writeDiary1(){
+    public String writeDiary1(Model model){
+        model.addAttribute("emotions", diaryService.getEmotions("기쁨"));
         return "user/userDiary/writeDiary1";
     }
 
