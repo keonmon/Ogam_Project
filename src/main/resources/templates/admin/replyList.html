@@ -54,74 +54,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr th:each="reply : ${userReplyList}">
                         <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td class="replyBox">가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사가나다라마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나마바사</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
-                      </tr>
-                      <tr>
-                        <td><input type="checkbox" name="check" /></td>
-                        <td>ccc@ccc.com</td>
-                        <td>굿바잉</td>
-                        <td>가나다라마바사</td>
+                        <td>[[${reply.MEMBER_EMAIL}]]</td>
+                        <td>[[${reply.MEMBER_NICK}]]</td>
+                        <td class="replyBox">[[${reply.REPLY}]]</td>
                         <td><a onclick="commentPopup( )">보기</a></td>
                       </tr>
                     </tbody>
