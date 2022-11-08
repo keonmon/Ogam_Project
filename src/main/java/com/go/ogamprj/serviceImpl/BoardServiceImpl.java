@@ -6,10 +6,18 @@ import com.go.ogamprj.sevice.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class BoardServiceImpl implements BoardService {
     @Autowired
     AdminBoardMapper adminBoardMapper;
+
+    //   user 페이지에 공지 보여주기
+    @Override
+    public ArrayList<Board> selectAll() {
+        return adminBoardMapper.selectAll();
+    }
 
     @Override
     public void boardInsert(Board board) {

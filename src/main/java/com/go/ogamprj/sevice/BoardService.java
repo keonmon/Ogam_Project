@@ -2,7 +2,11 @@ package com.go.ogamprj.sevice;
 
 import com.go.ogamprj.dto.Board;
 
+import java.util.ArrayList;
+
 public interface BoardService {
+
+    ArrayList<Board> selectAll();
 
     void boardInsert(Board board);
 
