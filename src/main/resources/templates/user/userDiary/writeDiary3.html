@@ -11,7 +11,9 @@
     <link href="/css/writeDiary.css" rel="stylesheet">
     <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-
+    <link href="/css/bootstrap/bootstrap_v3.3.0.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -24,7 +26,7 @@
                 <!-- ====================contents 영역======================= -->
                 <article class="writeArea">
                     <div class="writeOutline">
-                        <form>
+                        <form action="/insertDiary" name="write3Form" enctype="multipart/form-data" method="post" >
                             <div class="writeBg"></div>
 
                             <div class="currDate">
@@ -34,8 +36,7 @@
                             <div class="selectImg" onclick="selectImg()">
                                 <span class="beforeFont">사진 선택</span>
                             </div>
-                            <input type="file" class="inputFile" accept="image/jpg,image/jpeg,image/png " onchange="fileCheck(this)">
-                            
+                            <input type="file" name="file" class="inputFile" accept="image/jpg,image/jpeg,image/png " onchange="fileCheck(this)">
 
                             <div class="innerOutline">
                                 <div class="innerBg">
@@ -48,26 +49,28 @@
                                     <span class="subtitle">오늘 당신이 느낀 감정을 배경으로 표현하세요.(배경 미선택 시 기본 배경)</span>
                                 </div>
                                 <div class="selectedEmoji animation2">
-                                    <span>🤗</span>
+                                    <span>[[${emoji}]]</span>
                                 </div>
                                 <div class="diaryNote">
-                                    <textarea cols="100" rows="6"  onfocus="resize(this)" onblur="resize(this)" autofocus="autofocus" spellcheck="false" readonly>여기는 일기 영역(수정 불가)</textarea>
+                                    <textarea cols="100" rows="6"  onfocus="resize(this)" onblur="resize(this)" autofocus="autofocus" spellcheck="false" readonly>[[${session.writeContents}]]</textarea>
                                 </div>
-                                
+                                <div class="privateSwitch material-switch">
+                                    비공개<br><br>
+                                    <input id="someSwitchOptionDefault" name="diary_private" type="checkbox" value="y" th:checked="${writePrivate.equals('y')}"/>
+                                    <label for="someSwitchOptionDefault" class="label-default"></label>
+                                </div>
+
                             </div>
                             <div class="buttons">
-                                <a href="javascript:window.history.go(-1);">
-                                    <div class="before">
+                                <a class="before" href="javascript:window.history.go(-1);">
+                                    <div>
                                         <span class="beforeFont">이전</span>
                                     </div>
                                 </a>
                                 
-                                <!-- 나중에 submit으로 변경 -->
-                                <a href="/viewDiary">
-                                    <div class="next">
-                                        <span class="nextFont">다음</span>
-                                    </div>
-                                </a>
+                                <div class="next" onClick="document.forms['write3Form'].submit()">
+                                    <span class="nextFont">저장</span>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -136,7 +139,7 @@
                 }
 
                 // 현재일자 포맷 변경 후 적용
-                const WEEKDAY = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                const WEEKDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 let today = new Date();
                 
                 function makeYYMMDD(today){

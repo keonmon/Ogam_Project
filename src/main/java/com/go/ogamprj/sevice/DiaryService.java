@@ -14,4 +14,6 @@ public interface DiaryService {
     public List<HashMap<String,Object>> randomAllDiarySelectAll();
 
     public ArrayList<Emotions> getEmotions(String emotion);
+
+    public String getEmojiSelectOne(int emotion_seq);
 }

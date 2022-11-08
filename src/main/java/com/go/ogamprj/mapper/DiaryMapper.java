@@ -23,4 +23,7 @@ public interface DiaryMapper {
 
     @Select("select * from emotions where emotion = #{emotion}")
     public ArrayList<Emotions> getEmotions(String emotion);
+
+    @Select("select emoji from emotions where emotion_seq = #{emotion_seq}")
+    public String getEmojiSelectOne(int emotion_seq);
 }

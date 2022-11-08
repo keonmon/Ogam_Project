@@ -25,7 +25,7 @@
                 <!-- ====================contents 영역======================= -->
                 <article class="writeArea">
                     <div class="writeOutline">
-                        <form>
+                        <form action="/writeDiary2" name="write1Form" method="post">
                             <div class="writeBg"></div>
 
                             <div class="currDate">
@@ -50,7 +50,6 @@
                                         <option value="분노">분노</option></span>
                                     </select>
                                 </div>
-                                <form action="/selectedEmoji">
                                     <div class="emojiListBox">
                                         <div class="emojiListBg"></div>
                                         <div class="emojiSlider">
@@ -59,25 +58,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <input hidden class="inputEmoji" name="emoji" value="">
-                                </form>
                                 <div class="selectedEmoji">
                                     <span></span>
                                 </div>
                             </div>
                             <div class="buttons">
-                                <a href="javascript:window.history.go(-1);">
-                                    <div class="before">
+                                <a class="before" href="javascript:window.history.go(-1);">
+                                    <div>
                                         <span class="beforeFont">이전</span>
                                     </div>
                                 </a>
                                 <!-- 나중에 submit으로 변경 -->
-                                <a href="/writeDiary2">
-                                    <div class="next">
-                                        <span class="nextFont">다음</span>
-                                    </div>
-                                </a>
+                                <div class="next" onClick="document.forms['write1Form'].submit()">
+                                    <span class="nextFont">다음</span>
+                                </div>
                             </div>
+                            <input hidden class="inputEmoji" name="emotion_seq" value="">
                         </form>
                     </div>
 
@@ -93,12 +89,9 @@
                         type: 'post',
                         data: {emotion: emotion},
                     })
-                        .done(function (fragment) {
-                            $('.emojiList').replaceWith(fragment);
-                        $(document).ready(function(){
-
-                        });
-                        });
+                        .done(function (emotions) {
+                            $('.emojiList').replaceWith(emotions);
+                    });
                 });
             </script>
 

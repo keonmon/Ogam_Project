@@ -11,7 +11,9 @@
     <link href="/css/writeDiary.css" rel="stylesheet">
     <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-
+    <link href="/css/bootstrap/bootstrap_v3.3.0.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -24,7 +26,7 @@
                 <!-- ====================contents 영역======================= -->
                 <article class="writeArea">
                     <div class="writeOutline">
-                        <form>
+                        <form action="/writeDiary3" name="write2Form"  method="post">
                             <div class="writeBg"></div>
 
                             <div class="currDate">
@@ -39,25 +41,28 @@
                                     <span class="subtitle">오늘 당신이 느낀 감정을 기록하세요.</span>
                                 </div>
                                 <div class="selectedEmoji animation2">
-                                    <span>🤗</span>
+                                    <span>[[${emoji}]]</span>
                                 </div>
 
                                 <div class="diaryNote">
-                                    <textarea cols="100" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" onkeypress="if(event.keyCode==13)return false" autofocus="autofocus" spellcheck="false" maxlength="150" placeholder=" 당신의 감정을 이곳에 적어보세요!!! (최대 150자 & 줄바꿈 제한)"></textarea>
+                                    <textarea name="contents" cols="100" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" onkeypress="if(event.keyCode==13)return false" autofocus="autofocus" spellcheck="false" maxlength="150" placeholder=" 당신의 감정을 이곳에 적어보세요!!! (최대 150자 & 줄바꿈 제한)"></textarea>
+                                </div>
+                                <div class="privateSwitch material-switch pull-right">
+                                    비공개<br><br>
+                                    <input id="someSwitchOptionDefault" name="diary_private" type="checkbox" value="y"/>
+                                    <label for="someSwitchOptionDefault" class="label-default"></label>
                                 </div>
                             </div>
                             <div class="buttons">
-                                <a href="javascript:window.history.go(-1);">
-                                    <div class="before">
+                                <a class="before" href="javascript:window.history.go(-1);">
+                                    <div >
                                         <span class="beforeFont">이전</span>
                                     </div>
                                 </a>
                                 <!-- 나중에 submit으로 변경 -->
-                                <a href="/writeDiary3">
-                                    <div class="next">
-                                        <span class="nextFont">다음</span>
-                                    </div>
-                                </a>
+                                <div class="next" onClick="document.forms['write2Form'].submit()">
+                                    <span class="nextFont">다음</span>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -85,7 +90,7 @@
                 }
 
                 // 현재일자 포맷 변경 후 적용
-                const WEEKDAY = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                const WEEKDAY = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 let today = new Date();
                 
                 function makeYYMMDD(today){
