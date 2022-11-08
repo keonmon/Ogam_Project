@@ -61,7 +61,10 @@ public class DiaryServiceImpl implements DiaryService {
         return diaryMapper.getEmotions(emotion);
     }
 
-
+    @Override
+    public String getEmojiSelectOne(int emotion_seq) {
+        return diaryMapper.getEmojiSelectOne(emotion_seq);
+    }
 
 
     /**
