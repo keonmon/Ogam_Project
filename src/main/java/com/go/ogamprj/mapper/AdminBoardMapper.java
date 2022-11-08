@@ -12,6 +12,9 @@ public interface AdminBoardMapper {
     @Select("SELECT * FROM BOARD")
     ArrayList<Board> adminBoardSelectAll();  // 관리자 페이지 boardList (공개 비공개 다 보임)
 
+    @Select("select * from board where board_yn = 'y'")
+    ArrayList<Board> selectAll();
+
     void boardInsert(Board board);
 
     void boardUpdate(Board board);

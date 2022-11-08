@@ -5,12 +5,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class Admin_DiaryController {
-
-    @RequestMapping("/diaryList")
-    public String diaryList() {
-
-        return "admin/diaryList";
-    }
-
-
 }
