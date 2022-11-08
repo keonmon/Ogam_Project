@@ -14,19 +14,19 @@
         <main class="bodyContainer">
             <div th:replace="~{admin/menubar :: menubar }"></div>
             <div class="content">
-                <form action="/addnotice" method="get" >
+                <form action="/addNotice" method="get" >
                     <div id="board">
                         <div id="boardBox">
                             <span class="titles">
                                 <span>제목: </span>
-                                <input type="text" id="board_title" class="boardTitle"/>
+                                <input type="text" name="board_title" class="boardTitle"/>
                             </span>
                             <span class="titles">공개
-                                <input type="checkbox" id="board_yn" class="openChk"/>
+                                <input type="checkbox" name="board_yn" class="openChk" value="y"/>
                             </span>
                         </div>
                         <div id="board_middle">
-                            <textarea  id="board_contents"></textarea>
+                            <textarea  name="board_contents"></textarea>
                         </div>
                     </div>
                     <div id="board_bottom">
