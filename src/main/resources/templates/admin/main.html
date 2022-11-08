@@ -17,25 +17,25 @@
                 <div id="mCol1">
                     <div class="mCol1-1">
                         <i class="fa-solid fa-user"></i> 이용 사용자
-                        <div style="color: red;">8명</div> <!--여기에 이용자 수 -->
+                        <div th:text="${users}"></div> <!--여기에 이용자 수 -->
                     </div>
                     <div class="mCol1-1">
                         <i class="fa-solid fa-user-slash"></i> 탈퇴한 회원
-                        <div style="color: red;">8명</div> <!--여기에 탈퇴한 회원 -->
+                        <div th:text="${removeUser}"></div> <!--여기에 탈퇴한 회원 -->
                     </div>
                     <div class="mCol1-1">
                         <i class="fa-sharp fa-solid fa-book-medical"></i> 일기 등록
-                        <div style="color: red;">54개</div> <!--여기에 일기 등록-->
+                        <div th:text="${diary}"></div> <!--여기에 일기 등록-->
                     </div>
                     <div class="mCol1-1">
-                        <i class="fa-sharp fa-solid fa-handcuffs"></i> 신고 내용
-                        <div style="color: red;">12개</div> <!--여기에 신고 내용-->
+                        <i class="fa-sharp fa-solid fa-handcuffs"></i> 신고 요청
+                        <div th:text="${reply}"></div> <!--여기에 신고 내용-->
                     </div>
                 </div>
                 <div class="mCol2">
                     <div id="chart"> <!--일기 등록 건수 그래프-->
-                        <iframe src="./chart/diaryChart.html"></iframe>
-                        <iframe src="./chart/emotionChart.html"></iframe>
+                        <th:block th:replace="~{/admin/chart/diaryChart :: diaryChart}"></th:block>
+                        <th:block th:replace="~{/admin/chart/emotionChart :: emojiChart}"></th:block>
                     </div>
                 </div>
             </div>
