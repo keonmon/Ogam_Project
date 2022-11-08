@@ -58,94 +58,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr th:each="diary : ${userDiaryList}">
                   <td><input type="checkbox" name="check" /></td>
-                  <td>공개</td>
-                  <td>기쁨</td>
-                  <td>이모지</td>
-                  <td>aaa@aaa.com</td>
-                  <td>하이하이</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>공개</td>
-                  <td>슬픔</td>
-                  <td>이모지</td>
-                  <td>bbb@bbb.com</td>
-                  <td>바이바이</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>비공개</td>
-                  <td>행복</td>
-                  <td>이모지</td>
-                  <td>ccc@ccc.com</td>
-                  <td>굿바잉2</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>공개</td>
-                  <td>기쁨</td>
-                  <td>이모지</td>
-                  <td>aaa@aaa.com</td>
-                  <td>하이하이</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>공개</td>
-                  <td>슬픔</td>
-                  <td>이모지</td>
-                  <td>bbb@bbb.com</td>
-                  <td>바이바이</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>비공개</td>
-                  <td>행복</td>
-                  <td>이모지</td>
-                  <td>ccc@ccc.com</td>
-                  <td>굿바잉</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>비공개</td>
-                  <td>행복</td>
-                  <td>이모지</td>
-                  <td>ccc@ccc.com</td>
-                  <td>굿바잉2</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>비공개</td>
-                  <td>행복</td>
-                  <td>이모지</td>
-                  <td>ccc@ccc.com</td>
-                  <td>굿바잉</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>비공개</td>
-                  <td>행복</td>
-                  <td>이모지</td>
-                  <td>ccc@ccc.com</td>
-                  <td>굿바잉</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td>공개</td>
-                  <td>행복</td>
-                  <td>이모지</td>
-                  <td>ccc@ccc.com</td>
-                  <td>굿바잉</td>
+                  <td>[[${diary.DIARY_PRIVATE}]]</td>
+                  <td>[[${diary.EMOTION}]]</td>
+                  <td>[[${diary.EMOJI}]]</td>
+                  <td>[[${diary.MEMBER_EMAIL}]]</td>
+                  <td>[[${diary.MEMBER_NICK}]]</td>
                   <td><a onclick="diaryPopup( )">보기</a></td>
                 </tr>
               </tbody>
