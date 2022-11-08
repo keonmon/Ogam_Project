@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class Admin_NoticeController {
     @Autowired
-    BoardServiceImpl boardService;
+    BoardService boardService;
 
     @RequestMapping("/admin_noticeList")
     public String admin_noticeList() {
