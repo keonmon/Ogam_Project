@@ -99,6 +99,12 @@ label{
     cursor: pointer;
 }
 
+.emailBox {
+    display: block;
+    margin: 5% 15% auto 5%;
+    padding: 10px;
+}
+
 .pw_Reissue{
     display: block;
     margin-left: 100px;
