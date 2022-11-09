@@ -7,28 +7,33 @@ notifi.addEventListener("click", () => {
         notifi_wrapModal.classList.toggle("toggle");
 })
 
-// 친구 모달 스크립트
-function friend_Modal() {
-    let modalContainer = document.querySelector(".modalContainer");
-    modalContainer.style.display = "block";
-}
+// 버튼 script
+const response = document.querySelectorAll(".response");
+const deleteBtn = document.querySelectorAll(".deleteBtn");
+const applyBtn = document.querySelectorAll(".applyBtn");
 
-function closeModal1() {
-    let modalContainer = document.querySelector(".modalContainer");
-    modalContainer.style.display = "none";
-}
-
-// 모달창 버튼 스크립트
-const addBtn = document.querySelectorAll(".addBtn");
-const add = document.querySelectorAll(".add");
-const complete = document.querySelectorAll(".complete");
-
-for (let i = 0; i < addBtn.length; i++) {
-    addBtn[i].addEventListener("click", () => {
-        add[i].style.display = "none";
-        complete[i].style.display = "block";
+for (let i = 0; i < response.length; i++) {
+    response[i].addEventListener("click", () => {
+        deleteBtn[i].style.display = "none";
+        applyBtn[i].style.display = "block";
     })
 }
+
+// 메뉴바 스크립트
+const friendList = document.querySelector(".friendList");
+const sendList = document.querySelector(".sendList");
+
+friendList.addEventListener("click", () => {
+    friendList.style.zIndex = "1";
+    sendList.style.zIndex = "0";
+    window.location.href = "/friendList";
+})
+
+sendList.addEventListener("click", () => {
+    friendList.style.zIndex = "0";
+    sendList.style.zIndex = "1";
+    window.location.href = "/sendList";
+})
 
 // 다크모드
 const btn_theme = document.querySelector(".btn_theme");

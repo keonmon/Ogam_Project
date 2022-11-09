@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <title>diaryChart</title>
 
+</head>
+<body>
+<th:block th:fragment="diaryChart">
+    <div id="curve_chart" style="width: 100%; height: 320px;"></div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
 
+      var emotion = [];
+      var emoji = [];
+
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Time', 'happy😄', 'sad😭', 'angery😡'],
-          ['1',  1000,      400,    300],
-          ['2',  1170,      460,     25],
-          ['3',  660,       1120,    10],
-          ['4',  1030,      540,     0]
+          ['emotions',],
+
+          ['', 1000, 400, 300, 100, 20, 13]
         ]);
 
 
@@ -30,9 +36,6 @@
         chart.draw(data, options);
       }
     </script>
-
-</head>
-<body>
-    <div id="curve_chart" style="width: 100%; height: 320px;"></div>
+</th:block>
 </body>
 </html>

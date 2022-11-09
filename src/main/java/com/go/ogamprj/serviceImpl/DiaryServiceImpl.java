@@ -1,5 +1,8 @@
 package com.go.ogamprj.serviceImpl;
 
+
+import com.go.ogamprj.dto.Bgimage;
+import com.go.ogamprj.dto.Diary;
 import com.go.ogamprj.dto.Emotions;
 import com.go.ogamprj.mapper.DiaryMapper;
 import com.go.ogamprj.sevice.DiaryService;
@@ -61,7 +64,51 @@ public class DiaryServiceImpl implements DiaryService {
         return diaryMapper.getEmotions(emotion);
     }
 
+    @Override
+    public String getEmojiSelectOne(int emotion_seq) {
+        return diaryMapper.getEmojiSelectOne(emotion_seq);
+    }
 
+    @Override
+    public void diaryInsertWithBgimg(Bgimage bgimageDto, Diary diaryDto) {
+        // 파일경로, 파일명 db에 저장
+        diaryMapper.bgimageInsert(bgimageDto);
+
+        // 배경이미지테이블에서 마지막에 저장된 seq 추출
+        //int bgimg_seq = diaryMapper.bgimageSelectLastSeq();
+
+        // 다이어리를 저장할 때 서브쿼리로 이미지 seq추출을 포함
+        diaryMapper.diaryInsertWithBgimg(diaryDto);
+    }
+
+    @Override
+    public int diarySelectLastOne() {
+        return diaryMapper.diarySelectLastOne();
+    }
+
+    @Override
+    public void diaryInsertNoBgimg(Diary diaryDto) {
+        // 다이어리를 저장 - 배경이미지 제외
+        diaryMapper.diaryInsertNoBgimg(diaryDto);
+    }
+
+    @Override
+    public HashMap<String, Object> diarySelectOne(int diarySeq) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yy. MM. dd. EEE", Locale.ENGLISH);
+
+        HashMap<String,Object> resultMap = diaryMapper.diarySelectOne(diarySeq);
+
+        // 날짜변경
+        Date diary_date = (Date)resultMap.get("DIARY_DATE");
+        String formatedDate = sdf.format(diary_date);
+        resultMap.replace("DIARY_DATE",formatedDate);
+
+
+
+
+
+        return resultMap;
+    }
 
 
     /**

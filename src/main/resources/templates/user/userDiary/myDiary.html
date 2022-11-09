@@ -39,7 +39,7 @@
                                     <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
 
-                                    <a class="mod1_innerContents" th:href="|/viewDiary?${myDiary.DIARY_SEQ}|" th:each="myDiary : ${myDiaryList}">
+                                    <a class="mod1_innerContents" th:href="|/viewDiary?diarySeq=${myDiary.DIARY_SEQ}|" th:each="myDiary : ${myDiaryList}">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
                                                     <span class="mod1_d_nick">[[${myDiary.MEMBER_NICK}]]</span>
@@ -87,7 +87,7 @@
                                     <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
 
-                                    <a class="mod1_innerContents" th:href="|/viewDiary?${friendDiary.DIARY_SEQ}|" th:each="friendDiary : ${friendDiaryList}">
+                                    <a class="mod1_innerContents" th:href="|/viewDiary?diarySeq=${friendDiary.DIARY_SEQ}|" th:each="friendDiary : ${friendDiaryList}">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
                                                     <span class="mod1_d_nick">[[${friendDiary.MEMBER_NICK}]]</span>

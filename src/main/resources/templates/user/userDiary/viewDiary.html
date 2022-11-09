@@ -29,8 +29,8 @@
                 <!-- ====================contents 영역======================= -->
                 <article class="viewArea">
                     <div class="writeDate">
-                        <span>22. 10. 16. Sun</span>
-                        <div class="selectedEmoji">🤗</div>
+                        <span>[[${diaryDto.DIARY_DATE}]]</span>
+                        <div class="selectedEmoji">[[${diaryDto.EMOJI}]]</div>
                     </div>
                     <div class="viewOutline">
                         <div class="viewBg"></div>
@@ -55,13 +55,18 @@
                                 </div>
 
                                 <div class="innerBg">
-                                    <div class="innerImg"></div>
+                                    <th:block th:unless="${diaryDto['BGIMG_SEQ']}">
+                                        <div class="innerImg"></div>
+                                    </th:block>
+                                    <th:block th:if="${diaryDto['BGIMG_SEQ']}">
+                                        <div class="innerImg" th:style="|background:url(${diaryDto.BGIMG_PATH});|"></div>
+                                    </th:block>
                                 </div>
 
                                 <div class="diaryNote">
                                     <textarea cols="100" rows="auto" onfocus="resize(this)" onblur="resize(this)"
                                         autofocus="autofocus" spellcheck="false"
-                                        readonly="readonly">여기는 작성된 글 영역 이러한 저러한 일이 있었는데 기분이 너무 좋구만~~!!(수정 불가)ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</textarea>
+                                        readonly="readonly">[[${diaryDto.CONTENTS}]]</textarea>
                                 </div>
                             </div>
                             <!-- 댓글 작성 영역 -->

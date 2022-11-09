@@ -9,7 +9,10 @@
 -- notifi, friend_apply, friend_send 테이블              -> nickname 컬럼 제거
 -- friend_apply 테이블                                   -> friend_key number not null 컬럼 추가
 -- friend_apply. MEMBER_OP_EMAIL                        -> not null로 변경
-
+-- block_seq 시퀀스, block 테이블 생성문 추가
+-- deleted_diary,deleted_reply 테이블 삭제
+-- diary, reply 테이블에 삭제 구분 컬럼 추가 (diary_del, reply_del)
+-- member테이블 - member_adminyn 컬럼 삭제
 
 ----------------------------------------
 --DROP TABLE BGIMAGE;
@@ -37,7 +40,6 @@ CREATE TABLE MEMBER (
 	member_birth	date		NULL,
 	member_phone	varchar2(50)		NULL,
 	member_gender	varchar2(10)		NULL,
-	member_adminyn	varchar2(2)	DEFAULT 'n'	NULL,
 	member_blackYn	varchar2(2)	DEFAULT 'n'	NOT NULL,
 	member_black_reason	varchar2(200)		NULL,
 	member_date	date	DEFAULT sysdate	NULL,
@@ -58,7 +60,8 @@ CREATE TABLE DIARY (
     emotion_seq 	number	NOT NULL,
 	contents	varchar2(200)		NOT NULL,
 	diary_date	date	DEFAULT sysdate	NOT NULL,
-	diary_private	varchar2(2)	DEFAULT 'n'	NOT NULL
+	diary_private	varchar2(2)	DEFAULT 'n'	NOT NULL,
+	diary_del varchar2(2) not null default 'n'
 );
 
 --DROP TABLE reply;
@@ -68,7 +71,8 @@ CREATE TABLE reply (
 	diary_seq	number 	NOT NULL,
 	member_email	varchar2(100)		NOT NULL,
 	reply	varchar2(200)		NULL,
-	reply_date	date	DEFAULT sysdate	NULL
+	reply_date	date	DEFAULT sysdate	NULL,
+	reply_del varchar2(2) not null default 'n'
 );
 
 
@@ -187,26 +191,6 @@ CREATE TABLE BGIMAGE (
 	bgimg_path	varchar2(100)		NULL,
 	bgimg_title	varchar2(100)		NULL
 );
-
-
-CREATE TABLE deleted_diary (
-	diary_seq	number	NOT NULL,
-	reply_del	varchar2(2)		NOT NULL
-);
-
---DROP TABLE DELETED_DIARY;
-
-COMMENT ON COLUMN deleted_diary.reply_del IS 'member가 삭제 시 m
-관리자가 삭제 시  a';
-
-CREATE TABLE deleted_reply (
-	reply_seq	number	NOT NULL,
-	reply_del	varchar2(2)		NOT NULL
-);
-
-COMMENT ON COLUMN deleted_reply.reply_del IS 'member삭제 시 m
-관리자 삭제 시 a';
-
 
 
 ALTER TABLE DIARY ADD CONSTRAINT FK_MEMBER_TO_DIARY_1 FOREIGN KEY (
@@ -339,19 +323,23 @@ REFERENCES MEMBER (
 	member_email
 );
 
-ALTER TABLE deleted_diary ADD CONSTRAINT FK_DIARY_TO_deleted_diary_1 FOREIGN KEY (
-	diary_seq
-)
-REFERENCES DIARY (
-	diary_seq
+
+
+CREATE SEQUENCE  BLOCK_SEQ  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
+
+CREATE TABLE block (
+	block_seq	number	DEFAULT block_seq.nextval	NOT NULL,
+	member_email	varchar2(100)		NOT NULL,
+	block_email	varchar2(100)		NOT NULL
 );
 
-ALTER TABLE deleted_reply ADD CONSTRAINT FK_reply_TO_deleted_reply_1 FOREIGN KEY (
-	reply_seq
-)
-REFERENCES reply (
-	reply_seq
+ALTER TABLE block ADD CONSTRAINT PK_BLOCK PRIMARY KEY (
+	block_seq,
+	member_email
 );
+
+ALTER TABLE block ADD CONSTRAINT FK_MEMBER_TO_block_1 FOREIGN KEY ( member_email )
+REFERENCES MEMBER ( member_email );
 
 
 --COMMIT;

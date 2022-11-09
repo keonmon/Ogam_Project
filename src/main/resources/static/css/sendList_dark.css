@@ -1,0 +1,76 @@
+/* 다크모드 스타일 */
+.moon_background{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: rgb(152, 152, 152);
+    width: 50px;
+    height: 50px;
+    right: 20px;
+    bottom: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.btn_theme{
+    color: gold;
+    font-size: 35px;
+}
+
+/* darkMode body 스타일 */
+.dark {
+    background:#7c7c7c !important; 
+    color: #fff !important;
+    border-color: white !important;
+} 
+
+/* darkMode sidebar 스타이 */
+.dark .sidebar li a, .dark .sidebar li span, .dark .footer li {
+    border-color: #fff;
+    color: white;
+}
+
+/* darkMode menubar 스타일 */
+.dark .menubar, .dark .board a, .dark .login span, .dark .logout span, .dark .notifi{
+   background-color: #7c7c7c;
+   color: white;
+}
+.dark #writeDiary{
+    background-color: #908BE8;
+}
+
+/* darkMode bodyContainer 스타일 */
+.dark .bodyContainer {
+    background-color: #333;
+}
+/* darkMode 알림창 스타일 */
+.dark #notifi_modal{
+    background-color: #7c7c7c;
+}
+.dark #currentNotifi_contents, .dark #previewNotifi_contents{
+    background-color: #d1d1d1;
+    color: black;
+}
+
+/* darkMode 신청목록 스타일 */
+.dark .sendHeader{
+    background-color: #908BE8;
+}
+.dark .sendBody {
+    background-color: #7c7c7c;
+    color: black;
+}
+.dark .send_list {
+    background-color: #c9c9c9;
+}
+
+/* 친구 검색 모달 스타일 */
+.dark .wrapModal {
+    background-color: #777777;
+    color: black;
+}
+
+.dark .member_list {
+    background-color: #d1d1d1;
+}

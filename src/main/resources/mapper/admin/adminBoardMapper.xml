@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.go.ogamprj.mapper.AdminBoardMapper">
+    <insert id="boardInsert" parameterType="com.go.ogamprj.dto.Board">
+        INSERT INTO BOARD (BOARD_TITLE, BOARD_CONTENTS, BOARD_YN)
+        VALUES (#{board_title}, #{board_contents}, #{board_yn})
+    </insert>
+
+    <update id="boardUpdate" parameterType="com.go.ogamprj.dto.Board">
+        UPDATE SET BOARD (BOARD_TITLE, BOARD_CONTENTS, BOARD_YN)
+        VALUES (#{board_title}, #{board_contents}, #{board_yn})
+    </update>
+
+    <delete id="boardDelete">
+        DELETE FROM BOARD
+        WHERE BOARD_SEQ = #{board_seq}
+    </delete>
+</mapper>

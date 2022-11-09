@@ -19,14 +19,14 @@
                         <div id="boardBox">
                             <span class="titles">
                                 <span>제목: </span>
-                                <input type="text" id="board_title" class="boardTitle" readonly/>
+                                <input type="text" name="board_title" class="boardTitle" th:value="${board.board_title}" />
                             </span>
                             <span class="titles">공개
-                                <input type="checkbox" id="board_yn" class="openChk" readonly/>
+                                <input type="checkbox" name="board_yn" value="y" class="openChk" th:value="${board.board_yn}"/>
                             </span>
                         </div>
                         <div id="board_middle">
-                            <textarea  id="board_contents" readonly></textarea>
+                            <textarea  name="board_contents" th:value="${board.board_contents}"></textarea>
                         </div>
                     </div>
                     <div id="board_bottom">
