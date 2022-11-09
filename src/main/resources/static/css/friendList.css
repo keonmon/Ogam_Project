@@ -440,8 +440,14 @@
     border-radius: 10px;
 }
 .op_nickname{
-    display: flex;
+
     font-size: 18px;
+    padding: 20px;
+    width: 200rem;
+}
+.op_intro{
+
+    font-size: 13px;
     padding: 20px;
     width: 200rem;
 }

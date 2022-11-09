@@ -37,11 +37,13 @@ const sendList = document.querySelector(".sendList");
 friendList.addEventListener("click", () => {
     friendList.style.zIndex = "1";
     sendList.style.zIndex = "0";
+    window.location.href = "/friendList";
 })
 
 sendList.addEventListener("click", () => {
     friendList.style.zIndex = "0";
     sendList.style.zIndex = "1";
+    window.location.href = "/sendList";
 })
 
 // 다크모드
