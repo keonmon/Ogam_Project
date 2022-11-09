@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.go.ogamprj.mapper.FriendDiaryMapper">
+
+    <!--  친구 목록 전체 가져오기  -->
+    <select id="friendListSelectAll" resultType="java.util.Map">
+        select
+            m.member_image,
+            m.member_nick,
+            m.member_intro,
+            f.friend_date
+        from friend_apply f
+            join member m
+            on f.member_email = m.member_email
+        where f.member_email
+        in (select member_op_email
+                from friend_apply
+            where member_email = #{myEmail})
+    </select>
+
+    <select id="friendListCount" resultType="int">
+        select count(*) from friend_apply where member_email = #{myEmail}
+    </select>
+</mapper>
