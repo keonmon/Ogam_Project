@@ -13,6 +13,11 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     AdminBoardMapper adminBoardMapper;
 
+    @Override
+    public ArrayList<Board> adminBoardSelectAll() {
+        return adminBoardMapper.adminBoardSelectAll();
+    }
+
     //   user 페이지에 공지 보여주기
     @Override
     public ArrayList<Board> selectAll() {
@@ -33,4 +38,11 @@ public class BoardServiceImpl implements BoardService {
     public void boardDelete(int board_seq) {
         adminBoardMapper.boardDelete(board_seq);
     }
+
+    @Override
+    public Board selectOneBoard(int board_seq) {
+        return adminBoardMapper.selectOneBoard(board_seq);
+    }
+
+
 }

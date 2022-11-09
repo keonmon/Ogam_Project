@@ -10,5 +10,5 @@ import java.util.List;
 public interface AdminDiaryMapper {
 
     /* USER 일기 전체 가져오기 */
-    List<HashMap<String, Object>> userDiarySelectAll();
+    public List<HashMap<String, Object>> userDiarySelectAll();
 }

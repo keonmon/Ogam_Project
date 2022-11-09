@@ -3,34 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>[관리자] 공지 작성</title>
-    <link rel="stylesheet" type="text/css" href="css/admin.css" />
-    <link rel="stylesheet" type="text/css" href="css/adminBoard.css" />
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="/css/adminBoard.css" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <aside th:replace="~{admin/sidebar :: sidebar }"></aside>
+        <aside th:replace="~{admin/sidebar :: sidebar}"></aside>
         <main class="bodyContainer">
-            <div th:replace="~{admin/menubar :: menubar }"></div>
+            <div th:replace="~{admin/menubar :: menubar}"></div>
             <div class="content">
-                <form action="board.html" method="get" >
+                <form action="/adminUpdate" method="get" >
                     <div id="board">
                         <div id="boardBox">
                             <span class="titles">
                                 <span>제목: </span>
-                                <input type="text" name="board_title" class="boardTitle" th:value="${board.board_title}" />
+                                <input type="text" name="board_title" class="boardTitle" th:field="*{board.board_title}" />
                             </span>
                             <span class="titles">공개
-                                <input type="checkbox" name="board_yn" value="y" class="openChk" th:value="${board.board_yn}"/>
+                                <input type="checkbox" name="board_yn" value="y" class="openChk" th:field="*{board.board_yn}"/>
                             </span>
                         </div>
                         <div id="board_middle">
-                            <textarea  name="board_contents" th:value="${board.board_contents}"></textarea>
+                            <textarea  name="board_contents" th:field="*{board.board_contents}"></textarea>
                         </div>
                     </div>
                     <div id="board_bottom">
                         <input type="submit" value="수정하기"/>
+                        <input type="hidden" th:value="${board.board_seq}">
                         <input type="button" onclick="history.back();" value="취소"/>
                     </div>
                 </form>
