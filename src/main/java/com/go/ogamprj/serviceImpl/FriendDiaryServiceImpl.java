@@ -5,8 +5,8 @@ import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class FriendDiaryServiceImpl implements FriendDiaryService {
@@ -26,4 +26,11 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
     public int friendListCount(String myEmail) {
         return friendDiaryMapperMapper.friendListCount(myEmail);
     }
+
+    // 검색으로 친구리스트 가져오기
+    @Override
+    public List<Map<String, Object>> search(String searchKeyword) {
+        return friendDiaryMapperMapper.search(searchKeyword);
+    }
+
 }

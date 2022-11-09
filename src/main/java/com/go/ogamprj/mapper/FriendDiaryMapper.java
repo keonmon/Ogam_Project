@@ -13,4 +13,6 @@ public interface FriendDiaryMapper {
 
     //친구 리스트 카운트
     int friendListCount(String myEmail);
+
+    List<Map<String, Object>> search(String searchKeyword);
 }

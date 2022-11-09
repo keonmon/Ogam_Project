@@ -8,4 +8,6 @@ public interface FriendDiaryService {
     List<Map<String, Object>> friendListSelectAll(String myEmail);
 
     int friendListCount(String myEmail);
+
+    List<Map<String, Object>> search(String searchKeyword);
 }

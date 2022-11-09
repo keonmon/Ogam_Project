@@ -22,17 +22,20 @@
                     <div class="sendHeader">
                         <span>친구 목록</span>
                     </div>
-                    <div class="searchContainer">
-                        <div class="searchBox">
-                            <input type="text" class="search" id="search" name="" placeholder="아이디 입력" />
+                    <form action="/friendList" method="get">
+                        <div class="searchContainer">
+                                <div class="searchBox">
+                                    <input type="text" id="searchKeyword" name="searchKeyword" placeholder="아이디 입력" />
+                                    <button type="submit" class="searchImg">
+                                        <img src="/img/search.png" />
+                                    </button>
+                                </div>
+                            <div class="friendCnt">
+                                <span>[[ ${friendListCount} ]]</span> 친구
+                            </div>
                         </div>
-                        <div class="searchImg">
-                            <img src="/img/search.png" />
-                        </div>
-                        <div class="friendCnt">
-                            <span>[[ ${friendListCount} ]]</span> 친구
-                        </div>
-                    </div>
+                        <span id="search_explain">** 검색어 없이 검색할 경우 전체 리스트 보여줍니다 **</span>
+                    </form>
                     <div class="sendBody">
                         <th:block th:each="friend : ${friendList}">
                             <div class="send_date">[[ ${friend.FRIEND_DATE} ]]</div>
@@ -41,7 +44,11 @@
                                     <span class="op_img">
                                         <img src="/Img/logoImg.png" />
                                     </span>
-                                    <span class="op_nickname">[[ ${friend.MEMBER_NICK} ]]</span>
+                                    <div class="op_nickname">
+                                        <span>[[ ${friend.MEMBER_NICK} ]]</span>
+                                        <p>[[ ${friend.MEMBER_INTRO} ]]</p>
+
+                                    </div>
                                     <div class="response">
                                         <div class="deleteBtn">삭제</div>
                                         <div class="applyBtn">추가</div>

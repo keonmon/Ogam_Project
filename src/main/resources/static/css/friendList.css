@@ -363,7 +363,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vw;
+    height: 3vw;
 }
 .searchBox{
     display: flex;
@@ -386,12 +386,20 @@
 
 .searchImg{
     width: 4vw;
+    border-style: none;
+    background-color: rgb(231, 233, 233);
 }
 
 .searchImg img{
-    width: 1.8vw;
-    height: 1.8vw;
+    height: 1.7vw;
     cursor: pointer;
+}
+
+#search_explain{
+    display:block;
+    text-align:center;
+    font-size:13px;
+    color:red;
 }
 
 .friendCnt{
