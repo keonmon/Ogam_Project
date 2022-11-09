@@ -1,5 +1,7 @@
 package com.go.ogamprj.controller.user;
 
+import com.go.ogamprj.dto.Bgimage;
+import com.go.ogamprj.dto.Diary;
 import com.go.ogamprj.sevice.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -87,53 +89,82 @@ public class User_MyDiaryController {
     public String insertDiary(HttpServletRequest request, Model model,
                               @RequestParam(defaultValue = "n") String diary_private,
                               @RequestParam MultipartFile file){
+
         request.getSession().setAttribute("writePrivate",diary_private);
         int writeEmotionSeq = (int)request.getSession().getAttribute("writeEmotionSeq");
         String writeContents = (String)request.getSession().getAttribute("writeContents");
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+
+        Diary diaryDto = new Diary(0, loginUser, 0, writeEmotionSeq, writeContents, null, diary_private, "n");
 
         // 업로드된 파일 처리
-            // 파일이 비어있을 경우 (js에서 먼저 valid하기때문에 여기에 걸릴 일은 거의 없음)
+            // 이미지를 업로드하지 않는 경우
         if(file.isEmpty()) {
-            int emotion_seq = (int)request.getSession().getAttribute("writeEmotionSeq");
-            model.addAttribute("emoji", diaryService.getEmojiSelectOne(emotion_seq));
-            model.addAttribute("writePrivate",diary_private);
+            // 배경이미지를 제외하고 다이어리 저장
+            diaryService.diaryInsertNoBgimg(diaryDto);
+        } else {
 
-            return "redirect:/writeDiary3";
+            // 파일 업로드 준비
+            // 서버 webapp 경로 추출
+            String realPath = request.getSession().getServletContext().getRealPath("/");
+
+            // file의 실제이름 추출
+            String origName = file.getOriginalFilename();
+
+            // 파일 이름으로 쓸 uuid 생성
+            String uuid = UUID.randomUUID().toString();
+
+            // 확장자 추출(ex : .png)
+            String extension = origName.substring(origName.lastIndexOf("."));
+
+            // uuid와 확장자 결합
+            String savedName = uuid + extension;
+
+            // 파일을 불러올 때 사용할 파일 경로
+            String savedPath = realPath + fileDir + savedName;
+
+            Bgimage bgimageDto = new Bgimage(0, fileDir + savedName, savedName);
+            // 파일 서버에 저장
+            try {
+                file.transferTo(new File(savedPath));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            // 다이어리 DB에 저장(파일과 함께 가져감
+            diaryService.diaryInsertWithBgimg(bgimageDto, diaryDto);
         }
 
-        // 서버 webapp 경로 추출
-        String realPath = request.getSession().getServletContext().getRealPath("/");
+        // 마지막 저장된 diarySeq 조회
+        int diarySeq = diaryService.diarySelectLastOne();
 
-        // file의 실제이름 추출
-        String origName = file.getOriginalFilename();
-
-        // 파일 이름으로 쓸 uuid 생성
-        String uuid = UUID.randomUUID().toString();
-
-        // 확장자 추출(ex : .png)
-        String extension = origName.substring(origName.lastIndexOf("."));
-
-        // uuid와 확장자 결합
-        String savedName = uuid + extension;
-
-        // 파일을 불러올 때 사용할 파일 경로
-        String savedPath = realPath + fileDir + savedName;
-
-
-        // 실제로 로컬에 uuid를 파일명으로 저장
-        try {
-            file.transferTo(new File(savedPath));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        //int diarySeq = diaryService.
-
-        //+diarySeq
-        //return "user/userDiary/viewDiary?diarySeq=";
-        return "";
+        return "redirect:/viewDiary?diarySeq="+diarySeq;
     }
+
+
+    // /viewDiary?diarySeq="+diarySeq
+    @RequestMapping("/viewDiary")
+    public String DiaryView(HttpServletRequest request,
+                            Model model,
+                            @RequestParam int diarySeq){
+
+        // 다이어리와 배경이미지를 조인한 결과를 해시맵에 담음
+        HashMap<String,Object> diaryDto = diaryService.diarySelectOne(diarySeq);
+        model.addAttribute("diaryDto",diaryDto);
+
+        // 파일 경로에 realPath 덧붙이기
+        //String realPath = request.getSession().getServletContext().getRealPath("/");
+        //String editedPath = realPath + "/" + diaryDto.get("BGIMG_PATH");
+        //diaryDto.replace("BGIMG_PATH",editedPath);
+
+        // 댓글은 따로 가져와야함.
+
+        System.out.println(diaryDto);
+
+        return "user/userDiary/viewDiary";
+    }
+
+
 
     @RequestMapping("/diaryAll")
     public String diaryAll(){

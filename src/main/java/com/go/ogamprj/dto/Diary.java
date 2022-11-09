@@ -15,5 +15,6 @@ public class Diary {
     private String CONTENTS;         // 내용
     private Date DIARY_DATE;         // 작성일
     private String DIARY_PRIVATE;    // 비공개 유무 (n:공개 / y:비공개)
+    private String DIARY_DEL;        // 일기 삭제 유무
 };
 

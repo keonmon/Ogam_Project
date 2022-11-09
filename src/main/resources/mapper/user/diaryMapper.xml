@@ -40,4 +40,33 @@
           and d.diary_private = 'n'
           and rownum 	&lt;= 10
     </select>
+
+    <!-- 다이어리 배경이미지 insert -->
+    <insert id="bgimageInsert" parameterType="com.go.ogamprj.dto.Bgimage">
+        insert into bgimage(bgimg_path,bgimg_title) values(#{bgimg_path},#{bgimg_title})
+    </insert>
+
+    <!-- 다이어리 저장 + 배경이미지 seq추출  -->
+    <insert id="diaryInsertWithBgimg" parameterType="com.go.ogamprj.dto.Diary">
+        insert into
+            diary(MEMBER_EMAIL,EMOTION_SEQ,CONTENTS,DIARY_PRIVATE,BGIMG_SEQ)
+            values(#{MEMBER_EMAIL},#{EMOTION_SEQ},#{CONTENTS},#{DIARY_PRIVATE},(select max(bgimg_seq)
+                                                                                  from bgimage)
+            )
+    </insert>
+
+    <insert id="diaryInsertNoBgimg" parameterType="com.go.ogamprj.dto.Diary">
+        insert into
+        diary(MEMBER_EMAIL,EMOTION_SEQ,CONTENTS,DIARY_PRIVATE)
+        values(#{MEMBER_EMAIL},#{EMOTION_SEQ},#{CONTENTS},#{DIARY_PRIVATE} )
+    </insert>
+    
+    <select id="diarySelectOne" resultType="java.util.HashMap">
+        select *
+          from diary d LEFT JOIN bgimage i
+            on d.bgimg_seq = i.bgimg_seq
+          JOIN emotions e
+            on d.emotion_seq = e.emotion_seq
+         where d.diary_seq = #{diarySeq}
+    </select>
 </mapper>
