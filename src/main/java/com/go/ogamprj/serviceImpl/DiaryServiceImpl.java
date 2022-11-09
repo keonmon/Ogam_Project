@@ -103,30 +103,54 @@ public class DiaryServiceImpl implements DiaryService {
         String formatedDate = sdf.format(diary_date);
         resultMap.replace("DIARY_DATE",formatedDate);
 
-
-
-
-
         return resultMap;
+    }
+
+
+    @Override
+    public HashMap<String,Object> likeMap(int diary_seq) {
+        HashMap<String,Object> likeMap = new HashMap<>();
+
+        likeMap.put("likeCnt",diaryMapper.likeCnt(diary_seq));
+        likeMap.put("likeMemberList",diaryMapper.likeMemberList(diary_seq));
+
+        return likeMap;
+    }
+
+    @Override
+    public List<HashMap<String,Object>> replySelect(int diarySeq) {
+
+        List<HashMap<String,Object>> replyList = diaryMapper.replySelect(diarySeq);
+
+        // 날짜 변환
+        List<HashMap<String,Object>> resultList = changeDateFormat(replyList);
+
+        return resultList;
     }
 
 
     /**
      * 날짜 형식 바꾸기 함수
      * yy.MM.dd.EEE 형식으로 변환 (Locale.ENGLISH)
-     * @param diaryList
+     * @param list
      * @return
      */
-    public List<HashMap<String,Object>> changeDateFormat(List<HashMap<String,Object>> diaryList){
-        Date diary_date;
+    public List<HashMap<String,Object>> changeDateFormat(List<HashMap<String,Object>> list){
+        Date date;
         SimpleDateFormat sdf = new SimpleDateFormat("yy. MM. dd. EEE", Locale.ENGLISH);
 
-        for( int i = 0; i < diaryList.size(); i++){
-            diary_date = (Date)diaryList.get(i).get("DIARY_DATE");
-            String formatedDate = sdf.format(diary_date);
-            diaryList.get(i).replace("DIARY_DATE",formatedDate);
+        for( int i = 0; i < list.size(); i++){
+            if(list.get(i).containsKey("DIARY_DATE")) {
+                date = (Date) list.get(i).get("DIARY_DATE");
+                String formatedDate = sdf.format(date);
+                list.get(i).replace("DIARY_DATE", formatedDate);
+            }else if(list.get(i).containsKey("REPLY_DATE")){
+                date = (Date) list.get(i).get("REPLY_DATE");
+                String formatedDate = sdf.format(date);
+                list.get(i).replace("REPLY_DATE", formatedDate);
+            }
         }
-        return diaryList;
+        return list;
     }
 
 

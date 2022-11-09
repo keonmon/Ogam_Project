@@ -28,4 +28,9 @@ public interface DiaryService {
     public void diaryInsertNoBgimg(Diary diaryDto);
 
     public HashMap<String,Object> diarySelectOne(int diarySeq);
+
+
+    public HashMap<String,Object> likeMap(int diary_seq);
+
+    List<HashMap<String,Object>> replySelect(int diarySeq);
 }

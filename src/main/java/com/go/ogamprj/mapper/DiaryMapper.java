@@ -43,7 +43,15 @@ public interface DiaryMapper {
     @Select("select max(diary_seq) from diary")
     public int diarySelectLastOne();
 
-
     public HashMap<String,Object> diarySelectOne(int diarySeq);
+
+    @Select("select count(*) from diary_like where diary_seq = #{diary_seq}")
+    public int likeCnt(int diary_seq);
+
+    @Select("select member_email from diary_like where diary_seq = #{diary_seq}")
+    public List<String> likeMemberList(int diary_seq);
+
+    public List<HashMap<String,Object>> replySelect(int diarySeq);
+
 }
 

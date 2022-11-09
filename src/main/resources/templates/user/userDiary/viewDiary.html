@@ -10,12 +10,6 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
     <link href="/css/viewDiary.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-    <script>
-        // iframe 자동 height 조절
-        function resizeIframe(obj) {
-            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
-        }
-    </script>
 
 </head>
 
@@ -29,15 +23,15 @@
                 <!-- ====================contents 영역======================= -->
                 <article class="viewArea">
                     <div class="writeDate">
-                        <span>[[${diaryDto.DIARY_DATE}]]</span>
-                        <div class="selectedEmoji">[[${diaryDto.EMOJI}]]</div>
+                        <span>[[${diaryDto['DIARY_DATE']}]]</span>
+                        <div class="selectedEmoji">[[${diaryDto['EMOJI']}]]</div>
                     </div>
                     <div class="viewOutline">
                         <div class="viewBg"></div>
                         <form>
 
                             <div class="innerOutline" >
-                                <div class="diaryMenu" id="101">
+                                <div class="diaryMenu" th:id="${diaryDto.DIARY_SEQ}">
                                     ···
                                 </div>
                                 <!-- 모달 창 (다이어리 메뉴버튼)-->
@@ -49,10 +43,13 @@
                                     </div>
                                 </div> -->
 
+                                <th:block th:if="${likeMap.likeMemberList.contains(session.loginUser)}">
+                                <div class="likeButton likeit">♥</div>
+                                </th:block>
+                                <th:block th:unless="${likeMap.likeMemberList.contains(session.loginUser)}">
+                                    <div class="likeButton">♡</div>
+                                </th:block>
 
-                                <div class="likeButton">
-                                    ♡
-                                </div>
 
                                 <div class="innerBg">
                                     <th:block th:unless="${diaryDto['BGIMG_SEQ']}">
@@ -85,132 +82,31 @@
                                 <div class="mod2_innerSlide">
                                     <!-- 최대 10개 의 mod2_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
-                                    <div class="mod2_innerContents" >
+                                    <div class="mod2_innerContents" th:each="reply : ${replyList}">
                                         <div class="mod2_d_bg">
                                             <div class="mod2_d_set">
-                                                <div class="replyMenu" id="101">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다!
-                                                    😊</span>
-                                                <span class="mod2_d_imoji">🥰</span>
+                                                <div class="replyMenu" th:id="${reply.REPLY_SEQ}">···</div>
+                                                <span class="mod2_d_nick">[[${reply.MEMBER_NICK}]]</span>
+                                                <span class="mod2_d_date">[[${reply.REPLY_DATE}]]</span>
+                                                <span class="mod2_d_diary">[[${reply.REPLY}]]</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- 여기 이하는 반복임(더미) -->
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="102">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                <span class="mod2_d_imoji">😥</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="103">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                <span class="mod2_d_imoji">😩</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="104">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                <span class="mod2_d_imoji">🤬</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="105">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다!
-                                                    😊</span>
-                                                <span class="mod2_d_imoji">😻</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="106">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 재밌었다!
-                                                    😊</span>
-                                                <span class="mod2_d_imoji">🥰</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="107">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 슬펐다ㅠ</span>
-                                                <span class="mod2_d_imoji">😥</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="108">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 힘들었다!</span>
-                                                <span class="mod2_d_imoji">😩</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="109">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 화났다!</span>
-                                                <span class="mod2_d_imoji">🤬</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mod2_innerContents">
-                                        <div class="mod2_d_bg">
-                                            <div class="mod2_d_set">
-                                                <div class="replyMenu" id="110">···</div>
-                                                <span class="mod2_d_nick">김길동</span>
-                                                <span class="mod2_d_date">22. 10. 16. Sun</span>
-                                                <span class="mod2_d_diary">가나다라마바사 아자차카 타파하 하는 일이 있었다. 너무 사랑스러웠다!
-                                                    😊</span>
-                                                <span class="mod2_d_imoji">😻</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /더미데이터 종료 -->
+
+
                                 </div><!-- /innerSlide -->
                             </div>
+
                             <!-- 모달 창 (다이어리&댓글 메뉴버튼)-->
                             <div class="modal hidden">
                                 <div class="modalBg"></div>
                                 <div class="modalBox">
                                     <div class="modalClose" style="cursor: pointer;">X</div>
-                                    <iframe class="modalBody" scrolling="no" onload="resizeIframe(this)">
+                                    <div class="modalBody" scrolling="no" onload="resizeIframe(this)">
+                                        <th:block th:replace="~{/frag/user/modal/view_otherContents :: otherContentsModal}">
 
-                                    </iframe>
+                                        </th:block>
+                                    </div>
                                 </div>
                             </div>
                         </form>

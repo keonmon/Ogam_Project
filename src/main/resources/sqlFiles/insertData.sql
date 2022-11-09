@@ -258,6 +258,28 @@ insert into friend_apply(member_email, member_op_email,friend_key)
 )
 
 
+-- insert reply
+(
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(1,'user2@ogam.com','행복하셨다니 저도 기분이 좋아요!!');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(1,'user3@ogam.com','얼마나 재밌게 노셨으면 행복하셨을까용');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(2,'user1@ogam.com','우와 고양이!!!😻');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(3,'user2@ogam.com','그 사람 정말 나쁜사람이에요!');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(4,'user10@ogam.com','아무 탈 없이 금방 나으시길 ㅠㅠ');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(5,'user9@ogam.com','힘내세요!!!!!!!');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(6,'user10@ogam.com','마음이 힘드시다니ㅠㅠ 힘내세용');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(7,'user10@ogam.com','아무 탈 없이 금방 나으시길 ㅠㅠ');
+insert into reply(DIARY_SEQ,MEMBER_EMAIL,REPLY) values(10,'user5@ogam.com','에구 친구가 마음을 몰라줬네요ㅠ');
+)
+
+-- insert like
+(
+insert into diary_like(DIARY_SEQ,MEMBER_EMAIL) values(1,'user2@ogam.com');
+insert into diary_like(DIARY_SEQ,MEMBER_EMAIL) values(1,'user3@ogam.com');
+insert into diary_like(DIARY_SEQ,MEMBER_EMAIL) values(2,'user1@ogam.com');
+)
+
+
+
 -- 각종 alter문 (여기서 적용된 alter문은 전부 ogam_table.sql에 기록함)
 (
 alter table emotions modify emoji varchar2(50)
@@ -274,6 +296,8 @@ alter table friend_apply drop column nickname;
 alter table friend_send drop column nickname;
 
 alter table friend_apply add friend_key number not null;
+
+
 
 )
 
