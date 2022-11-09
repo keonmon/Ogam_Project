@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>[관리자] 공지 목록</title>
-    <link rel="stylesheet" type="text/css" href="css/admin.css" />
-    <link rel="stylesheet" type="text/css" href="css/adminList.css" />
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="/css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
@@ -35,6 +35,7 @@
             </form>
           </div>
           <!-- 테이블 -->
+          <form action="/deleteNotice">
           <div>
             <table class="table">
               <thead>
@@ -42,7 +43,7 @@
                   <th>
                     <input
                       type="checkbox"
-                      name="check"
+                      name="allCheck"
                       value="selectall"
                       onclick="selectAll(this)"
                     />
@@ -53,35 +54,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td><a href="./boardRevise.html" target="_self">자주 찾는 질문</a></td>
-                  <td>22-10-26</td>
-                  <td>공개</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td><a href="./boardRevise.html" target="_self">가입방법</a></td>
-                  <td>22-10-25</td>
-                  <td>공개</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td><a href="./boardRevise.html" target="_self">서비스 오픈 이벤트</a></td>
-                  <td>22-10-24</td>
-                  <td>공개</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td><a href="./boardRevise.html" target="_self">전체공지</a></td>
-                  <td>22-10-24</td>
-                  <td>공개</td>
-                </tr>
-                <tr>
-                  <td><input type="checkbox" name="check" /></td>
-                  <td><a href="./boardRevise.html" target="_self">출시 예정일</a></td>
-                  <td>22-10-11</td>
-                  <td>공개</td>
+                <tr th:each="board : ${boards}">
+                  <td><input type="checkbox" name="check" th:value="${board.board_seq}" /></td>
+                  <td><a th:href="|/boardRevise/${board.board_seq}|" target="_self">[[ ${board.board_title}]]</a></td>
+                  <td th:text="${board.board_date}"></td>
+                  <td th:text="${board.board_yn}"></td>
                 </tr>
               </tbody>
             </table>
@@ -89,8 +66,9 @@
           <!-- 테이블 end-->
           <div class="footerBtn">
             <span class="noticeBtn"><a href="/writeNotice"><i class="fa-solid fa-pen-to-square"></i>공지 작성</a></span>
-            <span class="deleteBtn"><a href="#"><i class="fa-solid fa-trash"></i>선택 삭제</a></span>            
+            <span class="deleteBtn"><i class="fa-solid fa-trash"></i><input type="submit" value="선택 삭제"/></a></span>
           </div>
+          </form>
         </div>
         <!-- content end -->
       </main>

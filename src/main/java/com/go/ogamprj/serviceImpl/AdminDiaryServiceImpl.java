@@ -14,7 +14,7 @@ import java.util.List;
 public class AdminDiaryServiceImpl implements AdminDiaryService {
 
     @Autowired
-    AdminDiaryMapper adminDiaryMapper;
+    public AdminDiaryMapper adminDiaryMapper;
 
     /* USER 일기 전체 가져오기 */
     @Override

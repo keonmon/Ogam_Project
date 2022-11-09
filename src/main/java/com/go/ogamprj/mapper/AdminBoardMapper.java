@@ -10,18 +10,18 @@ import java.util.ArrayList;
 public interface AdminBoardMapper {
 
     @Select("SELECT * FROM BOARD")
-    ArrayList<Board> adminBoardSelectAll();  // 관리자 페이지 boardList (공개 비공개 다 보임)
+    public ArrayList<Board> adminBoardSelectAll();  // 관리자 페이지 boardList (공개 비공개 다 보임)
 
     @Select("select * from board where board_yn = 'y'")
-    ArrayList<Board> selectAll();
+    public ArrayList<Board> selectAll();
 
-    void boardInsert(Board board);
+    public void boardInsert(Board board);
 
-    void boardUpdate(Board board);
+    public void boardUpdate(Board board);
 
-    void boardDelete(int board_seq);
+    public void boardDelete(int board_seq);
 
-    @Select("SELECT * FROM BOARD WHERE BOARD_SEQ = #{BOARD_SEQ}")
-    Board selectOneBoard(int board_seq);
+    @Select("SELECT * FROM BOARD WHERE BOARD_SEQ = #{board_seq}")
+    public Board selectOneBoard(int board_seq);
 
 }

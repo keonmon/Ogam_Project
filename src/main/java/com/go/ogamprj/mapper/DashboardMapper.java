@@ -1,8 +1,13 @@
 package com.go.ogamprj.mapper;
 
+import com.go.ogamprj.dto.Chart;
+import com.go.ogamprj.dto.Diary;
+import com.go.ogamprj.dto.Emotions;
+import com.google.gson.JsonArray;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Mapper
@@ -20,6 +25,6 @@ public interface DashboardMapper {
     @Select("SELECT COUNT(*) FROM MEMBER T1, BLACKLIST_DIARY T2, BLACKLIST_REPLY T3 WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL AND T1.MEMBER_EMAIL = T3.MEMBER_EMAIL")
     int reply();  // 신고 요청된 개수(일기 + 댓글)
 
-    HashMap<String, Integer> emotionChartMap(); // 차트 1달 이내의 데이터만 가져오기
+    ArrayList<Chart> emotionChartMap(); // 차트 1달 이내의 데이터만 가져오기
 
 }

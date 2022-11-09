@@ -3,10 +3,10 @@
         PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.go.ogamprj.mapper.DashboardMapper">
     <select id="emotionChartMap" resultType="java.util.ArrayList">
-        SELECT T1.EMOTION as emotion, COUNT(T2.CONTENTS) as num
-        FROM EMOTIONS T1, DIARY T2
+        SELECT EMOTION, COUNT(T1.MEMBER_EMAIL)
+        FROM DIARY T1, EMOTIONS T2
         WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ
         AND TO_CHAR(DIARY_DATE, 'YYYYMM') = TO_CHAR(SYSDATE, 'YYYYMM')
-        GROUP BY EMOTION
+        GROUP BY T2.EMOTION
     </select>
 </mapper>

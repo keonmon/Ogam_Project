@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/friendList.css" />
     <link rel="stylesheet" type="text/css" href="css/reviseInfo.css" />
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 
@@ -127,32 +128,37 @@
                                     </span>
                                     <div class="photo">
                                         <!-- 나중에 이미지로 바꿔주기 -->
-                                        <span id="imgBlock"></span>
+                                        <span id="imgBlock">
+                                            <th:block th:if="${member.MEMBER_IMAGE}"> // 사진이 null이면 안 보임
+                                                <img th:src="${member.MEMBER_IMAGE}"/>
+                                            </th:block>
+                                        </span>
                                         <label for="member_image">
                                             <div id="files">사진 선택</div>
                                         </label>
-                                        <input type="file" onchange="click_img(event)" accept="image/*" id="member_image" />
+                                        <input type="file" onchange="click_img(event)" accept="image/*" id="member_image" name="member_image"/>
                                     </div>
                                 </div>
                                 <div id="intro">
                                     <span class="iTitle">소개글</span>
-                                    <textarea></textarea>
+                                    <textarea th:field="*{member.MEMBER_INTRO}" name="member_intro"></textarea>
                                 </div>
                                 <div id="email">
                                     <span class="eTitle">이메일</span>
                                     <span class="part1">
-                                        <span><input type="text" id="member_email" class="emailBox"/></span>
+                                        <span><input type="text" id="member_email" name="member_email" class="emailBox"/></span>
                                         @
                                         <select class="selectBox">
                                             <option value="">선택입력</option>
                                             <option value="naver.com">naver.com</option>
                                             <option value="daum.net">daum.net</option>
                                             <option value="google.com">google.com</option>
+                                            <option value="ogam.com">ogam.com</option>
                                         </select>
                                     </span>
                                 </div>
                                 <div class="password">
-                                    <span class="pwTitle">비밀번호</span>
+                                    <span class="pwTitle" name="member_pw">비밀번호</span>
                                     <input type="password" id="before_pw" onchange=""/>
                                 </div>
                                 <div class="password">
@@ -171,8 +177,8 @@
                                 </div>
                                 <div class="nickName">
                                     <div class="nTitle">닉네임</div>
-                                    <input type="text" id="member_nick" onchange=""/>
-                                    <input type="submit" id="nick_chk" value="중복확인" />
+                                    <input type="text" id="member_nick" name="member_nick" th:field="*{member.MEMBER_NICK}"/>
+                                    <p id="nick_chk" onclick="uniqueChk()">중복확인</p>
                                 </div>
                                 <div class="birthday">
                                     <div class="bTitle">생년월일</div>
@@ -239,6 +245,25 @@
             </div>
         </main>
     </div>
+    <script>
+
+<!--        function uniqueChk() {-->
+
+<!--          let new_id = $('#member_nick').val();-->
+
+<!--          $.ajax({-->
+<!--            url: "chkNick",-->
+<!--            data: new_id,-->
+<!--            dataType; "json",-->
+<!--            type: "post",-->
+<!--            async: true,-->
+<!--            success: function(data) {-->
+<!--                if(data.cnt > 0-->
+<!--            }-->
+<!--          })-->
+<!--        }-->
+
+    </script>
     <script type="text/javascript" src="js/deleteUser.js"></script>
     <script src="js/friendList.js" type="text/javascript"></script>
     <script src="js/reviseInfo.js" type="text/javascript"></script>

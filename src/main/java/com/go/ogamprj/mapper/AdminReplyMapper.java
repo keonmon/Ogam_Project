@@ -9,5 +9,5 @@ import java.util.List;
 public interface AdminReplyMapper {
 
     /* USER 댓글 전체 가져오기 */
-    List<HashMap<String, Object>> userReplySelectAll();
+    public List<HashMap<String, Object>> userReplySelectAll();
 }

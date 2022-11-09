@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public interface BoardService {
 
+    ArrayList<Board> adminBoardSelectAll();
+
     ArrayList<Board> selectAll();
 
     void boardInsert(Board board);
@@ -13,5 +15,7 @@ public interface BoardService {
     void boardUpdate(Board board);
 
     void boardDelete(int board_seq);
+
+    Board selectOneBoard(int board_seq);
 
 }
