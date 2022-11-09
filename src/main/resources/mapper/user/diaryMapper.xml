@@ -11,6 +11,7 @@
           join member m
             on d.MEMBER_EMAIL = m.member_email
          where d.MEMBER_EMAIL = #{myEmail}
+           and d.diary_del = 'n'
     </select>
 
     <!-- 친구 다이어리 전부 가져오기 -->
@@ -24,6 +25,7 @@
                                    from friend_apply
                                   where MEMBER_EMAIL = #{myEmail})
            and diary_private = 'n'
+           and d.diary_del = 'n'
          order by d.diary_seq desc
     </select>
 
@@ -38,6 +40,7 @@
                                                                   from diary)))DIARY_SEQ
                                 from DUAL CONNECT BY LEVEL 	&lt;= 20000)
           and d.diary_private = 'n'
+          and d.diary_del = 'n'
           and rownum 	&lt;= 10
     </select>
 
@@ -67,6 +70,16 @@
             on d.bgimg_seq = i.bgimg_seq
           JOIN emotions e
             on d.emotion_seq = e.emotion_seq
+          JOIN member m
+            on d.member_email = m.member_email
          where d.diary_seq = #{diarySeq}
+    </select>
+
+    <select id="replySelect" resultType="java.util.HashMap">
+        select *
+          from reply r join member m
+            on r.member_email = m.member_email
+         where r.diary_seq = 1
+           and reply_del = 'n'
     </select>
 </mapper>
