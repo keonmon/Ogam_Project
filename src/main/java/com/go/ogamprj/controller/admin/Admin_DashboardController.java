@@ -31,7 +31,6 @@ public class Admin_DashboardController {
     public void emojiChart(HttpServletRequest request, @RequestParam String name) {
         Gson json = new Gson();
 
-        ArrayList<>
     }
 
 }
