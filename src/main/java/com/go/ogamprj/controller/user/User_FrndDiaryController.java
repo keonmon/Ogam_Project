@@ -18,18 +18,28 @@ public class User_FrndDiaryController {
 
     // 친구 리스트 목록 가져오기
     @RequestMapping("/friendList")
-    public String friendList(HttpServletRequest request, Model model) {
+    public String friendList(HttpServletRequest request,String searchKeyword, Model model) {
 
         String myEmail = "user1@ogam.com";
 
+        if(searchKeyword == null) {
         // 친구 전체 리스트
         List<Map<String, Object>> friendList = friendDiaryService.friendListSelectAll(myEmail);
+
+        model.addAttribute("friendList",friendList);
+        } else {
+        // 친구 검색 리스트
+        List<Map<String, Object>> search = friendDiaryService.search(searchKeyword);
+
+        model.addAttribute("friendList", search);
+
+        }
 
         // 친구리스트 카운트해서 가져오기
         int friendListCount = friendDiaryService.friendListCount(myEmail);
 
         model.addAttribute("friendListCount",friendListCount);
-        model.addAttribute("friendList",friendList);
+
         return "user/noticePage/friendList";
     }
 

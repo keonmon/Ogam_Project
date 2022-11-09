@@ -22,4 +22,22 @@
     <select id="friendListCount" resultType="int">
         select count(*) from friend_apply where member_email = #{myEmail}
     </select>
+
+    <select id="search" resultType="java.util.Map">
+        select *
+        from (select
+                m.member_image,
+                m.member_nick,
+                m.member_intro,
+                f.friend_date
+            from friend_apply f
+                join member m
+                on f.member_email = m.member_email
+            where f.member_email
+                in (select
+                        member_op_email
+                    from friend_apply
+                    where member_email = 'user1@ogam.com'))
+        where member_nick like '%${searchKeyword}%'
+    </select>
 </mapper>
