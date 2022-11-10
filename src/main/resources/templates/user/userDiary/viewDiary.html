@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
     <link href="/css/viewDiary.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script>
         //iframe 자동 height 조절
         function resizeIframe(obj) {
@@ -35,11 +36,11 @@
                         <div class="viewBg"></div>
                         <form>
 
-                            <div class="innerOutline" >
+                            <div class="innerOutline">
                                 <span class="writerNick">[[${diaryDto.MEMBER_NICK}]]</span>
                                 <div class="diaryMenu" type="diary" th:id="${diaryDto.DIARY_SEQ}">
-                                    <input hidden class="diaryWriter hiddenValue" th:value="${diaryDto.MEMBER_EMAIL}"/>
-                                    <input hidden class="loginUser hiddenValue" th:value="${session.loginUser}"/>
+                                    <input hidden class="diaryWriter hiddenValue" th:value="${diaryDto.MEMBER_EMAIL}" />
+                                    <input hidden class="loginUser hiddenValue" th:value="${session.loginUser}" />
                                     ···
                                 </div>
                                 <!-- 모달 창 (다이어리 메뉴버튼)-->
@@ -52,7 +53,7 @@
                                 </div> -->
 
                                 <th:block th:if="${likeMap.likeMemberList.contains(session.loginUser)}">
-                                <div class="likeButton likeit">♥</div>
+                                    <div class="likeButton likeit">♥</div>
                                 </th:block>
                                 <th:block th:unless="${likeMap.likeMemberList.contains(session.loginUser)}">
                                     <div class="likeButton">♡</div>
@@ -64,7 +65,8 @@
                                         <div class="innerImg"></div>
                                     </th:block>
                                     <th:block th:if="${diaryDto['BGIMG_SEQ']}">
-                                        <div class="innerImg" th:style="|background:url(${diaryDto.BGIMG_PATH});|"></div>
+                                        <div class="innerImg" th:style="|background:url(${diaryDto.BGIMG_PATH});|">
+                                        </div>
                                     </th:block>
                                 </div>
 
@@ -80,7 +82,8 @@
                                     <input type="text" class="replyInput" maxlength="30" placeholder="댓글을 입력하세요."
                                         spellcheck="false" />
                                 </div>
-                                <div class="replyUpload" onclick="replyAdd()">
+                                <div class="replyUpload" th:id="${diaryDto.DIARY_SEQ}" th:data-loginUser="${session.loginUser}"  
+                                    th:onclick="replyLoginValid('loginUser')">
                                     입력
                                 </div>
                             </div>
@@ -93,12 +96,14 @@
                                     <div class="mod2_innerContents" th:each="reply : ${replyList}">
                                         <div class="mod2_d_bg">
                                             <div class="mod2_d_set">
-                                                <div class="replyMenu" type="reply"  th:id="${reply.REPLY_SEQ}">···</div>
+                                                <div class="replyMenu" type="reply" th:id="${reply.REPLY_SEQ}">···</div>
                                                 <span class="mod2_d_nick">[[${reply.MEMBER_NICK}]]</span>
                                                 <span class="mod2_d_date">[[${reply.REPLY_DATE}]]</span>
                                                 <span class="mod2_d_diary">[[${reply.REPLY}]]</span>
-                                                <input hidden class="replyContent hiddenValue" th:value="${reply.REPLY}"/>
-                                                <input hidden class="replyWriter hiddenValue" th:value="${reply.MEMBER_EMAIL}"/>
+                                                <input hidden class="replyContent hiddenValue"
+                                                    th:value="${reply.REPLY}" />
+                                                <input hidden class="replyWriter hiddenValue"
+                                                    th:value="${reply.MEMBER_EMAIL}" />
                                             </div>
                                         </div>
                                     </div>
@@ -131,19 +136,45 @@
                     obj.style.height = (12 + obj.scrollHeight) + "px";
                 }
 
-                // 
+                //로그인 검사
+                function replyLoginValid(obj) {
+                    if (obj) {
+                        replyAdd();
+                    } else {
+                        alert('로그인 후 댓글 작성이 가능합니다.');
+                        location.href = "/";
+                    }
+                }
+
+                // 댓글 저장
                 function replyAdd() {
                     const writeInput = document.querySelector(".replyInput")
-                    const replyButton = document.querySelector(".replyInput")
-                    const reply = replyButton.value.trim();
-                    if(reply == "" ||reply.length==0){
+                    const replyButton = document.querySelector(".replyUpload")
+                    const diarySeq = replyButton.getAttribute("id")
+                    const reply = writeInput.value.trim();
+                    if (reply == "" || reply.length == 0) {
                         alert("댓글을 입력하세요.")
-                        writeInput.value=""
+                        writeInput.value = ""
                         writeInput.focus()
-                    }else{
-                        alert(reply);
+                    } else {
+
+                        // ajax
+                        $.ajax({
+                            url: '/replyInsert',
+                            type: 'post',
+                            data: { 
+                                "reply" : reply,
+                                "diarySeq" : diarySeq
+                            },
+                        })
+                        
+                        // 서버에서 가져온 data 뿌릴 곳 결정
+                        .done(function (replyList) {
+                            $('.mod2_innerSlide').replaceWith(replyList);
+                        });
+
                     }
-                    // 이하 ajax 구현
+
                 }
 
                 /* 좌우 스크롤 슬라이더 */
@@ -184,52 +215,46 @@
                 const loginUser = document.querySelector('.loginUser').value;
                 let writer, id, type, replyContent;
 
-                function open(url){
+                function open(url) {
                     document.querySelector(".modal").classList.remove("hidden");
-                    document.querySelector(".modalBody").src=`${url}?writer=${writer}&type=${type}&loginUser=${loginUser}&replyContent=${replyContent}&id=${id}`;
+                    document.querySelector(".modalBody").src = `${url}?writer=${writer}&type=${type}&loginUser=${loginUser}&replyContent=${replyContent}&id=${id}`;
                 }
 
                 const close = () => {
                     document.querySelector(".modal").classList.add("hidden");
                 }
 
-                // ajax로 contents=diary/reply값, 컨텐츠id값 받고 open(url)해야 함 
-                document.querySelector(".diaryMenu").addEventListener("click", (e)=>{
+
+                document.querySelector(".diaryMenu").addEventListener("click", (e) => {
                     id = e.target.id
                     type = e.target.getAttribute("type");
                     writer = document.querySelector(".diaryWriter").value;
-                    alert("선택된 일기 Id : " + id + "타입 : " + e.target.getAttribute("type") + " / 작성자 : " + writer+"/ session" + loginUser )
-                    /* ajax
-                     * 본인/타인 컨텐츠 비교 후 해당 모달html 결정
-                    */
-                    if(loginUser == null){
+
+                    if (loginUser == null) {
                         alert("로그인 후 이용할 수 있습니다.");
                         return;
-                    }else if(loginUser == writer){
+                    } else if (loginUser == writer) {
                         open("/modal/view_myContents.html")
-                    }else{
+                    } else {
                         open("/modal/view_otherContents.html")
                     }
                 });
 
                 const replyMenu_click = document.querySelectorAll(".replyMenu");
-                for(let i = 0; i < replyMenu_click.length; i++){
+                for (let i = 0; i < replyMenu_click.length; i++) {
                     replyMenu_click[i].addEventListener("click", (e) => {
                         id = e.target.id
                         type = e.target.getAttribute("type");
                         writer = document.querySelectorAll(".replyWriter")[i].value;
                         replyContent = document.querySelectorAll(".replyContent")[i].value;
-                        alert("선택된 댓글 Id : " + id + " / 타입 : " + e.target.getAttribute("type") + " / 작성자 : " + writer+"/ session" + loginUser+replyContent);
-                        /* ajax
-                        
-                        */
-                       if(loginUser == null){
-                           alert("로그인 후 이용할 수 있습니다.");
-                           return;
-                        }else if(loginUser == writer){
-                            
+
+                        if (loginUser == null) {
+                            alert("로그인 후 이용할 수 있습니다.");
+                            return;
+                        } else if (loginUser == writer) {
+
                             open("/modal/view_myContents.html")
-                        }else{
+                        } else {
                             open("/modal/view_otherContents.html")
                         }
                     })
@@ -241,25 +266,25 @@
 
             <script>
                 const like = document.querySelector(".likeButton")
-                like.addEventListener("click",(e)=>{
- 
-                    if(like.innerHTML == "♥") {
+                like.addEventListener("click", (e) => {
+
+                    if (like.innerHTML == "♥") {
                         /* 
                             ajax
                         
                         */
-                        like.innerHTML="♡";
-                    } else{
+                        like.innerHTML = "♡";
+                    } else {
                         /* 
                             ajax
                         
                         */
-                        like.innerHTML="♥"
+                        like.innerHTML = "♥"
                     }
                     like.classList.toggle("likeit");
                 });
             </script>
-            
+
         </main>
     </div>
 </body>

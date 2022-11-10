@@ -83,6 +83,7 @@
             on r.member_email = m.member_email
          where r.diary_seq = #{diarySeq}
            and reply_del = 'n'
+         order by reply_seq
     </select>
 
     <!-- 배경사진 없이 일기 수정 -->
@@ -141,4 +142,8 @@
         values( #{reply_seq}, #{member_email}, #{blacklist_member_email}, #{blacklist_comment})
     </insert>
 
+    <insert id="replyInsert" parameterType="java.util.Map">
+        insert into reply(diary_seq,member_email,reply)
+        values(#{diarySeq},#{member_email},#{reply})
+    </insert>
 </mapper>

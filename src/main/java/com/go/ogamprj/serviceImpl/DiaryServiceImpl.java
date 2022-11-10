@@ -175,8 +175,10 @@ public class DiaryServiceImpl implements DiaryService {
         diaryMapper.replyReportInsert(reply_seq,member_email,blacklist_member_email,blacklist_comment);
     }
 
-
-
+    @Override
+    public void replyInsert(Map<String, Object> replyMap) {
+        diaryMapper.replyInsert(replyMap);
+    }
 
 
     /**
