@@ -18,11 +18,12 @@
                 from friend_apply
             where member_email = #{myEmail})
     </select>
-
+    <!--  친구리스트 count  -->
     <select id="friendListCount" resultType="int">
         select count(*) from friend_apply where member_email = #{myEmail}
     </select>
 
+    <!--  친구리스트 검색 sql  -->
     <select id="search" resultType="java.util.Map">
         select *
         from (select
@@ -40,4 +41,43 @@
                     where member_email = 'user1@ogam.com'))
         where member_nick like '%${searchKeyword}%'
     </select>
+
+    <!--  친구리스트 delete  -->
+    <delete id="deleteFriend">
+        delete from friend_apply
+        where friend_key = (select f.friend_key
+                            from friend_apply f
+                                join member m
+                                on f.member_email = m.member_email
+                            where f.member_email
+                                in (select member_op_email
+                                    from friend_apply
+                                    where member_email = #{myEmail}) and member_nick = #{nickname})
+    </delete>
+
+    <!--  친구신청 리스트 전체 가져오기  -->
+    <select id="friendSendSelectAll" resultType="java.util.Map">
+        SELECT
+            m.member_image,
+            m.member_nick,
+            m.member_intro,
+            s.member_op_email,
+            s.send_date,
+            s.response
+        FROM MEMBER m, (SELECT * FROM FRIEND_SEND WHERE MEMBER_EMAIL = #{myEmail}) s
+        WHERE m.MEMBER_EMAIL = s.MEMBER_OP_EMAIL
+    </select>
+
+    <!--  친구리스트에 insert  -->
+    <insert id="insertfriendList" parameterType="com.go.ogamprj.dto.friendApply">
+        insert into friend_apply
+            values(fri_app_seq.nextval, #{member_email},#{member_op_email},sysdate, (select max(FRIEND_KEY)+1 from friend_apply))
+    </insert>
+
+    <!--  상대 이메일로 친구리스트 insert  -->
+    <insert id="insertfriendList2nd" parameterType="com.go.ogamprj.dto.friendApply">
+        insert into friend_apply
+            values(fri_app_seq.nextval, #{member_op_email},#{member_email},sysdate, (select max(FRIEND_KEY) from friend_apply))
+    </insert>
+
 </mapper>

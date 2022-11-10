@@ -1,6 +1,5 @@
 package com.go.ogamprj.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +16,7 @@ public class friendApply {
     private String member_email;    // 이메일
     private String member_op_email; // 상대 이메일
     private Date friend_date;       // 신청일
+    private int friend_key;
+
+
 }
