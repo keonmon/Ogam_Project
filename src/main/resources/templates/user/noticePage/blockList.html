@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차단된 사용자 목록</title>
+    <link rel="stylesheet" type="text/css" href="/css/blockList.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <main class="bodyContainer">
+            <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
+            <div class="contents">
+                <div class="block-send">
+                    <div class="sendHeader">
+                        <span>차단된 사용자 목록</span>
+                    </div>
+                    <form action="/blockList" method="get">
+                        <div class="searchContainer">
+                                <div class="searchBox">
+                                    <input type="text" id="searchKeyword" name="searchKeyword" placeholder="아이디 입력" />
+                                    <button type="submit" class="blockImg">
+                                        <img src="/img/block.png" />
+                                    </button>
+                                </div>
+                            <div class="blockCnt">
+                                <span>차단된 사용자 수</span> 
+                            </div>
+                        </div>
+                    </form>
+                    <div class="sendBody">
+                        <th:block th:each="block : ${blockList}">
+                            <div class="send_list">
+                                <div class="send_contents">
+                                    <span class="op_img">
+                                        <img src="/Img/logoImg.png" />
+                                    </span>
+                                    <div class="op_nickname">
+                                        <span>[[ ${friend.MEMBER_NICK} ]]</span>
+                                    </div>
+                                    <div class="response">
+                                        <div class="deleteBtn">삭제</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+                <div class="moon_background">
+                    <i class="fa-solid fa-moon btn_theme"></i>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/js/friendList.js" type="text/javascript"></script>
+</body>
+
+</html>
