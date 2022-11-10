@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my_diary</title>
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link href="/css/writeDiary.css" rel="stylesheet">
+    <link href="/css/scrollModules.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <link href="/css/bootstrap/bootstrap_v3.3.0.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <main class="bodyContainer">
+            <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
+            <div class="contents">
+                <!-- ====================contents 영역======================= -->
+                <article class="writeArea">
+                    <div class="writeOutline">
+                        <form action="/diaryUpdateForm3" name="write2Form"  method="post">
+                            <div class="writeBg"></div>
+
+                            <div class="currDate">
+                                <span>[[${diaryMap.DIARY_DATE}]]</span>
+                            </div>
+
+                            <div class="innerOutline">
+                                <div class="innerBg"></div>
+
+                                <div class="titles">
+                                    <span class="title">오늘의 감정</span>
+                                    <span class="subtitle">오늘 당신이 느낀 감정을 기록하세요.</span>
+                                </div>
+                                <div class="selectedEmoji animation2">
+                                    <span>[[${emoji}]]</span>
+                                </div>
+
+                                <div class="diaryNote">
+                                    <textarea name="contents" cols="100" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" onkeypress="if(event.keyCode==13)return false" autofocus="autofocus" spellcheck="false" maxlength="150" placeholder=" 당신의 감정을 이곳에 적어보세요!!! (최대 150자 & 줄바꿈 제한)">[[${diaryMap.CONTENTS}]]</textarea>
+                                </div>
+                                <div class="privateSwitch material-switch pull-right">
+                                    비공개<br><br>
+                                    <input id="someSwitchOptionDefault" name="diary_private" type="checkbox" value="y" th:checked="${diaryMap.DIARY_PRIVATE.equals('y')}"/>
+                                    <label for="someSwitchOptionDefault" class="label-default"></label>
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                <a class="before" href="javascript:window.history.go(-1);">
+                                    <div >
+                                        <span class="beforeFont">이전</span>
+                                    </div>
+                                </a>
+                                <!-- 나중에 submit으로 변경 -->
+                                <div class="next" onClick="document.forms['write2Form'].submit()">
+                                    <span class="nextFont">다음</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </article>
+            </div>
+            <!-- ==================== / contents 영역======================= -->
+            <script>
+                // 줄에 따른 textarea의 길이 변경
+                function resize(obj) {
+                  obj.style.height = "1px";
+                  obj.style.height = (12+obj.scrollHeight)+"px";
+                }
+
+                // 줄 수 제한 (현재 줄바꿈 제한)
+                // onkeydown="return limitLines(this, event)"
+                function limitLines(obj,e){
+                    // // 현재 textarea에 입력된 줄 수
+                    // let numberOfLines = (obj.value.match(/\n/g)||[]).length+1;
+                    // let maxRows = obj.rows; // textarea에 선언된 row 수
+
+                    if(e.which == 13 ){
+                        return false;
+                    }
+                }
+
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>
