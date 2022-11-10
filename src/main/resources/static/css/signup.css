@@ -120,7 +120,7 @@ html, body {
 }
 
 #member_nick {
-    width: 11.5vw;
+    width: 22vw;
     height: 40px;
     font-size: 1.1rem;
     margin-right: 10px;
@@ -132,7 +132,7 @@ html, body {
 }
 
 #nick_chk {
-    height: 35px;
+    height: 45px;
     font-size: 1.1rem;
     border:none;
     background-color: #A7BAFF;
@@ -158,13 +158,12 @@ html, body {
     margin-right: 30px;
 }
 
-#member_birth1,
-#member_birth2,
-#member_birth3 {
-    height: 40px;
-    width: 25%;
-    margin-left: 20px;
-    font-size: 1.1rem;
+#member_birth {
+   margin-left: 20px;
+       height: 40px;
+       width: 37vw;
+       margin-right: 2.2vw;
+       font-size: 1.1rem;
 }
 
 /*성별*/
@@ -176,17 +175,16 @@ html, body {
 
 .gTitle {
     font-size: 20px;
-    margin-left: 19px;
+    margin-left: 49px;
     width: 70px;
     min-width: 70px;
-    margin-right: 30px;
 }
 
-#member_gender {
-    height: 40px;
+#member_gender1,
+ #member_gender2{
+    height: 25px;
     width: 25%;
-    margin-left: 20px;
-    font-size: 1.1rem;
+    margin-left: 15px;
 }
 
 /* 휴대폰 번호 */
@@ -207,7 +205,7 @@ html, body {
     height: 40px;
     margin-right: 10px;
     font-size: 1.1rem;
-    width: 11.5vw;
+    width: 26.5vw;
 }
 
 #member_phone:focus {
