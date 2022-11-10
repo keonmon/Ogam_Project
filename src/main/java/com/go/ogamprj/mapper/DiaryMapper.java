@@ -4,6 +4,7 @@ package com.go.ogamprj.mapper;
 import com.go.ogamprj.dto.Bgimage;
 import com.go.ogamprj.dto.Diary;
 import com.go.ogamprj.dto.Emotions;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -56,5 +57,14 @@ public interface DiaryMapper {
     public void diaryUpdateNoBgimg(Diary diaryDto);
 
     public void diaryUpdateWithBgimg(Diary diaryDto);
+
+    public void replyUpdate(int reply_seq, String reply);
+
+    @Select("select diary_seq from reply where reply_seq = #{reply_seq}")
+    public int getDiarySeq(int reply_seq); // 해당 댓글이 달린 일기번호 가져오기
+
+    public void diaryDelete(int diary_seq);
+
+    public void replyDelete(int reply_seq);
 }
 

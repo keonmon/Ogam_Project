@@ -145,6 +145,25 @@ public class DiaryServiceImpl implements DiaryService {
         diaryMapper.diaryUpdateWithBgimg(diaryDto);
     }
 
+    @Override
+    public void replyUpdate(int reply_seq, String reply) {
+        diaryMapper.replyUpdate(reply_seq, reply);
+    }
+
+    @Override
+    public int getDiarySeq(int reply_seq) {
+        return diaryMapper.getDiarySeq(reply_seq);
+    }
+
+    @Override
+    public void diaryDelete(int diary_seq) {
+        diaryMapper.diaryDelete(diary_seq);
+    }
+
+    @Override
+    public void replyDelete(int reply_seq) {
+        diaryMapper.replyDelete(reply_seq);
+    }
 
 
     /**

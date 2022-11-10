@@ -188,7 +188,7 @@
 
             <div class="replyEditArea hidden">
                 <div class="TAbox">
-                    <input type="text" class="replyTA"  spellcheck="false" maxlength="30"></textarea>
+                    <input type="text" class="replyTA" name="reply" spellcheck="false" maxlength="30"/>
                 </div>
                 <div class="replyUpdate">
                     <span class="updateFont">완료</span>
@@ -209,6 +209,7 @@
         const id = params.get('id');
         console.log(params.get('id'))
         document.querySelector(".id").value = id;
+        document.querySelector(".replyTA").value = replyContent;
         
         const frm = document.querySelector(".frm")
         const editArea = document.querySelector(".replyEditArea")
@@ -220,7 +221,6 @@
                 frm.submit();
             }else{
                 editArea.classList.remove('hidden')
-                document.querySelector(".replyTA").value = replyContent;
                 
                 document.querySelector(".replyUpdate").addEventListener("click",function(e){
                     const prmpt = confirm("댓글을 수정하시겠습니까?");
