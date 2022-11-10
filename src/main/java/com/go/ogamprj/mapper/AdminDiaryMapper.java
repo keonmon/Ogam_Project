@@ -5,10 +5,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AdminDiaryMapper {
 
-    /* USER 일기 전체 가져오기 */
-    public List<HashMap<String, Object>> userDiarySelectAll();
+    List<Map<String, Object>> userDiarySelectAll();  // uSER 일기 전체 가져오기
+
 }

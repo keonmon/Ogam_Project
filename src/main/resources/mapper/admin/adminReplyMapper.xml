@@ -5,7 +5,11 @@
 <mapper namespace="com.go.ogamprj.mapper.AdminReplyMapper">
     <!-- USER 댓글 전체 가져오기 -->
     <select id="userReplySelectAll" resultType="java.util.HashMap">
-        select r.MEMBER_EMAIL, m.MEMBER_NICK, r.REPLY
+        select
+               r.REPLY_SEQ
+             , r.MEMBER_EMAIL
+             , m.MEMBER_NICK
+             , r.REPLY
           from reply r join member m
             on r.MEMBER_EMAIL = m.member_email
          order by r.REPLY_DATE desc

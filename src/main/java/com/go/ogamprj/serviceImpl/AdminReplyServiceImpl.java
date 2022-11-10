@@ -14,7 +14,7 @@ import java.util.List;
 public class AdminReplyServiceImpl implements AdminReplyService {
 
     @Autowired
-    public AdminReplyMapper adminReplyMapper;
+    AdminReplyMapper adminReplyMapper;
 
     /* USER 댓글 전체 가져오기 */
     @Override

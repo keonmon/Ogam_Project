@@ -12,7 +12,7 @@ public class Member {
     private String MEMBER_EMAIL;
     private String MEMBER_PW;
     private String MEMBER_NICK;
-    private Date MEMBER_BIRTH;
+    private String MEMBER_BIRTH;
     private String MEMBER_PHONE;
     private String MEMBER_GENDER;
     private String MEMBER_ADMINYN;
