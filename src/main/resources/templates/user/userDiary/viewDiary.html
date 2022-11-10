@@ -173,6 +173,7 @@
                             $('.mod2_innerSlide').replaceWith(replyList);
                         });
 
+                        writeInput.value = ""   // 입력창 비움
                     }
 
                 }
@@ -191,8 +192,11 @@
                 });
 
                 slider.addEventListener('mouseleave', () => {
-                    isMouseDown = false;
-                    slider.classList.remove('active');
+                    $(document).mouseup(function(e){
+                        isMouseDown = false;
+                        slider.classList.remove('active');
+                    })
+
                 });
 
                 slider.addEventListener('mouseup', () => {
@@ -200,7 +204,7 @@
                     slider.classList.remove('active');
                 });
 
-                slider.addEventListener('mousemove', (e) => {
+                document.addEventListener('mousemove', (e) => {
                     if (!isMouseDown) return;
 
                     e.preventDefault();
