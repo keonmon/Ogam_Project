@@ -1,4 +1,3 @@
-
 // 알림 모달 스크립트
 const notifi = document.querySelector(".notifi");
 const notifi_wrapModal = document.querySelector(".notifi_wrapModal");
@@ -6,18 +5,6 @@ const notifi_wrapModal = document.querySelector(".notifi_wrapModal");
 notifi.addEventListener("click", () => {
         notifi_wrapModal.classList.toggle("toggle");
 })
-
-// 버튼 script
-const response = document.querySelectorAll(".response");
-const deleteBtn = document.querySelectorAll(".deleteBtn");
-const applyBtn = document.querySelectorAll(".applyBtn");
-
-for (let i = 0; i < response.length; i++) {
-    response[i].addEventListener("click", () => {
-        deleteBtn[i].style.display = "none";
-        applyBtn[i].style.display = "block";
-    })
-}
 
 // 메뉴바 스크립트
 const friendList = document.querySelector(".friendList");
@@ -34,6 +21,46 @@ sendList.addEventListener("click", () => {
     sendList.style.zIndex = "1";
     window.location.href = "/sendList";
 })
+
+// 삭제버튼 script
+const response = document.querySelectorAll(".response");
+const op_nickname = document.querySelectorAll(".op_nickname span");
+for(let i = 0; i < response.length; i++){
+    response[i].addEventListener("click", () => {
+    let nickname = op_nickname[i].innerHTML;
+    Swal.fire({
+          title: '정말 삭제하시겠습니까?',
+          text: "친구목록에서 삭제가 됩니다!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '삭제',
+          cancelButtonText: '취소'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              '삭제!',
+              '삭제가 성공적으로 되었습니다.',
+              'success'
+            ). then(function () {
+                $.ajax({
+                   url:"/deleteFriend",
+                   type:"post",
+                   data:{"nickname" : nickname},
+                   success:function(data) {
+                        console.log("성공");
+                        window.location.href = "/friendList";
+                   },
+                   error:function(e) {
+                        console.log(e);
+                   }
+                })
+            });
+          }
+        })
+    })
+}
 
 // 다크모드
 const btn_theme = document.querySelector(".btn_theme");

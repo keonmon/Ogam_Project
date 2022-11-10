@@ -8,6 +8,8 @@ notifi.addEventListener("click", () => {
 })
 
 // 친구 모달 스크립트
+const friend_send = document.querySelector(".friend-send");
+
 function friend_Modal() {
     let modalContainer = document.querySelector(".modalContainer");
     modalContainer.style.display = "block";
@@ -45,6 +47,52 @@ sendList.addEventListener("click", () => {
     sendList.style.zIndex = "1";
     window.location.href = "/sendList";
 })
+
+// 친구 수락/ 거절 버튼
+
+const accept = document.querySelectorAll("#accept");
+const refuse = document.querySelectorAll("#refuse");
+const answer = document.querySelectorAll(".answer");
+const op_nickname = document.querySelectorAll(".op_nickname span");
+const op_email = document.querySelectorAll(".op_email");
+
+for(let i = 0; i < accept.length; i++){
+    accept[i].addEventListener("click", () => {
+    let response = answer[i].value.innerHTML = 'y';
+    let nickname = op_nickname[i].innerHTML;
+    let member_op_email = op_email[i].value;
+        Swal.fire({
+          title: '친구등록 완료했습니다',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        }).then(function () {
+            $.ajax({
+               url:"/response",
+               type:"post",
+               data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email},
+               success:function(data) {
+                    console.log(data)
+                    console.log("성공");
+                    window.location.href = "/friendList";
+               },
+               error:function(e) {
+                    console.log(e);
+               }
+            })
+        })
+    })
+}
+
+for(let i = 0; i < accept.length; i++){
+    refuse[i].addEventListener("click", () => {
+
+    })
+
+}
 
 // 다크모드
 const btn_theme = document.querySelector(".btn_theme");

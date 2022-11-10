@@ -24,12 +24,12 @@
                     </div>
                     <form action="/friendList" method="get">
                         <div class="searchContainer">
-                                <div class="searchBox">
-                                    <input type="text" id="searchKeyword" name="searchKeyword" placeholder="아이디 입력" />
-                                    <button type="submit" class="searchImg">
-                                        <img src="/img/search.png" />
-                                    </button>
-                                </div>
+                            <div class="searchBox">
+                                <input type="text" id="searchKeyword" name="searchKeyword" placeholder="아이디 입력" />
+                                <button type="submit" class="searchImg">
+                                    <img src="/img/search.png" />
+                                </button>
+                            </div>
                             <div class="friendCnt">
                                 <span>[[ ${friendListCount} ]]</span> 친구
                             </div>
@@ -51,7 +51,6 @@
                                     </div>
                                     <div class="response">
                                         <div class="deleteBtn">삭제</div>
-                                        <div class="applyBtn">추가</div>
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +70,10 @@
         </main>
     </div>
     <script src="/js/friendList.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
