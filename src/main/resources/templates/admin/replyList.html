@@ -55,7 +55,7 @@
                     </thead>
                     <tbody>
                       <tr th:each="reply : ${userReplyList}">
-                        <td><input type="checkbox" name="check" /></td>
+                        <td><input type="checkbox" name="check" th:value="${reply.REPLY_SEQ}" /></td>
                         <td>[[${reply.MEMBER_EMAIL}]]</td>
                         <td>[[${reply.MEMBER_NICK}]]</td>
                         <td class="replyBox">[[${reply.REPLY}]]</td>

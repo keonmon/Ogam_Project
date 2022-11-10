@@ -6,20 +6,20 @@ import com.go.ogamprj.sevice.AdminDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminDiaryServiceImpl implements AdminDiaryService {
 
     @Autowired
-    public AdminDiaryMapper adminDiaryMapper;
+    AdminDiaryMapper adminDiaryMapper;
 
     /* USER 일기 전체 가져오기 */
     @Override
-    public List<HashMap<String, Object>> userDiarySelectAll() {
+    public List<Map<String, Object>> userDiarySelectAll() {
 
         return adminDiaryMapper.userDiarySelectAll();
     }
+
 }

@@ -4,13 +4,20 @@
 
 <mapper namespace="com.go.ogamprj.mapper.AdminDiaryMapper">
     <!-- USER 일기 전체 가져오기 -->
-    <select id="userDiarySelectAll" resultType="java.util.HashMap">
-        select d.DIARY_PRIVATE, e.EMOTION, e.EMOJI, m.MEMBER_EMAIL, m.MEMBER_NICK
+    <select id="userDiarySelectAll" resultType="java.util.Map">
+        select
+               d.DIARY_SEQ
+             , d.DIARY_PRIVATE
+             , e.EMOTION
+             , e.EMOJI
+             , m.MEMBER_EMAIL
+             , m.MEMBER_NICK
           from diary d join emotions e
             on e.EMOTION_SEQ = d.EMOTION_SEQ
           join member m
-            on d.MEMBER_EMAIL = m.member_email
+            on d.MEMBER_EMAIL = m.MEMBER_EMAIL
          order by d.DIARY_DATE desc
     </select>
+
 
 </mapper>

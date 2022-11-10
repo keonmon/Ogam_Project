@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.go.ogamprj.mapper.AdminNotifyMapper">
+    <!-- 신고 기록 전체 가져오기 -->
+    <select id="notifySelectAll" resultType="java.util.Map">
+        SELECT
+        BLACKLIST_DIARY_SEQ
+        , CASE WHEN BLACKLIST_DIARY_SEQ IS NOT NULL THEN '일기' END AS "Category"
+        , BLACKLIST_COMMENT
+        , MEMBER_EMAIL
+        , BLACKLIST_USER_EMAIL
+        , BLACKLIST_DIARY_DATE
+        FROM BLACKLIST_DIARY
+        UNION ALL
+        SELECT
+        BLACKLIST_COM_SEQ
+        , CASE WHEN BLACKLIST_COM_SEQ IS NOT NULL THEN '댓글' END
+        , BLACKLIST_COMMENT
+        , MEMBER_EMAIL
+        , BLACKLIST_MEMBER_EMAIL
+        , BLACKLIST_REPLY_DATE
+        FROM BLACKLIST_REPLY
+        ORDER BY BLACKLIST_DIARY_DATE DESC
+    </select>
+
+</mapper>
