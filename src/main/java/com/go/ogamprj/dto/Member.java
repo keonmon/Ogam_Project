@@ -18,11 +18,22 @@ public class Member {
     private String MEMBER_ADMINYN;
     private String MEMBER_BLACKYN;
     private String MEMBER_BLACK_REASON;
-    private Date MEMBER_DATE;
-    private String MEMBER_IMAGE;
+    private String MEMBER_DATE;
     private String MEMBER_INTRO;
     private Date MEMBER_QUITED;
     private String MEMBER_QUITED_REASON;
+    private int BGIMG_SEQ;
+
+    public Member(String MEMBER_PW, String MEMBER_NICK
+                  , String MEMBER_BIRTH, String MEMBER_PHONE
+                  , String MEMBER_INTRO, int BGIMG_SEQ) {
+        this.MEMBER_PW = MEMBER_PW;
+        this.MEMBER_NICK = MEMBER_NICK;
+        this.MEMBER_BIRTH = MEMBER_BIRTH;
+        this.MEMBER_PHONE = MEMBER_PHONE;
+        this.MEMBER_INTRO = MEMBER_INTRO;
+        this.BGIMG_SEQ = BGIMG_SEQ;
+    }
 
 }
 

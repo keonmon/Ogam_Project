@@ -67,11 +67,11 @@ public class Admin_NoticeController {
 
     @RequestMapping("/adminUpdate")
     public String adminUpdate(@RequestParam String board_title, @RequestParam String board_contents
-            , @RequestParam(defaultValue = "n") String board_yn) {
+            , @RequestParam(defaultValue = "n") String board_yn, @RequestParam int board_seq) {
 
         Board board = new Board(board_title, board_contents, board_yn);
-        System.out.println(board);
-
+        board.setBoard_seq(board_seq);
+//        System.out.println(board);
 
         boardService.boardUpdate(board);
         return "redirect:/admin_noticeList";
