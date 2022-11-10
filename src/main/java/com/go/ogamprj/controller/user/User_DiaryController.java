@@ -363,9 +363,9 @@ public class User_DiaryController {
 
 
     // 일기 신고
-    @RequestMapping("/diaryBlacklistForm")
+    @RequestMapping("/diaryBlacklistInsert")
     @ResponseBody
-    public String diaryBlacklistForm(HttpServletRequest request,
+    public String diaryBlacklistInsert(HttpServletRequest request,
                               @RequestParam String id,
                               @RequestParam String blacklist_comment,
                               @RequestParam String writer){
@@ -373,17 +373,19 @@ public class User_DiaryController {
         if(loginUser == null){
             return "redirect:/";
         }else {
+            // System.out.println("loginUser : " + (String)loginUser + " / dirId : " + id + " / comment" + blacklist_comment + " / writer" + writer);
+            // 일기 신고 진행
+            diaryService.diaryReportInsert(Integer.parseInt(id), (String)loginUser, writer, blacklist_comment);
 
-            System.out.println("loginUser : " + (String)loginUser + " / dirId : " + id + " / comment" + blacklist_comment + " / writer" + writer);
-
-            return "";
+            return "<script>alert('일기가 신고되었습니다.');location.href='/viewDiary?diarySeq="+Integer.parseInt(id)+"'</script>";
         }
     }
 
+
     // 댓글 신고
-    @RequestMapping("/replyBlacklistForm")
+    @RequestMapping("/replyBlacklistInsert")
     @ResponseBody
-    public String replyBlacklistForm(HttpServletRequest request,
+    public String replyBlacklistInsert(HttpServletRequest request,
                               @RequestParam String id,
                               @RequestParam String blacklist_comment,
                               @RequestParam String writer){
@@ -391,11 +393,37 @@ public class User_DiaryController {
         if(loginUser == null){
             return "redirect:/";
         }else {
+            // System.out.println("loginUser : " + (String)loginUser + " / dirId : " + id + " / comment" + blacklist_comment + " / writer" + writer);
+            // 댓글 신고 진행
+            diaryService.replyReportInsert(Integer.parseInt(id), (String)loginUser, writer, blacklist_comment);
 
-            System.out.println("loginUser : " + (String)loginUser + " / repId : " + id + " / comment" + blacklist_comment + " / writer" + writer);
+            // 댓글이 작성된 일기 가져오기
+            int diaryId = diaryService.getDiarySeq(Integer.parseInt(id));
 
-            return "";
+            return "<script>alert('댓글이 신고되었습니다.');location.href='/viewDiary?diarySeq="+diaryId+"'</script>";
         }
+    }
+
+
+    // 댓글 등록 (AJAX)
+    @RequestMapping(value = "/replyInsert", method={RequestMethod.POST})
+    public String replyInsert(@RequestParam Map<String,Object> replyMap,
+                              Model model, HttpServletRequest request ){
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser==null){
+            return "redirect:/";
+        }else{
+            // 댓글저장
+            replyMap.put("member_email",(String)loginUser);
+            diaryService.replyInsert(replyMap);
+
+            // 댓글 리스트 가져오기
+            int diarySeq = Integer.parseInt((String)replyMap.get("diarySeq"));
+            model.addAttribute("replyList", diaryService.replySelect(diarySeq));
+
+            return "user/userDiary/viewDiary :: .mod2_innerSlide";
+        }
+
     }
 
 
