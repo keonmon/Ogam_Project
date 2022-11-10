@@ -1,0 +1,467 @@
+/* 전체 스타일 */
+*{
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    position: relative;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    height: 100vh;
+    min-height: 900px;
+}
+
+.bodyContainer{
+    width: 100vw;
+    min-width: 900px;
+}
+
+.sidebar li{
+    list-style: none;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: left;
+    padding: 30px 0px;
+    border-bottom: 2px solid #908BE8;
+}
+
+.sidebar li:first-child {
+    padding: 0px;
+}
+
+.top-menu li:hover{
+    background-color: #d1cef2;
+}
+
+.footer{
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+.footer li{
+    justify-content: center;
+    font-size: 15px;
+    font-weight: none;
+    text-align: center;
+    color: #B7B6B6;
+    padding: 5px 0px;
+    border-bottom: none;
+    background-color: none;
+}
+
+
+
+/* 사이드바 메인 이미지 */
+#mainImg {
+    width: 280px;
+}
+#mainImg img{
+    width: 100%;
+}
+
+.sidebar span:first-child{
+    margin-left: 40px;
+}
+.sidebar span:last-child{
+    margin-left: 30px;
+    color: #13056C;
+}
+
+/* 바디콘테이너 스타일 */
+.bodyContainer{
+    background-color: #f1f1f1; 
+    position: relative;
+}
+
+/* 메뉴바 스타일 */
+.menubar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto;
+    width: 95%;
+    height: 75px;
+    border-radius: 15px;
+    background-color: white;
+}
+
+#left-menu {
+    display: flex;
+    width: 100%;
+}
+
+#rigth-menu {
+    display: flex;
+    height: 100%;
+}
+
+.menubar span{
+    display: flex;
+    justify-content: space-around;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+/*일기작성*/
+#writeDiary {
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #ccbbf0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#writeDiary a{
+    color: white;
+}
+
+/* 공지 스타일 */
+.board{
+    font-size: 2em;
+    font-weight: bold;
+    color: #13056C;
+}
+.board:hover {
+    transform: translateY(-10px);
+    transition-duration: 2s;
+}
+
+/* 알림 스타일 */
+.notifi{
+    font-size: 2em;
+    font-weight: bold;
+    color: #13056C;
+    cursor: pointer;
+}
+
+/* 알림창 모달 스타일 */
+
+.notifi_wrapModal {
+    position: absolute;
+    display: none;
+    top: 40%;
+    left: 85%;
+    width: 300px;
+    height: 550px;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    background: rgb(202, 202, 202);
+    max-height: 100vh;
+}
+
+.toggle {
+    display: block;
+}
+
+#notifi_title{
+    margin: 10px auto;
+    padding: 5px;
+    text-align: center;
+    width: 80%;
+    font-size: 25px;
+    color: white;
+    font-weight: bold;
+    background-color: #908BE8;
+    border-radius: 15px;
+}
+.title{
+    width: 25%;
+    padding: 5px;
+    height: 30px;
+    margin-left: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    background-color: #908BE8;
+    border-radius: 15px;
+}
+
+/* 최근 알림 스타일 */
+.currentNotifi{
+    width: 100%;
+    height: 38%;
+    margin-bottom: 5px;
+    overflow-y: auto;
+}
+.currentNotifi::-webkit-scrollbar {
+    display: none;
+}
+#currentNotifi_contents{
+    display: flex;
+    margin: 5px auto;
+    width: 80%;
+    height: 50px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+#currentNotifi_contents img{
+    border-radius: 50%;
+    width: 50px;
+}
+
+#currentNotifi_contents p{
+    display: flex;
+    align-items: center;
+    margin: 0px 0px 0px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    width:100%;
+}
+/* 이전 알림 스타일 */
+.previewNotifi{
+    width: 100%;
+    height: 38%;
+    margin-bottom: 5px;
+    overflow-y: auto;
+}
+.previewNotifi::-webkit-scrollbar {
+    display: none;
+}
+#previewNotifi_contents{
+    display: flex;
+    margin: 5px auto;
+    width: 80%;
+    height: 50px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+#previewNotifi_contents img{
+    border-radius: 50%;
+    width: 50px;
+}
+
+#previewNotifi_contents p{
+    display: flex;
+    align-items: center;
+    margin: 0px 0px 0px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    width:100%;
+}
+
+/* 알림 모달창 버튼 */
+.notifi_btnBox {
+    display: flex;
+    justify-content: center;
+}
+.notifi_btnBox button {
+    border-style: none;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    margin-left: 10px;
+    box-shadow: 0px 0px 5px 1px rgba(156, 156, 156, 0.6);
+    cursor: pointer;
+}
+
+/* 이미지 스타일 */
+#user_img{
+    width: 60%;
+    height: 80%;
+    border: 1px solid gainsboro;
+    border-radius: 50%;
+    background-color: white;
+}
+
+/* 로그인 스타일 */
+.login{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #13056C;
+}
+
+/* 로그아웃 스타일 */
+.logout{
+    display: none;
+}
+
+/* 콘텐츠 스타일 */
+
+.contents{
+    display: flex;
+    justify-content: center;
+    height: 88vh;
+    position: relative;
+}
+
+.friendList{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 24%;
+    left: 16%;
+    width: 9vw;
+    height: 50px;
+    font-size: 1vw;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0px 0px 5px 1px rgba(156, 156, 156, 0.6);
+    background-color: #BA9AFF;
+    cursor: pointer;
+}
+.sendList{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 30%;
+    left: 16%;
+    width: 9vw;
+    height: 50px;
+    font-size: 1vw;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0px 0px 5px 1px rgba(156, 156, 156, 0.6);
+    background-color: #8BB8E8;
+    cursor: pointer;
+}
+
+/* 친구신청 스타일 */
+
+/* Header 부분 스타일 */
+.block-send{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 95%;
+    background-color: rgb(231, 233, 233);
+    border: 1px solid rgb(134, 134, 134);
+    border-radius: 15px;
+    z-index: 1;
+}
+.sendHeader{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 5rem;
+    background-color: #BA9AFF;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    font-weight: bold;
+    color: rgb(240, 239, 239);
+    align-items: center;
+}
+
+.sendHeader span{
+    font-size: 1.9rem;
+}
+
+/* 친구리스트 검색 스타일 */
+.searchContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3vw;
+}
+.searchBox{
+    display: flex;
+    justify-content: center;
+    min-width: 60%;
+ 
+}
+
+.searchBox input{
+    /* font-size: 1.3vw; */
+    width: 80%;
+    height: 1.8vw;
+    border-style: none;
+    box-shadow: 0px 0px 5px 1px rgba(156, 156, 156, 0.6);
+}
+
+.searchBox input:focus-visible{
+    outline-style: none;
+}
+
+.blockImg{
+    width: 4vw;
+    border-style: none;
+    background-color: rgb(231, 233, 233);
+}
+
+.blockImg img{
+    height: 1.7vw;
+    cursor: pointer;
+}
+
+.blockCnt{
+    /* display: flex;
+    justify-content: end; */
+    min-width: 5vw;
+    font-size: large;
+    font-weight: bold;
+}
+
+/* body 부분 스타일 */
+
+.sendBody{
+    height: 100%;
+    overflow-y: auto;
+}
+
+.send_list{
+    flex-direction: column;
+    width: 90%;
+    height: 7rem;
+    margin: 0px auto 20px;
+    border-radius: 15px;
+    background-color: #f1f1f1;
+}
+
+/* 차단 사용자 */
+
+.send_contents{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+/* 차단 사용자 이미지 */
+.op_img {
+    display: flex;
+    justify-content: center;
+}
+
+.op_img img{
+    width: 8rem;
+    border-radius: 10px;
+}
+
+/* 차단 사용자 닉네임 */
+.op_nickname{
+
+    font-size: 18px;
+    padding: 20px;
+    width: 200rem;
+}
+
+/* 삭제 버튼 */
+.response{
+    display: flex;
+    text-align: center;
+    width: 80em;
+}
+.response div{
+    width: 100%;
+    margin: auto 10px;
+    padding: 10px;
+    border-radius: 15px;
+}
+.response div:first-child{
+    background-color: #BA9AFF;
+    cursor: pointer;
+}

@@ -1,15 +1,26 @@
 package com.go.ogamprj.controller.user;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class User_LoginController {
 
-    @RequestMapping("/login")
-    public String login(){
 
-        return "/user/loginPage/login";
+    @RequestMapping("/loginPage")
+    public String loginPage(){
+
+        return "user/loginPage/loginPage";
+    }
+
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request){
+
+        return "redirect:/loginPage";
+
     }
 
     @RequestMapping("/Find")
