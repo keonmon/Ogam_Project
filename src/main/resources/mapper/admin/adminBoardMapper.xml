@@ -13,8 +13,6 @@
         , BOARD_CONTENTS = #{board_contents}
         , BOARD_YN = #{board_yn}
         WHERE BOARD_SEQ = #{board_seq}
-
-
     </update>
 
     <delete id="boardDelete">

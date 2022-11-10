@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="css/friendList.css" />
     <link rel="stylesheet" type="text/css" href="css/reviseInfo.css" />
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 
@@ -115,7 +114,7 @@
 
                  <!-- 마이 프로필 시작 -->
                 <div id="wrap">
-                    <form action="/reviseInfo" method="post">
+                    <form action="/reviseUpdate" method="post">
                        <div class="base">
                             <div id="top">
                                 <span id="myTitle">마이프로필</span>
@@ -129,7 +128,7 @@
                                     <div class="photo">
                                         <!-- 나중에 이미지로 바꿔주기 -->
                                         <span id="imgBlock">
-                                            <th:block th:if="${member.MEMBER_IMAGE}"> // 사진이 null이면 안 보임
+                                            <th:block th:if="${member.MEMBER_IMAGE}">  <!--사진이 null이면 안 보임-->
                                                 <img th:src="${member.MEMBER_IMAGE}"/>
                                             </th:block>
                                         </span>
@@ -141,32 +140,20 @@
                                 </div>
                                 <div id="intro">
                                     <span class="iTitle">소개글</span>
-                                    <textarea th:field="*{member.MEMBER_INTRO}" name="member_intro"></textarea>
+                                    <textarea name="member_intro">[[ ${member.MEMBER_INTRO} ]]</textarea>
                                 </div>
                                 <div id="email">
                                     <span class="eTitle">이메일</span>
                                     <span class="part1">
-                                        <span><input type="text" id="member_email" name="member_email" class="emailBox"/></span>
-                                        @
-                                        <select class="selectBox">
-                                            <option value="">선택입력</option>
-                                            <option value="naver.com">naver.com</option>
-                                            <option value="daum.net">daum.net</option>
-                                            <option value="google.com">google.com</option>
-                                            <option value="ogam.com">ogam.com</option>
-                                        </select>
+                                        <span><input type="text" name="id" class="emailBox" th:value="${member.MEMBER_EMAIL}" readonly/></span>
                                     </span>
-                                </div>
-                                <div class="password">
-                                    <span class="pwTitle" name="member_pw">비밀번호</span>
-                                    <input type="password" id="before_pw" onchange=""/>
                                 </div>
                                 <div class="password">
                                     <span class="pwTitle">
                                         <div>새로운</div>
                                         <div>비밀번호</div>
                                     </span>
-                                    <input type="password" id="member_pw" onchange="new_pw_chk()"/>
+                                    <input type="password" id="member_pw" name="member_pw" onchange="new_pw_chk()"/>
                                 </div>
                                 <div class="password">
                                     <span>
@@ -177,19 +164,19 @@
                                 </div>
                                 <div class="nickName">
                                     <div class="nTitle">닉네임</div>
-                                    <input type="text" id="member_nick" name="member_nick" th:field="*{member.MEMBER_NICK}"/>
-                                    <p id="nick_chk" onclick="uniqueChk()">중복확인</p>
+                                    <input type="text" id="member_nick" name="member_nick" th:value="${member.MEMBER_NICK}"/>
+                                    <input type="button" id="nick_chk" onclick="uniqueChk()" value="중복확인">
                                 </div>
                                 <div class="birthday">
                                     <div class="bTitle">생년월일</div>
-                                    <input type="text" id="member_birth1"/>
-                                    <input type="text" id="member_birth2" />
-                                    <input type="text" id="member_birth3"/>
+                                    <input type="text" placeholder="YYYY" required pattern="19[0-9][0-9]|20\d{2}" id="member_birth1" name="member_birth1" th:value="${year}"/>
+                                    <input type="text" placeholder="MM" required pattern="0[0-9]|1[0-2]" id="member_birth2" name="member_birth2" th:value="${month}"/>
+                                    <input type="text" placeholder="DD" required pattern="0[1-9]|[1-2][0-9]|3[0-1]" id="member_birth3" name="member_birth3" th:value="${day}"/>
                                 </div>
                                 <!-- 휴대폰 인증 -->
                                 <div class="phone">
                                     <div class="phTitle">휴대폰번호</div>
-                                    <input type="text" id="member_phone" placeholder="전화번호 입력"/>
+                                    <input type="text" id="member_phone" name="member_phone" placeholder="전화번호 입력" th:value="${phone}"/>
                                     <input type="submit" value="인증번호 받기" id="chkBtn"/>
                                 </div>
                                 <div>
@@ -197,7 +184,8 @@
                                 </div>
                             </div>
                             <div class="btn_bottom">
-                                <input type="submit" id="finish" value="회원정보 수정하기">
+                                <input type="submit" id="finish" value="회원정보 수정하기" onclick="allchk()">
+                                <input type="hidden" name="member_email" th:value="${member.MEMBER_EMAIL}"/>
                             </div>
                            <div class="btn_delete">
                                <p onclick="delete_Modal()">탈퇴하기</p>
@@ -245,23 +233,35 @@
             </div>
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
 
-<!--        function uniqueChk() {-->
+        function uniqueChk() {
+            let member_nick = $('#member_nick').val();
 
-<!--          let new_id = $('#member_nick').val();-->
+            $.ajax({
+                url: '/unique',
+                data: {"member_nick":member_nick},
+                type:'post',
+                success: function(success) {
+                    if(member_nick.length == 0){
+                        alert("닉네임이 너무 짧습니다😫");
+                        return;
+                    } else if (success == 1) {
+                        alert("이미 사용 중인 닉네임입니다🙁");
+                        return;
+                    } else if(success == 0) {
+                        alert("사용가능한 닉네임입니다☺️");
+                        $("input[name='nicky']").val('y');
+                    }
+                },
+                error: function() {
+                    alert("error");
+                }
+            })
 
-<!--          $.ajax({-->
-<!--            url: "chkNick",-->
-<!--            data: new_id,-->
-<!--            dataType; "json",-->
-<!--            type: "post",-->
-<!--            async: true,-->
-<!--            success: function(data) {-->
-<!--                if(data.cnt > 0-->
-<!--            }-->
-<!--          })-->
-<!--        }-->
+        }
+
 
     </script>
     <script type="text/javascript" src="js/deleteUser.js"></script>

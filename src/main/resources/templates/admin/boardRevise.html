@@ -31,7 +31,7 @@
                     </div>
                     <div id="board_bottom">
                         <input type="submit" value="수정하기"/>
-                        <input type="hidden" th:value="${board.board_seq}">
+                        <input type="hidden" name="board_seq" th:value="${board.board_seq}">
                         <input type="button" onclick="history.back();" value="취소"/>
                     </div>
                 </form>
