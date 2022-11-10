@@ -53,5 +53,8 @@ public interface DiaryMapper {
 
     public List<HashMap<String,Object>> replySelect(int diarySeq);
 
+    public void diaryUpdateNoBgimg(Diary diaryDto);
+
+    public void diaryUpdateWithBgimg(Diary diaryDto);
 }
 

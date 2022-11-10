@@ -12,6 +12,7 @@
             on d.MEMBER_EMAIL = m.member_email
          where d.MEMBER_EMAIL = #{myEmail}
            and d.diary_del = 'n'
+         order by d.diary_seq desc
     </select>
 
     <!-- 친구 다이어리 전부 가져오기 -->
@@ -79,7 +80,27 @@
         select *
           from reply r join member m
             on r.member_email = m.member_email
-         where r.diary_seq = 1
+         where r.diary_seq = #{diarySeq}
            and reply_del = 'n'
     </select>
+
+    <!-- 배경사진 없이 일기 수정 -->
+    <update id="diaryUpdateNoBgimg" parameterType="com.go.ogamprj.dto.Diary">
+        update diary
+           set emotion_seq = #{EMOTION_SEQ}
+             , contents = #{CONTENTS}
+             , diary_private=#{DIARY_PRIVATE}
+         where diary_seq = #{DIARY_SEQ}
+    </update>
+    <!-- 배경사진 포함 일기 수정 -->
+    <update id="diaryUpdateWithBgimg" parameterType="com.go.ogamprj.dto.Diary">
+        update diary
+           set emotion_seq = #{EMOTION_SEQ}
+             , contents = #{CONTENTS}
+             , diary_private=#{DIARY_PRIVATE}
+             , BGIMG_SEQ = (select max(bgimg_seq)
+                              from bgimage)
+         where diary_seq = #{DIARY_SEQ}
+
+    </update>
 </mapper>

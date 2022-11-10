@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -169,6 +170,191 @@ public class User_DiaryController {
 
         return "user/userDiary/viewDiary";
     }
+
+
+
+
+    // 일기 수정 폼1으로 이동
+    @RequestMapping("/diaryUpdateForm1")
+    public String diaryUpdateForm1(HttpServletRequest request,
+                                  @RequestParam String id,
+                                  Model model){
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+
+        request.getSession().setAttribute("updateDirId",id);    // 게시물번호 세션에 저장
+
+        System.out.println("loginUser : " + loginUser + " / dirId : "+ id);
+
+        // 기존 일기 데이터 조회
+        HashMap<String,Object> diaryMap = diaryService.diarySelectOne(Integer.parseInt(id));
+
+        System.out.println(diaryMap);
+        model.addAttribute("diaryMap", diaryMap );
+        model.addAttribute("emotions", diaryService.getEmotions("기쁨"));
+        return "user/userDiary/updateDiary1";
+    }
+
+    // 일기 수정폼 2
+    @RequestMapping("/diaryUpdateForm2")
+    public String diaryUpdateForm2(HttpServletRequest request, Model model, @RequestParam int emotion_seq){
+        request.getSession().setAttribute("writeEmotionSeq",emotion_seq);
+        String id = (String)request.getSession().getAttribute("updateDirId");
+
+        // 기존 일기 데이터 조회
+        HashMap<String,Object> diaryMap = diaryService.diarySelectOne(Integer.parseInt(id));
+
+        model.addAttribute("diaryMap", diaryMap );
+        model.addAttribute("emoji", diaryService.getEmojiSelectOne(emotion_seq));
+        return "user/userDiary/updateDiary2";
+    }
+
+    @RequestMapping("/diaryUpdateForm3")
+    public String diaryUpdateForm3(HttpServletRequest request, Model model,
+                              @RequestParam String contents,
+                              @RequestParam(defaultValue = "n") String diary_private){
+        request.getSession().setAttribute("writeContents",contents);
+        //request.getSession().setAttribute("writePrivate",diary_private);
+
+        String id = (String)request.getSession().getAttribute("updateDirId");
+        // 기존 일기 데이터 조회
+        HashMap<String,Object> diaryMap = diaryService.diarySelectOne(Integer.parseInt(id));
+
+        int emotion_seq = (int)request.getSession().getAttribute("writeEmotionSeq");
+        model.addAttribute("emoji", diaryService.getEmojiSelectOne(emotion_seq));
+        model.addAttribute("writePrivate",diary_private);
+        model.addAttribute("diaryMap", diaryMap );
+        return "user/userDiary/updateDiary3";
+    }
+
+
+    @RequestMapping(value = "/updateDiary",method = RequestMethod.POST)
+    public String updateDiary(HttpServletRequest request, Model model,
+                              @RequestParam(defaultValue = "n") String diary_private,
+                              @RequestParam MultipartFile file){
+
+        request.getSession().setAttribute("writePrivate",diary_private);
+        int writeEmotionSeq = (int)request.getSession().getAttribute("writeEmotionSeq");
+        String writeContents = (String)request.getSession().getAttribute("writeContents");
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+        String id = (String)request.getSession().getAttribute("updateDirId");
+
+        // 기존 일기 데이터 조회
+        HashMap<String,Object> diaryMap = diaryService.diarySelectOne(Integer.parseInt(id));
+
+        Diary diaryDto = new Diary(Integer.parseInt(id), loginUser, 0, writeEmotionSeq, writeContents, null, diary_private, "n");
+
+        // 업로드된 파일 처리
+        // 이미지를 업로드하지 않는 경우
+        if(file.isEmpty()) {
+            // 배경이미지를 제외하고 다이어리 수정
+            diaryService.diaryUpdateNoBgimg(diaryDto);
+        } else {
+
+            // 파일 업로드 준비
+            // 서버 webapp 경로 추출
+            String realPath = request.getSession().getServletContext().getRealPath("/");
+
+            // file의 실제이름 추출
+            String origName = file.getOriginalFilename();
+
+            // 파일 이름으로 쓸 uuid 생성
+            String uuid = UUID.randomUUID().toString();
+
+            // 확장자 추출(ex : .png)
+            String extension = origName.substring(origName.lastIndexOf("."));
+
+            // uuid와 확장자 결합
+            String savedName = uuid + extension;
+
+            // 파일을 불러올 때 사용할 파일 경로
+            String savedPath = realPath + fileDir + savedName;
+
+            Bgimage bgimageDto = new Bgimage(0, fileDir + savedName, savedName);
+            // 파일 서버에 저장
+            try {
+                file.transferTo(new File(savedPath));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            // 다이어리 DB에 수정(파일과 함께 가져감)
+            diaryService.diaryUpdateWithBgimg(bgimageDto, diaryDto);
+        }
+
+        return "redirect:/viewDiary?diarySeq=" + Integer.parseInt(id);
+    }
+
+
+
+    // 댓글 수정
+    @RequestMapping("/replyUpdateForm")
+    public String replyUpdateForm(HttpServletRequest request,
+                                  @RequestParam String id){
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+
+        System.out.println("loginUser : " + loginUser + " / repId : "+ id);
+
+
+        return "";
+    }
+
+
+    // 일기 삭제
+    @RequestMapping("/diaryDelete")
+    public String diaryDelete(HttpServletRequest request,
+                              @RequestParam String id){
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+
+        System.out.println("loginUser : " + loginUser + " / dirId : "+ id);
+
+
+        return "";
+    }
+
+
+    // 댓글 삭제
+    @RequestMapping("/replyDelete")
+    public String replyDelete(HttpServletRequest request,
+                              @RequestParam String id){
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+
+        System.out.println("loginUser : " + loginUser + " / repId : "+ id);
+
+        return "";
+    }
+
+    // 일기 신고
+    @RequestMapping("/diaryBlacklistForm")
+    @ResponseBody
+    public String diaryBlacklistForm(HttpServletRequest request,
+                              @RequestParam String id,
+                              @RequestParam String blacklist_comment,
+                              @RequestParam String writer){
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+
+        System.out.println("loginUser : " + loginUser + " / dirId : "+ id + " / comment" + blacklist_comment + " / writer" + writer);
+
+        return "";
+    }
+
+    // 댓글 신고
+    @RequestMapping("/replyBlacklistForm")
+    @ResponseBody
+    public String replyBlacklistForm(HttpServletRequest request,
+                              @RequestParam String id,
+                              @RequestParam String blacklist_comment,
+                              @RequestParam String writer){
+        String loginUser = (String)request.getSession().getAttribute("loginUser");
+
+        System.out.println("loginUser : " + loginUser + " / repId : "+ id + " / comment" + blacklist_comment + " / writer" + writer);
+
+        return "";
+    }
+
+
+
+
+
 
 
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+    </script>
+</head>
+<body>
+    <style>
+        .modalBody{
+            display: flex;
+            width: 100%;
+            height: auto;
+            gap: 0px;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .blacklistCommentList{
+            height: 125px;
+            font-family: 'Pretendard-Regular';
+
+        }
+
+
+        .buttons {
+            width: 35%;
+            height: 100%;
+            display: flex;
+            position: relative;
+            justify-content: space-around;
+            margin: 0 auto;
+            align-items: center;
+            gap: 15%;
+        }
+
+        .report {
+            width: 100px;
+            height: 40px;
+            background: #ba9aff;
+            position: relative;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            text-align: center;
+
+        }
+        .reportFont {
+            line-height: 40px;
+            color: #ffffff;
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        a{
+            color:#282828;
+            text-decoration: none;
+        }
+        .modalBody form{
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+        }
+    </style>
+
+    <div class="modalBody">
+        <h3 class="title"></h3>
+        <p class="test"></p>
+        <form method="get" class="frm">
+            <!-- <input type="hidden" class="type" name="type" value=""> -->
+            <!-- <input type="hidden" class="loginUser" name="loginUser" value=""> -->
+            <input type="hidden" class="writer" name="writer" value="">
+            <input type="hidden" class="id" name="id" value="">
+
+            <div class="blacklistCommentList">
+                <input type="radio" name="blacklist_comment" value="성적인 콘텐츠" checked="checked">성적인 콘텐츠<br/>
+                <input type="radio" name="blacklist_comment" value="폭력적, 혐오스러운 콘텐츠">폭력적, 혐오스러운 콘텐츠<br/>
+                <input type="radio" name="blacklist_comment" value="악의적, 희롱 또는 괴롭힘">악의적, 희롱 또는 괴롭힘<br/>
+                <input type="radio" name="blacklist_comment" value="권리 침해">권리 침해<br/>
+                <input type="radio" name="blacklist_comment" value="스팸 또는 오해의 소지가 있음" >스팸 또는 오해의 소지가 있음
+            </div>
+            <div class="buttons">
+                <!-- 나중에 submit으로 변경 -->
+                <div class="report" onclick="doReport()">
+                    <span class="reportFont">신고</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const url = new URL(location.href)
+        const params = url.searchParams;
+
+        const loginUser = params.get('loginUser');
+        const writer = params.get('writer');
+        const type = params.get('type');
+        const replyContent = params.get('replyContent');
+        const id = params.get('id');
+        console.log(params.get('id'));
+        document.querySelector(".id").value = id;
+        document.querySelector(".writer").value = writer;
+        
+        // document.querySelector(".type").value = type;   
+        // document.querySelector(".loginUser").value = loginUser;
+
+
+        if(type=='diary'){
+            document.querySelector(".title").innerHTML = `해당 게시물 신고 사유를 선택하세요`;
+
+        }else{
+            document.querySelector(".title").innerHTML = `해당 댓글 신고 사유를 선택하세요`;
+
+        }
+        
+        
+        // 신고 처리
+        function doReport() {
+            const frm = document.querySelector(".frm")
+            const checkedValue = document.querySelector("input[name='blacklist_comment']:checked").value
+            if(type=='diary'){
+                const prmpt = confirm("게시물 신고를 제출하시겠습니까?");
+                if(prmpt){
+                        frm.action="/diaryBlacklistForm";
+                         frm.submit();
+                    }else{
+                        return false;
+                    }
+            }else{
+                const prmpt = confirm("댓글 신고를 제출하시겠습니까?");
+                if(prmpt){
+                        frm.action="/replyBlacklistForm";
+                         frm.submit();
+                    }else{
+                        return false;
+                    }
+            }
+
+        }
+    </script>
+
+
+</body>
+</html>

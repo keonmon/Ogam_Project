@@ -33,4 +33,8 @@ public interface DiaryService {
     public HashMap<String,Object> likeMap(int diary_seq);
 
     List<HashMap<String,Object>> replySelect(int diarySeq);
+
+    public void diaryUpdateNoBgimg(Diary diaryDto);
+
+    public void diaryUpdateWithBgimg(Bgimage bgimageDto, Diary diaryDto);
 }
