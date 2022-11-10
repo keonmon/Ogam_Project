@@ -142,9 +142,10 @@
                         });
 
                         slider.addEventListener('mouseleave', () => {
-
-                            isMouseDown = false;
-                            slider.classList.remove('active');
+                            document.addEventListener('mouseup',()=>{
+                                isMouseDown = false;
+                                slider.classList.remove('active');
+                            })
                         });
 
                         slider.addEventListener('mouseup', (e) => {
@@ -153,7 +154,7 @@
                             slider.classList.remove('active');
                         });
 
-                        slider.addEventListener('mousemove', (e) => {
+                        document.addEventListener('mousemove', (e) => {
                             if (!isMouseDown) return;
                         
                             e.preventDefault();
@@ -180,8 +181,10 @@
                         });
     
                         sliderY.addEventListener('mouseleave', () => {
-                            isMouseDownY = false;
-                            sliderY.classList.remove('active');
+                            document.addEventListener('mouseup',()=>{
+                                isMouseDownY = false;
+                                sliderY.classList.remove('active');
+                            })
                         });
     
                         sliderY.addEventListener('mouseup', () => {
@@ -189,7 +192,7 @@
                             sliderY.classList.remove('active');
                         });
     
-                        sliderY.addEventListener('mousemove', (e) => {
+                        document.addEventListener('mousemove', (e) => {
                             if (!isMouseDownY) return;
     
                             e.preventDefault();
@@ -216,8 +219,10 @@
                         });
     
                         sliderY2.addEventListener('mouseleave', () => {
-                            isMouseDownY2 = false;
-                            sliderY2.classList.remove('active');
+                            document.addEventListener('mouseup',()=>{
+                                isMouseDownY2 = false;
+                                sliderY2.classList.remove('active');
+                            })
                         });
     
                         sliderY2.addEventListener('mouseup', () => {
@@ -225,7 +230,7 @@
                             sliderY2.classList.remove('active');
                         });
     
-                        sliderY2.addEventListener('mousemove', (e) => {
+                        document.addEventListener('mousemove', (e) => {
                             if (!isMouseDownY2) return;
     
                             e.preventDefault();

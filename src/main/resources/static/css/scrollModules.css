@@ -300,7 +300,7 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 90%;
-    height: 1200px;
+    height: auto;
     position: absolute;
     left: 0px;
     top: 65px;
@@ -314,7 +314,7 @@
 
 .contents article .mod1_innerContents {
     width: 100%;
-    height: 6%;
+    height: 100%;
     min-height: 90px;
     position: relative;
     transition: 0.5s;
@@ -329,7 +329,7 @@
     background-color: #ececec;
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
