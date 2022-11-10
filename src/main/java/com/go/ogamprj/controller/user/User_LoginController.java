@@ -30,9 +30,5 @@ public class User_LoginController {
         return "user/loginPage/Find_pw";
     }
 
-    @RequestMapping("/Signup")
-    public  String signup(){
 
-        return "user/loginPage/SignUp";
-    }
 }
