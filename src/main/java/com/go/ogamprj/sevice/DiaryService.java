@@ -48,4 +48,6 @@ public interface DiaryService {
 
     void diaryReportInsert(int diary_seq, String member_email, String blacklist_user_email, String blacklist_comment);
     void replyReportInsert(int reply_seq, String member_email, String blacklist_member_email, String blacklist_comment);
+
+    void replyInsert(Map<String, Object> replyMap);
 }
