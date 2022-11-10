@@ -11,6 +11,28 @@
 </head>
 <body>
     <style>
+
+        @font-face {
+            font-family: 'InkLipquid';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'KyoboHand';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         .modalBody{
             display: flex;
             width: 100%;
@@ -73,7 +95,7 @@
     <div class="modalBody">
         <h3 class="title"></h3>
         <p class="test"></p>
-        <form method="get" class="frm">
+        <form method="get" class="frm" target="_parent">
             <!-- <input type="hidden" class="type" name="type" value=""> -->
             <!-- <input type="hidden" class="loginUser" name="loginUser" value=""> -->
             <input type="hidden" class="writer" name="writer" value="">
@@ -113,10 +135,10 @@
 
 
         if(type=='diary'){
-            document.querySelector(".title").innerHTML = `해당 게시물 신고 사유를 선택하세요`;
+            document.querySelector(".title").innerHTML = `일기 신고`;
 
         }else{
-            document.querySelector(".title").innerHTML = `해당 댓글 신고 사유를 선택하세요`;
+            document.querySelector(".title").innerHTML = `댓글 신고`;
 
         }
         
@@ -126,17 +148,17 @@
             const frm = document.querySelector(".frm")
             const checkedValue = document.querySelector("input[name='blacklist_comment']:checked").value
             if(type=='diary'){
-                const prmpt = confirm("게시물 신고를 제출하시겠습니까?");
+                const prmpt = confirm("신고 양식을 제출하시겠습니까?");
                 if(prmpt){
-                        frm.action="/diaryBlacklistForm";
+                        frm.action="/diaryBlacklistInsert";
                          frm.submit();
                     }else{
                         return false;
                     }
             }else{
-                const prmpt = confirm("댓글 신고를 제출하시겠습니까?");
+                const prmpt = confirm("신고 양식을 제출하시겠습니까?");
                 if(prmpt){
-                        frm.action="/replyBlacklistForm";
+                        frm.action="/replyBlacklistInsert";
                          frm.submit();
                     }else{
                         return false;

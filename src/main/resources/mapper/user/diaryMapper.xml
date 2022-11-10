@@ -127,4 +127,18 @@
         where reply_seq = #{reply_seq}
     </update>
 
+
+
+    <!-- 일기 신고 -->
+    <insert id="diaryReportInsert">
+        insert into Blacklist_diary(diary_seq,member_email,blacklist_user_email,blacklist_comment)
+        values( #{diary_seq}, #{member_email}, #{blacklist_user_email}, #{blacklist_comment})
+    </insert>
+
+    <!-- 댓글 신고 -->
+    <insert id="replyReportInsert">
+        insert into Blacklist_reply(reply_seq,member_email,blacklist_member_email,blacklist_comment)
+        values( #{reply_seq}, #{member_email}, #{blacklist_member_email}, #{blacklist_comment})
+    </insert>
+
 </mapper>
