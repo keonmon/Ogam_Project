@@ -165,6 +165,19 @@ public class DiaryServiceImpl implements DiaryService {
         diaryMapper.replyDelete(reply_seq);
     }
 
+    @Override
+    public void diaryReportInsert(int diary_seq, String member_email, String blacklist_user_email, String blacklist_comment) {
+        diaryMapper.diaryReportInsert(diary_seq,member_email,blacklist_user_email,blacklist_comment);
+    }
+
+    @Override
+    public void replyReportInsert(int reply_seq, String member_email, String blacklist_member_email, String blacklist_comment) {
+        diaryMapper.replyReportInsert(reply_seq,member_email,blacklist_member_email,blacklist_comment);
+    }
+
+
+
+
 
     /**
      * 날짜 형식 바꾸기 함수

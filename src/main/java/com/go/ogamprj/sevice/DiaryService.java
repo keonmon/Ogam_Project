@@ -45,4 +45,7 @@ public interface DiaryService {
     void diaryDelete(int diary_seq);
 
     public void replyDelete(int reply_seq);
+
+    void diaryReportInsert(int diary_seq, String member_email, String blacklist_user_email, String blacklist_comment);
+    void replyReportInsert(int reply_seq, String member_email, String blacklist_member_email, String blacklist_comment);
 }

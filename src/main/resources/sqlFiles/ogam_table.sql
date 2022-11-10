@@ -13,6 +13,8 @@
 -- deleted_diary,deleted_reply 테이블 삭제
 -- diary, reply 테이블에 삭제 구분 컬럼 추가 (diary_del, reply_del)
 -- member테이블 - member_adminyn 컬럼 삭제
+--Blacklist_diary.blacklist_diary_date ,Blacklist_reply.blacklist_reply_date
+            --> 두 테이블의 date 관련 컬럼 기본값 sysdate, not null로 변경함
 
 ----------------------------------------
 --DROP TABLE BGIMAGE;
@@ -171,7 +173,7 @@ CREATE TABLE Blacklist_reply (
 	member_email	varchar2(100)		NOT NULL,
 	blacklist_member_email	varchar2(100)		NULL,
 	blacklist_comment	varchar2(50)		NULL,
-	blacklist_reply_date	date		NULL
+	blacklist_reply_date	date	default sysdate 	not NULL
 );
 
 
@@ -182,7 +184,7 @@ CREATE TABLE Blacklist_diary (
 	member_email	varchar2(100)		NOT NULL,
 	blacklist_user_email	varchar2(100)		NULL,
 	blacklist_comment	varchar2(50)		NULL,
-	blacklist_diary_date	date		NULL
+	blacklist_diary_date	date	default sysdate 	not NULL
 );
 
 
