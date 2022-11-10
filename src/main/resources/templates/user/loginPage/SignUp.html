@@ -7,39 +7,54 @@
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="wrap">
-        <form action="#" method="post">
-            <div class="line">
-                <div id="top">
-                    <span id="title">회원가입</span>
+<div id="wrap">
+    <form action="#" method="post">
+        <div class="line">
+            <div id="top">
+                <span id="title">회원가입</span>
+            </div>
+            <div id="middle">
+                <div class="email">
+                    <span class="eTitle">이메일</span>
+                    <input type="email" id="member_email"/>
                 </div>
-                <div id="middle">
-                    <span class="box" >
-                        <div class="sTitle">이메일</div> 
-                        <input type="text" id="member_email" value="" />
-                    </span>
-                    <span class="box" >
-                        <div class="sTitle">닉네임</div> 
-                        <input type="text" id="member_nick" value="" />
-                        <input type="submit" class="double_check" value="중복확인"/>
-                    </span>
-                    <span class="box" >
-                        <div class="sTitle">생년월일</div> 
-                        <input type="text" id="member_birth1" value="" />
-                        <input type="text" id="member_birth2" value="" />
-                        <input type="text" id="member_birth3" value="" />
-                    </span>
-                    <span class="box" >
-                        <div class="sTitle">휴대폰번호</div> 
-                        <input type="text" id="member_phone" value="" />
-                    </span>
+                <div class="password">
+                    <span class="pwTitle">비밀번호</span>
+                    <input type="password" id="member_pw" onchange=""/>
                 </div>
-                <div id="saveBtn">
-                    <input type="submit" class="infoSave" value="가입하기"/>
+                <div class="password">
+                        <span>
+                            <div class="pwTitle">비밀번호</div>
+                            <div class="pwTitle">재확인</div>
+                        </span>
+                    <input type="password" id="member_repw" onchange="chk_pwd()"/>
+                </div>
+                <div class="nickName">
+                    <div class="nTitle">닉네임</div>
+                    <input type="text" id="member_nick" onchange=""/>
+                    <input type="submit" id="nick_chk" value="중복확인" />
+                </div>
+                <div class="birthday">
+                    <div class="bTitle">생년월일</div>
+                    <input type="text" id="member_birth1"/>
+                    <input type="text" id="member_birth2" />
+                    <input type="text" id="member_birth3"/>
+                </div>
+                <div class="gender" >
+                    <div class="gTitle">성별</div>
+                    <input type="text" id="member_gender"/>
+                </div>
+                <div class="phone">
+                    <div class="phTitle">휴대폰번호</div>
+                    <input type="text" id="member_phone" placeholder="전화번호 입력"/>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="btn_bottom">
+                <input type="submit" id="signup" value="가입하기">
+            </div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

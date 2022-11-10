@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>my_diary</title>
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
+    <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link href="/css/writeDiary.css" rel="stylesheet">
+    <link href="/css/scrollModules.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+
+        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <main class="bodyContainer">
+            <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
+            <div class="contents">
+                <!-- ====================contents 영역======================= -->
+                <article class="writeArea">
+                    <div class="writeOutline">
+                        <form action="/diaryUpdateForm2" name="write1Form" method="post">
+                            <div class="writeBg"></div>
+
+                            <div class="currDate">
+                                <span>[[${diaryMap.DIARY_DATE}]]</span>
+                            </div>
+
+                            <div class="innerOutline">
+                                <div class="innerBg"></div>
+
+                                <div class="titles">
+                                    <span class="title">감정 수정하기</span>
+                                    <span class="subtitle">당신이 느낀 감정을 선택하세요.</span>
+                                </div>
+
+                                <div class="emoSelectBox">
+                                    <select class="select" name="emotions">
+                                        <option value="기쁨" selected="selected">기쁨</option></span>
+                                        <option value="사랑">사랑</option></span>
+                                        <option value="슬픔">슬픔</option></span>
+                                        <option value="우울">우울</option></span>
+                                        <option value="힘듦">힘듦</option></span>
+                                        <option value="분노">분노</option></span>
+                                    </select>
+                                </div>
+                                    <div class="emojiListBox">
+                                        <div class="emojiListBg"></div>
+                                        <div class="emojiSlider">
+                                            <div class="emojiList">
+                                                <span th:each="emotion : ${emotions}" class="imojies" th:data="${emotion.EMOTION_SEQ}">[[${emotion.EMOJI}]]</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="selectedEmoji">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <div class="buttons">
+                                <a class="before" href="javascript:window.history.go(-1);">
+                                    <div>
+                                        <span class="beforeFont">이전</span>
+                                    </div>
+                                </a>
+                                <!-- 나중에 submit으로 변경 -->
+                                <div class="next" onClick="document.forms['write1Form'].submit()">
+                                    <span class="nextFont">다음</span>
+                                </div>
+                            </div>
+                            <input hidden class="inputEmoji" name="emotion_seq" value="">
+                        </form>
+                    </div>
+
+                </article>
+            </div>
+            <!-- ==================== / contents 영역======================= -->
+            <script>
+
+                $(document).on("change", ".select", function () {
+                    let emotion = $(".select option:selected").val()
+                    $.ajax({
+                        url: '/getEmotion',
+                        type: 'post',
+                        data: {emotion: emotion},
+                    })
+                        .done(function (emotions) {
+                            $('.emojiList').replaceWith(emotions);
+                    });
+                });
+            </script>
+
+            <script>
+                /* 좌우 스크롤 슬라이더 */
+                const slider = document.querySelector('.emojiSlider');
+                let isMouseDown = false;
+                let startX, scrollLeft, walk;
+
+                slider.addEventListener('mousedown', (e) => {
+                    isMouseDown = true;
+                    slider.classList.add('active');
+
+                    startX = e.pageX - slider.offsetLeft;
+                    scrollLeft = slider.scrollLeft;
+                    walk=0; // 마우스down시 walk 0으로 초기화
+                });
+
+                slider.addEventListener('mouseleave', () => {
+                    isMouseDown = false;
+                    slider.classList.remove('active');
+                });
+
+                slider.addEventListener('mouseup', () => {
+                    isMouseDown = false;
+                    slider.classList.remove('active');
+                });
+
+                slider.addEventListener('mousemove', (e) => {
+                    if (!isMouseDown) return;
+
+                    e.preventDefault();
+                    const x = e.pageX - slider.offsetLeft;
+                    walk = (x - startX) * 1;
+                    slider.scrollLeft = scrollLeft - walk;
+                });
+                const clickHrefX = document.querySelectorAll('.imojies')
+
+                // walk가 20이상 움직이지 않으면 a태그 막기
+                for(let i = 0; i < clickHrefX.length; i++){
+                    clickHrefX[i].addEventListener('click',(e)=>{
+                        if(Math.abs(walk)>20)  e.preventDefault();
+                    });
+                };
+            </script>
+
+            <script>
+                let emojiList =  $(".imojies");
+                const giantEmojiSpan = document.querySelector(".selectedEmoji span")
+                const giantEmoji = document.querySelector(".selectedEmoji")
+
+                //로드시 0번 클릭
+                window.onload = function() {  emojiList[0].click(); }
+
+                $(document).on('click','.imojies',(e)=>{
+                    const selectedEmoji = e.target;
+                    
+
+                    // 전체 반투명 & 선택된이모지 애니메이션 지우기
+                    $('.imojies').removeClass('selected');
+                    // for(let j = 0; j < emojiList.length; j++){
+                    //     emojiList[j].classList.remove("selected")
+                    // }
+
+                    document.querySelector(".inputEmoji").value = e.target.getAttribute("data");
+
+                    // 선택된 이모지 크게 보여주기
+                    giantEmojiSpan.innerHTML = e.target.innerHTML
+
+                    // 선택된 이모지 투명도 1로
+                    e.target.classList.add("selected")
+
+                    // 선택된 큰 이모지 애니메이션
+                    giantEmoji.classList.remove("animation")
+                    void giantEmoji.offsetWidth;
+                    giantEmoji.classList.add("animation")
+
+                })
+
+            </script>
+        </main>
+    </div>
+</body>
+
+</html>

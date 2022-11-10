@@ -7,7 +7,7 @@
 
 # userImg 저장경로
 !**/userUploadImg/.gitkeep
-**/userUploadImgTest/*
+#**/userUploadImgTest/*
 !**/userUploadImgTest/.gitkeep
 
 # User-specific stuff

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="height: 100%;">
+    <style>
+        @font-face {
+            font-family: 'InkLipquid';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Pretendard-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'KyoboHand';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .modalBody{
+            display: flex;
+            width: 100%;
+            height: 300px;
+            gap: 0px;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .buttons {
+            width: 35%;
+            height: 100;
+            display: flex;
+            position: relative;
+            justify-content: space-around;
+            margin: 0 auto;
+            align-items: center;
+            gap: 15%;
+        }
+
+        .edit {
+            width: 300px;
+            height: 40px;
+            background: #8bb8e8;
+            position: relative;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            text-align: center;
+        }
+
+        .editFont {
+            line-height: 40px;
+            color: #ffffff;
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .delete {
+            width: 300px;
+            height: 40px;
+            background: #ba9aff;
+            position: relative;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            text-align: center;
+        }
+        .deleteFont {
+            line-height: 40px;
+            color: #ffffff;
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        a{
+            color:#282828;
+            text-decoration: none;
+        }
+
+        .replyUpdate {
+            width: 100px;
+            height: 40px;
+            background: #8bb8e8;
+            position: relative;
+            display: inline-block;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            text-align: center;
+        }
+
+        .updateFont {
+            line-height: 40px;
+            color: #ffffff;
+            position: relative;
+            font-family: 'Pretendard-Regular';
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        form{
+            width: 90%;
+            height: 100%;
+        }
+
+        .replyEditArea{
+            width: auto;
+            height: 86%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+
+        .TAbox{
+            width: 85%;
+            height: 23%;
+            display: flex;
+            grid-auto-columns: 71%;
+            background-color: #d9dfff;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .replyTA{
+            height: 41px;
+            width: 95%;
+            text-align: center;
+            border :0px;
+            background-color: #00000000;
+            font-family: 'KyoboHand';
+            font-size: 20px;
+            
+        }
+
+        input:focus{
+            outline: none;
+        }
+
+
+        
+    </style>
+
+    <div class="modalBody">
+        <form method="get" class="frm" target="_parent">
+            <input type="hidden" class="id" name="id" value="">
+            <!-- <input type="hidden" class="type" name="type" value="">
+            <input type="hidden" class="loginUser" name="loginUser" value="">
+            <input type="hidden" class="writer" name="writer" value=""> -->
+
+            <div class="buttons">
+                <div class="edit">
+                    <span class="editFont">수정</span>
+                </div>
+                <!-- 나중에 submit으로 변경 -->
+                <div class="delete">
+                    <span class="deleteFont">삭제</span>
+                </div>
+            </div>
+
+            <div class="replyEditArea hidden">
+                <div class="TAbox">
+                    <input type="text" class="replyTA" name="reply" spellcheck="false" maxlength="30"/>
+                </div>
+                <div class="replyUpdate">
+                    <span class="updateFont">완료</span>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        
+        const url = new URL(location.href)
+        const params = url.searchParams;
+
+        const loginUser = params.get('loginUser');
+        const writer = params.get('writer');
+        const type = params.get('type');
+        const replyContent = params.get('replyContent');
+        const id = params.get('id');
+        console.log(params.get('id'))
+        document.querySelector(".id").value = id;
+        document.querySelector(".replyTA").value = replyContent;
+        
+        const frm = document.querySelector(".frm")
+        const editArea = document.querySelector(".replyEditArea")
+        
+        // 수정시 처리 
+        document.querySelector(".edit").addEventListener("click",function(e){
+            if(type=="diary"){
+                frm.action="/diaryUpdateForm1";
+                frm.submit();
+            }else{
+                editArea.classList.remove('hidden')
+                
+                document.querySelector(".replyUpdate").addEventListener("click",function(e){
+                    const prmpt = confirm("댓글을 수정하시겠습니까?");
+                    if(prmpt){
+                        frm.action="/replyUpdateForm";
+                        frm.submit();
+                    }else{
+                        return false;
+                    }
+                    
+                })
+            }
+        })
+        
+        // 삭제시 처리
+        document.querySelector(".delete").addEventListener("click",(e)=>{
+            
+            const prmpt = confirm("정말로 삭제하시겠습니까?");
+            if(prmpt){
+                if(type =="diary"){
+                    frm.action="/diaryDelete";
+                    close();
+                    frm.submit();
+                }else{
+                    frm.action="/replyDelete";
+                    frm.submit();
+                }
+            }else{
+                return false;
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

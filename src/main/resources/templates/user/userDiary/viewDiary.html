@@ -10,7 +10,12 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
     <link href="/css/viewDiary.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-
+    <script>
+        //iframe 자동 height 조절
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+    </script>
 </head>
 
 <body>
@@ -31,7 +36,10 @@
                         <form>
 
                             <div class="innerOutline" >
-                                <div class="diaryMenu" th:id="${diaryDto.DIARY_SEQ}">
+                                <span class="writerNick">[[${diaryDto.MEMBER_NICK}]]</span>
+                                <div class="diaryMenu" type="diary" th:id="${diaryDto.DIARY_SEQ}">
+                                    <input hidden class="diaryWriter hiddenValue" th:value="${diaryDto.MEMBER_EMAIL}"/>
+                                    <input hidden class="loginUser hiddenValue" th:value="${session.loginUser}"/>
                                     ···
                                 </div>
                                 <!-- 모달 창 (다이어리 메뉴버튼)-->
@@ -85,10 +93,12 @@
                                     <div class="mod2_innerContents" th:each="reply : ${replyList}">
                                         <div class="mod2_d_bg">
                                             <div class="mod2_d_set">
-                                                <div class="replyMenu" th:id="${reply.REPLY_SEQ}">···</div>
+                                                <div class="replyMenu" type="reply"  th:id="${reply.REPLY_SEQ}">···</div>
                                                 <span class="mod2_d_nick">[[${reply.MEMBER_NICK}]]</span>
                                                 <span class="mod2_d_date">[[${reply.REPLY_DATE}]]</span>
                                                 <span class="mod2_d_diary">[[${reply.REPLY}]]</span>
+                                                <input hidden class="replyContent hiddenValue" th:value="${reply.REPLY}"/>
+                                                <input hidden class="replyWriter hiddenValue" th:value="${reply.MEMBER_EMAIL}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -102,11 +112,11 @@
                                 <div class="modalBg"></div>
                                 <div class="modalBox">
                                     <div class="modalClose" style="cursor: pointer;">X</div>
-                                    <div class="modalBody" scrolling="no" onload="resizeIframe(this)">
-                                        <th:block th:replace="~{/frag/user/modal/view_otherContents :: otherContentsModal}">
+                                    <iframe class="modalBody" scrolling="no" onload="resizeIframe(this)">
+                                        <!-- <th:block th:replace="/frag/user/modal/view_otherContents :: otherContentsModal">
 
-                                        </th:block>
-                                    </div>
+                                        </th:block> -->
+                                    </iframe>
                                 </div>
                             </div>
                         </form>
@@ -171,9 +181,12 @@
 
             <!-- 모달창 script -->
             <script>
+                const loginUser = document.querySelector('.loginUser').value;
+                let writer, id, type, replyContent;
+
                 function open(url){
                     document.querySelector(".modal").classList.remove("hidden");
-                    document.querySelector(".modalBody").src=url;
+                    document.querySelector(".modalBody").src=`${url}?writer=${writer}&type=${type}&loginUser=${loginUser}&replyContent=${replyContent}&id=${id}`;
                 }
 
                 const close = () => {
@@ -182,26 +195,43 @@
 
                 // ajax로 contents=diary/reply값, 컨텐츠id값 받고 open(url)해야 함 
                 document.querySelector(".diaryMenu").addEventListener("click", (e)=>{
-                    const diaryId = e.target.id
-                    alert("선택된 일기 Id : " + diaryId)
+                    id = e.target.id
+                    type = e.target.getAttribute("type");
+                    writer = document.querySelector(".diaryWriter").value;
+                    alert("선택된 일기 Id : " + id + "타입 : " + e.target.getAttribute("type") + " / 작성자 : " + writer+"/ session" + loginUser )
                     /* ajax
                      * 본인/타인 컨텐츠 비교 후 해당 모달html 결정
                     */
-
-                    open("/modal/view_otherContents.html")
-                    //open("/modal/view_myContents.html")
+                    if(loginUser == null){
+                        alert("로그인 후 이용할 수 있습니다.");
+                        return;
+                    }else if(loginUser == writer){
+                        open("/modal/view_myContents.html")
+                    }else{
+                        open("/modal/view_otherContents.html")
+                    }
                 });
 
                 const replyMenu_click = document.querySelectorAll(".replyMenu");
                 for(let i = 0; i < replyMenu_click.length; i++){
                     replyMenu_click[i].addEventListener("click", (e) => {
-                        const replyId = e.target.id
-                        alert("선택된 댓글 Id : " + replyId)
+                        id = e.target.id
+                        type = e.target.getAttribute("type");
+                        writer = document.querySelectorAll(".replyWriter")[i].value;
+                        replyContent = document.querySelectorAll(".replyContent")[i].value;
+                        alert("선택된 댓글 Id : " + id + " / 타입 : " + e.target.getAttribute("type") + " / 작성자 : " + writer+"/ session" + loginUser+replyContent);
                         /* ajax
                         
                         */
-                        open("/modal/view_otherContents.html")
-                        //open("/modal/view_myContents.html");
+                       if(loginUser == null){
+                           alert("로그인 후 이용할 수 있습니다.");
+                           return;
+                        }else if(loginUser == writer){
+                            
+                            open("/modal/view_myContents.html")
+                        }else{
+                            open("/modal/view_otherContents.html")
+                        }
                     })
                 }
 

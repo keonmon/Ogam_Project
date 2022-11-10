@@ -1,5 +1,6 @@
 package com.go.ogamprj.serviceImpl;
 
+import com.go.ogamprj.dto.friendApply;
 import com.go.ogamprj.mapper.FriendDiaryMapper;
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,25 +13,53 @@ import java.util.*;
 public class FriendDiaryServiceImpl implements FriendDiaryService {
 
     @Autowired
-    FriendDiaryMapper friendDiaryMapperMapper;
+    FriendDiaryMapper friendDiaryMapper;
 
     // 친구 목록 전체 가져오기
     @Override
     public List<Map<String, Object>> friendListSelectAll(String myEmail) {
-        List<Map<String, Object>> friendList = friendDiaryMapperMapper.friendListSelectAll(myEmail);
+        List<Map<String, Object>> friendList = friendDiaryMapper.friendListSelectAll(myEmail);
         return friendList;
     }
 
     // 친구 리스트 카운트
     @Override
     public int friendListCount(String myEmail) {
-        return friendDiaryMapperMapper.friendListCount(myEmail);
+        return friendDiaryMapper.friendListCount(myEmail);
     }
 
     // 검색으로 친구리스트 가져오기
     @Override
     public List<Map<String, Object>> search(String searchKeyword) {
-        return friendDiaryMapperMapper.search(searchKeyword);
+        return friendDiaryMapper.search(searchKeyword);
     }
+
+    // 친구 리스트 삭제
+    @Override
+    public void deleteFriend(String myEmail, String nickname) {
+        friendDiaryMapper.deleteFriend(myEmail, nickname);
+    }
+
+    // 친구 신청 전체 가져오기
+    @Override
+    public List<Map<String, Object>> friendSendSelectAll(String myEmail) {
+        return friendDiaryMapper.friendSendSelectAll(myEmail);
+    }
+
+    // 친구 리스트에 insert
+    @Override
+    public void insertfriendList(friendApply friendApply) {
+        friendDiaryMapper.insertfriendList(friendApply);
+        friendDiaryMapper.insertfriendList2nd(friendApply);
+    }
+
+
+
+    // 친구 신청 삭제
+    @Override
+    public void deleteFriendSend(String myEmail) {
+        friendDiaryMapper.deleteFriendSend(myEmail);
+    }
+
 
 }

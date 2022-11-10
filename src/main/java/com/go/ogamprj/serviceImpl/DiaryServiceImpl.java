@@ -128,6 +128,43 @@ public class DiaryServiceImpl implements DiaryService {
         return resultList;
     }
 
+    @Override
+    public void diaryUpdateNoBgimg(Diary diaryDto) {
+        diaryMapper.diaryUpdateNoBgimg(diaryDto);
+    }
+
+    @Override
+    public void diaryUpdateWithBgimg(Bgimage bgimageDto, Diary diaryDto) {
+        // 파일경로, 파일명 db에 저장
+        diaryMapper.bgimageInsert(bgimageDto);
+
+        // 배경이미지테이블에서 마지막에 저장된 seq 추출
+        //int bgimg_seq = diaryMapper.bgimageSelectLastSeq();
+
+        // 다이어리를 수정할 때 서브쿼리로 이미지 seq추출을 포함
+        diaryMapper.diaryUpdateWithBgimg(diaryDto);
+    }
+
+    @Override
+    public void replyUpdate(int reply_seq, String reply) {
+        diaryMapper.replyUpdate(reply_seq, reply);
+    }
+
+    @Override
+    public int getDiarySeq(int reply_seq) {
+        return diaryMapper.getDiarySeq(reply_seq);
+    }
+
+    @Override
+    public void diaryDelete(int diary_seq) {
+        diaryMapper.diaryDelete(diary_seq);
+    }
+
+    @Override
+    public void replyDelete(int reply_seq) {
+        diaryMapper.replyDelete(reply_seq);
+    }
+
 
     /**
      * 날짜 형식 바꾸기 함수

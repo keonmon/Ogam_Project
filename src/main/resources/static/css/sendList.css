@@ -339,7 +339,6 @@
     background-color: rgb(231, 233, 233);
     border: 1px solid rgb(134, 134, 134);
     border-radius: 15px;
-    z-index: 1;
 }
 .sendHeader{
     display: flex;
@@ -416,7 +415,6 @@
     border-radius: 10px;
 }
 .op_nickname{
-    display: flex;
     font-size: 18px;
     padding: 20px;
     width: 200rem;
