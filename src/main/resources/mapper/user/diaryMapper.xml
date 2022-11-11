@@ -157,4 +157,18 @@
               where diary_seq = #{diary_seq}
                 and member_email = #{member_email}
     </delete>
+
+    <select id="calendarDiarySelectAll" resultType="java.util.Map">
+        SELECT T1.DIARY_DATE as "start", T1.DIARY_SEQ as "id", T2.emoji as "title"
+        FROM(SELECT trunc(DIARY_DATE)as DIARY_DATE, MAX(DIARY_SEQ) AS DIARY_SEQ
+        FROM DIARY
+        where MEMBER_EMAIL = #{memberSeq}
+        AND diary_del = 'n'
+        GROUP BY trunc(DIARY_DATE)) T1,
+
+        (SELECT T1.DIARY_SEQ, T2.EMOJI
+        FROM DIARY T1, EMOTIONS T2
+        WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ) T2
+        WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
+    </select>
 </mapper>

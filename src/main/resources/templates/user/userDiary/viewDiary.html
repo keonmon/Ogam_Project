@@ -245,24 +245,25 @@
                 });
 
                 const replyMenu_click = document.querySelectorAll(".replyMenu");
-                for (let i = 0; i < replyMenu_click.length; i++) {
-                    replyMenu_click[i].addEventListener("click", (e) => {
-                        id = e.target.id
-                        type = e.target.getAttribute("type");
-                        writer = document.querySelectorAll(".replyWriter")[i].value;
-                        replyContent = document.querySelectorAll(".replyContent")[i].value;
+                
+                $(document).on('click','.replyMenu',function(e){
+                    let i = $('.replyMenu').index(this);
+                    id = e.target.id
+                    type = e.target.getAttribute("type");
+                    writer = document.querySelectorAll(".replyWriter")[i].value;
+                    replyContent = document.querySelectorAll(".replyContent")[i].value;
 
-                        if (loginUser == null) {
-                            alert("로그인 후 이용할 수 있습니다.");
-                            return;
-                        } else if (loginUser == writer) {
+                    if (loginUser == null) {
+                        alert("로그인 후 이용할 수 있습니다.");
+                        return;
+                    } else if (loginUser == writer) {
 
-                            open("/modal/view_myContents.html")
-                        } else {
-                            open("/modal/view_otherContents.html")
-                        }
-                    })
-                }
+                        open("/modal/view_myContents.html")
+                    } else {
+                        open("/modal/view_otherContents.html")
+                    }
+                })
+                
 
                 document.querySelector(".modalClose").addEventListener("click", close);
                 document.querySelector(".modalBg").addEventListener("click", close);

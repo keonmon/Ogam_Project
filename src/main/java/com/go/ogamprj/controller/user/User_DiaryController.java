@@ -1,5 +1,7 @@
 package com.go.ogamprj.controller.user;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.go.ogamprj.dto.Bgimage;
 import com.go.ogamprj.dto.Diary;
 import com.go.ogamprj.sevice.DiaryService;
@@ -18,10 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class User_DiaryController {
@@ -46,7 +45,7 @@ public class User_DiaryController {
 
             // 친구 일기 가져오기
             List<HashMap<String, Object>> friendDiaryList = diaryService.friendDiarySelectAll((String)loginUser);
-
+            model.addAttribute("memberSeq", loginUser.toString());
             model.addAttribute("myDiaryList", myDiaryList);
             model.addAttribute("friendDiaryList", friendDiaryList);
 
@@ -458,49 +457,22 @@ public class User_DiaryController {
         }
     }
 
-    @RequestMapping(value = "/calendar", params = "method=data", method={RequestMethod.POST})
+    @RequestMapping(value = "/calendar")
     @ResponseBody
-    public String getCalendarList( HttpServletRequest request,Model model) {
+    public JSONArray getCalendarList( HttpServletRequest request,
+                                      Model model,
+                                      @RequestParam String memberSeq
+                                      )  {
 
-        // id : diary_seq
-        // title : emoji
-        // start : diary_Date
-        // end : diary_Date
-        // allday : true
-        HashMap<String,Object> map = new HashMap<>();
-        JSONArray jarr = new JSONArray();
-        JSONObject list = new JSONObject();
+        List<Map<String,Object>> diaryList = diaryService.calendarDiarySelectAll(memberSeq);
 
-        map.put("id",1);
-        map.put("groupId",null);
-        map.put("title","할일title");
-        map.put("writer",null);
-        map.put("content",null);
-        map.put("start","2022-11-11T00:00:00");
-        map.put("end","2022-11-11T00:00:00");
+        JSONArray result = new JSONArray();
+        result.addAll(diaryList);
 
+        //System.out.println("db에서 갓 나옴 : "+diaryList);
+        System.out.println("json으로 변환 : "+ result);
+        return result;
 
-        JSONObject json = new JSONObject(map);
-        jarr.add(json);
-        list.put("list" ,jarr);
-        System.out.println(list);
-
-
-        //HashMap<String,Object> list = "list":{
-        //    "id":1,
-        //    "groupId":null,
-        //    "title":"할일title",
-        //    "writer":null,
-        //    "content":null,
-        //    "start":"2021-05-01T00:00:00",
-        //    "end":"2021-05-03T00:00:00",
-        //    "allday":true,
-        //
-        //}];
-        //model.addAttribute("list",list);
-
-        return "success";
-        //return "user/userDiary/myDiary";
     }
 
 
