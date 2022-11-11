@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="css/admin.css" />
     <link rel="stylesheet" type="text/css" href="css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -17,24 +16,17 @@
         <div th:replace="~{admin/menubar :: menubar }"></div>
             <div class="content">
                 <div class="searchTap">
-                  <form action="#" method="get">
-                    <select class="searchList" id="searchType" name="searchType">
-                      <option value="category" selected>카테고리</option>
-                      <option value="sort">신고 분류</option>
-                      <option value="reporters">신고자 이메일</option>
-                      <option value="respondents">피신고자 이메일</option>
-                      <option value="date">신고일</option>
+                  <form action="/admin_notifyList" method="get">
+                    <select class="searchList" id="type" name="type">
+                      <option value="Category" selected>카테고리</option>
+                      <option value="BLACKLIST_COMMENT">신고 분류</option>
+                      <option value="MEMBER_EMAIL">신고자 이메일</option>
+                      <option value="BLACKLIST_USER_EMAIL">피신고자 이메일</option>
+                      <option value="BLACKLIST_DIARY_DATE">신고일</option>
                     </select>
-                    <input
-                      class="searchInput"
-                      type="text"
-                      id="searchKeyword"
-                      name="searchKeyword"
-                      placeholder="해당 정보를 입력해주세요."
-                      value=""
-                    />
-      
-                    <input type="submit" class="searchBtn" value="검색" />
+                      <input class="searchInput" type="text" id="keyword" name="keyword"
+                             placeholder="해당 정보를 입력해주세요." value="" />
+                      <input type="submit" class="searchBtn" value="검색" />
                   </form>
                 </div>
                 <!-- 테이블 -->
@@ -64,9 +56,14 @@
                         <td>[[${notify.Category}]]</td>
                         <td>[[${notify.BLACKLIST_COMMENT}]]</td>
                         <td><a onclick="memberPopup( )">[[${notify.MEMBER_EMAIL}]]</a></td>
-                        <td><a onclick="memberPopup( )">[[${notify.BLACKLIST_DIARY_DATE}]]</a></td>
+                        <td><a onclick="memberPopup( )">[[${notify.BLACKLIST_USER_EMAIL}]]</a></td>
                         <td>[[${notify.BLACKLIST_DIARY_DATE}]]</td>
-                        <td><a onclick="diaryPopup( )">보기</a></td>
+                        <td>
+                          <th:block th:switch="${notify.Category}">
+                              <a th:case="일기" onclick="diaryPopup( )">보기</a>
+                              <a th:case="댓글" onclick="commentPopup( )">보기</a>
+                          </th:block>
+                        </td>
                       </tr>
                     </tbody>
                   </table>                  
@@ -79,5 +76,46 @@
             <!-- content end -->
         </main>
     </div>
+    <!-- 팝업 -->
+    <script>
+        // 멤버
+        function memberPopup( ) {
+
+            window.open("/memberPopup", "memberPopup",
+            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=750px'] );
+
+            iniform.target="memberPopup";
+            iniform.action="/memberPopup";
+
+            iniform.submit( );
+
+        }
+
+        // 일기
+        function diaryPopup( ) {
+
+            window.open("/diaryPopup", "diaryPopup",
+            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=625px'] );
+
+            iniform.target="diaryPopup";
+            iniform.action="/diaryPopup";
+
+            iniform.submit( );
+
+        }
+
+        // 댓글
+        function commentPopup( ) {
+
+            window.open("/commentPopup", "commentPopup",
+            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=510px'] );
+
+            iniform.target="commentPopup";
+            iniform.action="/commentPopup";
+
+            iniform.submit( );
+
+        }
+    </script>
 </body>
 </html>

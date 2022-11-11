@@ -17,7 +17,12 @@ public class AdminUserServiceImpl implements AdminUserService {
     /* USER 전체 가져오기 */
     @Override
     public ArrayList<Member> userSelectAll() {
-
         return adminUserMapper.userSelectAll();
+    }
+
+    /* 키워드 검색 */
+    @Override
+    public ArrayList<Member> userSelectKeyword(String type, String keyword) {
+        return adminUserMapper.userSelectKeyword(type, keyword);
     }
 }

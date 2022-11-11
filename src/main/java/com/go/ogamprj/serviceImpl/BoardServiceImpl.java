@@ -20,7 +20,13 @@ public class BoardServiceImpl implements BoardService {
         return adminBoardMapper.adminBoardSelectAll();
     }
 
-    //   user 페이지에 공지 보여주기
+    // 키워드 검색
+    @Override
+    public ArrayList<Board> adminBoardSelectKeyword(String type, String keyword) {
+        return adminBoardMapper.adminBoardSelectKeyword(type, keyword);
+    }
+
+    // user 페이지에 공지 보여주기
     @Override
     public ArrayList<Board> selectAll() {
         return adminBoardMapper.selectAll();

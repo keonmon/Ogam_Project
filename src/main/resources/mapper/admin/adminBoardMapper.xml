@@ -19,4 +19,30 @@
         DELETE FROM BOARD WHERE BOARD_SEQ = #{board_seq}
     </delete>
 
+    <!-- 키워드 검색 -->
+    <select id="adminBoardSelectKeyword" resultType="com.go.ogamprj.dto.Board">
+        SELECT *
+          FROM BOARD
+         WHERE board_seq IS not null
+        <if test=" keyword != null and keyword != '' ">
+            <choose>
+                <!-- 검색 유형이 있을 때 -->
+                <when test="type != null and type != ''">
+                    <choose>
+                        <when test="'board_title'.equals( type )">
+                            AND board_title LIKE #{keyword}
+                        </when>
+                        <when test="'board_date'.equals( type )">
+                            AND board_date LIKE #{keyword}
+                        </when>
+                        <when test="'board_yn'.equals( type )">
+                            AND board_yn LIKE #{keyword}
+                        </when>
+                    </choose>
+                </when>
+            </choose>
+        </if>
+         ORDER BY board_seq DESC
+    </select>
+
 </mapper>

@@ -1,10 +1,10 @@
 function memberPopup( ) {
         
-    window.open("/admin/memberPopup.html", "memberPopup",
+    window.open("/memberPopup", "memberPopup",
     ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=750px'] );
     
     iniform.target="memberPopup";
-    iniform.action="/admin/memberPopup.html";
+    iniform.action="/memberPopup";
     
     iniform.submit( );
     
@@ -16,7 +16,7 @@ function diaryPopup( ) {
     ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=625px'] );
     
     iniform.target="diaryPopup";
-    iniform.action="diaryPopup.html";
+    iniform.action="/diaryPopup";
     
     iniform.submit( );
     
@@ -24,11 +24,11 @@ function diaryPopup( ) {
 
 function commentPopup( ) {
         
-    window.open("/admin/commentPopup", "commentPopup",
+    window.open("/commentPopup", "commentPopup",
     ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=510px'] );
     
     iniform.target="commentPopup";
-    iniform.action="/admin/commentPopup";
+    iniform.action="/commentPopup";
     
     iniform.submit( );
     
