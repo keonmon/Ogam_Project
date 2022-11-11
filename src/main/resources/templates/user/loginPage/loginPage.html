@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,24 +9,25 @@
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="" value="">
         <div class="container">
             <div class="mainLogo">
                 <img src="/img/logoImg.png" />
             </div>
-
+            <form action="/login" method="get">
             <div class="idBox">
-                <label for="id">아이디</label>
-                <input type="text" id="id" name="id">
+                <label for="member_email">아이디</label>
+                <input type="text" id="member_email" name="member_email"
+                placeholder="이메일을 입력하세요!">
             </div>
 
             <div class="passwordBox">
-                <label for="password">비밀번호 </label>
-                <input type="password" id="password" name="password">
+                <label for="member_pw">비밀번호 </label>
+                <input type="password" id="member_pw" name="member_pw"
+                placeholder="비밀번호를 입력하세요!">
             </div>
 
             <div class="loginBox">
-                <button>로그인</button>
+                <button type="submit" th:value="login">로그인</button>
             </div>
 
             <div class="kakaoLoginBox">
@@ -37,9 +38,9 @@
             <div class="findId">
                 <a href="/Find.html">아이디 / 비밀번호찾기</a> <a href="/SignUp.html">회원가입</a>
             </div>
-
+            </form>
         </div>
-    </form>
+
 </body>
 
 </html>

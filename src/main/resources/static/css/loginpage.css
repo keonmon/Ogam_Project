@@ -20,29 +20,16 @@ label{
     margin-right: 10px;
 }
 
-.idBox{
-    font-weight: bold;
-    display: block;
-    margin: 10px auto 10px;
-    padding: 10px;
-    width: 50%;
-}
-
-#id {
-    border-width: medium;
-    padding: 10px;
-    width: 300px;
-    size: 40px;
-}
-
+.idBox,
 .passwordBox{
     font-weight: bold;
     display: block;
     margin: 10px auto 10px;
+    padding: 10px;
     width: 50%;
 }
 
-#password {
+.idBox input{
     border-width: medium;
     padding: 10px;
     width: 300px;
