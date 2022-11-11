@@ -126,20 +126,33 @@
     padding: 10px 15px 10px 15px;
     cursor: pointer;
 }
-
-.likeButton{
-    color:#252525;
-    font-size:45px; 
-    z-index: 1;
+.like{
     position: absolute;
+    display: flex;
     font-family: 'KyoboHand';
-    right:0%;
+    left: 15px;
     bottom: 0%;
     margin: 5px 20px 5px 20px;
+    z-index: 1;
+    align-items: center;
+}
+.likeButton{
+    color:#252525;
+    font-size:45px;
+    position: relative;
     cursor: pointer;
 }
+
 .likeit{
-    color:red
+    color:red;
+}
+
+.likeCnt{
+    display:inline-block;
+    width:auto;
+    font-size:25px;
+    color:#252525;
+    position:relative;
 }
 
 .innerBg {
