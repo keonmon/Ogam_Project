@@ -7,42 +7,51 @@
 </head>
 <body>
 <th:block th:fragment="emojiChart">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-
-
-
+      var mapArr = [];
 
 
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var jsonData = $.ajax({
-            url: "/emotionChart";
-            dataType : "json",
-            async: true;
-        });.responseText;
-        alert(jsonData);
-        var data = google.visualization.arrayToDataTable(jsonData);
+        var emotionData = $.ajax({
+            url: '/emotion',
+            type: 'post',
+            dataType: 'json',
+            success: function(map) {
+<!--                alert(map);-->
+                for(var i = 0; i < map.length; i++) {
+                    const tmp = [map[i].name , map[i].score];
+                    mapArr.push(tmp);
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+                    var data = new google.visualization.DataTable();
+                    data.addColumn('string', 'Emotions', { role: 'style' });
+                    data.addColumn('number', 'score');
+                    data.addRows(mapArr);
 
+                     var options = {
+                      colors: '#A7BAFF'
+                    };
 
-      }
+                    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+                    chart.draw(data, options);
 
-        var options = {
-          chart: {
-            title: '한달 간의 감정 그래프',
-          },
-          fontSize: 15
-        };
+                }
+                console.log(mapArr.length);
+            }
 
+        })
 
       }
     </script>
-    <div id="columnchart_material" style="padding:0px 10px; width: 100%; height: 450px;"></div>
+    <div id="columnchart_material" style="padding:0px 10px; width: 35vm; height: 550px; padding: 10px;"></div>
 </th:block>
 </body>
 </html>
+
+
+
+

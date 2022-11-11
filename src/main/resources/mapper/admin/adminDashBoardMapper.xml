@@ -2,11 +2,39 @@
 <!DOCTYPE mapper
         PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.go.ogamprj.mapper.DashboardMapper">
-    <select id="emotionChartMap" resultType="java.util.ArrayList">
-        SELECT EMOTION, COUNT(T1.MEMBER_EMAIL)
+    <select id="emotionList" resultType="String">
+        SELECT EMOTION
         FROM DIARY T1, EMOTIONS T2
         WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ
-        AND TO_CHAR(DIARY_DATE, 'YYYYMM') = TO_CHAR(SYSDATE, 'YYYYMM')
+        AND TO_CHAR(DIARY_DATE, 'YYYYMM') = TO_CHAR(CURRENT_DATE, 'YYYYMM')
         GROUP BY T2.EMOTION
+    </select>
+    <select id="cntList" resultType="Integer">
+        SELECT COUNT(T1.MEMBER_EMAIL)AS CNT
+        FROM DIARY T1, EMOTIONS T2
+        WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ
+        AND TO_CHAR(DIARY_DATE, 'YYYYMM') = TO_CHAR(CURRENT_DATE, 'YYYYMM')
+        GROUP BY T2.EMOTION
+    </select>
+    <select id="diaryCnt" resultType="Integer">
+        SELECT COUNT(*) AS DIARYCNT
+        FROM DIARY
+        WHERE TO_CHAR(DIARY_DATE, 'YYYYMMDD') BETWEEN TO_CHAR(CURRENT_DATE, 'YYYYMMDD')
+        AND TO_CHAR(CURRENT_DATE + 1, 'YYYYMMDD') - 1/86400
+    </select>
+    <select id="memberCnt" resultType="Integer">
+        SELECT COUNT(*) AS MEMBERCNT
+        FROM MEMBER
+        WHERE TO_CHAR(MEMBER_DATE, 'YYYYMM') = TO_CHAR(CURRENT_DATE, 'YYYYMM')
+    </select>
+
+    <select id="blackcnt" resultType="java.util.HashMap">
+        (SELECT *
+        FROM MEMBER T1, BLACKLIST_REPLY T2
+        WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL)
+        UNION
+        (SELECT *
+        FROM MEMBER T1, BLACKLIST_DIARY T2
+        WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL)
     </select>
 </mapper>

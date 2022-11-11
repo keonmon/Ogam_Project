@@ -1,9 +1,11 @@
 package com.go.ogamprj.controller.user;
 
+import com.go.ogamprj.dto.Bgimage;
 import com.go.ogamprj.dto.Member;
 import com.go.ogamprj.mapper.MemberMapper;
 import com.go.ogamprj.sevice.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.UUID;
 
 
 @Controller
@@ -25,6 +28,10 @@ public class User_MyPageController {
     MemberService memberService;
     @Autowired
     MemberMapper memberMapper;
+
+
+    @Value("${upload.path}")
+    private String fileDir;
 
 
     @RequestMapping("/MyPage")
@@ -59,24 +66,28 @@ public class User_MyPageController {
     }
 
     @RequestMapping("/reviseUpdate")
-    public String reviseUpdate(HttpServletRequest request, HttpServletResponse response
+    public String reviseUpdate(HttpServletRequest request
                               , @RequestParam String member_email, @RequestParam(required = false) String member_pw
                               , @RequestParam String member_nick, @RequestParam String member_birth1
                               , @RequestParam String member_birth2, @RequestParam String member_birth3
-                              , @RequestParam String member_phone, @RequestParam(required = false) String member_image
+                              , @RequestParam String member_phone, @RequestParam(defaultValue = "") MultipartFile member_image
                               , @RequestParam String member_intro, @RequestParam MultipartFile file) throws IOException {
 
-        ServletOutputStream imgout = response.getOutputStream();
-        String imgPath = "was/img/location";
-        String imgName = request.getParameter("img_nm");
-        File filePath = new File(imgPath + File.separator + imgName);
+        String realPath = request.getSession().getServletContext().getRealPath("/");
+        String originName = file.getOriginalFilename();
+        String uuid = UUID.randomUUID().toString();
+        String extension = originName.substring(originName.lastIndexOf("."));
 
-        FileInputStream input = new FileInputStream(imgPath);
-        int length;
-        byte[] buffer = new byte[10];
-        while ((length = input.read(buffer)) != -1) {
-            imgout.write(buffer, 0, length);
-        }
+        String savName = uuid + extension;
+
+        String savedPath = realPath + fileDir + savName; // 서버 저장 경로
+
+        Bgimage bgimageDto = new Bgimage(0, fileDir + savName, savName);
+
+        file.transferTo(new File(savedPath));
+
+
+
 
         String member_birth = member_birth1 + "/" + member_birth2 + "/" + member_birth3;
 //        Member member = new Member(member_pw, member_nick, member_birth, member_phone, member_intro);
