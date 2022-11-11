@@ -470,7 +470,7 @@ public class User_DiaryController {
         result.addAll(diaryList);
 
         //System.out.println("db에서 갓 나옴 : "+diaryList);
-        System.out.println("json으로 변환 : "+ result);
+        //System.out.println("json으로 변환 : "+ result);
         return result;
 
     }
