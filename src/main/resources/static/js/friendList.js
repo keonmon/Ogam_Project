@@ -49,7 +49,6 @@ for(let i = 0; i < response.length; i++){
                    type:"post",
                    data:{"nickname" : nickname},
                    success:function(data) {
-                        console.log("성공");
                         window.location.href = "/friendList";
                    },
                    error:function(e) {
