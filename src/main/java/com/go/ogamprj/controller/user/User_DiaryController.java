@@ -429,8 +429,7 @@ public class User_DiaryController {
             return "user/userDiary/viewDiary :: .mod2_innerSlide";
         }
     }
-<<<<<<< HEAD
-=======
+
 
 
     // 좋아요 동작 ajax
@@ -459,7 +458,7 @@ public class User_DiaryController {
         }
     }
 
-    @RequestMapping(value = "/calendar", params = "method=data")
+    @RequestMapping(value = "/calendar", params = "method=data", method={RequestMethod.POST})
     @ResponseBody
     public String getCalendarList( HttpServletRequest request,Model model) {
 
@@ -505,15 +504,4 @@ public class User_DiaryController {
     }
 
 
-
-
-
-
-
-    @RequestMapping("/diaryAll")
-    public String diaryAll(){
-        return "user/userDiary/diaryAll";
-    }
-
->>>>>>> 0b96225105047daa46f2515596a04ff7ada86092
 }
