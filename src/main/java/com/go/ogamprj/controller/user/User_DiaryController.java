@@ -424,4 +424,46 @@ public class User_DiaryController {
             return "user/userDiary/viewDiary :: .mod2_innerSlide";
         }
     }
+<<<<<<< HEAD
+=======
+
+
+    // 좋아요 동작
+    @RequestMapping(value = "/likeInsert", method={RequestMethod.POST})
+    public String likeInsert(@RequestParam Map<String,Object> map,
+                             Model model, HttpServletRequest request){
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        int diary_seq = Integer.parseInt(map.get("diarySeq").toString());
+
+        if(loginUser==null){
+            return "redirect:/";
+        }else {
+            if(map.get("do").toString().equals("insert")){
+                // insert
+                diaryService.likeInsert(loginUser.toString(), diary_seq);
+            }else{
+                // delete
+                diaryService.likeDelete(loginUser.toString(), diary_seq);
+            }
+
+            HashMap<String, Object> likeMap = diaryService.likeMap(diary_seq);
+
+            model.addAttribute("likeMap", likeMap);
+            System.out.println("ajax : " + likeMap);
+            return "user/userDiary/viewDiary :: .like";
+        }
+    }
+
+
+
+
+
+
+
+    @RequestMapping("/diaryAll")
+    public String diaryAll(){
+        return "user/userDiary/diaryAll";
+    }
+
+>>>>>>> 0b96225105047daa46f2515596a04ff7ada86092
 }
