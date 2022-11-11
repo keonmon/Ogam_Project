@@ -78,8 +78,9 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
 
     // 친구 신청 삭제
     @Override
-    public void deleteFriendSend(String myEmail, String member_op_email) {
-        friendDiaryMapper.deleteFriendSend(myEmail, member_op_email);
+    public void deleteFriendSend(Integer fri_send_seq) {
+        System.out.println(fri_send_seq);
+        friendDiaryMapper.deleteFriendSend(fri_send_seq);
     }
 
 

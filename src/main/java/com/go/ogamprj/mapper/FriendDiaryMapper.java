@@ -39,7 +39,7 @@ public interface FriendDiaryMapper {
     void insertfriendList2nd(friendApply friendApply);
 
     // 친구 신청 리스트 삭제
-    void deleteFriendSend(String myEmail, String member_op_email);
+    void deleteFriendSend(Integer fri_send_seq);
 
     // 친구 신청하기
     void insertfriendSend(friendSend friendSend);

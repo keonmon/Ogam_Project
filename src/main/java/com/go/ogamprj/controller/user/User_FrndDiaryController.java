@@ -25,15 +25,18 @@ public class User_FrndDiaryController {
     @RequestMapping("/friendList")
     public String friendList(HttpServletRequest request,String searchKeyword, Model model) {
 
-        String myEmail = "user1@ogam.com";
+        String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         if(searchKeyword == null) {
+
         // 친구 전체 리스트
         List<Map<String, Object>> friendList = friendDiaryService.friendListSelectAll(myEmail);
 
         model.addAttribute("friendList",friendList);
         } else {
+
         // 친구 검색 리스트
+
         List<Map<String, Object>> search = friendDiaryService.search(searchKeyword);
 
         model.addAttribute("friendList", search);
@@ -51,9 +54,9 @@ public class User_FrndDiaryController {
     // 친구 리스트 삭제
     @RequestMapping("/deleteFriend")
     @ResponseBody
-    public String deleteFriend(String nickname) {
+    public String deleteFriend(HttpServletRequest request,String nickname) {
 
-        String myEmail = "user1@ogam.com";
+        String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         friendDiaryService.deleteFriend(myEmail, nickname);
         return "success";
@@ -63,7 +66,7 @@ public class User_FrndDiaryController {
     @RequestMapping("/sendList")
     public String sendList(HttpServletRequest request, Model model){
 
-        String myEmail = "user1@ogam.com";
+        String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         // 친구 신청 가져오기
         List<Map<String, Object>> friendSendList = friendDiaryService.friendSendSelectAll(myEmail);
@@ -81,7 +84,7 @@ public class User_FrndDiaryController {
     @ResponseBody
     public String addSendList(HttpServletRequest request, @RequestParam String member_email, @RequestParam String response) {
 
-        String myEmail = "user1@ogam.com";
+        String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         friendDiaryService.insertfriendSend(new friendSend(0,myEmail,member_email,response,null));
 
@@ -103,15 +106,15 @@ public class User_FrndDiaryController {
     // 친구 수락/거절
     @RequestMapping("/response")
     @ResponseBody
-    public String response(HttpServletRequest request, @RequestParam String member_op_email, String response) {
+    public String response(HttpServletRequest request, @RequestParam String member_op_email, String response, Integer fri_send_seq) {
 
-        String myEmail = "user1@ogam.com";
+        String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         if(response.equals("y")) {
             friendDiaryService.insertfriendList(new friendApply(0,myEmail,member_op_email,null,0));
-            friendDiaryService.deleteFriendSend(myEmail, member_op_email);
+            friendDiaryService.deleteFriendSend(fri_send_seq);
         } else {
-            friendDiaryService.deleteFriendSend(myEmail, member_op_email);
+            friendDiaryService.deleteFriendSend(fri_send_seq);
         }
         return "success";
     }
