@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="css/admin.css" />
     <link rel="stylesheet" type="text/css" href="css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -17,21 +16,15 @@
         <div th:replace="~{admin/menubar :: menubar }"></div>
             <div class="content">
                 <div class="searchTap">
-                  <form action="#" method="get">
-                    <select class="searchList" id="searchType" name="searchType">
-                      <option value="email">이메일</option>
-                      <option value="nick">닉네임</option>
+                  <form action="/admin_replyList" method="get">
+                    <select class="searchList" id="type" name="type">
+                      <option value="MEMBER_EMAIL">이메일</option>
+                      <option value="MEMBER_NICK">닉네임</option>
+                      <option value="REPLY">내용</option>
                     </select>
-                    <input
-                      class="searchInput"
-                      type="text"
-                      id="searchKeyword"
-                      name="searchKeyword"
-                      placeholder="해당 정보를 입력해주세요."
-                      value=""
-                    />
-      
-                    <input type="submit" class="searchBtn" value="검색" />
+                      <input class="searchInput" type="text" id="keyword" name="keyword"
+                             placeholder="해당 정보를 입력해주세요." value="" />
+                      <input type="submit" class="searchBtn" value="검색" />
                   </form>
                 </div>
                 <!-- 테이블 -->
@@ -50,7 +43,7 @@
                         <th>작성자 이메일</th>
                         <th>닉네임</th>
                         <th>내용</th>
-                        <th>일기</th>
+                        <th>댓글</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -72,5 +65,20 @@
             <!-- content end -->
         </main>
     </div>
+    <!-- 팝업 -->
+    <script type="text/javascript" src="js/popup.js"></script>
+    <script>
+        function commentPopup( ) {
+
+            window.open("/commentPopup", "commentPopup",
+            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=510px'] );
+
+            iniform.target="commentPopup";
+            iniform.action="/commentPopup";
+
+            iniform.submit( );
+
+        }
+    </script>
 </body>
 </html>

@@ -5,14 +5,45 @@
 <mapper namespace="com.go.ogamprj.mapper.AdminReplyMapper">
     <!-- USER 댓글 전체 가져오기 -->
     <select id="userReplySelectAll" resultType="java.util.HashMap">
-        select
+        SELECT
                r.REPLY_SEQ
              , r.MEMBER_EMAIL
              , m.MEMBER_NICK
              , r.REPLY
-          from reply r join member m
-            on r.MEMBER_EMAIL = m.member_email
-         order by r.REPLY_DATE desc
+          FROM reply r join member m
+            ON r.MEMBER_EMAIL = m.member_email
+         ORDER BY r.REPLY_DATE desc
+    </select>
+
+    <!-- 키워드 검색 -->
+    <select id="userReplySelectKeyword" resultType="java.util.HashMap">
+        SELECT
+               r.REPLY_SEQ
+             , r.MEMBER_EMAIL
+             , m.MEMBER_NICK
+             , r.REPLY
+          FROM reply r join member m
+            ON r.MEMBER_EMAIL = m.member_email
+         WHERE r.REPLY_DEL = 'n'
+        <if test=" keyword != null and keyword != '' ">
+            <choose>
+                <!-- 검색 유형이 있을 때 -->
+                <when test="type != null and type != ''">
+                    <choose>
+                        <when test="'MEMBER_EMAIL'.equals( type )">
+                            AND r.MEMBER_EMAIL LIKE #{keyword}
+                        </when>
+                        <when test="'MEMBER_NICK'.equals( type )">
+                            AND MEMBER_NICK LIKE #{keyword}
+                        </when>
+                        <when test="'REPLY'.equals( type )">
+                            AND REPLY LIKE #{keyword}
+                        </when>
+                    </choose>
+                </when>
+            </choose>
+        </if>
+        ORDER BY r.REPLY_DATE DESC
     </select>
 
 </mapper>

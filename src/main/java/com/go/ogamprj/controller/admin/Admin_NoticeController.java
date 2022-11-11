@@ -30,8 +30,13 @@ public class Admin_NoticeController {
 
 
     @RequestMapping("/admin_noticeList")
-    public String admin_noticeList(Model model) {
-        model.addAttribute("boards", boardService.adminBoardSelectAll());
+    public String admin_noticeList(HttpServletRequest request, String type, String keyword, Model model) {
+
+        if ( keyword == null) {
+            model.addAttribute("boards", boardService.adminBoardSelectAll());
+        } else {
+            model.addAttribute("boards", boardService.adminBoardSelectKeyword(type, "%"+ keyword + "%"));
+        }
 
         return "admin/noticeList";
     }

@@ -12,6 +12,8 @@ public interface AdminBoardMapper {
     @Select("SELECT * FROM BOARD")
     public ArrayList<Board> adminBoardSelectAll();  // 관리자 페이지 boardList (공개 비공개 다 보임)
 
+    ArrayList<Board> adminBoardSelectKeyword(String type, String keyword);  // 키워드 검색
+
     @Select("select * from board where board_yn = 'y'")
     public ArrayList<Board> selectAll();
 
@@ -23,5 +25,6 @@ public interface AdminBoardMapper {
 
     @Select("SELECT * FROM BOARD WHERE BOARD_SEQ = #{board_seq}")
     public Board selectOneBoard(int board_seq);
+
 
 }

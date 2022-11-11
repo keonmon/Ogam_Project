@@ -8,6 +8,8 @@ public interface BoardService {
 
     ArrayList<Board> adminBoardSelectAll();
 
+    ArrayList<Board> adminBoardSelectKeyword(String type, String keyword);      // 키워드 검색
+
     ArrayList<Board> selectAll();
 
     void boardInsert(Board board);
@@ -17,5 +19,6 @@ public interface BoardService {
     void boardDelete(int board_seq);
 
     Board selectOneBoard(int board_seq);
+
 
 }

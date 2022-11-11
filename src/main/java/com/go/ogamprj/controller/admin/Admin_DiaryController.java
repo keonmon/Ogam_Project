@@ -1,11 +1,14 @@
 package com.go.ogamprj.controller.admin;
 
+import com.go.ogamprj.dto.Diary;
 import com.go.ogamprj.sevice.AdminDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -21,21 +24,23 @@ public class Admin_DiaryController {
 
     /* USER 일기 전체 가져오기 */
     @RequestMapping("/admin_diaryList")
-    public String diaryList(HttpServletRequest request, Model model) {
+    public String diaryList(HttpServletRequest request, String type, String keyword, Model model) {
 
-        model.addAttribute("userDiaryList", adminDiaryService.userDiarySelectAll());
+        if ( keyword == null) {
+            model.addAttribute("userDiaryList", adminDiaryService.userDiarySelectAll());
+        } else {
+            model.addAttribute("userDiaryList", adminDiaryService.userDiarySelectKeyword(type, "%"+ keyword + "%"));
+        }
 
         return "admin/diaryList";
     }
 
+    /* 일기 상세보기 */
     @RequestMapping("/diaryPopup")
     public String diaryPopup() {
 
-        return "diaryPopup";
+        return "admin/diaryPopup";
     }
-
-
-
 
 
 }

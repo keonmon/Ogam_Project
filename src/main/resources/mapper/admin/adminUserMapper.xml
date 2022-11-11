@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.go.ogamprj.mapper.AdminUserMapper">
+    <!-- 키워드 검색 -->
+    <select id="userSelectKeyword" resultType="com.go.ogamprj.dto.Member">
+        SELECT *
+        FROM MEMBER
+        WHERE MEMBER_EMAIL IS not null
+        <if test=" keyword != null and keyword != '' ">
+            <choose>
+                <!-- 검색 유형이 있을 때 -->
+                <when test="type != null and type != ''">
+                    <choose>
+                        <when test="'MEMBER_EMAIL'.equals( type )">
+                            AND MEMBER_EMAIL LIKE #{keyword}
+                        </when>
+                        <when test="'MEMBER_NICK'.equals( type )">
+                            AND MEMBER_NICK LIKE #{keyword}
+                        </when>
+                        <when test="'MEMBER_PHONE'.equals( type )">
+                            AND MEMBER_PHONE LIKE #{keyword}
+                        </when>
+                    </choose>
+                </when>
+            </choose>
+        </if>
+    </select>
+
+</mapper>

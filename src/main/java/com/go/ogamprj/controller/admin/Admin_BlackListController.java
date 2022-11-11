@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class Admin_BlackListController {
 
@@ -14,10 +16,16 @@ public class Admin_BlackListController {
 
     /* 신고 기록 전체 가져오기 */
     @RequestMapping("/admin_notifyList")
-    public String notifyList(Model model) {
+    public String notifyList(HttpServletRequest request, String type, String keyword, Model model) {
 
-        model.addAttribute("notifyList", adminNotifyService.notifySelectAll());
+        if ( keyword == null) {
+            model.addAttribute("notifyList", adminNotifyService.notifySelectAll());
+        } else {
+            model.addAttribute("notifyList", adminNotifyService.notifySelectKeyword(type, "%"+ keyword + "%"));
+        }
 
         return "admin/notifyList";
     }
+
+
 }

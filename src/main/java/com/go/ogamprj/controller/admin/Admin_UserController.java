@@ -17,12 +17,22 @@ public class Admin_UserController {
 
     /* USER 전체 가져오기 */
     @RequestMapping("/admin_userList")
-    public String userList(HttpServletRequest request, Model model) {
+    public String userList(HttpServletRequest request, String type, String keyword, Model model) {
 
-        model.addAttribute("userList", adminUserService.userSelectAll());
-
+        if ( keyword == null) {
+            model.addAttribute("userList", adminUserService.userSelectAll());
+        } else {
+            model.addAttribute("userList", adminUserService.userSelectKeyword(type, "%"+ keyword + "%"));
+        }
 
         return "admin/userList";
+    }
+
+    /* 사용자 정보 상세보기 */
+    @RequestMapping("/memberPopup")
+    public String diaryPopup() {
+
+        return "admin/memberPopup";
     }
 
 

@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="css/admin.css" />
     <link rel="stylesheet" type="text/css" href="css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
-    <script type="text/javascript" src="js/popup.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -18,17 +17,15 @@
             <div class="content">
                 <div>
                     <div class="searchTap">
-                        <form action="#" method="get">
-                            <select class="searchList" id="searchType" name="searchType">
-                                <option value="email" selected>이메일</option>
-                                <option value="nick">닉네임</option>
-                                <option value="phone">전화번호</option>
-                            </select>                                
-                            <input class="searchInput" type="text" id="searchKeyword" name="searchKeyword" 
-                                    placeholder="해당 정보를 입력해주세요." value="">    
-
-                            <input type="submit" class="searchBtn" value="검색"/>
-                            
+                        <form action="/admin_userList" method="get">
+                            <select class="searchList" id="type" name="type">
+                                <option value="MEMBER_EMAIL" selected>이메일</option>
+                                <option value="MEMBER_NICK">닉네임</option>
+                                <option value="MEMBER_PHONE">전화번호</option>
+                            </select>
+                            <input class="searchInput" type="text" id="keyword" name="keyword"
+                                   placeholder="해당 정보를 입력해주세요." value="" />
+                            <input type="submit" class="searchBtn" value="검색" />
                         </form>
                     </div>
                     <!-- 테이블 -->
@@ -46,10 +43,10 @@
                             </thead>
                             <tbody>
                                 <tr th:each="user : ${userList}">
-                                    <td>[[${user.MEMBER_EMAIL}]]</td>
+<!--                                    <td th:text="${user.MEMBER_EMAIL}" onclick="memberPopup()"></td>-->
+                                    <td><a onclick="memberPopup()">[[${user.MEMBER_EMAIL}]]</a></td>
                                     <td>[[${user.MEMBER_NICK}]]</td>
                                     <td>[[${user.MEMBER_BIRTH}]]</td>
-<!--                                    <td th:text="${#temporals.format(user.MEMBER_BIRTH, 'yyyyMMdd')}">[[${user.MEMBER_BIRTH}]]</td>-->
                                     <td>[[${user.MEMBER_PHONE}]]</td>
                                     <!-- 성별 -->
                                     <td th:if="${user.MEMBER_GENDER == 'male'}">
@@ -75,5 +72,19 @@
 
         </main>
     </div>
+    <!-- 팝업 -->
+    <script>
+        function memberPopup( ) {
+
+            window.open("/memberPopup", "memberPopup",
+            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=750px'] );
+
+            iniform.target="memberPopup";
+            iniform.action="/memberPopup";
+
+            iniform.submit( );
+
+        }
+    </script>
 </body>
 </html>

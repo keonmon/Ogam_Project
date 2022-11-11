@@ -94,7 +94,7 @@ input[type=checkbox] {
     font: var(--fa-font-solid);
 }
 .iconF::before {
-    content: "\e463";   /* f182 */
+    content: "\f182";
     font: var(--fa-font-solid);
 }
 

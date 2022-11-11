@@ -19,7 +19,12 @@ public class AdminReplyServiceImpl implements AdminReplyService {
     /* USER 댓글 전체 가져오기 */
     @Override
     public List<HashMap<String, Object>> userReplySelectAll() {
-
         return adminReplyMapper.userReplySelectAll();
+    }
+
+    /* 키워드 검색 */
+    @Override
+    public List<HashMap<String, Object>> userReplySelectKeyword(String type, String keyword) {
+        return adminReplyMapper.userReplySelectKeyword(type, keyword);
     }
 }
