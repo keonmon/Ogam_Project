@@ -5,17 +5,15 @@
 
     <!--  친구 목록 전체 가져오기  -->
     <select id="friendListSelectAll" resultType="java.util.Map">
-        select
-            m.member_nick,
-            m.member_intro,
-            f.friend_date
-        from friend_apply f
-            join member m
-            on f.member_email = m.member_email
-        where f.member_email
-        in (select member_op_email
+        select *
+        from member m
+            join friend_apply f
+            on m.member_email = f.member_email
+            left join bgimage b
+            on b.bgimg_seq = m.bgimg_seq
+        where f.member_email in (select member_op_email
                 from friend_apply
-            where member_email = #{myEmail})
+                where member_email = #{myEmail})
         order by f.friend_date desc
     </select>
     <!--  친구리스트 count  -->
@@ -26,19 +24,17 @@
     <!--  친구리스트 검색 sql  -->
     <select id="search" resultType="java.util.Map">
         select *
-        from (select
-                m.member_nick,
-                m.member_intro,
-                f.friend_date
-            from friend_apply f
-                join member m
-                on f.member_email = m.member_email
-            where f.member_email
-                in (select
-                        member_op_email
-                    from friend_apply
-                    where member_email = 'user1@ogam.com'))
-        where member_nick like '%${searchKeyword}%'
+        from member m
+            join friend_apply f
+            on m.member_email = f.member_email
+            left join bgimage b
+            on b.bgimg_seq = m.bgimg_seq
+        where f.member_email
+                in (select member_op_email
+                from friend_apply
+                where member_email = 'user1@ogam.com')
+        and member_nick like '%${searchKeyword}%'
+        order by f.friend_date
     </select>
 
     <!--  친구리스트 delete  -->
@@ -56,44 +52,83 @@
 
     <!--  친구신청 리스트 전체 가져오기  -->
     <select id="friendSendSelectAll" resultType="java.util.Map">
-        SELECT
-            m.member_nick,
-            m.member_intro,
-            s.member_op_email,
-            s.send_date,
-            s.response
-        FROM MEMBER m, (SELECT * FROM FRIEND_SEND WHERE MEMBER_EMAIL = #{myEmail}) s
-        WHERE m.MEMBER_EMAIL = s.MEMBER_OP_EMAIL
-        ORDER BY s.send_date desc
+        select *
+        from member m
+            join friend_send s
+            on m.member_email = s.member_email
+            left join bgimage b
+            on b.bgimg_seq = m.bgimg_seq
+        where s.member_op_email = #{myEmail}
+        order by s.send_date
     </select>
 
     <!--  친구목록 뺴고 멤버리스트 가져오기  -->
     <select id="memberSelectAll" resultType="java.util.Map">
-        SELECT
-            m.member_nick,
-            m.member_email,
-            m.member_intro
-        FROM MEMBER m, ((SELECT MEMBER_EMAIL FROM MEMBER) MINUS (SELECT T2.MEMBER_OP_EMAIL
-                            FROM MEMBER T1, FRIEND_APPLY T2
-                            WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL
-                            AND T2.MEMBER_EMAIL = #{myEmail})) s
-        WHERE m.MEMBER_EMAIL = s.MEMBER_EMAIL
+        select *
+        from member m
+        join (
+        (select member_email
+        from member
+        where member_email != #{myEmail})
+
+        minus
+
+        (select member_op_email
+        from friend_apply
+        where member_email = #{myEmail})
+
+        minus
+
+        (select member_op_email
+        from FRIEND_send
+        where member_email = #{myEmail})
+
+        minus
+
+        (select member_email
+        from FRIEND_send
+        where member_op_email = #{myEmail})
+
+        ) t
+
+        on m.member_email = t.member_email
+        left join bgimage i
+        on m.bgimg_seq = i.bgimg_seq
     </select>
 
     <!--  친구목록 뺴고 검색  -->
     <select id="memberSearch" resultType="java.util.Map">
-        SELECT
-            m.member_nick,
-            m.member_email,
-            m.member_intro
-        FROM MEMBER m,
-            ((SELECT MEMBER_EMAIL, MEMBER_NICK FROM MEMBER) MINUS
-                (SELECT T2.MEMBER_OP_EMAIL, MEMBER_NICK
-                    FROM MEMBER T1, FRIEND_APPLY T2
-                    WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL
-                    AND T2.MEMBER_EMAIL = 'user1@ogam.com')) s
-        WHERE m.MEMBER_EMAIL = s.MEMBER_EMAIL
-        and m.member_nick like '%${searchKeyword}%'
+        select *
+        from member m
+        join (
+        (select member_email
+        from member
+        where member_email != 'user8@ogam.com')
+
+        minus
+
+        (select member_op_email
+        from friend_apply
+        where member_email = 'user8@ogam.com')
+
+        minus
+
+        (select member_op_email
+        from FRIEND_send
+        where member_email = 'user8@ogam.com')
+
+        minus
+
+        (select member_email
+        from FRIEND_send
+        where member_op_email = 'user8@ogam.com')
+
+        ) t
+
+        on m.member_email = t.member_email
+        left join bgimage i
+        on m.bgimg_seq = i.bgimg_seq
+        where member_nick like '%${searchKeyword}%'
     </select>
 
 
@@ -115,10 +150,10 @@
             values(fri_app_seq.nextval, #{member_op_email},#{member_email},sysdate, (select max(FRIEND_KEY) from friend_apply))
     </insert>
 
-    <!--  친구 친성 delete  -->
+    <!--  친구 신성 delete  -->
     <delete id="deleteFriendSend">
         delete from friend_send
-        where member_email = #{myEmail} and member_op_email = #{member_op_email}
+        where fri_send_seq = #{fri_send_seq}
     </delete>
 
 </mapper>

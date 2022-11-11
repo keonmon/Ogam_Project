@@ -50,13 +50,12 @@
                                 <div class="send_date">[[ ${friend.FRIEND_DATE} ]]</div>
                                 <div class="send_list">
                                     <div class="send_contents">
-                                        <span class="op_img">
-                                            <img src="/Img/logoImg.png" />
-                                        </span>
+                                        <div class="op_img">
+                                            <img th:src="${friend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
+                                        </div>
                                         <div class="op_nickname">
                                             <span>[[ ${friend.MEMBER_NICK} ]]</span>
                                             <p>[[ ${friend.MEMBER_INTRO} ]]</p>
-
                                         </div>
                                         <div class="response">
                                             <div class="deleteBtn">삭제</div>

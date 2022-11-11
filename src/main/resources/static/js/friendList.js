@@ -54,6 +54,14 @@ for(let i = 0; i < response.length; i++){
     })
 }
 
+// 닉네임 클릭시 이벤트
+for(let i = 0; i < op_nickname.length; i++) {
+    op_nickname[i].addEventListener("click", () => {
+        console.log(op_nickname[i]);
+    })
+}
+
+
 // 다크모드
 const btn_theme = document.querySelector(".btn_theme");
 const body = document.body;

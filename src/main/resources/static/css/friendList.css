@@ -439,15 +439,20 @@
 .op_img {
     display: flex;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 .op_img img{
-    width: 8rem;
-    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
 .op_nickname{
     font-size: 18px;
     padding: 20px;
     width: 200rem;
+    cursor:pointer;
 }
 .op_intro{
     font-size: 13px;

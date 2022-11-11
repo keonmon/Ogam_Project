@@ -43,11 +43,12 @@
                             <th:block th:each="friendSend : ${friendSendList}">
                                     <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
                                     <input type="text" class="op_email" th:value="${friendSend.MEMBER_OP_EMAIL}" style="display:none">
+                                    <input type="text" class="friSeq" th:value="${friendSend.FRI_SEND_SEQ}" style="display:none">
                                     <div class="send_date">[[${friendSend.SEND_DATE}]]</div>
                                     <div class="send_list">
                                         <div class="send_contents">
                                             <span class="op_img">
-                                                <img src="/Img/logoImg.png" />
+                                                 <img th:src="${friendSend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friendSend['BGIMG_PATH']}" />
                                             </span>
                                             <div class="op_nickname">
                                                 <span>[[ ${friendSend.MEMBER_NICK} ]]</span>
@@ -87,16 +88,16 @@
                                 <div class="send_date"></div>
                                 <div class="send_list">
                                     <div class="send_contents">
-                                        <span>찾을수가 없습니다.</span>
+                                        <span>리스트에 없습니다.</span>
                                     </div>
                                 </div>
                             </th:block>
                             <th:block th:unless="${#lists.size(memberList)} == 0">
                                 <div class="member_list" th:each="member : ${memberList}">
-                                <input type="text" class="member_email" th:value="${member.MEMBER_EMAIL}" style="display:none">
+                                    <input type="text" class="member_email" th:value="${member.MEMBER_EMAIL}" style="display:none">
                                     <div class="member_contents">
                                         <span class="member_img">
-                                            <img src="/Img/logoImg.png" />
+                                             <img th:src="${member['BGIMG_PATH'] == null ? 'img/basicProfile.png' : member['BGIMG_PATH']}" />
                                         </span>
                                         <div class="member_nickname">
                                             <span>[[ ${member.MEMBER_NICK} ]]</span>

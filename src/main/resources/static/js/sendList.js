@@ -19,10 +19,13 @@ const add = document.querySelectorAll(".add");
 const complete = document.querySelectorAll(".complete");
 const email = document.querySelectorAll(".member_email");
 const nickname = document.querySelectorAll(".member_nickname span");
+const list = document.querySelectorAll(".member_list");
 
 for (let i = 0; i < addBtn.length; i++) {
     add[i].addEventListener("click", () => {
     let member_email = email[i].value;
+    let member_list = list[i];
+    console.log(member_list);
     let response = 'n';
 
     Swal.fire({
@@ -39,9 +42,8 @@ for (let i = 0; i < addBtn.length; i++) {
              type:"post",
              data:{"member_email" : member_email, "response" : response},
              success:function(data) {
-             console.log(data);
-                add[i].style.display = "none";
-                complete[i].style.display = "block";
+                console.log(data);
+                member_list.remove();
              },
              error:function(e) {
                   console.log(e);
@@ -92,12 +94,14 @@ const refuse = document.querySelectorAll("#refuse");
 const answer = document.querySelectorAll(".answer");
 const op_nickname = document.querySelectorAll(".op_nickname span");
 const op_email = document.querySelectorAll(".op_email");
+const friSeq = document.querySelectorAll(".friSeq");
 
 for(let i = 0; i < accept.length; i++){
     accept[i].addEventListener("click", () => {
     let response = answer[i].value.innerHTML = 'y';
     let nickname = op_nickname[i].innerHTML;
     let member_op_email = op_email[i].value;
+
         Swal.fire({
           title: '친구등록을 완료했습니다',
           showClass: {
@@ -127,7 +131,7 @@ for(let i = 0; i < refuse.length; i++){
     let response = answer[i].value.innerHTML = 'n';
     let nickname = op_nickname[i].innerHTML;
     let member_op_email = op_email[i].value;
-
+    let fri_send_seq = friSeq[i].value;
     Swal.fire({
           title: '친구등록을 거절했습니다',
           showClass: {
@@ -140,7 +144,7 @@ for(let i = 0; i < refuse.length; i++){
             $.ajax({
              url:"/response",
              type:"post",
-             data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email},
+             data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email, "fri_send_seq" : fri_send_seq},
              success:function(data) {
                 console.log(data)
                 window.location.href = "/sendList";
