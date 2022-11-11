@@ -371,9 +371,7 @@
     cursor: pointer;
 }
 /* 모달 body 스타일 */
-/* .modalBody{
-    border-top: 1px solid rgb(187, 187, 187);
-} */
+
 .member_date {
     width: 90%;
     margin: auto;
@@ -406,6 +404,12 @@
     width: 300rem;
     cursor: pointer;
 }
+#search_explain{
+    display:block;
+    text-align:center;
+    font-size:13px;
+    color:red;
+}
 .addBtn {
     text-align: center;
     width: 100em;
@@ -420,10 +424,6 @@
 }
 .add{
     background-color: #BA9AFF;
-}
-.complete{
-    display: none;
-    background-color: #8BB8E8;
 }
 /* 모달 버튼 스타일 */
 .btnBox {

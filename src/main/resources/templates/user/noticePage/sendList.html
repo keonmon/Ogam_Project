@@ -77,27 +77,37 @@
             <div id="modal" class="modalContainer">
                 <div class="wrapModal">
                     <div class="search_member">
-                        <input type="text" id="searchInput" placeholder="검색" />
+                        <input type="text" id="searchInput" placeholder="검색"/>
                         <button type="button" id="searchBtn">검색</button>
                     </div>
+                    <span id="search_explain">** 검색어 없이 검색할 경우 전체 리스트 보여줍니다 **</span>
                     <div class="modal">
                         <div class="modalBody">
-                            <div class="member_list" th:each="member : ${memberList}">
-                            <input type="text" class="member_email" th:value="${member.MEMBER_EMAIL}" style="display:none">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <div class="member_nickname">
-                                        <span>[[ ${member.MEMBER_NICK} ]]</span>
-                                        <p>[[ ${member.MEMBER_INTRO} ]]</p>
-                                    </div>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
+                            <th:block th:if="${#lists.size(memberList)} == 0">
+                                <div class="send_date"></div>
+                                <div class="send_list">
+                                    <div class="send_contents">
+                                        <span>찾을수가 없습니다.</span>
                                     </div>
                                 </div>
-                            </div>
+                            </th:block>
+                            <th:block th:unless="${#lists.size(memberList)} == 0">
+                                <div class="member_list" th:each="member : ${memberList}">
+                                <input type="text" class="member_email" th:value="${member.MEMBER_EMAIL}" style="display:none">
+                                    <div class="member_contents">
+                                        <span class="member_img">
+                                            <img src="/Img/logoImg.png" />
+                                        </span>
+                                        <div class="member_nickname">
+                                            <span>[[ ${member.MEMBER_NICK} ]]</span>
+                                            <p>[[ ${member.MEMBER_INTRO} ]]</p>
+                                        </div>
+                                        <div class="addBtn">
+                                            <div class="add">추가</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
                         </div>
                     </div>
                     <div class="btnBox">

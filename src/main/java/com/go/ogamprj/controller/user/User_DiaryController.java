@@ -408,23 +408,24 @@ public class User_DiaryController {
     // 댓글 등록 (AJAX)
     @RequestMapping(value = "/replyInsert", method={RequestMethod.POST})
     public String replyInsert(@RequestParam Map<String,Object> replyMap,
-                              Model model, HttpServletRequest request ){
+                              Model model, HttpServletRequest request ) {
         Object loginUser = request.getSession().getAttribute("loginUser");
-        if(loginUser==null){
+        if (loginUser == null) {
             return "redirect:/";
-        }else{
+        } else {
             // 댓글저장
-            replyMap.put("member_email",(String)loginUser);
+            replyMap.put("member_email", (String) loginUser);
             diaryService.replyInsert(replyMap);
 
             // 댓글 리스트 가져오기
-            int diarySeq = Integer.parseInt((String)replyMap.get("diarySeq"));
+            int diarySeq = Integer.parseInt((String) replyMap.get("diarySeq"));
             model.addAttribute("replyList", diaryService.replySelect(diarySeq));
 
             return "user/userDiary/viewDiary :: .mod2_innerSlide";
         }
-
     }
+<<<<<<< HEAD
+=======
 
 
     // 좋아요 동작
@@ -464,4 +465,5 @@ public class User_DiaryController {
         return "user/userDiary/diaryAll";
     }
 
+>>>>>>> 0b96225105047daa46f2515596a04ff7ada86092
 }
