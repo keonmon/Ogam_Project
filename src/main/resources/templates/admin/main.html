@@ -5,6 +5,7 @@
     <title>[관리자] 메인</title>
     <link rel="stylesheet" type="text/css" href="css/admin.css" />
     <link rel="stylesheet" type="text/css" href="css/adminMain.css" />
+    <link rel="stylesheet" type="text/css" href="css/diaryCount.css" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -34,8 +35,12 @@
                 </div>
                 <div class="mCol2">
                     <div id="chart"> <!--일기 등록 건수 그래프-->
-                        <th:block th:replace="~{/admin/chart/diaryChart :: diaryChart}"></th:block>
-                        <th:block th:replace="~{/admin/chart/emotionChart :: emojiChart}"></th:block>
+                        <div id="diary">
+                            <div th:replace="~{/admin/chart/diaryCount :: diaryChart}" ></div>
+                        </div>
+                        <div id="emotion">
+                            <div th:replace="~{/admin/chart/emotionChart :: emojiChart}" ></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>diaryChart</title>
+</head>
+<body>
+<th:block th:fragment="diaryChart">
+
+    <div class="top">
+        <div id="todayCount">
+            <div class="title">오늘의 일기</div>
+            <div id="diaryCount"></div>
+        </div>
+        <div id="newface">
+            <div class="title">이번달 신규 가입</div>
+            <div id="joinCount"></div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+<!--            오늘 일기 등록 개수-->
+            var diaryCnt = $.ajax({
+                url: '/diaryCnt',
+                type: 'post',
+                dataType: 'json',
+                success: function(dCnt) {
+                    $('#diaryCount').text(dCnt).val();
+                },
+                error: function() {
+                    console.log(dCnt);
+                    alert("error");
+                }
+            })
+<!--            한달동안 가입한 회원 수 -->
+            var memberCnt = $.ajax({
+                url: '/memberCnt',
+                type: 'post',
+                dataType: 'json',
+                success: function(mCnt) {
+                    $('#joinCount').text(mCnt).val();
+                },
+                error: function() {
+                    console.log(mCnt);
+                    alert("error");
+                }
+            })
+
+    </script>
+</th:block>
+</body>
+</html>

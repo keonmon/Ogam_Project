@@ -1,14 +1,11 @@
 package com.go.ogamprj.mapper;
 
-import com.go.ogamprj.dto.Chart;
-import com.go.ogamprj.dto.Diary;
-import com.go.ogamprj.dto.Emotions;
-import com.google.gson.JsonArray;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Mapper
 public interface DashboardMapper {
@@ -22,9 +19,12 @@ public interface DashboardMapper {
     @Select("SELECT COUNT(*) FROM DIARY WHERE DIARY_DEL = 'n'") // 삭제한 일기 제외
     int diary();
 
-    @Select("SELECT COUNT(*) FROM MEMBER T1, BLACKLIST_DIARY T2, BLACKLIST_REPLY T3 WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL AND T1.MEMBER_EMAIL = T3.MEMBER_EMAIL")
-    int reply();  // 신고 요청된 개수(일기 + 댓글)
+    List<HashMap<String, Object>> blackcnt();  // 신고 요청된 개수(일기 + 댓글)
 
-    ArrayList<Chart> emotionChartMap(); // 차트 1달 이내의 데이터만 가져오기
+    ArrayList<String> emotionList(); // 차트 1달 이내의 데이터만 가져오기 Emoation
+    ArrayList<Integer> cntList(); // 차트 1달 이내의 데이터만 가져오기 CNT
 
+    int diaryCnt(); // 오늘 하루동안 몇명이 일기쓴 일기 개수
+
+    int memberCnt(); // 한달 동안 가입한 신규 회원 수
 }
