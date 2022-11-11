@@ -12,6 +12,86 @@
     <link href="/css/scrollModules.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- fullcalendar CDN -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <!-- fullcalendar 언어 CDN -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+                headerToolbar : { // 헤더에 표시할 툴 바
+                    start : 'prev next today',
+                    end : 'title'
+                },
+                titleFormat : function(date) {
+                    return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
+                },
+                nowIndicator: true, // 현재 시간 마크
+
+               eventClick: function(arg) {
+                   // 있는 일정 클릭시,
+                   console.log("#등록된 일정 클릭#");
+                   console.log(arg.event);
+
+               },
+               editable: false,
+               selectMirror: true,
+               selectable: true,
+           //    dayMaxEvents: true, // allow "more" link when too many events
+               events: function(info, successCallback, failureCallback){
+                    // ajax 처리로 데이터를 로딩 시킨다.
+                    $.ajax({
+                        type:"get",
+                        url:"/calendar?method=data",
+                        dataType:"json"
+                    })
+                    .success(function(data){
+                        console.log(data);
+
+                    });
+                }
+            });
+            calendar.render();
+        });
+
+    </script>
+    <style>
+        .fc .fc-toolbar.fc-header-toolbar {
+            margin-bottom: 5px !important;
+        }
+        .fc .fc-view-harness {
+            height: 335px !important;
+            flex-grow: 1; /* because this harness is WITHIN the .fc's flexbox */
+            position: relative;
+        }
+        .fc .fc-scrollgrid-section-body table,
+          .fc .fc-scrollgrid-section-footer table {
+            border-bottom-style: hidden; /* head keeps its bottom border tho */
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .fc .fc-scroller-liquid-absolute {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            height:105% !important;
+        }
+        .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+            position: relative; /* for containing abs positioned event harnesses */
+            min-height: 2.15em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */
+        }
+        .fc .fc-daygrid-day-top{
+            display: flex;
+            flex-direction: row-reverse;
+            height: 20px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,8 +130,6 @@
                                             </div>
                                     </a>
 
-                                    <!-- 더미데이터 종료 -->
-                                    
                                 </div><!-- /innerSlide -->
 
                             </div>
@@ -60,16 +138,7 @@
                 </div><!-- /최근 내 감정 -->
                 <!-- 내 감정 캘린더 -->
                 <div class="my_calendar">
-                    <div class="mod1_Outline_shdw">
-                        <div class="mod1_Outline">
-                            <div class="mod1_Outline2">
-                                <div class="mod1_grey"></div>
-                                <div class="mod1_titleBg">
-                                    <span class="mod1_titleFont">내 감정 달력</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="calendar"></div>
                 </div><!-- /내 감정 캘린더 -->
 
                 <!-- 친구 감정 -->
@@ -128,7 +197,7 @@
                         document.addEventListener('mouseup',()=>{
                             isMouseDownY = false;
                             sliderY.classList.remove('active');
-                        )}
+                        })
                     });
 
                     sliderY.addEventListener('mouseup', () => {

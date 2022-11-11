@@ -3,6 +3,8 @@ package com.go.ogamprj.controller.user;
 import com.go.ogamprj.dto.Bgimage;
 import com.go.ogamprj.dto.Diary;
 import com.go.ogamprj.sevice.DiaryService;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class User_DiaryController {
@@ -427,7 +432,7 @@ public class User_DiaryController {
     }
 
 
-    // 좋아요 동작
+    // 좋아요 동작 ajax
     @RequestMapping(value = "/likeInsert", method={RequestMethod.POST})
     public String likeInsert(@RequestParam Map<String,Object> map,
                              Model model, HttpServletRequest request){
@@ -451,6 +456,51 @@ public class User_DiaryController {
             System.out.println("ajax : " + likeMap);
             return "user/userDiary/viewDiary :: .like";
         }
+    }
+
+    @RequestMapping(value = "/calendar", params = "method=data")
+    @ResponseBody
+    public String getCalendarList( HttpServletRequest request,Model model) {
+
+        // id : diary_seq
+        // title : emoji
+        // start : diary_Date
+        // end : diary_Date
+        // allday : true
+        HashMap<String,Object> map = new HashMap<>();
+        JSONArray jarr = new JSONArray();
+        JSONObject list = new JSONObject();
+
+        map.put("id",1);
+        map.put("groupId",null);
+        map.put("title","할일title");
+        map.put("writer",null);
+        map.put("content",null);
+        map.put("start","2022-11-11T00:00:00");
+        map.put("end","2022-11-11T00:00:00");
+
+
+        JSONObject json = new JSONObject(map);
+        jarr.add(json);
+        list.put("list" ,jarr);
+        System.out.println(list);
+
+
+        //HashMap<String,Object> list = "list":{
+        //    "id":1,
+        //    "groupId":null,
+        //    "title":"할일title",
+        //    "writer":null,
+        //    "content":null,
+        //    "start":"2021-05-01T00:00:00",
+        //    "end":"2021-05-03T00:00:00",
+        //    "allday":true,
+        //
+        //}];
+        //model.addAttribute("list",list);
+
+        return "success";
+        //return "user/userDiary/myDiary";
     }
 
 
