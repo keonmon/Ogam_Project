@@ -180,6 +180,16 @@ public class DiaryServiceImpl implements DiaryService {
         diaryMapper.replyInsert(replyMap);
     }
 
+    @Override
+    public void likeInsert(String member_email, int diary_seq) {
+        diaryMapper.likeInsert(member_email,diary_seq);
+    }
+
+    @Override
+    public void likeDelete(String member_email, int diary_seq) {
+        diaryMapper.likeDelete(member_email,diary_seq);
+    }
+
 
     /**
      * 날짜 형식 바꾸기 함수

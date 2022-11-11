@@ -51,13 +51,13 @@
 
                                     </div>
                                 </div> -->
-
-                                <th:block th:if="${likeMap.likeMemberList.contains(session.loginUser)}">
-                                    <div class="likeButton likeit">♥</div>
-                                </th:block>
-                                <th:block th:unless="${likeMap.likeMemberList.contains(session.loginUser)}">
-                                    <div class="likeButton">♡</div>
-                                </th:block>
+                                <th:div class="like" >
+                                    <th:block  >
+                                        <th:div th:class="|likeButton ${likeMap.likeMemberList.contains(session.loginUser)?'likeit':''}|"
+                                                th:text="${likeMap.likeMemberList.contains(session.loginUser)?'♥':'♡'}"></th:div>
+                                        <th:span class="likeCnt">[[${(likeMap.likeCnt!=0)?likeMap.likeCnt:""}]]</th:span>
+                                    </th:block>
+                                </th:div>
 
 
                                 <div class="innerBg">
@@ -65,7 +65,7 @@
                                         <div class="innerImg"></div>
                                     </th:block>
                                     <th:block th:if="${diaryDto['BGIMG_SEQ']}">
-                                        <div class="innerImg" th:style="|background:url(${diaryDto.BGIMG_PATH});|">
+                                        <div class="innerImg" th:style="|background-image:url(${diaryDto.BGIMG_PATH});|">
                                         </div>
                                     </th:block>
                                 </div>
@@ -270,22 +270,42 @@
 
             <script>
                 const like = document.querySelector(".likeButton")
-                like.addEventListener("click", (e) => {
+                $(document).on("click",".likeButton",function(e) {
+                    const diarySeq = document.querySelector(".diaryMenu").getAttribute("id");   // 게시물 번호
+                    if (like.classList.contains("likeit")) {
 
-                    if (like.innerHTML == "♥") {
-                        /* 
-                            ajax
-                        
-                        */
-                        like.innerHTML = "♡";
+                        // ajax
+                        $.ajax({
+                            url: '/likeInsert',
+                            type: 'post',
+                            data: {
+                                "diarySeq" : diarySeq,
+                                "do" : "delete"
+                            },
+                        })
+
+                        // 서버에서 가져온 data를 뿌릴 곳 결정
+                        .done(function (likeMap) {
+                            $('.like').replaceWith(likeMap);
+                        });
+                        like.classList.remove("likeit");
                     } else {
-                        /* 
-                            ajax
-                        
-                        */
-                        like.innerHTML = "♥"
+                        // ajax
+                        $.ajax({
+                            url: '/likeInsert',
+                            type: 'post',
+                            data: {
+                                "diarySeq" : diarySeq,
+                                "do" : "insert"
+                            },
+                        })
+
+                        // 서버에서 가져온 data를 뿌릴 곳 결정
+                        .done(function (likeMap) {
+                            $('.like').replaceWith(likeMap);
+                        });
+                        like.classList.add("likeit");
                     }
-                    like.classList.toggle("likeit");
                 });
             </script>
 

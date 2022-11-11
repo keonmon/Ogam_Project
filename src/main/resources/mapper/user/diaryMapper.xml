@@ -146,4 +146,15 @@
         insert into reply(diary_seq,member_email,reply)
         values(#{diarySeq},#{member_email},#{reply})
     </insert>
+
+    <insert id="likeInsert" parameterType="java.util.Map">
+        insert into diary_like(diary_seq,member_email)
+        values(#{diary_seq},#{member_email})
+    </insert>
+
+    <delete id="likeDelete" parameterType="java.util.Map">
+        delete from diary_like
+              where diary_seq = #{diary_seq}
+                and member_email = #{member_email}
+    </delete>
 </mapper>
