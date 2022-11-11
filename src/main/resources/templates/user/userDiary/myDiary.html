@@ -17,79 +17,70 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
     <!-- fullcalendar 언어 CDN -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js'></script>
-    <script>
 
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView : 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
-                headerToolbar : { // 헤더에 표시할 툴 바
-                    start : 'prev next today',
-                    end : 'title'
-                },
-                titleFormat : function(date) {
-                    return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
-                },
-                nowIndicator: true, // 현재 시간 마크
-
-               eventClick: function(arg) {
-                   // 있는 일정 클릭시,
-                   console.log("#등록된 일정 클릭#");
-                   console.log(arg.event);
-                   if (confirm('일기를 확인하시겠습니까?')) {
-                        arg.event.remove()
-                   }
-               },
-
-               editable: false,
-               selectMirror: true,
-               selectable: true,
-           //    dayMaxEvents: true, // allow "more" link when too many events
-               events: function(info, successCallback, failureCallback){
-                    // ajax 처리로 데이터를 로딩 시킨다.
-                    $.ajax({
-                        type:"post",
-                        url:"/calendar?method=data",
-                        dataType:"json"
-                    })
-                    .success(function(data){
-                        console.log(data);
-
-                    });
-                }
-            });
-            calendar.render();
-        });
-
-    </script>
     <style>
+        a.fc-event, a.fc-event:hover {
+            text-decoration: none;
+            width: 100%;
+            height: 50px;
+            position: absolute;
+            top: -22px;
+        }
+        .fc-daygrid-dot-event {
+            display: flex;
+            padding: 2px 0;
+            justify-content: center;
+            align-items: center;
+        }
+        .fc-daygrid-dot-event .fc-event-title {
+                flex-grow: 1;
+                flex-shrink: 1;
+                min-width: 0;
+                overflow: hidden;
+                font-weight: bold;
+                font-size: 30px;
+                position: absolute;
+                display: inline-block;
+        }
+        .fc-event-time, .fc-daygrid-event-dot {
+            display:none;
+        }
         .fc .fc-toolbar.fc-header-toolbar {
             margin-bottom: 5px !important;
         }
+
         .fc .fc-view-harness {
             height: 335px !important;
-            flex-grow: 1; /* because this harness is WITHIN the .fc's flexbox */
+            flex-grow: 1;
+            /* because this harness is WITHIN the .fc's flexbox */
             position: relative;
         }
+
         .fc .fc-scrollgrid-section-body table,
-          .fc .fc-scrollgrid-section-footer table {
-            border-bottom-style: hidden; /* head keeps its bottom border tho */
+        .fc .fc-scrollgrid-section-footer table {
+            border-bottom-style: hidden;
+            /* head keeps its bottom border tho */
             width: 100% !important;
             height: 100% !important;
         }
+
         .fc .fc-scroller-liquid-absolute {
             position: absolute;
             top: 0;
             right: 0;
             left: 0;
             bottom: 0;
-            height:105% !important;
+            height: 105% !important;
         }
+
         .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
-            position: relative; /* for containing abs positioned event harnesses */
-            min-height: 2.15em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */
+            position: relative;
+            /* for containing abs positioned event harnesses */
+            min-height: 2.15em;
+            /* in addition to being a min-height during natural height, equalizes the heights a little bit */
         }
-        .fc .fc-daygrid-day-top{
+
+        .fc .fc-daygrid-day-top {
             display: flex;
             flex-direction: row-reverse;
             height: 20px !important;
@@ -109,20 +100,23 @@
                     <!-- 최근 내 감정 -->
 
                     <div class="my_currDiarys">
-                    <div class="mod1_Outline_shdw">
-                        <div class="mod1_Outline">
-                            <div class="mod1_Outline2">
-                                <div class="mod1_grey"></div>
-                                <div class="mod1_titleBg">
-                                    <span class="mod1_titleFont">최근 내 감정</span>
+                        <div class="mod1_Outline_shdw">
+                            <div class="mod1_Outline">
+                                <div class="mod1_Outline2">
+                                    <div class="mod1_grey"></div>
+                                    <div class="mod1_titleBg">
+                                        <span class="mod1_titleFont">최근 내 감정</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mod1_slider_me slider">
-                                <div class="mod1_innerSlide">
-                                    <!-- 최대 10개 의 mod1_innerContents
+                                <input hidden class="memberSeq" th:value="${memberSeq}"/>
+                                <div class="mod1_slider_me slider">
+                                    <div class="mod1_innerSlide">
+                                        <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
 
-                                    <a class="mod1_innerContents" th:href="|/viewDiary?diarySeq=${myDiary.DIARY_SEQ}|" th:each="myDiary : ${myDiaryList}">
+                                        <a class="mod1_innerContents"
+                                            th:href="|/viewDiary?diarySeq=${myDiary.DIARY_SEQ}|"
+                                            th:each="myDiary : ${myDiaryList}">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
                                                     <span class="mod1_d_nick">[[${myDiary.MEMBER_NICK}]]</span>
@@ -131,35 +125,37 @@
                                                     <span class="mod1_d_imoji">[[${myDiary.EMOJI}]]</span>
                                                 </div>
                                             </div>
-                                    </a>
+                                        </a>
 
-                                </div><!-- /innerSlide -->
+                                    </div><!-- /innerSlide -->
 
-                            </div>
-                        </div>
-                    </div> <!-- /module1 -->
-                </div><!-- /최근 내 감정 -->
-                <!-- 내 감정 캘린더 -->
-                <div class="my_calendar">
-                    <div id="calendar"></div>
-                </div><!-- /내 감정 캘린더 -->
-
-                <!-- 친구 감정 -->
-                <div class="rand_Diary">
-                    <div class="mod1_Outline_shdw">
-                        <div class="mod1_Outline">
-                            <div class="mod1_Outline2">
-                                <div class="mod1_grey"></div>
-                                <div class="mod1_titleBg">
-                                    <span class="mod1_titleFont">친구의 감정</span>
                                 </div>
                             </div>
-                            <div class="mod1_slider_frnd slider">
-                                <div class="mod1_innerSlide">
-                                    <!-- 최대 10개 의 mod1_innerContents
+                        </div> <!-- /module1 -->
+                    </div><!-- /최근 내 감정 -->
+                    <!-- 내 감정 캘린더 -->
+                    <div class="my_calendar">
+                        <div id="calendar"></div>
+                    </div><!-- /내 감정 캘린더 -->
+
+                    <!-- 친구 감정 -->
+                    <div class="rand_Diary">
+                        <div class="mod1_Outline_shdw">
+                            <div class="mod1_Outline">
+                                <div class="mod1_Outline2">
+                                    <div class="mod1_grey"></div>
+                                    <div class="mod1_titleBg">
+                                        <span class="mod1_titleFont">친구의 감정</span>
+                                    </div>
+                                </div>
+                                <div class="mod1_slider_frnd slider">
+                                    <div class="mod1_innerSlide">
+                                        <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
 
-                                    <a class="mod1_innerContents" th:href="|/viewDiary?diarySeq=${friendDiary.DIARY_SEQ}|" th:each="friendDiary : ${friendDiaryList}">
+                                        <a class="mod1_innerContents"
+                                            th:href="|/viewDiary?diarySeq=${friendDiary.DIARY_SEQ}|"
+                                            th:each="friendDiary : ${friendDiaryList}">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
                                                     <span class="mod1_d_nick">[[${friendDiary.MEMBER_NICK}]]</span>
@@ -168,108 +164,152 @@
                                                     <span class="mod1_d_imoji">[[${friendDiary.EMOJI}]]</span>
                                                 </div>
                                             </div>
-                                    </a>
+                                        </a>
 
-                                </div><!-- /innerSlide -->
+                                    </div><!-- /innerSlide -->
 
+                                </div>
                             </div>
-                        </div>
 
-                    </div> <!-- /module1 -->
-                </div><!-- 친구의 감정 -->
+                        </div> <!-- /module1 -->
+                    </div><!-- 친구의 감정 -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const memberSeq = document.querySelector(".memberSeq").value;
+                            var calendarEl = document.getElementById('calendar');
+                            var calendar = new FullCalendar.Calendar(calendarEl, {
+                                initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
+                                headerToolbar: { // 헤더에 표시할 툴 바
+                                    start: 'prev next today',
+                                    end: 'title'
+                                },
+                                titleFormat: function (date) {
+                                    return date.date.year + '년 ' + (parseInt(date.date.month) + 1) + '월';
+                                },
+                                
+                                eventClick: function (arg) {
+                                    if (confirm('선택한 감정을 확인하시겠습니까?')) {
+                                        location.href="/viewDiary?diarySeq=" + arg.event.id ;
+                                    }
+                                },
+
+                                editable: false,
+                                selectMirror: true,
+                                selectable: true,
+                                //    dayMaxEvents: true, // allow "more" link when too many events
+                                events: function (info, successCallback, failureCallback) {
+                                    // ajax 처리로 데이터를 로딩 시킨다.
+                                    $.ajax({
+                                        type: "get",
+                                        url: "/calendar",
+                                        data : { "memberSeq" : memberSeq },
+                                        dataType: "json",
+                                        success: function (data) {
+                                            console.log(data);
+                                            successCallback(data);
+                                        }, error: function (e) {
+                                            console.log(e);
+                                        }
+                                    })
+                                }
+                            });
+
+                            calendar.render();
+                        });
+
+                    </script>
 
 
+                    <!-- 내 감정 스크롤 -->
+                    <script>
+                        /* 상하 스크롤 슬라이더 */
+                        const sliderY = document.querySelector('.mod1_slider_me');
+                        let isMouseDownY = false;
+                        let startY, scrollTop, walk;
 
-                <!-- 내 감정 스크롤 -->
-                <script>
-                    /* 상하 스크롤 슬라이더 */
-                    const sliderY = document.querySelector('.mod1_slider_me');
-                    let isMouseDownY = false;
-                    let startY, scrollTop, walk;
+                        sliderY.addEventListener('mousedown', (e) => {
+                            isMouseDownY = true;
+                            sliderY.classList.add('active');
 
-                    sliderY.addEventListener('mousedown', (e) => {
-                        isMouseDownY = true;
-                        sliderY.classList.add('active');
+                            startY = e.pageY - sliderY.offsetLeft;
+                            scrollTop = sliderY.scrollTop;
+                            walk = 0; // 마우스down시 walk 0으로 초기화
+                        });
 
-                        startY = e.pageY - sliderY.offsetLeft;
-                        scrollTop = sliderY.scrollTop;
-                        walk=0; // 마우스down시 walk 0으로 초기화
-                    });
+                        sliderY.addEventListener('mouseleave', () => {
+                            document.addEventListener('mouseup', () => {
+                                isMouseDownY = false;
+                                sliderY.classList.remove('active');
+                            })
+                        });
 
-                    sliderY.addEventListener('mouseleave', () => {
-                        document.addEventListener('mouseup',()=>{
+                        sliderY.addEventListener('mouseup', () => {
                             isMouseDownY = false;
                             sliderY.classList.remove('active');
-                        })
-                    });
+                        });
 
-                    sliderY.addEventListener('mouseup', () => {
-                        isMouseDownY = false;
-                        sliderY.classList.remove('active');
-                    });
+                        document.addEventListener('mousemove', (e) => {
+                            if (!isMouseDownY) return;
 
-                    document.addEventListener('mousemove', (e) => {
-                        if (!isMouseDownY) return;
+                            e.preventDefault();
+                            const y = e.pageY - sliderY.offsetLeft;
+                            walk = (y - startY) * 1;
+                            sliderY.scrollTop = scrollTop - walk;
+                        });
+                    </script>
+                    <!-- 친구 감정 스크롤 -->
+                    <script>
+                        /* 상하 스크롤 슬라이더 */
+                        const sliderY2 = document.querySelector('.mod1_slider_frnd');
+                        let isMouseDownY2 = false;
+                        let startY2, scrollTop2;
 
-                        e.preventDefault();
-                        const y = e.pageY - sliderY.offsetLeft;
-                        walk = (y - startY) * 1;
-                        sliderY.scrollTop = scrollTop - walk;
-                    });
-                </script>
-                <!-- 친구 감정 스크롤 -->
-                <script>
-                    /* 상하 스크롤 슬라이더 */
-                    const sliderY2 = document.querySelector('.mod1_slider_frnd');
-                    let isMouseDownY2 = false;
-                    let startY2, scrollTop2;
+                        sliderY2.addEventListener('mousedown', (e) => {
+                            isMouseDownY2 = true;
+                            sliderY2.classList.add('active');
 
-                    sliderY2.addEventListener('mousedown', (e) => {
-                        isMouseDownY2 = true;
-                        sliderY2.classList.add('active');
+                            startY2 = e.pageY - sliderY2.offsetLeft;
+                            scrollTop2 = sliderY2.scrollTop;
+                            walk = 0; // 마우스down시 walk 0으로 초기화
+                        });
 
-                        startY2 = e.pageY - sliderY2.offsetLeft;
-                        scrollTop2 = sliderY2.scrollTop;
-                        walk=0; // 마우스down시 walk 0으로 초기화
-                    });
+                        sliderY2.addEventListener('mouseleave', () => {
+                            document.addEventListener('mouseup', () => {
+                                isMouseDownY2 = false;
+                                sliderY2.classList.remove('active');
+                            })
+                        });
 
-                    sliderY2.addEventListener('mouseleave', () => {
-                        document.addEventListener('mouseup',()=>{
+                        sliderY2.addEventListener('mouseup', () => {
                             isMouseDownY2 = false;
                             sliderY2.classList.remove('active');
-                        })
-                    });
-
-                    sliderY2.addEventListener('mouseup', () => {
-                        isMouseDownY2 = false;
-                        sliderY2.classList.remove('active');
-                    });
-
-                    document.addEventListener('mousemove', (e) => {
-                        if (!isMouseDownY2) return;
-
-                        e.preventDefault();
-                        const y = e.pageY - sliderY2.offsetLeft;
-                        walk = (y - startY2) * 1;
-                        sliderY2.scrollTop = scrollTop2 - walk;
-                    });
-
-                    const clickHrefY = document.querySelectorAll('.mod1_innerContents')
-
-                    // walk가 20이상 움직이지 않으면 a태그 막기
-                    for(let i = 0; i < clickHrefY.length; i++){
-                        clickHrefY[i].addEventListener('click',(e)=>{
-                            if(Math.abs(walk)>20)  e.preventDefault();
                         });
-                    };
+
+                        document.addEventListener('mousemove', (e) => {
+                            if (!isMouseDownY2) return;
+
+                            e.preventDefault();
+                            const y = e.pageY - sliderY2.offsetLeft;
+                            walk = (y - startY2) * 1;
+                            sliderY2.scrollTop = scrollTop2 - walk;
+                        });
+
+                        const clickHrefY = document.querySelectorAll('.mod1_innerContents')
+
+                        // walk가 20이상 움직이지 않으면 a태그 막기
+                        for (let i = 0; i < clickHrefY.length; i++) {
+                            clickHrefY[i].addEventListener('click', (e) => {
+                                if (Math.abs(walk) > 20) e.preventDefault();
+                            });
+                        };
 
 
-                </script>
+                    </script>
 
                 </article>
             </div>
             <!-- ==================== / contents 영역======================= -->
-            
+
         </main>
     </div>
 </body>

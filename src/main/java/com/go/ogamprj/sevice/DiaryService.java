@@ -55,4 +55,6 @@ public interface DiaryService {
     void likeInsert(String member_email, int diary_seq);
 
     void likeDelete(String member_email, int diary_seq);
+
+    List<Map<String,Object>> calendarDiarySelectAll(String memberSeq);
 }

@@ -190,6 +190,11 @@ public class DiaryServiceImpl implements DiaryService {
         diaryMapper.likeDelete(member_email,diary_seq);
     }
 
+    @Override
+    public List<Map<String,Object>> calendarDiarySelectAll(String memberSeq) {
+        return diaryMapper.calendarDiarySelectAll(memberSeq);
+    }
+
 
     /**
      * 날짜 형식 바꾸기 함수
