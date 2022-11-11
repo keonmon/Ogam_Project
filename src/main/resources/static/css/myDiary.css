@@ -19,10 +19,19 @@
 .contents .my_calendar {
     display: block;
     width: 49%;
-    height: 45%;
+    height: 50%;
     position: relative;
     top: 20px;
     float: right;
+    overflow: scroll;
+}
+
+.my_calendar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.my_calendar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 
 .contents .rand_Diary {
@@ -30,7 +39,7 @@
     width: 49%;
     height: 43%;
     position: relative;
-    top: 35px;
+    top: 0px;
     float: right;
 }
 
