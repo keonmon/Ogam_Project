@@ -25,4 +25,6 @@ public interface FriendDiaryService {
     List<Map<String, Object>> memberSelectAll();
 
     void insertfriendSend(friendSend friendSend);
+
+    List<Map<String, Object>> memberSearch(String searchKeyword);
 }

@@ -30,8 +30,13 @@ public interface FriendDiaryMapper {
     @Select("select * from member")
     List<Map<String, Object>> memberSelectAll();
 
+    // 멤버 검색
+    @Select("select * from member where member_nick like '%${searchKeyword}%'")
+    List<Map<String, Object>> memberSearch(String searchKeyword);
+
     // 친구 리스트 insert
     void insertfriendList(friendApply friendApply);
+
     void insertfriendList2nd(friendApply friendApply);
 
     // 친구 신청 리스트 삭제
@@ -39,4 +44,5 @@ public interface FriendDiaryMapper {
 
     // 친구 신청하기
     void insertfriendSend(friendSend friendSend);
+
 }

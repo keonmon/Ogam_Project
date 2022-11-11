@@ -6,6 +6,9 @@ import com.go.ogamprj.mapper.FriendDiaryMapper;
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -59,6 +62,12 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
         friendDiaryMapper.insertfriendSend(friendSend);
     }
 
+    // 멤버 검색
+    @Override
+    public List<Map<String, Object>> memberSearch(String searchKeyword) {
+        return friendDiaryMapper.memberSearch(searchKeyword);
+    }
+
     // 친구 리스트에 insert
     @Override
     public void insertfriendList(friendApply friendApply) {
@@ -71,7 +80,4 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
     public void deleteFriendSend(String myEmail, String member_op_email) {
         friendDiaryMapper.deleteFriendSend(myEmail, member_op_email);
     }
-
-
-
 }

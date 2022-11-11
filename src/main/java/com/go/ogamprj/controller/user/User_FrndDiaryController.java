@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -85,12 +86,14 @@ public class User_FrndDiaryController {
         return "success";
     }
 
-    // 모달 검색
-    @RequestMapping("searchModal")
-    @ResponseBody
-    public String searchModal() {
+    // modal member 검색하기
+    @RequestMapping(value = "modalSearch", method = {RequestMethod.POST})
+    public String modalSearch(@RequestParam String searchKeyword, Model model) {
 
-        return "success";
+        List<Map<String, Object>> memberSearch = friendDiaryService.memberSearch(searchKeyword);
+
+        model.addAttribute("memberList",memberSearch);
+        return "user/noticePage/sendList :: .modalBody";
     }
 
     // 친구 수락/거절
