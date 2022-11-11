@@ -36,8 +36,11 @@
                    // 있는 일정 클릭시,
                    console.log("#등록된 일정 클릭#");
                    console.log(arg.event);
-
+                   if (confirm('일기를 확인하시겠습니까?')) {
+                        arg.event.remove()
+                   }
                },
+
                editable: false,
                selectMirror: true,
                selectable: true,
@@ -45,7 +48,7 @@
                events: function(info, successCallback, failureCallback){
                     // ajax 처리로 데이터를 로딩 시킨다.
                     $.ajax({
-                        type:"get",
+                        type:"post",
                         url:"/calendar?method=data",
                         dataType:"json"
                     })
