@@ -8,6 +8,7 @@
     <title>대쉬보드</title>
     <link rel="stylesheet" type="text/css" href="/css/sendList.css" />
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/notifi.css" />
     <link rel="stylesheet" type="text/css" href="/css/sendList_dark.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -31,27 +32,36 @@
                         </div>
                     </div>
                     <div class="sendBody">
-                        <th:block th:each="friendSend : ${friendSendList}">
-                            <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
-                            <input type="text" class="op_email" th:value="${friendSend.MEMBER_OP_EMAIL}" style="display:none">
-                            <div class="send_date">[[${friendSend.SEND_DATE}]]</div>
+                        <th:block th:if="${#lists.size(friendSendList)} == 0">
+                            <div class="send_date"></div>
                             <div class="send_list">
                                 <div class="send_contents">
-                                    <span class="op_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <div class="op_nickname">
-                                        <span>[[ ${friendSend.MEMBER_NICK} ]]</span>
-                                        <p>[[ ${friendSend.MEMBER_INTRO} ]]</p>
-
-                                    </div>
-                                    <div class="response">
-                                        <div id="accept">수락</div>
-                                        <div id="refuse">거절</div>
-                                    </div>
+                                      <span>받은 친구신청이 없습니다.</span>
                                 </div>
                             </div>
-                            <hr />
+                        </th:block>
+                        <th:block th:unless="${#lists.size(friendSendList)} == 0">
+                            <th:block th:each="friendSend : ${friendSendList}">
+                                    <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
+                                    <input type="text" class="op_email" th:value="${friendSend.MEMBER_OP_EMAIL}" style="display:none">
+                                    <div class="send_date">[[${friendSend.SEND_DATE}]]</div>
+                                    <div class="send_list">
+                                        <div class="send_contents">
+                                            <span class="op_img">
+                                                <img src="/Img/logoImg.png" />
+                                            </span>
+                                            <div class="op_nickname">
+                                                <span>[[ ${friendSend.MEMBER_NICK} ]]</span>
+                                                <p>[[ ${friendSend.MEMBER_INTRO} ]]</p>
+                                            </div>
+                                            <div class="response">
+                                                <div id="accept">수락</div>
+                                                <div id="refuse">거절</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                            </th:block>
                         </th:block>
                     </div>
                 </div>
@@ -68,163 +78,29 @@
             <div id="modal" class="modalContainer">
                 <div class="wrapModal">
                     <div class="search_member">
-                        <input type="text" placeholder="검색" />
-                        <button type="submit" id="searchBtn">검색</button>
+                        <input type="text" id="searchInput" name="searchKeyword" placeholder="검색" />
+                        <button type="button" id="searchBtn">검색</button>
                     </div>
                     <div class="modal">
                         <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
+                            <th:block th:each="member : ${memberList}">
+                                <input type="text" class="member_email" th:value="${member.MEMBER_EMAIL}" style="display:none">
+                                <div class="member_list">
+                                    <div class="member_contents">
+                                        <span class="member_img">
+                                            <img src="/Img/logoImg.png" />
+                                        </span>
+                                        <div class="member_nickname">
+                                            <span>[[ ${member.MEMBER_NICK} ]]</span>
+                                            <p>[[ ${member.MEMBER_INTRO} ]]</p>
+                                        </div>
+                                        <div class="addBtn">
+                                            <div class="add">추가</div>
+                                            <div class="complete">완료</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modalBody">
-                            <div class="member_list">
-                                <div class="member_contents">
-                                    <span class="member_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <span class="member_nickname">신청자 닉네임</span>
-                                    <div class="addBtn">
-                                        <div class="add">추가</div>
-                                        <div class="complete">완료</div>
-                                    </div>
-                                </div>
-                            </div>
+                            </th:block>
                         </div>
                     </div>
                     <div class="btnBox">

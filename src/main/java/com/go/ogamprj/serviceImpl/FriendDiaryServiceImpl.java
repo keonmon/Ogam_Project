@@ -1,6 +1,7 @@
 package com.go.ogamprj.serviceImpl;
 
 import com.go.ogamprj.dto.friendApply;
+import com.go.ogamprj.dto.friendSend;
 import com.go.ogamprj.mapper.FriendDiaryMapper;
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,18 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
         return friendDiaryMapper.friendSendSelectAll(myEmail);
     }
 
+    // member 전체 유저 가져오기
+    @Override
+    public List<Map<String, Object>> memberSelectAll() {
+        return friendDiaryMapper.memberSelectAll();
+    }
+
+    // 친구 신청하기
+    @Override
+    public void insertfriendSend(friendSend friendSend) {
+        friendDiaryMapper.insertfriendSend(friendSend);
+    }
+
     // 친구 리스트에 insert
     @Override
     public void insertfriendList(friendApply friendApply) {
@@ -53,13 +66,12 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
         friendDiaryMapper.insertfriendList2nd(friendApply);
     }
 
-
-
     // 친구 신청 삭제
     @Override
-    public void deleteFriendSend(String myEmail) {
-        friendDiaryMapper.deleteFriendSend(myEmail);
+    public void deleteFriendSend(String myEmail, String member_op_email) {
+        friendDiaryMapper.deleteFriendSend(myEmail, member_op_email);
     }
+
 
 
 }

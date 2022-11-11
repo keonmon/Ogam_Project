@@ -6,7 +6,6 @@
     <!--  친구 목록 전체 가져오기  -->
     <select id="friendListSelectAll" resultType="java.util.Map">
         select
-            m.member_image,
             m.member_nick,
             m.member_intro,
             f.friend_date
@@ -17,6 +16,7 @@
         in (select member_op_email
                 from friend_apply
             where member_email = #{myEmail})
+        order by f.friend_date desc
     </select>
     <!--  친구리스트 count  -->
     <select id="friendListCount" resultType="int">
@@ -27,7 +27,6 @@
     <select id="search" resultType="java.util.Map">
         select *
         from (select
-                m.member_image,
                 m.member_nick,
                 m.member_intro,
                 f.friend_date
@@ -58,7 +57,6 @@
     <!--  친구신청 리스트 전체 가져오기  -->
     <select id="friendSendSelectAll" resultType="java.util.Map">
         SELECT
-            m.member_image,
             m.member_nick,
             m.member_intro,
             s.member_op_email,
@@ -66,6 +64,7 @@
             s.response
         FROM MEMBER m, (SELECT * FROM FRIEND_SEND WHERE MEMBER_EMAIL = #{myEmail}) s
         WHERE m.MEMBER_EMAIL = s.MEMBER_OP_EMAIL
+        ORDER BY s.send_date desc
     </select>
 
     <!--  친구리스트에 insert  -->
@@ -74,10 +73,22 @@
             values(fri_app_seq.nextval, #{member_email},#{member_op_email},sysdate, (select max(FRIEND_KEY)+1 from friend_apply))
     </insert>
 
+    <!--  친구신청에 insert  -->
+    <insert id="insertfriendSend" parameterType="com.go.ogamprj.dto.friendSend">
+        insert into friend_send
+        values(fri_send_seq.nextval, #{member_email},#{member_op_email},#{response},sysdate)
+    </insert>
+
     <!--  상대 이메일로 친구리스트 insert  -->
     <insert id="insertfriendList2nd" parameterType="com.go.ogamprj.dto.friendApply">
         insert into friend_apply
             values(fri_app_seq.nextval, #{member_op_email},#{member_email},sysdate, (select max(FRIEND_KEY) from friend_apply))
     </insert>
+
+    <!--  친구 친성 delete  -->
+    <delete id="deleteFriendSend">
+        delete from friend_send
+        where member_email = #{myEmail} and member_op_email = #{member_op_email}
+    </delete>
 
 </mapper>

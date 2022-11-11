@@ -8,6 +8,7 @@
     <title>대쉬보드</title>
     <link rel="stylesheet" type="text/css" href="/css/friendList.css" />
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/notifi.css" />
     <link rel="stylesheet" type="text/css" href="/css/friendList_dark.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -37,23 +38,33 @@
                         <span id="search_explain">** 검색어 없이 검색할 경우 전체 리스트 보여줍니다 **</span>
                     </form>
                     <div class="sendBody">
-                        <th:block th:each="friend : ${friendList}">
-                            <div class="send_date">[[ ${friend.FRIEND_DATE} ]]</div>
+                        <th:block th:if="${#lists.size(friendList)} == 0">
+                            <div class="send_date"></div>
                             <div class="send_list">
                                 <div class="send_contents">
-                                    <span class="op_img">
-                                        <img src="/Img/logoImg.png" />
-                                    </span>
-                                    <div class="op_nickname">
-                                        <span>[[ ${friend.MEMBER_NICK} ]]</span>
-                                        <p>[[ ${friend.MEMBER_INTRO} ]]</p>
-
-                                    </div>
-                                    <div class="response">
-                                        <div class="deleteBtn">삭제</div>
-                                    </div>
+                                    <span class="message">받은 친구신청이 없습니다.</span>
                                 </div>
                             </div>
+                        </th:block>
+                        <th:block th:unless="${#lists.size(friendList)} == 0">
+                            <th:block th:each="friend : ${friendList}">
+                                <div class="send_date">[[ ${friend.FRIEND_DATE} ]]</div>
+                                <div class="send_list">
+                                    <div class="send_contents">
+                                        <span class="op_img">
+                                            <img src="/Img/logoImg.png" />
+                                        </span>
+                                        <div class="op_nickname">
+                                            <span>[[ ${friend.MEMBER_NICK} ]]</span>
+                                            <p>[[ ${friend.MEMBER_INTRO} ]]</p>
+
+                                        </div>
+                                        <div class="response">
+                                            <div class="deleteBtn">삭제</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
                         </th:block>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 package com.go.ogamprj.controller.user;
 
 import com.go.ogamprj.dto.friendApply;
+import com.go.ogamprj.dto.friendSend;
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,7 @@ public class User_FrndDiaryController {
         return "user/noticePage/friendList";
     }
 
+    // 친구 리스트 삭제
     @RequestMapping("/deleteFriend")
     @ResponseBody
     public String deleteFriend(String nickname) {
@@ -56,28 +58,53 @@ public class User_FrndDiaryController {
         return "success";
     }
 
-    // 친구 신청 가져오기
+    // 친구 신청 페이지
     @RequestMapping("/sendList")
     public String sendList(Model model){
 
         String myEmail = "user1@ogam.com";
 
+        // 친구 신청 가져오기
         List<Map<String, Object>> friendSendList = friendDiaryService.friendSendSelectAll(myEmail);
 
+        // member 전체 유저 가져오기
+        List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll();
+
+        model.addAttribute("memberList",memberList);
         model.addAttribute("friendSendList",friendSendList);
         return "user/noticePage/sendList";
+    }
+
+    // 모달 친구신청
+    @RequestMapping("/addSendList")
+    @ResponseBody
+    public String addSendList(HttpServletRequest request, @RequestParam String member_email, @RequestParam String response) {
+
+        String myEmail = "user1@ogam.com";
+        friendDiaryService.insertfriendSend(new friendSend(0,myEmail,member_email,response,null));
+        return "success";
+    }
+
+    // 모달 검색
+    @RequestMapping("searchModal")
+    @ResponseBody
+    public String searchModal() {
+
+        return "success";
     }
 
     // 친구 수락/거절
     @RequestMapping("/response")
     @ResponseBody
-    public String response(HttpServletRequest request, @RequestParam String member_op_email, String response, String nickname) {
+    public String response(HttpServletRequest request, @RequestParam String member_op_email, String response) {
 
         String myEmail = "user1@ogam.com";
 
         if(response.equals("y")) {
             friendDiaryService.insertfriendList(new friendApply(0,myEmail,member_op_email,null,0));
-            //friendDiaryService.deleteFriendSend(myEmail);
+            friendDiaryService.deleteFriendSend(myEmail, member_op_email);
+        } else {
+            friendDiaryService.deleteFriendSend(myEmail, member_op_email);
         }
         return "success";
     }

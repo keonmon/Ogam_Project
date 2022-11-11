@@ -18,21 +18,55 @@ function friend_Modal() {
 function closeModal1() {
     let modalContainer = document.querySelector(".modalContainer");
     modalContainer.style.display = "none";
+    window.location.href="/sendList";
 }
 
 // 모달창 버튼 스크립트
 const addBtn = document.querySelectorAll(".addBtn");
 const add = document.querySelectorAll(".add");
 const complete = document.querySelectorAll(".complete");
+const email = document.querySelectorAll(".member_email");
 
 for (let i = 0; i < addBtn.length; i++) {
     addBtn[i].addEventListener("click", () => {
-        add[i].style.display = "none";
-        complete[i].style.display = "block";
+    let member_email = email[i].value;
+    let response = 'n';
+
+    Swal.fire({
+      title: '친구신청을 했습니다',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    }).then(function () {
+          $.ajax({
+             url:"/addSendList",
+             type:"post",
+             data:{"member_email" : member_email, "response" : response},
+             success:function(data) {
+                add[i].style.display = "none";
+                complete[i].style.display = "block";
+             },
+             error:function(e) {
+                  console.log(e);
+             }
+          })
+      })
     })
 }
 
-// 메뉴바 스크립트
+// 모달창 검색 ajax
+const searchBtn = document.getElementById("searchBtn");
+const searchInput = document.getElementById("searchInput").value;
+
+searchBtn.addEventListener("click", () => {
+console.log(searchInput);
+
+})
+
+// 친구신청 / 친구 리스트 메뉴바 스크립트
 const friendList = document.querySelector(".friendList");
 const sendList = document.querySelector(".sendList");
 
@@ -62,7 +96,7 @@ for(let i = 0; i < accept.length; i++){
     let nickname = op_nickname[i].innerHTML;
     let member_op_email = op_email[i].value;
         Swal.fire({
-          title: '친구등록 완료했습니다',
+          title: '친구등록을 완료했습니다',
           showClass: {
             popup: 'animate__animated animate__fadeInDown'
           },
@@ -75,9 +109,7 @@ for(let i = 0; i < accept.length; i++){
                type:"post",
                data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email},
                success:function(data) {
-                    console.log(data)
-                    console.log("성공");
-                    window.location.href = "/friendList";
+                    window.location.href = "/sendList";
                },
                error:function(e) {
                     console.log(e);
@@ -87,9 +119,34 @@ for(let i = 0; i < accept.length; i++){
     })
 }
 
-for(let i = 0; i < accept.length; i++){
+for(let i = 0; i < refuse.length; i++){
     refuse[i].addEventListener("click", () => {
+    let response = answer[i].value.innerHTML = 'n';
+    let nickname = op_nickname[i].innerHTML;
+    let member_op_email = op_email[i].value;
 
+    Swal.fire({
+          title: '친구등록을 거절했습니다',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        }).then(function () {
+            $.ajax({
+             url:"/response",
+             type:"post",
+             data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email},
+             success:function(data) {
+                console.log(data)
+                window.location.href = "/sendList";
+             },
+             error:function(e) {
+                  console.log(e);
+             }
+            })
+        })
     })
 
 }

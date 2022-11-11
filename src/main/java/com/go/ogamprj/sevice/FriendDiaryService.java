@@ -1,6 +1,7 @@
 package com.go.ogamprj.sevice;
 
 import com.go.ogamprj.dto.friendApply;
+import com.go.ogamprj.dto.friendSend;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,11 @@ public interface FriendDiaryService {
 
     List<Map<String, Object>> friendSendSelectAll(String myEmail);
 
-    void deleteFriendSend(String myEmail);
-
     void insertfriendList(friendApply friendApply);
+
+    void deleteFriendSend(String myEmail, String member_op_email);
+
+    List<Map<String, Object>> memberSelectAll();
+
+    void insertfriendSend(friendSend friendSend);
 }
