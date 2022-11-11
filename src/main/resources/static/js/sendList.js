@@ -18,9 +18,10 @@ const addBtn = document.querySelectorAll(".addBtn");
 const add = document.querySelectorAll(".add");
 const complete = document.querySelectorAll(".complete");
 const email = document.querySelectorAll(".member_email");
+const nickname = document.querySelectorAll(".member_nickname span");
 
 for (let i = 0; i < addBtn.length; i++) {
-    addBtn[i].addEventListener("click", () => {
+    add[i].addEventListener("click", () => {
     let member_email = email[i].value;
     let response = 'n';
 
@@ -38,6 +39,7 @@ for (let i = 0; i < addBtn.length; i++) {
              type:"post",
              data:{"member_email" : member_email, "response" : response},
              success:function(data) {
+             console.log(data);
                 add[i].style.display = "none";
                 complete[i].style.display = "block";
              },

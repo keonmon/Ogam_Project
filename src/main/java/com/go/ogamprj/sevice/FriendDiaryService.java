@@ -22,9 +22,10 @@ public interface FriendDiaryService {
 
     void deleteFriendSend(String myEmail, String member_op_email);
 
-    List<Map<String, Object>> memberSelectAll();
+    List<Map<String, Object>> memberSelectAll(String myEmail);
 
     void insertfriendSend(friendSend friendSend);
 
     List<Map<String, Object>> memberSearch(String searchKeyword);
+
 }

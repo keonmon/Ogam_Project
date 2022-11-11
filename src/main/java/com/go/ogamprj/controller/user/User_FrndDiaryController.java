@@ -61,7 +61,7 @@ public class User_FrndDiaryController {
 
     // 친구 신청 페이지
     @RequestMapping("/sendList")
-    public String sendList(Model model){
+    public String sendList(HttpServletRequest request, Model model){
 
         String myEmail = "user1@ogam.com";
 
@@ -69,7 +69,7 @@ public class User_FrndDiaryController {
         List<Map<String, Object>> friendSendList = friendDiaryService.friendSendSelectAll(myEmail);
 
         // member 전체 유저 가져오기
-        List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll();
+        List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
 
         model.addAttribute("memberList",memberList);
         model.addAttribute("friendSendList",friendSendList);
@@ -82,7 +82,9 @@ public class User_FrndDiaryController {
     public String addSendList(HttpServletRequest request, @RequestParam String member_email, @RequestParam String response) {
 
         String myEmail = "user1@ogam.com";
+
         friendDiaryService.insertfriendSend(new friendSend(0,myEmail,member_email,response,null));
+
         return "success";
     }
 
@@ -91,6 +93,8 @@ public class User_FrndDiaryController {
     public String modalSearch(@RequestParam String searchKeyword, Model model) {
 
         List<Map<String, Object>> memberSearch = friendDiaryService.memberSearch(searchKeyword);
+
+        System.out.println(memberSearch);
 
         model.addAttribute("memberList",memberSearch);
         return "user/noticePage/sendList :: .modalBody";

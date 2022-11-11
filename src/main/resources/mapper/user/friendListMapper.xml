@@ -67,10 +67,40 @@
         ORDER BY s.send_date desc
     </select>
 
+    <!--  친구목록 뺴고 멤버리스트 가져오기  -->
+    <select id="memberSelectAll" resultType="java.util.Map">
+        SELECT
+            m.member_nick,
+            m.member_email,
+            m.member_intro
+        FROM MEMBER m, ((SELECT MEMBER_EMAIL FROM MEMBER) MINUS (SELECT T2.MEMBER_OP_EMAIL
+                            FROM MEMBER T1, FRIEND_APPLY T2
+                            WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL
+                            AND T2.MEMBER_EMAIL = #{myEmail})) s
+        WHERE m.MEMBER_EMAIL = s.MEMBER_EMAIL
+    </select>
+
+    <!--  친구목록 뺴고 검색  -->
+    <select id="memberSearch" resultType="java.util.Map">
+        SELECT
+            m.member_nick,
+            m.member_email,
+            m.member_intro
+        FROM MEMBER m,
+            ((SELECT MEMBER_EMAIL, MEMBER_NICK FROM MEMBER) MINUS
+                (SELECT T2.MEMBER_OP_EMAIL, MEMBER_NICK
+                    FROM MEMBER T1, FRIEND_APPLY T2
+                    WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL
+                    AND T2.MEMBER_EMAIL = 'user1@ogam.com')) s
+        WHERE m.MEMBER_EMAIL = s.MEMBER_EMAIL
+        and m.member_nick like '%${searchKeyword}%'
+    </select>
+
+
     <!--  친구리스트에 insert  -->
     <insert id="insertfriendList" parameterType="com.go.ogamprj.dto.friendApply">
         insert into friend_apply
-            values(fri_app_seq.nextval, #{member_email},#{member_op_email},sysdate, (select max(FRIEND_KEY)+1 from friend_apply))
+            values(fri_app_seq.nextval, #{member_email},#{member_op_email},sysdate, (select NVL(max(FRIEND_KEY),0)+1 from friend_apply))
     </insert>
 
     <!--  친구신청에 insert  -->

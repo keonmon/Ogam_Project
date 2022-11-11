@@ -52,8 +52,9 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
 
     // member 전체 유저 가져오기
     @Override
-    public List<Map<String, Object>> memberSelectAll() {
-        return friendDiaryMapper.memberSelectAll();
+    public List<Map<String, Object>> memberSelectAll(String myEmail) {
+
+        return friendDiaryMapper.memberSelectAll(myEmail);
     }
 
     // 친구 신청하기
@@ -80,4 +81,6 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
     public void deleteFriendSend(String myEmail, String member_op_email) {
         friendDiaryMapper.deleteFriendSend(myEmail, member_op_email);
     }
+
+
 }

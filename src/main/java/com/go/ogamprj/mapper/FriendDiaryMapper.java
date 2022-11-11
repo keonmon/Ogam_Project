@@ -26,12 +26,11 @@ public interface FriendDiaryMapper {
     // 친구 신청 리스트 전체 가져오기
     List<Map<String, Object>> friendSendSelectAll(String myEmail);
 
-    // member 전체 유저 가져오기
-    @Select("select * from member")
-    List<Map<String, Object>> memberSelectAll();
+    // member 친구리스트 빼고 유저 가져오기
+    List<Map<String, Object>> memberSelectAll(String myEmail);
 
     // 멤버 검색
-    @Select("select * from member where member_nick like '%${searchKeyword}%'")
+
     List<Map<String, Object>> memberSearch(String searchKeyword);
 
     // 친구 리스트 insert
