@@ -1,12 +1,4 @@
 
-// 알림 모달 스크립트
-const notifi = document.querySelector(".notifi");
-const notifi_wrapModal = document.querySelector(".notifi_wrapModal");
-
-notifi.addEventListener("click", () => {
-        notifi_wrapModal.classList.toggle("toggle");
-})
-
 // 친구 모달 스크립트
 const friend_send = document.querySelector(".friend-send");
 
@@ -59,11 +51,20 @@ for (let i = 0; i < addBtn.length; i++) {
 
 // 모달창 검색 ajax
 const searchBtn = document.getElementById("searchBtn");
-const searchInput = document.getElementById("searchInput").value;
+const searchInput = document.getElementById("searchInput");
+
+let searchKeyword;
 
 searchBtn.addEventListener("click", () => {
-console.log(searchInput);
+searchKeyword = searchInput.value;
 
+    $.ajax({
+        url: "/modalSearch",
+        type: "post",
+        data:{"searchKeyword":searchKeyword},
+    }).done(function (memberList){
+        $(".modalBody").replaceWith(memberList);
+    })
 })
 
 // 친구신청 / 친구 리스트 메뉴바 스크립트

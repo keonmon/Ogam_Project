@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 
 <th:block th:fragment="userMenubar">
+    <link rel="stylesheet" type="text/css" href="/css/notifi.css" />
     <div class="menubar">
         <div id="left-menu">
             <span id="writeDiary">
@@ -31,9 +32,9 @@
                 </a>
             </span>
         </div>
-        <div id="notifi_modal" class="notifi_wrapModal">
+        <div id="notifi_modal notifi_wrapModal" class="notifi_wrapModal">
             <div id="notifi_title">알림</div>
-            <div class="title">최근 알림</div>
+            <div class="titleText">최근 알림</div>
             <div class="currentNotifi">
                 <div id="currentNotifi_contents">
                     <img src="/Img/logoImg.png" />
@@ -60,7 +61,7 @@
                     <p>호준님이 친구신청을 요청 했습니다.</p>
                 </div>
             </div>
-            <div class="title">이전 알림</div>
+            <div class="titleText">이전 알림</div>
             <div class="previewNotifi">
                 <div id="previewNotifi_contents">
                     <img src="/Img/logoImg.png" />
@@ -103,5 +104,6 @@
             <div class="notifi_wrapModal"></div>
         </div>
     </div>
+    <script src="/js/notifi.js" type="text/javascript"></script>
 </th:block>
 </html>
