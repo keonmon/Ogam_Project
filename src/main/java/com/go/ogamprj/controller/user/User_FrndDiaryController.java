@@ -2,6 +2,7 @@ package com.go.ogamprj.controller.user;
 
 import com.go.ogamprj.dto.friendApply;
 import com.go.ogamprj.dto.friendSend;
+import com.go.ogamprj.sevice.DiaryService;
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +23,10 @@ public class User_FrndDiaryController {
     @Autowired
     FriendDiaryService friendDiaryService;
 
+    @Autowired
+    DiaryService diaryService;
+    
+    
     // 친구 리스트 목록 가져오기
     @RequestMapping("/friendList")
     public String friendList(HttpServletRequest request,String searchKeyword, Model model) {
@@ -118,4 +124,31 @@ public class User_FrndDiaryController {
         }
         return "success";
     }
+
+    // 친구의 다이어리로 이동
+    @RequestMapping(value="/frndDiary", method = {RequestMethod.POST})
+    public String friendDiary(HttpServletRequest request,
+                              Model model,
+                              @RequestParam String frndEmail) {
+
+
+        // 로그인유저의 세션정보 가져오기 (이메일주소)
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if (loginUser == null) {
+            return "redirect:/";
+        } else {
+
+            // 해당 친구의 일기 가져오기
+            List<HashMap<String, Object>> myDiaryList = diaryService.oneDiarySelectAll(frndEmail);
+
+            // 친구 일기 가져오기
+            List<HashMap<String, Object>> friendDiaryList = diaryService.friendDiarySelectAll((String) loginUser);
+            model.addAttribute("memberSeq", frndEmail);
+            model.addAttribute("myDiaryList", myDiaryList);
+            model.addAttribute("friendDiaryList", friendDiaryList);
+
+            return "user/userDiary/frndDiary";
+        }
+    }
+
 }

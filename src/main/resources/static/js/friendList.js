@@ -55,9 +55,16 @@ for(let i = 0; i < response.length; i++){
 }
 
 // 닉네임 클릭시 이벤트
-for(let i = 0; i < op_nickname.length; i++) {
-    op_nickname[i].addEventListener("click", () => {
-        console.log(op_nickname[i]);
+const op_nicknameDiv = document.querySelectorAll(".op_nickname");
+const frndEmails = document.querySelectorAll(".frndEmail");
+for(let i = 0; i < op_nicknameDiv.length; i++) {
+    op_nicknameDiv[i].addEventListener("click", () => {
+        console.log(op_nicknameDiv[i]);
+
+        console.log(frndEmails[i].value);
+
+//        location.href = "frndDiary?frndEmail=" + frndEmails[i].value
+        $.post("/frndDiary"), {frndEmail : frndEmails[i].value};
     })
 }
 

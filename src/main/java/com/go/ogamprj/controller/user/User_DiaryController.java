@@ -457,6 +457,7 @@ public class User_DiaryController {
         }
     }
 
+    // 캘린더 데이터
     @RequestMapping(value = "/calendar")
     @ResponseBody
     public JSONArray getCalendarList( HttpServletRequest request,
