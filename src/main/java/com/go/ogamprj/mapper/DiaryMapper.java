@@ -77,5 +77,7 @@ public interface DiaryMapper {
     void likeDelete(String member_email, int diary_seq);
 
     List<Map<String,Object>> calendarDiarySelectAll(String memberSeq);
+
+    List<Map<String, Object>> frndCalendarDiarySelectAll(String memberSeq);
 }
 
