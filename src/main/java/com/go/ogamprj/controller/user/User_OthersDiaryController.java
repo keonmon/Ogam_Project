@@ -39,6 +39,7 @@ public class User_OthersDiaryController {
         String emotion = jObject.getString("reqEmotion");
 
 
+
         List<Map<String, Object>> selectDiaryByMood = user_othersDiaryService.selectDiaryByHappy(emotion);
 
         System.out.println(selectDiaryByMood);

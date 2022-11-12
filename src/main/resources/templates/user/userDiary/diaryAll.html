@@ -56,12 +56,13 @@
                         </th:block>
                         <th:block th:unless="${#lists.size(selectDiaryByMood)} == 0">
                             <th:block th:each="selectDiary : ${selectDiaryByMood}">
-                                <input type="text" class="diarySeq" th:value="${selectDiary.EMOTION_SEQ}" style="display:none">
+                                <input type="text" class="diarySeq" th:value="${selectDiary.DIARY_SEQ}" style="display:none">
                                 <div class="diaryBox">
                                     <div class="diary">
                                         <div class="diaryContents">[[${selectDiary.CONTENTS}]]</div>
                                         <div class="diaryContentsFooter">
                                             <div class="diaryEmoji">[[${selectDiary.EMOJI}]]</div>
+                                            <div class="diaryDate">작성자 : [[${selectDiary.MEMBER_NICK}]]</div>
                                             <div class="diaryDate" th:text="${#dates.format(selectDiary.DIARY_DATE, 'yyyy-MM-dd')}"></div>
                                         </div>
                                     </div>
