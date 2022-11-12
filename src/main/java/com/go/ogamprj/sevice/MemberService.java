@@ -3,12 +3,14 @@ package com.go.ogamprj.sevice;
 import com.go.ogamprj.dto.Bgimage;
 import com.go.ogamprj.dto.Member;
 
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.List;
 
 public interface MemberService {
-    public Member findMember(String member_email);
+    public HashMap<String, Object> findMember(String member_email);
 
-    public void reviseUpdate(Member member);
+    public void reviseUpdate(Member member, Bgimage bgimgDto);
 
-    public Optional<Bgimage> profile(Long id);
+    public void noProfile(Member member);
+
 }
