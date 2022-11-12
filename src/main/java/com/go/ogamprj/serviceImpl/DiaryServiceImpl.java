@@ -97,6 +97,10 @@ public class DiaryServiceImpl implements DiaryService {
         SimpleDateFormat sdf = new SimpleDateFormat("yy. MM. dd. EEE", Locale.ENGLISH);
 
         HashMap<String,Object> resultMap = diaryMapper.diarySelectOne(diarySeq);
+        if(resultMap == null){
+            return resultMap;
+        }
+
 
         // 날짜변경
         Date diary_date = (Date)resultMap.get("DIARY_DATE");
@@ -193,6 +197,11 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<Map<String,Object>> calendarDiarySelectAll(String memberSeq) {
         return diaryMapper.calendarDiarySelectAll(memberSeq);
+    }
+
+    @Override
+    public List<Map<String, Object>> frndCalendarDiarySelectAll(String memberSeq) {
+        return diaryMapper.frndCalendarDiarySelectAll(memberSeq);
     }
 
 

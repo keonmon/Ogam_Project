@@ -158,6 +158,7 @@
                 and member_email = #{member_email}
     </delete>
 
+    <!-- 나의 감정 캘린더 -->
     <select id="calendarDiarySelectAll" resultType="java.util.Map">
         SELECT T1.DIARY_DATE as "start", T1.DIARY_SEQ as "id", T2.emoji as "title"
         FROM(SELECT TRUNC(DIARY_DATE,'DD')as DIARY_DATE, MAX(DIARY_SEQ) AS DIARY_SEQ
@@ -171,4 +172,21 @@
         WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ) T2
         WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
     </select>
+
+    <!-- 친구 감정 캘린더 -->
+    <select id="frndCalendarDiarySelectAll" resultType="java.util.Map">
+        SELECT T1.DIARY_DATE as "start", T1.DIARY_SEQ as "id", T2.emoji as "title"
+        FROM(SELECT TRUNC(DIARY_DATE,'DD')as DIARY_DATE, MAX(DIARY_SEQ) AS DIARY_SEQ
+        FROM DIARY
+        where MEMBER_EMAIL = #{memberSeq}
+        AND diary_del = 'n'
+        AND diary_private = 'n'
+        GROUP BY TRUNC(DIARY_DATE,'DD')) T1,
+
+        (SELECT T1.DIARY_SEQ, T2.EMOJI
+        FROM DIARY T1, EMOTIONS T2
+        WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ) T2
+        WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
+    </select>
+
 </mapper>

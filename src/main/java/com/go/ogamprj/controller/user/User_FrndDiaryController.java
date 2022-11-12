@@ -4,6 +4,7 @@ import com.go.ogamprj.dto.friendApply;
 import com.go.ogamprj.dto.friendSend;
 import com.go.ogamprj.sevice.DiaryService;
 import com.go.ogamprj.sevice.FriendDiaryService;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -150,6 +151,24 @@ public class User_FrndDiaryController {
 
             return "user/userDiary/frndDiary";
         }
+    }
+
+    // 친구캘린더 데이터
+    @RequestMapping(value = "/frndCalendar")
+    @ResponseBody
+    public JSONArray getCalendarList(HttpServletRequest request,
+                                     Model model,
+                                     @RequestParam String memberSeq
+    )  {
+
+        List<Map<String,Object>> diaryList = diaryService.frndCalendarDiarySelectAll(memberSeq);
+
+        JSONArray result = new JSONArray();
+        result.addAll(diaryList);
+
+        //System.out.println("db에서 갓 나옴 : "+diaryList);
+        //System.out.println("json으로 변환 : "+ result);
+        return result;
     }
 
 }

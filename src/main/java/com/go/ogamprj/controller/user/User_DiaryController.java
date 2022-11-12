@@ -159,6 +159,13 @@ public class User_DiaryController {
             // 다이어리와 배경이미지를 조인한 결과를 해시맵에 담음
             HashMap<String, Object> diaryDto = diaryService.diarySelectOne(diarySeq);
 
+            
+            //System.out.println("비공개 유무 : " + diaryDto.get("DIARY_PRIVATE"));
+            //System.out.println("로그인유저 == 작성자 : " + (diaryDto.get("MEMBER_EMAIL").equals(loginUser.toString()) ));
+            // 비공개게시물 & 로그인유저 == 작성자 가 아닐경우 메인으로 꺼쪄
+            if( ( diaryDto.get("DIARY_PRIVATE").equals("y") ) && (!diaryDto.get("MEMBER_EMAIL").equals(loginUser.toString()) ) ){
+                  return "redirect:/";
+            }
 
             // 파일 경로에 realPath 덧붙이기
             //String realPath = request.getSession().getServletContext().getRealPath("/");
@@ -473,7 +480,6 @@ public class User_DiaryController {
         //System.out.println("db에서 갓 나옴 : "+diaryList);
         //System.out.println("json으로 변환 : "+ result);
         return result;
-
     }
 
 
