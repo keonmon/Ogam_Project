@@ -19,7 +19,7 @@
 <body>
     <div class="container">
 
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='myDiary')" class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
@@ -40,7 +40,7 @@
 
                             <div class="innerOutline">
                                 <div class="innerBg">
-                                    <div class="innerImg" th:style="|background:url(${diaryMap.BGIMG_PATH});|"></div>
+                                    <div class="innerImg" th:style="|background-image:url(${diaryMap.BGIMG_PATH});|"></div>
                                 </div>
 
                                 <div class="titles">

@@ -190,21 +190,24 @@
 }
 
 .moodSelect div {
+    display: flex;
     background-color: rgb(139, 184, 232, 60%);
     border-radius: 20px;
     width: 13%;
     height: 90%;
     min-width: 110px;
     text-align: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .moodSelect div > span {
     font-size: 70px;
 }
 .moodSelect div > p{
-    margin-top: 0px;
     font-size: 30px;
     font-weight: bold;
+    margin: 0;
 }
 
 /* 일기 목록 박스 스타일 */
