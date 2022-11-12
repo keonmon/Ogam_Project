@@ -8,6 +8,7 @@
     <title>대쉬보드</title>
     <link rel="stylesheet" type="text/css" href="/css/friendList.css" />
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
     <link rel="stylesheet" type="text/css" href="/css/friendList_dark.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -47,7 +48,7 @@
                         </th:block>
                         <th:block th:unless="${#lists.size(friendList)} == 0">
                             <th:block th:each="friend : ${friendList}">
-                                <div class="send_date">[[ ${friend.FRIEND_DATE} ]]</div>
+                                <div class="send_date" th:text="|친구 된 날짜 : ${#dates.format(friend.FRIEND_DATE, 'yyyy-MM-dd')}|"></div>
                                 <div class="send_list">
                                     <div class="send_contents">
                                         <div class="op_img">
