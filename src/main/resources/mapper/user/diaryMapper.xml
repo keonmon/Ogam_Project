@@ -42,7 +42,7 @@
                                 from DUAL CONNECT BY LEVEL 	&lt;= 20000)
           and d.diary_private = 'n'
           and d.diary_del = 'n'
-          and rownum 	&lt;= 10
+          and rownum 	&lt;= 15
     </select>
 
     <!-- 다이어리 배경이미지 insert -->

@@ -2,7 +2,7 @@
 -- ▶▶▶▶▶ 앵간하면 건들지 말것 ( 조심쓰 ) ◀◀◀◀◀◀
 -- 테이블 및 컬럼 수정시 반드시 기록할 것
 
--- member.member_date                                   -> default sysdate로 수정
+-- member.member_date                                   -> default current_date로 수정
 -- diary.bgimg_seq                                      -> null로 수정
 -- emotions.emoji                                       -> 다시 varchar2(50)으로 수정함...
 -- notifi.reply_seq, diary_seq, like_seq, fri_send_seq  -> null로 바꿈
@@ -14,7 +14,10 @@
 -- diary, reply 테이블에 삭제 구분 컬럼 추가 (diary_del, reply_del)
 -- member테이블 - member_adminyn 컬럼 삭제
 --Blacklist_diary.blacklist_diary_date ,Blacklist_reply.blacklist_reply_date
-            --> 두 테이블의 date 관련 컬럼 기본값 sysdate, not null로 변경함
+            --> 두 테이블의 date 관련 컬럼 기본값 current_date, not null로 변경함
+
+-- 모든 sysdate가 default인 컬럼들을 전부 current_date로 수정
+
 
 ----------------------------------------
 --DROP TABLE BGIMAGE;
@@ -44,7 +47,7 @@ CREATE TABLE MEMBER (
 	member_gender	varchar2(10)		NULL,
 	member_blackYn	varchar2(2)	DEFAULT 'n'	NOT NULL,
 	member_black_reason	varchar2(200)		NULL,
-	member_date	date	DEFAULT sysdate	NULL,
+	member_date	date	DEFAULT current_date	NULL,
 	member_image	varchar2(100)		NULL,
 	member_intro	varchar2(200)		NULL,
 	member_quited	date		NULL,
@@ -61,7 +64,7 @@ CREATE TABLE DIARY (
 	bgimg_seq	number		NULL,
     emotion_seq 	number	NOT NULL,
 	contents	varchar2(200)		NOT NULL,
-	diary_date	date	DEFAULT sysdate	NOT NULL,
+	diary_date	date	DEFAULT current_date	NOT NULL,
 	diary_private	varchar2(2)	DEFAULT 'n'	NOT NULL,
 	diary_del varchar2(2) not null default 'n'
 );
@@ -73,7 +76,7 @@ CREATE TABLE reply (
 	diary_seq	number 	NOT NULL,
 	member_email	varchar2(100)		NOT NULL,
 	reply	varchar2(200)		NULL,
-	reply_date	date	DEFAULT sysdate	NULL,
+	reply_date	date	DEFAULT current_date	NULL,
 	reply_del varchar2(2) not null default 'n'
 );
 
@@ -94,7 +97,7 @@ CREATE TABLE friend_apply (
 	fri_app_seq	number	DEFAULT fri_app_seq.nextval PRIMARY KEY	NOT NULL,
 	member_email	varchar2(100)		NOT NULL,
 	member_op_email	varchar2(100)		NOT NULL,
-	friend_date	date	DEFAULT sysdate	NOT NULL,
+	friend_date	date	DEFAULT current_date	NOT NULL,
 	friend_key number not null
 );
 
@@ -104,7 +107,7 @@ CREATE TABLE friend_send (
 	member_email	varchar2(100)		NOT NULL,
 	member_op_email	varchar2(100)		NOT NULL,
 	response	varchar2(2)		NULL,
-	send_date	date	DEFAULT sysdate	NULL,
+	send_date	date	DEFAULT current_date	NULL,
 	yndate	date		NULL
 );
 
@@ -134,7 +137,7 @@ CREATE TABLE notifi (
 	fri_send_seq	number	NULL,
 	noti_email	varchar2(100)		NULL,
 	noti_type	varchar2(50)		NOT NULL,
-	noti_date	date	DEFAULT sysdate	NOT NULL,
+	noti_date	date	DEFAULT current_date	NOT NULL,
 	noti_readDate	date		NULL,
 	noti_comm	varchar2(200)		NULL
 );
@@ -151,13 +154,13 @@ COMMENT ON COLUMN notifi.noti_type IS '- 댓글 알림 : reply
 - 친구 맺음 : friend_yn';
 
 
-COMMENT ON COLUMN notifi.noti_readDate IS '사용자가 확인할 경우 sysdate입력';
+COMMENT ON COLUMN notifi.noti_readDate IS '사용자가 확인할 경우 current_date입력';
 
 CREATE TABLE BOARD (
 	board_seq	number	DEFAULT board_seq.nextVal PRIMARY KEY	NOT NULL,
 	board_title	varchar2(100)		NULL,
 	board_contents	varchar2(500)		NULL,
-	board_date	date	DEFAULT sysdate	NOT NULL,
+	board_date	date	DEFAULT current_date	NOT NULL,
 	board_yn	varchar2(2)	DEFAULT 'n'	NOT NULL
 );
 
@@ -173,7 +176,7 @@ CREATE TABLE Blacklist_reply (
 	member_email	varchar2(100)		NOT NULL,
 	blacklist_member_email	varchar2(100)		NULL,
 	blacklist_comment	varchar2(50)		NULL,
-	blacklist_reply_date	date	default sysdate 	not NULL
+	blacklist_reply_date	date	default current_date 	not NULL
 );
 
 
@@ -184,7 +187,7 @@ CREATE TABLE Blacklist_diary (
 	member_email	varchar2(100)		NOT NULL,
 	blacklist_user_email	varchar2(100)		NULL,
 	blacklist_comment	varchar2(50)		NULL,
-	blacklist_diary_date	date	default sysdate 	not NULL
+	blacklist_diary_date	date	default current_date 	not NULL
 );
 
 

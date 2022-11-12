@@ -18,7 +18,7 @@
 <body>
     <div class="container">
 
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='myDiary')" class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
