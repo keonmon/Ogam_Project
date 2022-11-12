@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
-<th:block th:fragment="userSidebar">
+<th:block th:fragment="userSidebar(currMenu)">
     <aside class="sidebar">
         <div class="top-menu">
             <ul>
@@ -11,19 +11,19 @@
                         </a>
                     </div>
                 </li>
-                <li>
+                <li th:classappend="${currMenu == 'myDiary'} ? active">
                     <a href="/myDiary">
                         <span> <i class="fa-solid fa-users-rectangle"></i></span>
                         <span>내 일기장</span>
                     </a>
                 </li>
-                <li>
+                <li th:classappend="${currMenu == 'friendList'} ? active">
                     <a href="/friendList">
                         <span> <i class="fa-solid fa-table"></i></span>
                         <span>친구의 일기장</span>
                     </a>
                 </li>
-                <li>
+                <li th:classappend="${currMenu == 'diaryAll'} ? active">
                     <a href="/diaryAll">
                         <span> <i class="fa-solid fa-house-user"></i></span>
                         <span>오늘의 일기장</span>
