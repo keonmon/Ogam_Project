@@ -73,7 +73,8 @@ public class User_FrndDiaryController {
 
         // member 전체 유저 가져오기
         List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
-        System.out.println(memberList);
+        System.out.println("asdasdas : " + memberList);
+
         model.addAttribute("memberList",memberList);
         model.addAttribute("friendSendList",friendSendList);
         return "user/noticePage/sendList";

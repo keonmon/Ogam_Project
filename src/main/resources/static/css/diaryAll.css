@@ -248,6 +248,25 @@
     background-color: #ECECEC;
     box-shadow: 0px 0px 10px 1px rgba(156, 156, 156, 0.2);
     height: 15vw;
+    cursor:pointer;
+}
+
+.diary:hover{
+    animation: rotate 0.8s linear;
+}
+
+@keyframes rotate{
+     0%{
+        background-position: right bottom;
+    }
+    50%{
+        background-position: left bottom;
+        transform: rotateY(90deg);
+    }
+    100%{
+        background-position: right bottom;
+        transform: rotateY(0deg);
+    }
 }
 
 .diaryContents {
@@ -261,6 +280,7 @@
 
 .diaryContentsFooter {
     display: flex;
+    flex-direction:column;
     height: 35%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -280,6 +300,7 @@
     justify-content: end;
     align-items: flex-end;
     width: 100%;
+    height:100%;
     padding: 10px;
     font-size: 20px;
     font-weight: bold;

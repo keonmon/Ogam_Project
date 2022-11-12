@@ -25,8 +25,10 @@ for(let i = 0; i < moodSelect.length; i++) {
 
 // 일기 클릭시 url 이동
 const diary = document.querySelectorAll(".diary");
+const diarySeq = document.querySelectorAll(".diarySeq");
 for(let i = 0; i < diary.length; i++ ) {
     diary[i].addEventListener("click", () => {
-        console.log(diary[i]);
+
+        window.location.href= "/viewDiary?diarySeq=" + diarySeq[i].value
     })
 }
