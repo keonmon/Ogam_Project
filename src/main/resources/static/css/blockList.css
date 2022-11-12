@@ -73,7 +73,7 @@
 
 /* 바디콘테이너 스타일 */
 .bodyContainer{
-    background-color: #f1f1f1; 
+    background-color: #f1f1f1;
     position: relative;
 }
 
@@ -340,10 +340,13 @@
     border: 1px solid rgb(134, 134, 134);
     border-radius: 15px;
     z-index: 1;
+    flex-direction: space-between;
+
 }
 .sendHeader{
     display: flex;
-    justify-content: center;
+    padding: 10px;
+    justify-content: space-around;
     width: 100%;
     height: 5rem;
     background-color: #BA9AFF;
@@ -355,7 +358,7 @@
 }
 
 .sendHeader span{
-    font-size: 1.9rem;
+    font-size: 1.3rem;
 }
 
 /* 친구리스트 검색 스타일 */
@@ -369,7 +372,7 @@
     display: flex;
     justify-content: center;
     min-width: 60%;
- 
+
 }
 
 .searchBox input{
@@ -382,6 +385,18 @@
 
 .searchBox input:focus-visible{
     outline-style: none;
+}
+
+#searchKeyword {
+    width: 10vw;
+}
+
+#blockBtn {
+    width: 3vw;
+    margin-left: 10px;
+    background-color: #878689;
+    border-radius: 3px;
+    color: white;
 }
 
 .blockImg{
@@ -398,9 +413,10 @@
 .blockCnt{
     /* display: flex;
     justify-content: end; */
-    min-width: 5vw;
+    min-width: 3vw;
     font-size: large;
     font-weight: bold;
+    margin-left: 20px;
 }
 
 /* body 부분 스타일 */
@@ -425,6 +441,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    margin-top: 10px;
     width: 100%;
     height: 100%;
     padding: 10px;
@@ -437,8 +454,18 @@
 }
 
 .op_img img{
-    width: 8rem;
+    width: 6.5rem;
+    height: 100px;
     border-radius: 10px;
+}
+
+.deleteBtn{
+    width: 5vw;
+    height: 30px;
+    background-color: #BA9AFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
 }
 
 /* 차단 사용자 닉네임 */

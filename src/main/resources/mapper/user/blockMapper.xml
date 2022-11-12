@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.go.ogamprj.mapper.BlockMapper">
+    <select id="blockList" resultType="java.util.HashMap">
+        SELECT T1.MEMBER_EMAIL AS MEMBER_EMAIL
+               , T1.MEMBER_PW AS MEMBER_PW
+               , T1.MEMBER_NICK AS MEMBER_NICK
+               , T1.MEMBER_INTRO AS MEMBER_INTRO
+               , T2.BGIMG_PATH AS BGIMG_PATH
+               , T3.BLOCK_SEQ AS BLOCK_SEQ
+        FROM MEMBER T1, BGIMAGE T2,
+        (SELECT T2.BLOCK_EMAIL, T2.BLOCK_SEQ
+        FROM MEMBER T1, BLOCK T2
+        WHERE T1.MEMBER_EMAIL = T2.MEMBER_EMAIL
+        AND T2.MEMBER_EMAIL = #{MEMBER_EMAIL})T3
+        WHERE T1.BGIMG_SEQ = T2.BGIMG_SEQ(+)
+        AND T1.MEMBER_EMAIL = T3.BLOCK_EMAIL
+    </select>
+    <delete id="blockDel">
+        DELETE FROM BLOCK
+        WHERE BLOCK_SEQ = #{BLOCK_SEQ}
+    </delete>
+
+<!--    block 타입으로 인서트-->
+    <insert id="blockPlus" parameterType="com.go.ogamprj.dto.Block">
+        INSERT INTO
+        BLOCK (MEMBER_EMAIL, BLOCK_EMAIL)
+        VALUES (#{MEMBER_EMAIL}, #{BLOCK_EMAIL})
+    </insert>
+<!--    중복 차단 방지-->
+    <select id="doubleBlock" resultType="Integer">
+        SELECT COUNT(*)
+        FROM BLOCK
+        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+        AND BLOCK_EMAIL = #{BLOCK_EMAIL}
+    </select>
+<!--    차단할 유저의 닉네임으로 아이디를 찾는다-->
+    <select id="findId" resultType="String">
+        SELECT MEMBER_EMAIL as BLOCK_EMAIL
+        FROM MEMBER
+        WHERE MEMBER_NICK = #{MEMBER_NICK}
+    </select>
+
+</mapper>

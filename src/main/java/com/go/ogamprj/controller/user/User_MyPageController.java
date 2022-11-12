@@ -113,7 +113,6 @@ public class User_MyPageController {
 
         int pwd = memberMapper.delMemberPwd(member_email, member_pw);
         PrintWriter out = response.getWriter();
-
         init(response);
 
         if(pwd == 0) {
