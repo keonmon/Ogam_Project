@@ -4,6 +4,8 @@ function delete_Modal() {
     modalContainer.style.display = "block";
 }
 
+
+
 // 닫기 버튼
 function closeModal() {
     let modalContainer = document.querySelector(".modalContainer");

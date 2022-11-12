@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class User_FrndDiaryController {
+public class User_FrindDiaryController {
 
     @Autowired
     FriendDiaryService friendDiaryService;

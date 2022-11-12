@@ -2,11 +2,44 @@
 <!DOCTYPE mapper
         PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.go.ogamprj.mapper.MemberMapper">
-    <update id="reviseUpdate" parameterType="com.go.ogamprj.dto.Member">
+<!--    프로필사진 포함한 유저 정보-->
+    <select id="findMember" resultType="java.util.HashMap">
+        SELECT T1.MEMBER_EMAIL AS MEMBER_EMAIL
+        , T1.MEMBER_PW AS MEMBER_PW, T1.MEMBER_NICK AS MEMBER_NICK,
+        T1.MEMBER_BIRTH AS MEMBER_BIRTH, T1.MEMBER_PHONE AS MEMBER_PHONE
+        , T1.BGIMG_SEQ AS BGIMG_SEQ, T2.BGIMG_PATH as BGIMG_PATH
+        , T1.MEMBER_INTRO AS MEMBER_INTRO
+        FROM MEMBER T1, BGIMAGE T2
+        WHERE T1.BGIMG_SEQ = T2.BGIMG_SEQ(+)
+        AND T1.MEMBER_EMAIL = #{MEMBER_EMAIL}
+    </select>
+<!--    유저 정보 업데이트-->
+    <update id="reviseUpdate">
         UPDATE MEMBER
-        SET MEMBER_PW = #{MEMBER_PW},
+        SET MEMBER_PW = #{MEMBER_PW}
         , MEMBER_NICK = #{MEMBER_NICK}, MEMBER_BIRTH = #{MEMBER_BIRTH}
         , MEMBER_PHONE = #{MEMBER_PHONE}, MEMBER_INTRO = #{MEMBER_INTRO}
+        , BGIMG_SEQ = (SELECT MAX(bgimg_seq) FROM BGIMAGE)
+        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+    </update>
+
+<!--    사진없는 정보 업데이트-->
+    <update id="noProfile">
+        UPDATE MEMBER
+        SET MEMBER_PW = #{MEMBER_PW}
+        , MEMBER_NICK = #{MEMBER_NICK}, MEMBER_BIRTH = #{MEMBER_BIRTH}
+        , MEMBER_PHONE = #{MEMBER_PHONE}, MEMBER_INTRO = #{MEMBER_INTRO}
+        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+    </update>
+<!--    사진 있을 때 정보 업데이트-->
+    <insert id="proPhotoUpdate" parameterType="com.go.ogamprj.dto.Bgimage">
+        INSERT INTO
+        BGIMAGE VALUES(#{BGIMG_SEQ}, #{BGIMG_PATH}, #{BGIMG_TITLE})
+    </insert>
+    <update id="delMember">
+        UPDATE MEMBER
+        SET MEMBER_QUITED = CURRENT_DATE
+        , MEMBER_QUITED_REASON = #{MEMBER_QUITED_REASON}
         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
     </update>
 </mapper>
