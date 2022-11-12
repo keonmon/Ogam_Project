@@ -6,6 +6,7 @@
 
 .container{
     display: flex;
+    position :relative;
 }
 
 /* 사이드바 스타일 */
@@ -77,7 +78,7 @@
 
 /* 바디콘테이너 스타일 */
 .bodyContainer{
-    background-color: #f1f1f1; 
+    background-color: #f1f1f1;
 }
 
 /* 메뉴바 스타일 */
@@ -169,6 +170,8 @@
 /* 콘텐츠 스타일 */
 
 .contents{
+    display:flex;
+    flex-direction: column;
     height: 88vh;
 }
 
@@ -226,25 +229,17 @@
 }
 
 .diaryContainer{
+    display:grid;
+    grid-template-columns : repeat(4, 1fr);
     background-color: #D9D9D9;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    width: 100%;
     height: 85%;
     overflow-y: auto;
 }
 
-/* .diaryContainer::-webkit-scrollbar {
-    display: none;
-} */
-
 .diaryBox {
-    display: flex;
-    column-gap: 3vw;
-    justify-self: start;
-    align-items: center;
-    height: 50%;
-    margin: auto 1vw;
+    margin: 1vw;
 }
 
 .diary {
@@ -252,8 +247,26 @@
     border-radius: 20px;
     background-color: #ECECEC;
     box-shadow: 0px 0px 10px 1px rgba(156, 156, 156, 0.2);
-    width: 30%;
-    height: 90%;
+    height: 15vw;
+    cursor:pointer;
+}
+
+.diary:hover{
+    animation: rotate 0.8s linear;
+}
+
+@keyframes rotate{
+     0%{
+        background-position: right bottom;
+    }
+    50%{
+        background-position: left bottom;
+        transform: rotateY(90deg);
+    }
+    100%{
+        background-position: right bottom;
+        transform: rotateY(0deg);
+    }
 }
 
 .diaryContents {
@@ -267,6 +280,7 @@
 
 .diaryContentsFooter {
     display: flex;
+    flex-direction:column;
     height: 35%;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -286,7 +300,27 @@
     justify-content: end;
     align-items: flex-end;
     width: 100%;
+    height:100%;
     padding: 10px;
     font-size: 20px;
     font-weight: bold;
+}
+
+.emptyData {
+    display:flex;
+    justify-content:center;
+}
+
+.emptyData .diaryText{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size: 25px;
+    font-weight: bold;
+    width:80%;
+    height:10vw;
+    margin-top:20px;
+    background-color: #ECECEC;
+    border-radius:20px;
+    box-shadow: 0px 0px 10px 1px rgba(156, 156, 156, 0.2);
 }

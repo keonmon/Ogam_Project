@@ -40,6 +40,10 @@
     background-color: #d1cef2;
 }
 
+.sidebar .active{
+    background-color: #d1cef2;
+}
+
 .footer{
     flex-direction: column;
     margin-top: auto;

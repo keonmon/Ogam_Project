@@ -91,7 +91,7 @@
 <body>
     <div class="container">
 
-        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='myDiary')" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='friendList')" class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
@@ -105,7 +105,7 @@
                                 <div class="mod1_Outline2">
                                     <div class="mod1_grey"></div>
                                     <div class="mod1_titleBg">
-                                        <span class="mod1_titleFont">최근 내 감정</span>
+                                        <span class="mod1_titleFont">친구의 감정</span>
                                     </div>
                                 </div>
                                 <input hidden class="memberSeq" th:value="${memberSeq}"/>
@@ -114,7 +114,7 @@
                                         <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
 
-                                        <a class="mod1_innerContents"
+                                        <a class="mod1_innerContents" th:if="${myDiary['DIARY_PRIVATE'].equals('n')}"
                                             th:href="|/viewDiary?diarySeq=${myDiary.DIARY_SEQ}|"
                                             th:each="myDiary : ${myDiaryList}">
                                             <div class="mod1_d_bg">
@@ -132,20 +132,20 @@
                                 </div>
                             </div>
                         </div> <!-- /module1 -->
-                    </div><!-- /최근 내 감정 -->
+                    </div><!-- /최근 친구 감정 -->
                     <!-- 내 감정 캘린더 -->
                     <div class="my_calendar">
                         <div id="calendar"></div>
                     </div><!-- /내 감정 캘린더 -->
 
-                    <!-- 친구 감정 -->
+                    <!-- 또 다른 친구 감정 -->
                     <div class="rand_Diary">
                         <div class="mod1_Outline_shdw">
                             <div class="mod1_Outline">
                                 <div class="mod1_Outline2">
                                     <div class="mod1_grey"></div>
                                     <div class="mod1_titleBg">
-                                        <span class="mod1_titleFont">친구의 감정</span>
+                                        <span class="mod1_titleFont">다른 친구의 감정</span>
                                     </div>
                                 </div>
                                 <div class="mod1_slider_frnd slider">
@@ -172,7 +172,7 @@
                             </div>
 
                         </div> <!-- /module1 -->
-                    </div><!-- 친구의 감정 -->
+                    </div><!--또 다른 친구의 감정 -->
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
                             const memberSeq = document.querySelector(".memberSeq").value;
@@ -201,7 +201,7 @@
                                     // ajax 처리로 데이터를 로딩 시킨다.
                                     $.ajax({
                                         type: "get",
-                                        url: "/calendar",
+                                        url: "/frndCalendar",
                                         data : { "memberSeq" : memberSeq },
                                         dataType: "json",
                                         success: function (data) {

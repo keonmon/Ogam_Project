@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.go.ogamprj.mapper.User_OthersDiaryMapper">
+
+    <!--  전체 diary 가져오기  -->
+    <select id="selectDiaryAll" resultType="java.util.Map">
+        select *
+        from diary d
+            join emotions e
+            on d.emotion_seq = e.emotion_seq
+            join member m
+            on d.member_email = m.member_email
+    </select>
+
+    <!--  기분별 diary 가져오기  -->
+    <select id="selectDiaryByHappy" resultType="java.util.Map">
+        select *
+        from diary d
+            join emotions e
+            on d.emotion_seq = e.emotion_seq
+            join member m
+            on d.member_email = m.member_email
+        where e.emotion = #{emotion}
+    </select>
+</mapper>

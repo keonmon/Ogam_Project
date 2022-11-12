@@ -19,7 +19,7 @@
 <body>
     <div class="container">
 
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='myDiary') " class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
@@ -45,7 +45,7 @@
                                 </div>
 
                                 <div class="diaryNote">
-                                    <textarea name="contents" cols="100" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" onkeypress="if(event.keyCode==13)return false" autofocus="autofocus" spellcheck="false" maxlength="150" placeholder=" 당신의 감정을 이곳에 적어보세요!!! (최대 150자 & 줄바꿈 제한)"></textarea>
+                                    <textarea id="diary" name="contents" cols="100" rows="5" onkeydown="resize(this)" onkeyup="resize(this)" onkeypress="if(event.keyCode==13)return false" autofocus="autofocus" spellcheck="false" maxlength="150" placeholder=" 당신의 감정을 이곳에 적어보세요!!! (최대 150자 & 줄바꿈 제한)"></textarea>
                                 </div>
                                 <div class="privateSwitch material-switch pull-right">
                                     비공개<br><br>
@@ -60,7 +60,7 @@
                                     </div>
                                 </a>
                                 <!-- 나중에 submit으로 변경 -->
-                                <div class="next" onClick="document.forms['write2Form'].submit()">
+                                <div class="next" onClick="next()">
                                     <span class="nextFont">다음</span>
                                 </div>
                             </div>
@@ -71,6 +71,17 @@
             </div>
             <!-- ==================== / contents 영역======================= -->
             <script>
+                
+                function next(){
+                    const diaryInput = document.getElementById("diary")
+                    const diary = diaryInput.value.trim();
+                    if(diary==""|| diary.length == 0){
+                        alert("내용을 입력하세요.")
+                        diaryInput.value = ""
+                        diaryInput.focus()
+                    }else{ document.forms['write2Form'].submit(); }
+                }
+
                 // 줄에 따른 textarea의 길이 변경
                 function resize(obj) {
                   obj.style.height = "1px";

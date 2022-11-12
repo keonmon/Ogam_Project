@@ -8,13 +8,14 @@
     <title>대쉬보드</title>
     <link rel="stylesheet" type="text/css" href="/css/sendList.css" />
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
     <link rel="stylesheet" type="text/css" href="/css/sendList_dark.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="container">
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='friendList') " class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
@@ -44,7 +45,7 @@
                                     <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
                                     <input type="text" class="op_email" th:value="${friendSend.MEMBER_OP_EMAIL}" style="display:none">
                                     <input type="text" class="friSeq" th:value="${friendSend.FRI_SEND_SEQ}" style="display:none">
-                                    <div class="send_date">[[${friendSend.SEND_DATE}]]</div>
+                                    <div class="send_date" th:text="|친구 신청일 : ${#dates.format(friendSend.SEND_DATE, 'yyyy-MM-dd')}|"></div>
                                     <div class="send_list">
                                         <div class="send_contents">
                                             <span class="op_img">
@@ -52,7 +53,7 @@
                                             </span>
                                             <div class="op_nickname">
                                                 <span>[[ ${friendSend.MEMBER_NICK} ]]</span>
-                                                <p>[[ ${friendSend.MEMBER_INTRO} ]]</p>
+                                                <p>[[ ${friendSend['MEMBER_INTRO']} ]]</p>
                                             </div>
                                             <div class="response">
                                                 <div id="accept">수락</div>
@@ -101,7 +102,7 @@
                                         </span>
                                         <div class="member_nickname">
                                             <span>[[ ${member.MEMBER_NICK} ]]</span>
-                                            <p>[[ ${member.MEMBER_INTRO} ]]</p>
+                                            <p>[[ ${member['MEMBER_INTRO']} ]]</p>
                                         </div>
                                         <div class="addBtn">
                                             <div class="add">추가</div>

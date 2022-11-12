@@ -22,7 +22,7 @@
 <body>
     <div class="container">
 
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='') " class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
@@ -163,7 +163,7 @@
                             url: '/replyInsert',
                             type: 'post',
                             data: { 
-                                "reply" : reply,
+                                "reply" : reply.trim(),
                                 "diarySeq" : diarySeq
                             },
                         })

@@ -100,7 +100,7 @@ public class User_DiaryController {
         String writeContents = (String)request.getSession().getAttribute("writeContents");
         String loginUser = (String)request.getSession().getAttribute("loginUser");
 
-        Diary diaryDto = new Diary(0, loginUser, 0, writeEmotionSeq, writeContents, null, diary_private, "n");
+        Diary diaryDto = new Diary(0, loginUser, 0, writeEmotionSeq, writeContents.trim(), null, diary_private, "n");
 
         // 업로드된 파일 처리
             // 이미지를 업로드하지 않는 경우
@@ -159,6 +159,13 @@ public class User_DiaryController {
             // 다이어리와 배경이미지를 조인한 결과를 해시맵에 담음
             HashMap<String, Object> diaryDto = diaryService.diarySelectOne(diarySeq);
 
+            
+            //System.out.println("비공개 유무 : " + diaryDto.get("DIARY_PRIVATE"));
+            //System.out.println("로그인유저 == 작성자 : " + (diaryDto.get("MEMBER_EMAIL").equals(loginUser.toString()) ));
+            // 비공개게시물 & 로그인유저 == 작성자 가 아닐경우 메인으로 꺼쪄
+            if( ( diaryDto.get("DIARY_PRIVATE").equals("y") ) && (!diaryDto.get("MEMBER_EMAIL").equals(loginUser.toString()) ) ){
+                  return "redirect:/";
+            }
 
             // 파일 경로에 realPath 덧붙이기
             //String realPath = request.getSession().getServletContext().getRealPath("/");
@@ -268,7 +275,7 @@ public class User_DiaryController {
             // 기존 일기 데이터 조회
             HashMap<String, Object> diaryMap = diaryService.diarySelectOne(Integer.parseInt(id));
 
-            Diary diaryDto = new Diary(Integer.parseInt(id), (String) loginUser, 0, writeEmotionSeq, writeContents, null, diary_private, "n");
+            Diary diaryDto = new Diary(Integer.parseInt(id), (String) loginUser, 0, writeEmotionSeq, writeContents.trim(), null, diary_private, "n");
 
             // 업로드된 파일 처리
             // 이미지를 업로드하지 않는 경우
@@ -324,7 +331,7 @@ public class User_DiaryController {
             return "redirect:/";
         }else{
             // 댓글 수정
-            diaryService.replyUpdate(Integer.parseInt(id),reply);
+            diaryService.replyUpdate(Integer.parseInt(id),reply.trim());
             // 일기 번호 구하기
             int diaryId = diaryService.getDiarySeq(Integer.parseInt(id));
 
@@ -457,6 +464,7 @@ public class User_DiaryController {
         }
     }
 
+    // 캘린더 데이터
     @RequestMapping(value = "/calendar")
     @ResponseBody
     public JSONArray getCalendarList( HttpServletRequest request,
@@ -472,7 +480,6 @@ public class User_DiaryController {
         //System.out.println("db에서 갓 나옴 : "+diaryList);
         //System.out.println("json으로 변환 : "+ result);
         return result;
-
     }
 
 
