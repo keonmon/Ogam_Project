@@ -114,7 +114,7 @@
                                         <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
 
-                                        <a class="mod1_innerContents"
+                                        <a class="mod1_innerContents" th:if="${myDiary['DIARY_PRIVATE'].equals('n')}"
                                             th:href="|/viewDiary?diarySeq=${myDiary.DIARY_SEQ}|"
                                             th:each="myDiary : ${myDiaryList}">
                                             <div class="mod1_d_bg">

@@ -5,7 +5,7 @@
 <mapper namespace="com.go.ogamprj.mapper.DiaryMapper">
     <!-- 내 다이어리 전부 가져오기 -->
     <select id="oneDiarySelectAll" resultType="java.util.HashMap">
-        select m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ
+        select m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ, d.DIARY_PRIVATE
           from diary d join emotions e
             on e.EMOTION_SEQ = d.EMOTION_SEQ
           join member m
