@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="/css/test.css" />
     <link rel="stylesheet" type="text/css" href="/css/friendList_dark.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 </head>
 
 <body>
@@ -63,6 +65,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input hidden class="frndEmail" name="email" th:value="${friend.MEMBER_EMAIL}"/>
                             </th:block>
                         </th:block>
                     </div>
