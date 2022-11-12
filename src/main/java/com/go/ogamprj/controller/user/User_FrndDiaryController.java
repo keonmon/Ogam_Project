@@ -43,7 +43,7 @@ public class User_FrndDiaryController {
 
         // 친구 검색 리스트
 
-        List<Map<String, Object>> search = friendDiaryService.search(searchKeyword);
+        List<Map<String, Object>> search = friendDiaryService.search(searchKeyword.trim());
 
         model.addAttribute("friendList", search);
 

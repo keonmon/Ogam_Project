@@ -59,13 +59,35 @@ const op_nicknameDiv = document.querySelectorAll(".op_nickname");
 const frndEmails = document.querySelectorAll(".frndEmail");
 for(let i = 0; i < op_nicknameDiv.length; i++) {
     op_nicknameDiv[i].addEventListener("click", () => {
-        console.log(op_nicknameDiv[i]);
 
-        console.log(frndEmails[i].value);
+        //post로 친구 main으로 이동 (이메일을 통한 무차별 접근을 통제하기 위해 post)
+        pageGoPost({
+        	url: "/frndDiary",	//이동할 페이지
+            target: "_self",
+            vals: [				//전달할 인수들
+            	["frndEmail", frndEmails[i].value]
+        	]
+        });
 
-//        location.href = "frndDiary?frndEmail=" + frndEmails[i].value
-        $.post("/frndDiary"), {frndEmail : frndEmails[i].value};
     })
+}
+
+// 스크립트로 form 생성하여 post로 페이지 이동
+function pageGoPost(d){
+	var insdoc = "";
+
+	for (var i = 0; i < d.vals.length; i++) {
+	  insdoc+= "<input type='hidden' name='"+ d.vals[i][0] +"' value='"+ d.vals[i][1] +"'>";
+	}
+
+	var goform = $("<form>", {
+	  method: "post",
+	  action: d.url,
+	  target: d.target,
+	  html: insdoc
+	}).appendTo("body");
+
+	goform.submit();
 }
 
 

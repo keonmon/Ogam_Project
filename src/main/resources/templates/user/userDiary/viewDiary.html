@@ -163,7 +163,7 @@
                             url: '/replyInsert',
                             type: 'post',
                             data: { 
-                                "reply" : reply,
+                                "reply" : reply.trim(),
                                 "diarySeq" : diarySeq
                             },
                         })
