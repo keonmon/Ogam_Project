@@ -9,9 +9,13 @@
         from member m
             join friend_apply f
             on m.member_email = f.member_email
-            left join bgimage b
-            on b.bgimg_seq = m.bgimg_seq
+            left join bgimage i
+            on i.bgimg_seq = m.bgimg_seq
         where f.member_op_email =#{myEmail}
+        and f.member_email in(
+                    (select member_email from member) minus
+                    (select block_email from block where member_email = #{myEmail})
+        )
         order by f.friend_date desc
     </select>
     <!--  친구리스트 count  -->
@@ -25,14 +29,15 @@
         from member m
             join friend_apply f
             on m.member_email = f.member_email
-            left join bgimage b
-            on b.bgimg_seq = m.bgimg_seq
-        where f.member_email
-                in (select member_op_email
-                from friend_apply
-                where member_email = #{myEmail})
+            left join bgimage i
+            on i.bgimg_seq = m.bgimg_seq
+        where f.member_op_email =#{myEmail}
+        and f.member_email in(
+                    (select member_email from member) minus
+                    (select block_email from block where member_email =#{myEmail}))
         and member_nick like '%${searchKeyword}%'
         order by f.friend_date desc
+
     </select>
 
     <!--  친구리스트 delete  -->
@@ -87,6 +92,18 @@
         from FRIEND_send
         where member_op_email = #{myEmail})
 
+        minus
+
+        (select member_email
+        from block
+        where member_email = #{myEmail})
+
+        minus
+
+        (select block_email
+        from block
+        where member_email = #{myEmail})
+
         ) t
 
         on m.member_email = t.member_email
@@ -121,6 +138,18 @@
         from FRIEND_send
         where member_op_email = #{myEmail})
 
+        minus
+
+        (select member_email
+        from block
+        where member_email = #{myEmail})
+
+        minus
+
+        (select block_email
+        from block
+        where member_email = #{myEmail})
+
         ) t
 
         on m.member_email = t.member_email
@@ -153,14 +182,5 @@
         delete from friend_send
         where fri_send_seq = #{fri_send_seq}
     </delete>
-
-    <!--  상대 유저에게 신청 받았는지 valid  -->
-    <select id="sendValid" resultType="int">
-        select count(*)
-            from member m
-            join friend_send f
-            on m.member_email = f.member_email
-        where f.member_op_email = 'user1@ogam.com'
-    </select>
 
 </mapper>

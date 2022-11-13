@@ -2,8 +2,10 @@ package com.go.ogamprj.controller.user;
 
 import com.go.ogamprj.dto.FriendApply;
 import com.go.ogamprj.dto.FriendSend;
+import com.go.ogamprj.dto.Notifi;
 import com.go.ogamprj.sevice.DiaryService;
 import com.go.ogamprj.sevice.FriendDiaryService;
+import com.go.ogamprj.sevice.NotifiService;
 import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,9 @@ public class User_FrndDiaryController {
     
     @Autowired
     DiaryService diaryService;
+
+    @Autowired
+    NotifiService notifiService;
 
     // 친구 리스트 목록 가져오기
     @RequestMapping("/friendList")
@@ -79,10 +85,6 @@ public class User_FrndDiaryController {
         // member 전체 유저 가져오기
         List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
 
-        // 상대 유저에게 신청 받았는지 valid
-        int vaild = friendDiaryService.sendValid(myEmail);
-        System.out.println(vaild);
-
         model.addAttribute("memberList",memberList);
         model.addAttribute("friendSendList",friendSendList);
         return "user/noticePage/sendList";
@@ -96,6 +98,11 @@ public class User_FrndDiaryController {
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         friendDiaryService.insertfriendSend(new FriendSend(0,myEmail,member_email,response,null));
+
+        // 알림 insert
+        // 알림 구분자
+        String noti_type = "friend";
+        notifiService.notifiInsert(new Notifi(0,myEmail,0,member_email,noti_type,null,null,null));
 
         return "success";
     }

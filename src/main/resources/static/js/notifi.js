@@ -8,13 +8,25 @@ const currentNotifiBox = document.querySelectorAll(".currentNotifi_contents");
 notifi.addEventListener("click", () => {
      notifi_wrapModal.classList.toggle("toggle");
 
+      $.ajax({
+         url: "/notifi",
+         type: "get",
+     }).done(function (friendSendList){
+            console.log(friendSendList);
+         $(".currentNotifi").replaceWith(friendSendList);
+     })
+
 })
 
 
 // 알림 클릭 이벤트
 for(let i = 0; i < currentNotifiBox.length; i++) {
     currentNotifiBox[i].addEventListener("click", () =>{
-        console.log(currentNotifiBox[i]);
+
+        // 친구 친청 op_email 변수에 넣어주기
+//        let member_op_email = member_email[i].innerHTML;
+//        console.log(member_op_email);
+
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -23,11 +35,12 @@ for(let i = 0; i < currentNotifiBox.length; i++) {
           timer: 1500
         }).then(function() {
          $.ajax({
-                url: "/currentNotifi",
-                type: "post",
+                url: "/notifi",
+                type: "get",
                 data:data,
             }).done(function (friendSendList){
-                $(".currentNotifi").replaceWith(friendSendList);
+            console.log(friendSendList);
+                //$(".currentNotifi").replaceWith(friendSendList);
             })
         })
     })
