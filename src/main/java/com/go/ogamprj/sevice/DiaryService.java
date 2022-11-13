@@ -59,4 +59,8 @@ public interface DiaryService {
     List<Map<String,Object>> calendarDiarySelectAll(String memberSeq);
 
     List<Map<String, Object>> frndCalendarDiarySelectAll(String memberSeq);
+
+    void notifyReplyInsert(Map<String, Object> replyMap);
+
+    void notifyLikeInsert(Map<String, Object> map);
 }
