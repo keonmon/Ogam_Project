@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>차단된 사용자 목록</title>
-    <link rel="stylesheet" type="text/css" href="/css/blockList.css" />
+    <link rel="stylesheet" type="text/css" href="/css/blockList.css?after" />
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -19,41 +19,46 @@
             <div class="contents">
                 <div class="block-send">
                     <div class="sendHeader">
-                        <span>차단된 사용자 목록</span>
-                    </div>
-                    <form action="/blockList" method="get">
-                        <div class="searchContainer">
+                        <span>차단된 사용자</span>
+                        <form action="/blockPlus" method="post">
+                            <div class="searchContainer">
                                 <div class="searchBox">
-                                    <input type="text" id="searchKeyword" name="searchKeyword" placeholder="아이디 입력" />
-                                    <button type="submit" class="blockImg">
-                                        <img src="/img/block.png" />
-                                    </button>
+                                    <input type="text" id="searchKeyword" name="member_nick" placeholder="아이디 입력" />
+                                    <input type="submit" value="차단" id="blockBtn"/>
                                 </div>
-                            <div class="blockCnt">
-                                <span>차단된 사용자 수</span> 
+                                <div class="blockCnt">
+                                    <span>총</span>
+                                    <span th:text="${blockCnt}"></span>
+                                    <span>명</span>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                <form action="/blockDel" method="post">
                     <div class="sendBody">
                         <th:block th:each="block : ${blockList}">
                             <div class="send_list">
                                 <div class="send_contents">
                                     <span class="op_img">
-                                        <img src="/Img/logoImg.png" />
+                                        <img th:src="${block['BGIMG_PATH'] == null ? 'img/basicProfile.png' : block['BGIMG_PATH']}" />
                                     </span>
                                     <div class="op_nickname">
-                                        <span>[[ ${friend.MEMBER_NICK} ]]</span>
+                                        <span>[[ ${block.MEMBER_NICK} ]]</span>
+                                        <div>
+                                            <span th:text="${block.MEMBER_INTRO}"></span>
+                                        </div>
                                     </div>
                                     <div class="response">
-                                        <div class="deleteBtn">삭제</div>
+                                        <input type="submit" class="deleteBtn" value="삭제">
+                                        <input type="hidden" th:value="${block.BLOCK_SEQ}" name="block_seq"/>
                                     </div>
                                 </div>
                             </div>
                         </th:block>
                     </div>
+                </form>
                 </div>
                 <div class="moon_background">
-                    <i class="fa-solid fa-moon btn_theme"></i>
                 </div>
             </div>
         </main>
