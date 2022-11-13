@@ -27,4 +27,9 @@ public class AdminReplyServiceImpl implements AdminReplyService {
     public List<HashMap<String, Object>> userReplySelectKeyword(String type, String keyword) {
         return adminReplyMapper.userReplySelectKeyword(type, keyword);
     }
+
+    @Override
+    public void replyDelete(int reply_seq) {
+        adminReplyMapper.replyDelete(reply_seq);
+    }
 }

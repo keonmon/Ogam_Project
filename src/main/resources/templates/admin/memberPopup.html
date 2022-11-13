@@ -8,52 +8,57 @@
 </head>
 <body>
     <div id="wrap">
-        <form action="/admin_userList" method="post">
+        <form action="/memberPopup" method="post">
             <div class="line">
                 <div id="top">
                     <span id="title">회원프로필</span>
                 </div>
                 <div id="middle">
                     <span class="box">
-                        <div id="sTitle" >프로필 사진</div> 
-                        <img src="img/profile.jpeg" id="member_profile" /> <!-- 여기에 사진 넣어줌-->
+                        <div id="sTitle" >프로필 사진</div>
+                        <img th:src="${member['BGIMG_PATH'] == null ? 'img/basicProfile.png' : member['BGIMG_PATH']}" id="proImg"/>
+<!--                        <img src="img/profile.jpeg" id="member_profile" /> &lt;!&ndash; 여기에 사진 넣어줌&ndash;&gt;-->
+<!--                        <th:block th:if="${member.BGIMG_SEQ}">  &lt;!&ndash;사진이 null이면 안 보임&ndash;&gt;-->
+<!--                            <img th:src="${member.BGIMG_SEQ}"/>-->
+<!--                        </th:block>-->
                     </span>
                     <span class="box" >
                         <span class="sTitle">소개글</span> 
-                        <textarea type="text" id="member_intro" value="intro" readonly>안녕하세옹 저의 일기장입니다</textarea>
+<!--                        <textarea type="text" id="member_intro" th:field="*{member.MEMBER_INTRO}" readonly></textarea>-->
+                        <textarea type="text" id="member_intro" readonly>[[ ${member.MEMBER_INTRO} ]]</textarea>
                     </span>
                     <span class="box" >
                         <div class="sTitle">이메일</div> 
-                        <input type="text" id="member_email" value="" readonly />
+                        <input type="text" id="member_email" th:value="${member.MEMBER_EMAIL}" readonly />
                     </span>
                     <span class="box" >
                         <div class="sTitle">닉네임</div> 
-                        <input type="text" id="member_nick" value="" readonly />
+                        <input type="text" id="member_nick" th:value="${member.MEMBER_NICK}" readonly />
                     </span>
                     <span class="box" >
-                        <div class="sTitle">생년월일</div> 
-                        <input type="text" id="member_birth1" value="" readonly />
-                        <input type="text" id="member_birth2" value="" readonly />
-                        <input type="text" id="member_birth3" value="" readonly />
+                        <div class="sTitle">생년월일</div>
+                        <input type="text" id="member_birth1" th:value="${year}" readonly /> <!-- value=""  -->
+                        <input type="text" id="member_birth2" th:value="${month}" readonly /> <!-- value=""  -->
+                        <input type="text" id="member_birth3" th:value="${day}" readonly /> <!-- value=""  -->
                     </span>
                     <span class="box" >
                         <div class="sTitle">휴대폰번호</div> 
-                        <input type="text" id="member_phone" value="" readonly />
+                        <input type="text" id="member_phone" th:value="${member.MEMBER_PHONE}" readonly />
                     </span>
                     <span class="box" >
-                        <div class="sTitle">신고 횟수</div> 
-                        <input type="text" id="black_count" value="" readonly />
+                        <div class="sTitle">신고 횟수</div> <!-- 아직 못함-->
+                        <input type="text" id="black_count" th:value="${member.MEMBER_PHONE}" readonly /> <!-- value=""  -->
                     </span>
                     <span class="box" >
                         <div class="chkBox">
-                            <input type="radio" name="member_blackYn" class="black_radio"/>
+                            <input type="radio" name="member_blackYn" class="black_radio" value="y" th:checked="${member_blackYn eq 'y' ? 'checked' : ''}"/>
                             <div class="chkBox1-1">
                                 <span class="sTitle" >정지 계정</span>
                                 <span id="icon1"></span>
                             </div>
                         </div>
                         <div class="chkBox">
-                            <input type="radio" name="member_blackYn" class="black_radio" />
+                            <input type="radio" name="member_blackYn" class="black_radio" value="n" th:checked="${member_blackYn eq 'n' ? 'checked' : ''}"/>
                             <div class="chkBox1-1">
                                 <span class="sTitle">활성 계정</span>
                                 <span id="icon2"></span>

@@ -12,4 +12,5 @@ public interface AdminDiaryMapper {
 
     List<Map<String, Object>> userDiarySelectKeyword(String type, String keyword);      // 키워드 검색
 
+    void diaryDelete(int diary_seq);    // 일기 삭제
 }

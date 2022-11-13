@@ -52,7 +52,7 @@
                     </thead>
                     <tbody>
                       <tr th:each="notify : ${notifyList}">
-                        <td><input type="checkbox" name="check" th:value="${notify.BLACKLIST_DIARY_SEQ}" /></td>
+                        <td><input type="checkbox" name="check" th:value="${notify.BLACKLIST_SEQ}" /></td>
                         <td>[[${notify.Category}]]</td>
                         <td>[[${notify.BLACKLIST_COMMENT}]]</td>
                         <td><a onclick="memberPopup( )">[[${notify.MEMBER_EMAIL}]]</a></td>
@@ -70,52 +70,13 @@
                 </div>
                 <!-- 테이블 end-->
                 <div class="footerBtn">
-                  <span class="deleteBtn"><a href="#"><i class="fa-solid fa-trash"></i>선택 삭제</a></span>            
+                    <span class="deleteBtn"><i class="fa-solid fa-trash"></i><input type="submit" value="선택 삭제"/></a></span>
                 </div>
               </div>
             <!-- content end -->
         </main>
     </div>
     <!-- 팝업 -->
-    <script>
-        // 멤버
-        function memberPopup( ) {
-
-            window.open("/memberPopup", "memberPopup",
-            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=750px'] );
-
-            iniform.target="memberPopup";
-            iniform.action="/memberPopup";
-
-            iniform.submit( );
-
-        }
-
-        // 일기
-        function diaryPopup( ) {
-
-            window.open("/diaryPopup", "diaryPopup",
-            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=625px'] );
-
-            iniform.target="diaryPopup";
-            iniform.action="/diaryPopup";
-
-            iniform.submit( );
-
-        }
-
-        // 댓글
-        function commentPopup( ) {
-
-            window.open("/commentPopup", "commentPopup",
-            ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=510px'] );
-
-            iniform.target="commentPopup";
-            iniform.action="/commentPopup";
-
-            iniform.submit( );
-
-        }
-    </script>
+    <script type="text/javascript" src="js/popup.js"></script>
 </body>
 </html>
