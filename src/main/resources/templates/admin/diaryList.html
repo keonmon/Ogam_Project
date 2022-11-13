@@ -30,8 +30,9 @@
             </form>
           </div>
           <!-- 테이블 -->
-          <form action="#">
-          <div>
+          <form action="/deleteDiary">
+<!--            <input type="hidden" name="member_email" th:value="${member.MEMBER_EMAIL}"/>-->
+            <div>
             <table class="table">
               <thead>
                 <tr>
@@ -52,21 +53,23 @@
                 </tr>
               </thead>
               <tbody>
+
                 <tr th:each="diary : ${userDiaryList}">
-                  <td><input type="checkbox" name="check" th:value="${diary.DIARY_SEQ}" /></td>
+                   <input type="hidden" name="diary_seq" id="diary_seq" th:value="${diary.DIARY_SEQ}"/>
+                  <td><input type="checkbox"  name="check" th:value="${diary.DIARY_SEQ}" /></td>
                   <td>[[${diary.DIARY_PRIVATE}]]</td>
                   <td>[[${diary.EMOTION}]]</td>
                   <td>[[${diary.EMOJI}]]</td>
                   <td>[[${diary.MEMBER_EMAIL}]]</td>
                   <td>[[${diary.MEMBER_NICK}]]</td>
-                  <td><a onclick="diaryPopup( )">보기</a></td>
+                  <td><a onclick="diaryPopup(diary_seq)">보기</a></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <!-- 테이블 end-->
           <div class="footerBtn">
-            <span class="deleteBtn"><i class="fa-solid fa-trash"></i>선택 삭제</span>
+            <span class="deleteBtn"><i class="fa-solid fa-trash"></i><input type="submit" value="선택 삭제"/></a></span>
           </div>
           </form>
         </div>
@@ -74,18 +77,22 @@
       </main>
     </div>
     <!-- 팝업 -->
+    <script type="text/javascript" src="js/popup.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js%22%3E"></script>
     <script>
-      function diaryPopup( ) {
+      const diarySeq =$("#diary_seq").val();
+      var diary = window.open("about:blank",:_blank);
+      $.ajax ({
+        url: "/diaryPopup",
+        method: "post",
+        dataType: "html",
+        data: "diarySeq",
+        success: function(data) {
+            diary.location.href="/diaryPopup/{diarySeq}"
 
-          window.open("/diaryPopup", "diaryPopup",
-          ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=625px'] );
+        }
 
-          iniform.target="diaryPopup";
-          iniform.action="/diaryPopup";
-
-          iniform.submit( );
-
-      }
+      })
     </script>
   </body>
 </html>

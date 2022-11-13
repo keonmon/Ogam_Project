@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class Admin_BlackListController {
@@ -25,6 +27,17 @@ public class Admin_BlackListController {
         }
 
         return "admin/notifyList";
+    }
+
+    /* 신고 삭제 - 목록에서 삭제 */
+    @RequestMapping("/deleteNotify")
+    public String deleteDiary(@RequestParam List<Integer> check) {
+
+        if(check.size() > 0) {
+            for(Integer num : check) adminNotifyService.notifyDelete(num);
+        }
+
+        return "redirect:/admin_notifyList";
     }
 
 

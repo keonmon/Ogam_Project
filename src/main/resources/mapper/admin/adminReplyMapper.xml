@@ -12,7 +12,8 @@
              , r.REPLY
           FROM reply r join member m
             ON r.MEMBER_EMAIL = m.member_email
-         ORDER BY r.REPLY_DATE desc
+         WHERE r.REPLY_DEL = 'n'
+         ORDER BY r.REPLY_SEQ desc
     </select>
 
     <!-- 키워드 검색 -->
@@ -43,7 +44,13 @@
                 </when>
             </choose>
         </if>
-        ORDER BY r.REPLY_DATE DESC
+        ORDER BY r.REPLY_SEQ DESC
     </select>
 
+    <!-- 댓글 삭제 -->
+    <update id="replyDelete" parameterType="com.go.ogamprj.dto.Reply">
+        UPDATE REPLY
+           SET REPLY_DEL = 'y'
+         WHERE REPLY_SEQ = #{REPLY_SEQ}
+    </update>
 </mapper>

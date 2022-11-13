@@ -25,4 +25,9 @@ public class AdminNotifyServiceImpl implements AdminNotifyService {
     public List<Map<String, Object>> notifySelectKeyword(String type, String keyword) {
         return adminNotifyMapper.notifySelectKeyword(type, keyword);
     }
+
+    @Override
+    public void notifyDelete(int diary_seq) {
+        adminNotifyMapper.notifyDelete(diary_seq);
+    }
 }
