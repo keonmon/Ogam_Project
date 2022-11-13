@@ -79,6 +79,9 @@ public class User_FrndDiaryController {
         // member 전체 유저 가져오기
         List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
 
+        // 상대 유저에게 신청 받았는지 valid
+        int vaild = friendDiaryService.sendValid(myEmail);
+        System.out.println(vaild);
 
         model.addAttribute("memberList",memberList);
         model.addAttribute("friendSendList",friendSendList);

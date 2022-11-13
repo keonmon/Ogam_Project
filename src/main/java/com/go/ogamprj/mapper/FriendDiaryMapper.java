@@ -43,4 +43,5 @@ public interface FriendDiaryMapper {
     // 친구 신청하기
     void insertfriendSend(FriendSend friendSend);
 
+    int sendValid(String myEmail);
 }
