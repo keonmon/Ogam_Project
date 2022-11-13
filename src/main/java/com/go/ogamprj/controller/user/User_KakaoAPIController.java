@@ -1,5 +1,7 @@
 package com.go.ogamprj.controller.user;
 
+import com.go.ogamprj.serviceImpl.KakaoAPIServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,9 +11,10 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 
 @Controller
-public class user_AuthController {
+public class User_KakaoAPIController {
 
-    KakaoAPI kakaoApi = new KakaoAPI();
+    @Autowired
+    KakaoAPIServiceImpl kakaoApiServiceImpl;
     // 카카오 로그인 인증 절차
 
     @RequestMapping(value="/kakaoLogin")
@@ -20,11 +23,13 @@ public class user_AuthController {
         ModelAndView mav = new ModelAndView();
 
         // 1번 : 인증코드 요청 전달
-        String accessToken = kakaoApi.getAccessToken(code);
+        String accessToken = kakaoApiServiceImpl.getAccessToken(code);
         // 2번 : 인증코드 전달
-        HashMap<String, Object> userInfo = kakaoApi.getUserInfo(accessToken);
+        HashMap<String, Object> userInfo = kakaoApiServiceImpl.getUserInfo(accessToken);
 
         System.out.println("login info : " + userInfo.toString());
+
+        //
 
         if(userInfo.get("email") != null){
             session.setAttribute("userId",userInfo.get("email"));
@@ -39,7 +44,7 @@ public class user_AuthController {
     public ModelAndView kakaoLogout(HttpSession session){
         ModelAndView mav = new ModelAndView();
 
-        kakaoApi.kakaoLogout((String)session.getAttribute("accessToken"));
+        kakaoApiServiceImpl.kakaoLogout((String)session.getAttribute("accessToken"));
         session.removeAttribute("accessToken");
         session.removeAttribute("userId");
         mav.setViewName("redirect:/");

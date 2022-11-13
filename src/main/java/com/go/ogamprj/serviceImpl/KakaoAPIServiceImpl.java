@@ -1,8 +1,11 @@
-package com.go.ogamprj.controller.user;
+package com.go.ogamprj.serviceImpl;
 
+import com.go.ogamprj.mapper.MemberMapper;
+import com.go.ogamprj.sevice.KakaoAPIService;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +15,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
-public class KakaoAPI {
+public class KakaoAPIServiceImpl implements KakaoAPIService {
+
+    @Autowired
+    MemberMapper memberMapper;
+
+    @Override
     public String getAccessToken(String code) {
         String accessToken = "";
         String refreshToken = "";
@@ -61,6 +69,7 @@ public class KakaoAPI {
     }
 
 
+    @Override
     public HashMap<String, Object> getUserInfo(String accessToken) {
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
         String reqUrl = "https://kapi.kakao.com/v2/user/me";
@@ -101,7 +110,7 @@ public class KakaoAPI {
         return userInfo;
     }
 
-
+    @Override
     public void kakaoLogout(String accessToken) {
         String reqURL = "https://kapi.kakao.com/v1/user/logout";
         try {
