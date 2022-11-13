@@ -20,12 +20,12 @@ const complete = document.querySelectorAll(".complete");
 const email = document.querySelectorAll(".member_email");
 const nickname = document.querySelectorAll(".member_nickname span");
 const list = document.querySelectorAll(".member_list");
+const modal_op_email = document.querySelectorAll(".member_op_email");
 
 for (let i = 0; i < addBtn.length; i++) {
     add[i].addEventListener("click", () => {
     let member_email = email[i].value;
     let member_list = list[i];
-    console.log(member_list);
     let response = 'n';
 
     Swal.fire({
