@@ -9,27 +9,30 @@
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
 <div class="container">
     <div class="mainLogo">
-        <img src="/img/logoImg.png"/>
+        <img src="/img/logoImg.png" onclick="location.href='/'"/>
     </div>
     <form action="/login" method="get">
+        <div class="message">[[${msg}]]</div>
         <div class="idBox">
-            <label for="member_email">아이디</label>
+            <label for="member_email">이메일</label>
             <input type="text" id="member_email" name="member_email"
-                   placeholder="이메일을 입력하세요!">
+                   placeholder="이메일을 입력하세요!" required='required' th:value="${member_email}">
         </div>
 
         <div class="passwordBox">
             <label for="member_pw">비밀번호 </label>
             <input type="password" id="member_pw" name="member_pw"
-                   placeholder="비밀번호를 입력하세요!">
+                   placeholder="비밀번호를 입력하세요!" required='required'>
         </div>
-        <div class="logins">
 
+        <div class="logins">
             <div class="loginBox">
-                <button type="submit" th:value="login">로그인</button>
+                <button>로그인</button>
             </div>
+
             <th:block th:if="${userId == null}">
                 <!-- img/kakao_login_large_narrow.png -->
                 <div class="kakaoLoginBox">
@@ -39,15 +42,19 @@
         </div>
 
             <div class="findId">
-                <a href="/Find.html">아이디 / 비밀번호찾기</a> <a href="/SignUp.html">회원가입</a>
+                <a href="/Find">아이디 / 비밀번호찾기</a> <a href="/SignUpForm">회원가입</a>
             </div>
+
     </form>
+
 </div>
+
 <script>
     document.querySelector(".kakaoLoginBox").addEventListener("click",()=>{
         location.href="https://kauth.kakao.com/oauth/authorize?client_id=e653480cbcc1e58c29fbf190f7765c4c&redirect_uri=http://localhost:8081/kakaoLogin&response_type=code";
     });
 </script>
+
 </body>
 
 </html>

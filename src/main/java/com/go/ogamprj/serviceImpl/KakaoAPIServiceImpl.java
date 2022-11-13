@@ -96,14 +96,20 @@ public class KakaoAPIServiceImpl implements KakaoAPIService {
             JsonParser parser = new JsonParser();
             JsonElement element =  parser.parse(result);
 
+
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakaoAccount = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
+            String kakaoId =  element.getAsJsonObject().get("id").getAsString();
 
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
+            userInfo.put("kakaoId", kakaoId);
+
+
+
 
 
         } catch (Exception e) {
@@ -132,6 +138,35 @@ public class KakaoAPIServiceImpl implements KakaoAPIService {
                 result+=line;
             }
             System.out.println(result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void kakaoUserInsert(HashMap<String, Object> userInfo) {
+        memberMapper.kakaoUserInsert(userInfo);
+    }
+
+    @Override
+    public HashMap<String,Object> kakaoUserCheck(Object kakaoId) {
+        return memberMapper.kakaoUserCheck(kakaoId);
+    }
+
+    @Override
+    public void unlink(String accessToken) {
+        String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

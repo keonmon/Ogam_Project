@@ -5,10 +5,10 @@
 <!--    프로필사진 포함한 유저 정보-->
     <select id="findMember" resultType="java.util.HashMap">
         SELECT T1.MEMBER_EMAIL AS MEMBER_EMAIL
-        , T1.MEMBER_PW AS MEMBER_PW, T1.MEMBER_NICK AS MEMBER_NICK,
-        T1.MEMBER_BIRTH AS MEMBER_BIRTH, T1.MEMBER_PHONE AS MEMBER_PHONE
+        , T1.MEMBER_PW AS MEMBER_PW, T1.MEMBER_NICK AS MEMBER_NICK
+        , NVL(T1.MEMBER_BIRTH, CURRENT_DATE) AS MEMBER_BIRTH, T1.MEMBER_PHONE AS MEMBER_PHONE
         , T1.BGIMG_SEQ AS BGIMG_SEQ, T2.BGIMG_PATH as BGIMG_PATH
-        , T1.MEMBER_INTRO AS MEMBER_INTRO
+        , NVL(T1.MEMBER_INTRO, ' ') AS MEMBER_INTRO
         FROM MEMBER T1, BGIMAGE T2
         WHERE T1.BGIMG_SEQ = T2.BGIMG_SEQ(+)
         AND T1.MEMBER_EMAIL = #{MEMBER_EMAIL}
@@ -42,4 +42,9 @@
         , MEMBER_QUITED_REASON = #{MEMBER_QUITED_REASON}
         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
     </update>
+
+    <insert id="kakaoUserInsert" parameterType="java.util.HashMap">
+        insert into member(MEMBER_NICK,KAKAOID,MEMBER_EMAIL)
+        values(#{nickname},#{kakaoId},#{email})
+    </insert>
 </mapper>

@@ -28,4 +28,5 @@ public interface FriendDiaryService {
 
     List<Map<String, Object>> memberSearch(String myEmail, String searchKeyword);
 
+    int sendValid(String myEmail);
 }

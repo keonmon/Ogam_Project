@@ -188,5 +188,28 @@
         WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ) T2
         WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
     </select>
-
+    <insert id="notifyReplyInsert" parameterType="java.util.Map">
+        insert into notifi(member_email, diary_seq, noti_email, noti_type, noti_comm)
+        select *
+          from (select m.member_email                       as member_email
+                     , #{diarySeq}                          as diary_seq
+                     , #{loginUser}                         as noti_email
+                     , 'reply'                              as noti_type
+                     , '일기에 새로운 댓글이 달렸습니다'         as noti_comm
+                  from diary d join member m
+                    on d.member_email = m.member_email
+                 where d.diary_seq = #{diarySeq})
+    </insert>
+    <insert id="notifyLikeInsert" parameterType="java.util.Map">
+        insert into notifi(member_email, diary_seq, noti_email, noti_type, noti_comm)
+        select *
+          from (select m.member_email                           as member_email
+                     , #{diarySeq}                              as diary_seq
+                     , #{loginUser}                             as noti_email
+                     , 'like'                                   as noti_type
+                     , '작성한 일기가 좋아요를 받았습니다'           as noti_comm
+                  from diary d join member m
+                    on d.member_email = m.member_email
+                 where d.diary_seq = #{diarySeq})
+    </insert>
 </mapper>

@@ -154,4 +154,13 @@
         where fri_send_seq = #{fri_send_seq}
     </delete>
 
+    <!--  상대 유저에게 신청 받았는지 valid  -->
+    <select id="sendValid" resultType="int">
+        select count(*)
+            from member m
+            join friend_send f
+            on m.member_email = f.member_email
+        where f.member_op_email = 'user1@ogam.com'
+    </select>
+
 </mapper>

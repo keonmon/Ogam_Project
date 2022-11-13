@@ -1,25 +1,15 @@
 package com.go.ogamprj.controller.admin;
 
 import com.go.ogamprj.dto.Board;
-import com.go.ogamprj.serviceImpl.BoardServiceImpl;
 import com.go.ogamprj.sevice.BoardService;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Controller

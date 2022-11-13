@@ -81,7 +81,7 @@
 
 #board_middle textarea {
     width: 100%;
-    height: 34vw;
+    height: 32.5vw;
     border: none;
     border-radius: 10px;
     box-shadow: inset -1px 1px 5px gray;
@@ -113,4 +113,5 @@
 
 #board_bottom input:hover {
     background-color: #a4cdfa;
+    cursor: pointer;
 }
