@@ -153,4 +153,23 @@ public class KakaoAPIServiceImpl implements KakaoAPIService {
         return memberMapper.kakaoUserCheck(kakaoId);
     }
 
+    @Override
+    public void unlink(String accessToken) {
+        String reqURL = "https://kapi.kakao.com/v1/user/unlink";
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

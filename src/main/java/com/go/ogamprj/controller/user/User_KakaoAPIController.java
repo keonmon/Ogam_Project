@@ -32,6 +32,12 @@ public class User_KakaoAPIController {
         //  - 넘어온 데이터 확인
         System.out.println("userInfo : " + userInfo);
 
+        // 넘어온 데이터에 이메일이 없다면 unlink실행
+        if(userInfo.get("email") == null){
+            System.out.println();
+            return "redirect:/kakaoUnlink";
+        }
+
         // 넘어온 데이터와 일치하는 데이터가 있는지 확인
         HashMap<String,Object> checkUser = kakaoApiService.kakaoUserCheck(userInfo.get("kakaoId"));
         if(checkUser == null){
@@ -45,8 +51,17 @@ public class User_KakaoAPIController {
             session.setAttribute("accessToken",accessToken);
         }
 
-
         return "redirect:/";
     }
+
+    @RequestMapping(value="/kakaoUnlink")
+    public String unlink(HttpSession session) {
+        kakaoApiService.unlink((String)session.getAttribute("accessToken"));
+        kakaoApiService.unlink((String)session.getAttribute("loginUser"));
+        session.invalidate();
+        return "redirect:/";
+    }
+
+
 
 }
