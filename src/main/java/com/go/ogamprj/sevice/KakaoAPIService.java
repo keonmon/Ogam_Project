@@ -13,4 +13,6 @@ public interface KakaoAPIService {
     void kakaoUserInsert(HashMap<String, Object> userInfo);
 
     HashMap<String,Object> kakaoUserCheck(Object kakaoId);
+
+    void unlink(String access_token);
 }

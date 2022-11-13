@@ -1,5 +1,6 @@
 package com.go.ogamprj.controller.user;
 
+import com.go.ogamprj.sevice.KakaoAPIService;
 import com.go.ogamprj.sevice.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class User_LoginController {
 
+    @Autowired
+    KakaoAPIService kakaoAPIService;
     @Autowired
     LoginService loginService;
 
@@ -38,9 +42,16 @@ public class User_LoginController {
     }
 
     @RequestMapping("/logout")
-    public String logout(HttpServletRequest request){
+    public String logout(HttpServletRequest request, HttpSession session){
         request.getSession().removeAttribute("loginUser");
-        request.getSession().removeAttribute("accessToken");
+        Object accessToken = request.getSession().getAttribute("accessToken");
+
+        // 카카오로 로그인 되어있다면?
+        if(accessToken != null){
+            kakaoAPIService.kakaoLogout((String)session.getAttribute("accessToken"));
+            session.invalidate();
+            request.getSession().removeAttribute("accessToken");
+        }
         return "redirect:/";
     }
 
