@@ -12,5 +12,5 @@ public interface AdminNotifyMapper {
 
     List<Map<String, Object>> notifySelectKeyword(String type, String keyword);     // 키워드 검색
 
-    void notifyDelete(int diary_seq);
+    void notifyDelete(int index);
 }

@@ -25,8 +25,8 @@ public class Member {
     private int BGIMG_SEQ;
 
     public Member(String MEMBER_PW, String MEMBER_NICK
-                  , String MEMBER_BIRTH, String MEMBER_PHONE
-                  , String MEMBER_INTRO, int BGIMG_SEQ) {
+            , String MEMBER_BIRTH, String MEMBER_PHONE
+            , String MEMBER_INTRO, int BGIMG_SEQ) {
         this.MEMBER_PW = MEMBER_PW;
         this.MEMBER_NICK = MEMBER_NICK;
         this.MEMBER_BIRTH = MEMBER_BIRTH;
@@ -35,5 +35,19 @@ public class Member {
         this.BGIMG_SEQ = BGIMG_SEQ;
     }
 
-}
+    public Member(String member_email, String member_pw, String member_nick,
+                  String birth, String gender, String member_phone) {
+        this.MEMBER_EMAIL = member_email;
+        this.MEMBER_PW = member_pw;
+        this.MEMBER_NICK = member_nick;
+        this.MEMBER_BIRTH = birth;
+        System.out.println(birth);
+        this.MEMBER_GENDER = gender;
+        this.MEMBER_PHONE = member_phone;
+    }
 
+    public Member(String MEMBER_BLACKYN, String MEMBER_BLACK_REASON) {
+        this.MEMBER_BLACKYN = MEMBER_BLACKYN;
+        this.MEMBER_BLACK_REASON = MEMBER_BLACK_REASON;
+    }
+}
