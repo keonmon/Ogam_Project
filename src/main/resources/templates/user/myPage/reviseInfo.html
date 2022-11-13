@@ -15,7 +15,7 @@
 
 <body>
     <div class="container">
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='')" class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
             <div class="contents">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div id="intro">
                                     <span class="iTitle">소개글</span>
-                                    <textarea name="member_intro">[[ ${member.MEMBER_INTRO} ]]</textarea>
+                                        <textarea name="member_intro">[[ ${member.MEMBER_INTRO} ]]</textarea>
                                 </div>
                                 <div id="email">
                                     <span class="eTitle">이메일</span>
@@ -57,7 +57,7 @@
                                     <span class="pwTitle">
                                         <div>비밀번호</div>
                                     </span>
-                                    <input type="password" id="member_pw" name="member_pw" th:value="${member.MEMBER_PW}" onchange="new_pw_chk()"/>
+                                    <input type="password" id="member_pw" name="member_pw" th:value="${member['MEMBER_PW'] == null ? '' : member['member_pw']}" onchange="new_pw_chk()"/>
                                 </div>
                                 <div class="password">
                                     <span>
@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="phone">
                                     <div class="phTitle">휴대폰번호</div>
-                                    <input type="text" id="member_phone" name="member_phone" placeholder="전화번호 입력" th:value="${member.MEMBER_PHONE}" readonly/>
+                                    <input type="text" id="member_phone" name="member_phone" placeholder="전화번호 입력" th:value="${member['MEMBER_PHONE'] == null ? '' : member['MEMBER_PHONE']}" readonly/>
                                 </div>
                             </div>
                             <div class="btn_bottom">
@@ -216,6 +216,8 @@
             var pw = $('#member_pwd').val();
             $("#member_pass").val(pw);
        })
+
+
 
 
     </script>
