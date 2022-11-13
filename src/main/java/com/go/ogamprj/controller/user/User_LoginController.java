@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,8 +22,8 @@ public class User_LoginController {
     LoginService loginService;
 
     @RequestMapping("/loginPage")
-    public String loginPage(@RequestParam(required = false, defaultValue = "") String member_email, Model model){
-        model.addAttribute("member_email", member_email);
+    public String loginPage() {
+
         return "user/loginPage/loginPage";
     }
 
@@ -30,7 +31,6 @@ public class User_LoginController {
     public String login(HttpServletRequest request, @RequestParam String member_email, @RequestParam String member_pw){
 
        boolean loginvalid = loginService.loginvalid(member_email, member_pw);
-
 
       if(loginvalid == true) {
 
@@ -63,16 +63,42 @@ public class User_LoginController {
     }
 
     @RequestMapping("/Find_id")
-    public String findid(){
+    public String findid(@RequestParam String birth1, String birth2,
+                                       String birth3, String member_phone){
 
-        return "user/loginPage/Find_id";
+//        System.out.println("Controller=" birth1+"/"+birth2+"/"+birth3);
+//        System.out.println("Controller=" member_phone);
+
+        boolean findid = loginService.findid(birth1+"/"+birth2+"/"+birth3, member_phone);
+
+//        System.out.println("참거짓 여부=" + findid);
+
+        if(findid == true) {
+            System.out.println("데이터가 넘어가나요?");
+            return "user/loginPage/Find_id";
+        } else {
+
+            return "redirect:/Find";
+        }
+//        return "user/loginPage/Find_id";
     }
 
     @RequestMapping("Find_pw")
-    public String findpw(){
+    public String findpw(@RequestParam String member_email, String member_phone) {
 
-        return "user/loginPage/Find_pw";
+//        System.out.println("Controller=" + member_email + " " + member_phone);
+
+        boolean findpw = loginService.findpw(member_email, member_phone);
+
+        System.out.println("참거짓 여부=" + findpw);
+
+        if (findpw == true) {
+            System.out.println("데이터가 넘어가나요?");
+            return "user/loginPage/Find_pw";
+        } else {
+
+            return "redirect:/Find";
+        }
+//      return "user/loginPage/Find_pw";
     }
-
-
 }

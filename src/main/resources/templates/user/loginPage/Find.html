@@ -6,52 +6,51 @@
     <title>아이디/비밀번호찾기</title>
     <link rel="stylesheet" type="text/css" href="/css/find.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-
 </head>
 <body>
-    <form action="" value="">
         <div class="container">
             <div class="wrapper">
+               <form action="/Find_id" method="get">
                 <div class="checkId">
                     <p>아이디 찾기</p>
-
                     <div class="birthday">
                         <label>생년월일</label>
-                        <input type="text" id="birth1" name="year">
-                        <input type="text" id="birth2" name="month">
-                        <input type="text" id="birth3" name="day">
+                        <input type="text" id="member_birth1" name="birth1" required>
+                        <input type="text" id="member_birth2" name="birth2" required>
+                        <input type="text" id="member_birth3" name="birth3" required>
                     </div>
 
                     <div class="phoneNum">
                         <label>휴대폰번호</label>
-                        <input type="text" id="phonenum" name="phonenum">
+                        <input type="text" id="member_phone" name="member_phone" required>
                     </div>
 
                     <div class="id_submitBtn">
                         <button>아이디 찾기</button>
                     </div>
                 </div>
-
+               </form>
+                <form action="/Find_pw" method="get">
                 <div class="checkPw">
                     <p>비밀번호 찾기</p>
-                
+
 
                 <div class="emailBox">
                     <label>이메일</label>
-                    <input type="email" id="email">
+                    <input type="email" id="member_email" name="member_email" required>
                 </div>
 
-                <div class="phonenumBox">
-                    <label for="phonenum2">휴대폰번호</label>
-                    <input type="text" id="phonenum2" name="phonenum">
+                <div class="phoneNum">
+                    <label for="member_phone2">휴대폰번호</label>
+                    <input type="text" id="member_phone2" name="member_phone" required>
 
                 </div>
                 <div class="pw_Reissue">
                     <button>비밀번호 재발급</button>
                 </div>
                 </div>
+                </form>
             </div>
         </div>
-    </form>
 </body>
 </html>

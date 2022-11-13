@@ -9,6 +9,7 @@
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
+
 <div class="container">
     <div class="mainLogo">
         <img src="/img/logoImg.png"/>
@@ -28,7 +29,7 @@
         <div class="logins">
 
             <div class="loginBox">
-                <button type="submit" th:value="login">로그인</button>
+                <button>로그인</button>
             </div>
             <th:block th:if="${userId == null}">
                 <!-- img/kakao_login_large_narrow.png -->
@@ -39,7 +40,7 @@
         </div>
 
             <div class="findId">
-                <a href="/Find.html">아이디 / 비밀번호찾기</a> <a href="/SignUp.html">회원가입</a>
+                <a href="/Find">아이디 / 비밀번호찾기</a> <a href="/SignUpForm">회원가입</a>
             </div>
     </form>
 </div>
