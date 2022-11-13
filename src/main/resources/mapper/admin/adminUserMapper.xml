@@ -3,11 +3,23 @@
         PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.go.ogamprj.mapper.AdminUserMapper">
+    <!-- USER 전체 가져오기 -->
+<!--    <select id="userSelectAll" resultType="com.go.ogamprj.dto.Member">-->
+<!--        SELECT-->
+<!--               MEMBER_EMAIL-->
+<!--             , MEMBER_NICK-->
+<!--             , MEMBER_BIRTH-->
+<!--             , MEMBER_PHONE-->
+<!--             , NVL(MEMBER_GENDER, 'X')-->
+<!--             , MEMBER_BLACKYN-->
+<!--          FROM MEMBER-->
+<!--    </select>-->
+
     <!-- 키워드 검색 -->
     <select id="userSelectKeyword" resultType="com.go.ogamprj.dto.Member">
         SELECT *
-        FROM MEMBER
-        WHERE MEMBER_EMAIL IS not null
+          FROM MEMBER
+         WHERE MEMBER_EMAIL IS not null
         <if test=" keyword != null and keyword != '' ">
             <choose>
                 <!-- 검색 유형이 있을 때 -->
@@ -27,5 +39,47 @@
             </choose>
         </if>
     </select>
+
+    <!-- 사용자 상세 정보 -->
+    <select id="userSelectOne" resultType="java.util.Map">
+        SELECT
+               T1.MEMBER_EMAIL AS MEMBER_EMAIL
+             , T1.MEMBER_PW AS MEMBER_PW
+             , T1.MEMBER_NICK AS MEMBER_NICK
+             , NVL(T1.MEMBER_BIRTH,CURRENT_DATE) AS MEMBER_BIRTH
+             , T1.MEMBER_PHONE AS MEMBER_PHONE
+             , T1.BGIMG_SEQ AS BGIMG_SEQ
+             , T2.BGIMG_PATH as BGIMG_PATH
+             , NVL(T1.MEMBER_INTRO,' ') AS MEMBER_INTRO
+             , T1.MEMBER_BLACKYN AS MEMBER_BLACKYN
+             , NVL(T1.MEMBER_BLACK_REASON, ' ') AS MEMBER_BLACK_REASON
+          FROM MEMBER T1, BGIMAGE T2
+         WHERE T1.BGIMG_SEQ = T2.BGIMG_SEQ(+)
+           AND T1.MEMBER_EMAIL = #{MEMBER_EMAIL}
+    </select>
+
+    <!-- 일기 신고 수 -->
+    <select id="diaryCount" resultType="Integer">
+        SELECT count(*)
+          FROM member m, blacklist_diary bd
+         WHERE m.member_email = bd.member_email
+           AND bd.BLACKLIST_USER_EMAIL = #{BLACKLIST_USER_EMAIL}
+    </select>
+
+    <!-- 댓글 신고 수 -->
+    <select id="replyCount" resultType="Integer">
+        SELECT count(*)
+          FROM member m, blacklist_reply br
+         WHERE m.member_email = br.member_email
+           AND br.BLACKLIST_MEMBER_EMAIL = #{BLACKLIST_MEMBER_EMAIL}
+    </select>
+
+    <!-- 계정 정지 -->
+    <update id="userUpdate" parameterType="com.go.ogamprj.dto.Member">
+        UPDATE MEMBER
+           SET MEMBER_BLACKYN = #{MEMBER_BLACKYN},
+               MEMBER_BLACK_REASON = #{MEMBER_BLACK_REASON}
+         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+    </update>
 
 </mapper>

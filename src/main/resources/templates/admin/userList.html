@@ -42,24 +42,24 @@
                                 </tr>                                
                             </thead>
                             <tbody>
-                                <tr th:each="user : ${userList}">
+                                <tr th:each="member : ${userList}">
 <!--                                    <td th:text="${user.MEMBER_EMAIL}" onclick="memberPopup()"></td>-->
-                                    <td><a onclick="memberPopup()">[[${user.MEMBER_EMAIL}]]</a></td>
-                                    <td>[[${user.MEMBER_NICK}]]</td>
-                                    <td>[[${user.MEMBER_BIRTH}]]</td>
-                                    <td>[[${user.MEMBER_PHONE}]]</td>
+                                    <td><a onclick="memberPopup()">[[${member.MEMBER_EMAIL}]]</a></td>
+                                    <td>[[${member.MEMBER_NICK}]]</td>
+                                    <td>[[${member.MEMBER_BIRTH}]]</td>
+                                    <td>[[${member.MEMBER_PHONE}]]</td>
                                     <!-- 성별 -->
-                                    <td th:if="${user.MEMBER_GENDER == 'male'}">
+                                    <td th:if="${member.MEMBER_GENDER == 'male'}">
                                         <i class="iconM"></i>
                                     </td>
-                                    <td th:if="${user.MEMBER_GENDER == 'female'}">
+                                    <td th:if="${member.MEMBER_GENDER == 'female'}">
                                         <i class="iconF"></i>
                                     </td>
                                     <!-- 정지 유무 -->
-                                    <td th:if="${user.MEMBER_BLACKYN == 'y'}">
+                                    <td th:if="${member.MEMBER_BLACKYN == 'y'}">
                                         <i class="icon1"></i>
                                     </td>
-                                    <td th:if="${user.MEMBER_BLACKYN == 'n'}">
+                                    <td th:if="${member.MEMBER_BLACKYN == 'n'}">
                                         <i class="icon2"></i>
                                     </td>
                                 </tr>

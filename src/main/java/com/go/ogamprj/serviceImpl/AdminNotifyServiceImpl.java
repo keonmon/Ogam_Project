@@ -11,6 +11,7 @@ import java.util.Map;
 @Service
 public class AdminNotifyServiceImpl implements AdminNotifyService {
 
+
     @Autowired
     AdminNotifyMapper adminNotifyMapper;
 
@@ -27,7 +28,7 @@ public class AdminNotifyServiceImpl implements AdminNotifyService {
     }
 
     @Override
-    public void notifyDelete(int diary_seq) {
-        adminNotifyMapper.notifyDelete(diary_seq);
+    public void notifyDelete(int index) {
+        adminNotifyMapper.notifyDelete(index);
     }
 }
