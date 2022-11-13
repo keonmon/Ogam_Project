@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    font-family: 'Pretendard-Regular';
+     display: flex;
+     height: 80vh;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -14,13 +27,18 @@
     background-color: white;
     width: 97%;
     height: 97%;
+    display: flex;
     margin: 10px auto;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .wrapper p {
-    font-size: 30px;
-    text-align: center;
-    margin: 2% auto;
+        font-size: 30px;
+        text-align: center;
+        margin: 6% auto;
 }
 
 label{
@@ -28,83 +46,73 @@ label{
     display: inline-block;
     font-size: 20px;
     margin-right: 10px;
+    width: 50%;
 }
 
-.checkId {
-    border-bottom: 2px solid #908be8;
+.divBox{
+display: flex;
     font-weight: bold;
     font-size: 30px;
-    width: 80%;
-    height: 50%;
+    width: 40vh;
+    height: auto;
     margin: auto;
+    flex-direction: column;
+    align-items: center;
 }
 
-.checkPw{
-    font-weight: bold;
-    font-size: 30px;
-    width: 80%;
-    height: 50%;
-    margin: auto;
+.underLine{
+    /*border-bottom: 2px solid #908be8;*/
 }
 
-.birthday {
-    display: block;
+
+.div {
+display: flex;
+    width: 100%;
     margin: auto;
     padding: 10px;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.birthday input{
-    width: 100px;
+
+
+.btn{
+    display: block;
+    margin: 5%;
+    width: auto;
+            height: auto;
+}
+
+.btn button{
+    background-color: #a7baff;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        width: 300px;
+        height: 35px;
+        margin: auto;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 0;
+}
+
+.input{
+    width: 54vh;
     height: 20px;
-    margin-top: 10%;
+    padding: 5px 10px 5px 10px;
 }
 
-.phoneNum {
+.mar-bott{
+
+        margin-bottom: 15%;
+}
+
+.message{
+    width: 100%;
+    font-size: 20px;
+    /* font-weight: bold; */
     display: block;
-    margin: 5% auto 5%;
-    padding: 10px;
-}
-
-.id_submitBtn{
-    display: block;
-    margin-left: 100px;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    width: 50%;
-
-}
-
-.id_submitBtn button{
-    background-color: #a7baff;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    width: 300px;
-    height: 30px;
-    margin: auto;
-    cursor: pointer;
-}
-
-.emailBox {
-    display: block;
-    margin: 5% 15% auto 5%;
-    padding: 10px;
-}
-
-.pw_Reissue{
-    display: block;
-    margin-left: 100px;
-    margin-top: 15%;
-    width: 50%;
-}
-
-.pw_Reissue button{
-    background-color: #a7baff;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    width: 300px;
-    height: 30px;
-    margin: auto;
-    cursor: pointer;
+    color: #908BE8;
+    margin: 0 auto;
+    text-align: center;
 }

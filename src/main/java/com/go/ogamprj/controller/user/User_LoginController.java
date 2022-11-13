@@ -74,42 +74,34 @@ public class User_LoginController {
     }
 
     @RequestMapping("/Find_id")
-    public String findid(@RequestParam String birth1, String birth2,
-                                       String birth3, String member_phone){
+    public String findid(@RequestParam String birth, String member_phone, Model model){
 
-//        System.out.println("Controller=" birth1+"/"+birth2+"/"+birth3);
-//        System.out.println("Controller=" member_phone);
-
-        boolean findid = loginService.findid(birth1+"/"+birth2+"/"+birth3, member_phone);
-
-//        System.out.println("참거짓 여부=" + findid);
-
-        if(findid == true) {
-            System.out.println("데이터가 넘어가나요?");
-            return "user/loginPage/Find_id";
+        String member_email = loginService.idFindSelectOne(birth, member_phone);
+        System.out.println(member_email);
+        if(member_email == null || member_email.equals("")) {
+            model.addAttribute("idMsg","회원이 존재하지 않습니다");
+            return "user/loginPage/Find"; // 이메일/비밀번호 찾기 창
         } else {
-
-            return "redirect:/Find";
+            model.addAttribute("member_email",member_email);
+            model.addAttribute("msg", "회원님의 이메일은\n'" +member_email+ "'\n입니다");
+            return "user/loginPage/Find_id";    // 결과 이메일 창
         }
-//        return "user/loginPage/Find_id";
     }
 
     @RequestMapping("Find_pw")
-    public String findpw(@RequestParam String member_email, String member_phone) {
+    public String findpw(@RequestParam String member_email, String member_phone, Model model) {
 
-//        System.out.println("Controller=" + member_email + " " + member_phone);
 
         boolean findpw = loginService.findpw(member_email, member_phone);
 
-        System.out.println("참거짓 여부=" + findpw);
 
         if (findpw == true) {
-            System.out.println("데이터가 넘어가나요?");
+
             return "user/loginPage/Find_pw";
         } else {
-
+            model.addAttribute("pwMsg","회원이 존재하지 않습니다");
             return "redirect:/Find";
         }
-//      return "user/loginPage/Find_pw";
+//      return "user/loginPage/Find";
     }
 }

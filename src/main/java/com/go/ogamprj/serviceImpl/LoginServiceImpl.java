@@ -22,10 +22,8 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
-    public boolean findid(String member_birth, String member_phone) {
-        System.out.println("Impl=" + member_birth + " " + member_phone);
-        System.out.println("행 개수=" +loginMapper.findid(member_birth, member_phone));
-        return loginMapper.findid(member_birth, member_phone) == 1;
+    public String idFindSelectOne(String member_birth, String member_phone) {
+        return loginMapper.idFindSelectOne(member_birth, member_phone);
     }
 
     @Override

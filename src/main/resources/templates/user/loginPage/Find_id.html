@@ -13,18 +13,14 @@
         <div class="container">
             <div class="wrapper">
                 <div class="sendId">
-                   <p>아이디 찾기</p> 
+                   <p>이메일 찾기</p>
                 </div>
-                <div class="text">
-
-                    <p>oo님의 아이디는 ~입니다.</p>
-
-                </div>
+                <th:div class="message">[[${msg}]]</th:div>
                 <div class="loginbtn">
                     <button>로그인</button>
                 </div>
                 <div class="goFind_pw">
-                    <a href="/Find" >비밀번호 찾기</a>
+                    <a th:href="|/Find&member_email=${member_email}}|">비밀번호 찾기</a>
                 </div>
             </div>
         </div>
