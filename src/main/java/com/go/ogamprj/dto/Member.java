@@ -35,5 +35,15 @@ public class Member {
         this.BGIMG_SEQ = BGIMG_SEQ;
     }
 
+    public Member(String member_email, String member_pw, String member_nick,
+                  String birth, String gender, String member_phone) {
+        this.MEMBER_EMAIL = member_email;
+        this.MEMBER_PW = member_pw;
+        this.MEMBER_NICK = member_nick;
+        this.MEMBER_BIRTH = birth;
+        System.out.println(birth);
+        this.MEMBER_GENDER = gender;
+        this.MEMBER_PHONE = member_phone;
+    }
 }
 

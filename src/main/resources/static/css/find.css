@@ -17,10 +17,10 @@
     margin: 10px auto;
 }
 
-.wrapper p{
+.wrapper p {
     font-size: 30px;
     text-align: center;
-    margin: auto;
+    margin: 2% auto;
 }
 
 label{
@@ -65,25 +65,11 @@ label{
     padding: 10px;
 }
 
-/*#birth {
-   text-align: center;
-    padding: 5px;
-    width: 100px;
-    size: 20px;
-    margin: auto;
-}
-
-#phonenum {
-    border-width: medium;
-    padding: 10px;
-    size: 20px;
-    margin: auto;
-} */
-
 .id_submitBtn{
     display: block;
     margin-left: 100px;
     margin-top: 5%;
+    margin-bottom: 5%;
     width: 50%;
 
 }

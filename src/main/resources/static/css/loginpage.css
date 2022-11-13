@@ -29,7 +29,8 @@ label{
     width: 50%;
 }
 
-.idBox input{
+#id,
+#password{
     border-width: medium;
     padding: 10px;
     width: 300px;

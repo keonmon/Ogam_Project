@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,20 +9,22 @@
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <form action="" value="">
+    <form action="/loginPage" value="get">
         <div class="container">
             <div class="wrapper">
                 <div class="sendId">
                    <p>아이디 찾기</p> 
                 </div>
                 <div class="text">
-                    <p>ooo님의 아이디는 aaa@AAA.com입니다.</p>
+
+                    <p>oo님의 아이디는 ~입니다.</p>
+
                 </div>
                 <div class="loginbtn">
                     <button>로그인</button>
                 </div>
                 <div class="goFind_pw">
-                    <a href="http://127.0.0.1:5500/Page/Find_pw.html" >비밀번호 찾기</a>
+                    <a href="/Find" >비밀번호 찾기</a>
                 </div>
             </div>
         </div>

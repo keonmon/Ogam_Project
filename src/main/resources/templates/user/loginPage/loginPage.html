@@ -15,19 +15,21 @@
             </div>
             <form action="/login" method="get">
             <div class="idBox">
-                <label for="member_email">아이디</label>
-                <input type="text" id="member_email" name="member_email"
-                placeholder="이메일을 입력하세요!">
+                <label for="id">아이디</label>
+                <input type="text" id="id" name="member_email" required
+                       pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}"
+                       placeholder="이메일을 입력하세요!">
             </div>
 
             <div class="passwordBox">
-                <label for="member_pw">비밀번호 </label>
-                <input type="password" id="member_pw" name="member_pw"
-                placeholder="비밀번호를 입력하세요!">
+                <label for="password">비밀번호 </label>
+                <input type="password" id="password" name="member_pw" required
+                       pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}"
+                       placeholder="비밀번호를 입력하세요!">
             </div>
 
             <div class="loginBox">
-                <button type="submit" th:value="login">로그인</button>
+                <button>로그인</button>
             </div>
 
             <div class="kakaoLoginBox">
@@ -36,7 +38,7 @@
 
 
             <div class="findId">
-                <a href="/Find.html">아이디 / 비밀번호찾기</a> <a href="/SignUp.html">회원가입</a>
+                <a href="/Find">아이디 / 비밀번호찾기</a> <a href="/SignUpForm">회원가입</a>
             </div>
             </form>
         </div>
