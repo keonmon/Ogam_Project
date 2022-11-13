@@ -96,14 +96,20 @@ public class KakaoAPIServiceImpl implements KakaoAPIService {
             JsonParser parser = new JsonParser();
             JsonElement element =  parser.parse(result);
 
+
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakaoAccount = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
             String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
+            String kakaoId =  element.getAsJsonObject().get("id").getAsString();
 
             userInfo.put("nickname", nickname);
             userInfo.put("email", email);
+            userInfo.put("kakaoId", kakaoId);
+
+
+
 
 
         } catch (Exception e) {
@@ -135,6 +141,16 @@ public class KakaoAPIServiceImpl implements KakaoAPIService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void kakaoUserInsert(HashMap<String, Object> userInfo) {
+        memberMapper.kakaoUserInsert(userInfo);
+    }
+
+    @Override
+    public HashMap<String,Object> kakaoUserCheck(Object kakaoId) {
+        return memberMapper.kakaoUserCheck(kakaoId);
     }
 
 }

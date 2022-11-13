@@ -113,7 +113,7 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
-
+                                        <th:a class="mod1_innerContents noData" th:if="${session.loginUser} and ${#lists.isEmpty(myDiaryList)}" href="/writeDiary1"> 당신의 첫번째 감정을 기록하세요!🥳 </th:a>
                                         <a class="mod1_innerContents"
                                             th:href="|/viewDiary?diarySeq=${myDiary.DIARY_SEQ}|"
                                             th:each="myDiary : ${myDiaryList}">
@@ -152,7 +152,7 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                         10 * ( width:230px + margin-right:20px ) -->
-
+                                        <th:a class="mod1_innerContents noData" th:if="${session.loginUser} and ${#lists.isEmpty(friendDiaryList)}" href="/friendList"> 친구가 작성한 일기가 없어요😥 </th:a>
                                         <a class="mod1_innerContents"
                                             th:href="|/viewDiary?diarySeq=${friendDiary.DIARY_SEQ}|"
                                             th:each="friendDiary : ${friendDiaryList}">

@@ -39,8 +39,9 @@ public class User_LoginController {
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request){
-        request.getSession().removeAttribute("member_email");
-        return "redirect:/loginPage";
+        request.getSession().removeAttribute("loginUser");
+        request.getSession().removeAttribute("accessToken");
+        return "redirect:/";
     }
 
 

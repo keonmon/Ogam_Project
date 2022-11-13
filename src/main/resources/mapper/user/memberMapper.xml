@@ -42,4 +42,9 @@
         , MEMBER_QUITED_REASON = #{MEMBER_QUITED_REASON}
         WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
     </update>
+
+    <insert id="kakaoUserInsert" parameterType="java.util.HashMap">
+        insert into member(MEMBER_NICK,KAKAOID,MEMBER_EMAIL)
+        values(#{nickname},#{kakaoId},#{email})
+    </insert>
 </mapper>

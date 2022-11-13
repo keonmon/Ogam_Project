@@ -300,5 +300,7 @@ alter table friend_apply add friend_key number not null;
 alter table Blacklist_diary modify blacklist_diary_date date default sysdate not null;
 alter table Blacklist_reply modify blacklist_reply_date date default sysdate not null;
 
+
+alter table MEMBER add KAKAOID number null ;
 )
 

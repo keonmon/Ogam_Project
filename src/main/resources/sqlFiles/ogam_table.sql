@@ -18,7 +18,7 @@
 
 -- 모든 sysdate가 default인 컬럼들을 전부 current_date로 수정
 
-
+-- MEMBER 테이블에 카카오 로그인을 위한 KAKAOID NUMBER NULL컬럼 추가
 ----------------------------------------
 --DROP TABLE BGIMAGE;
 
@@ -51,7 +51,9 @@ CREATE TABLE MEMBER (
 	member_image	varchar2(100)		NULL,
 	member_intro	varchar2(200)		NULL,
 	member_quited	date		NULL,
-	member_quited_reason	varchar2(200)		NULL
+	member_quited_reason	varchar2(200)		NULL,
+	BGIMG_SEQ	NUMBER	NULL,
+	KAKAOID     NUMBER      NULL
 );
 
 COMMENT ON COLUMN MEMBER.member_adminyn IS '값이 y면 관리자계정';
