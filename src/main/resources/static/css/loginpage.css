@@ -16,6 +16,7 @@
     display: block;
     margin: auto;
     width: 50%;
+    cursor:pointer;
 }
 
 
@@ -93,4 +94,14 @@ input{
 
 body{
     font-family: 'Pretendard-Regular';
+}
+
+.massage{
+    width: 50%;
+    font-size: 20px;
+    /* font-weight: bold; */
+    display: block;
+    color: #908BE8;
+    margin: 0 auto;
+    text-align: center;
 }

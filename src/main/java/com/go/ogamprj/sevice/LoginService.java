@@ -2,9 +2,11 @@ package com.go.ogamprj.sevice;
 
 import com.go.ogamprj.dto.Member;
 
+import java.util.Map;
+
 public interface LoginService {
 
-    public boolean loginvalid(String member_email, String member_pw);
+    public Map<String,Object> memberSelectOne(String member_email);
 
     public boolean findid(String member_birth, String member_phone);
 

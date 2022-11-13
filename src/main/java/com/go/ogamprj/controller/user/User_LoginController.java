@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 public class User_LoginController {
@@ -28,17 +29,27 @@ public class User_LoginController {
     }
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, @RequestParam String member_email, @RequestParam String member_pw){
+    public String login(HttpServletRequest request, Model model,
+                        @RequestParam String member_email,
+                        @RequestParam String member_pw ) {
 
-       boolean loginvalid = loginService.loginvalid(member_email, member_pw);
-
-      if(loginvalid == true) {
-
-         return "user/userDashboard/userDashboard";
-      } else{
-
-       return "redirect:/loginPage";
+        // MEMBER_EMAIL, MEMBER_PW 담김
+        Map<String,Object> memberMap = loginService.memberSelectOne(member_email);
+        if (memberMap == null) {
+            model.addAttribute("msg", "아이디가 존재하지 않습니다😅");
+        } else if(memberMap.get("MEMBER_PW") == null) {
+            model.addAttribute("msg", "비밀번호 오류입니다.😅");
+            model.addAttribute("member_email",member_email);
+        } else if(!memberMap.get("MEMBER_PW").equals(member_pw)) {
+            model.addAttribute("msg", "비밀번호가 다릅니다.😅");
+            model.addAttribute("member_email",member_email);
+        } else if(memberMap.get("MEMBER_PW").equals(member_pw)) {
+            request.getSession().setAttribute("loginUser",member_email);
+            return "redirect:/";
+        }else{
+            model.addAttribute("msg", "알 수 없는 오류가 발생했습니다.😅");
         }
+            return "user/loginPage/loginPage";
     }
 
     @RequestMapping("/logout")
