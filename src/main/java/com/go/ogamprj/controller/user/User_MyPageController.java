@@ -36,7 +36,10 @@ public class User_MyPageController {
 
     @RequestMapping("/MyPage")
     public String MyPage(HttpServletRequest request, Model model) {
-        String member_email = "user2@ogam.com";
+        String member_email = "annjin21@naver.com";
+//        request.getSession().setAttribute("member_email", "user2@ogam.com");
+//        String member_email = (String) request.getSession().getAttribute("member_email");
+        System.out.println(member_email);
         HashMap<String, Object> user = memberService.findMember(member_email);
 //        System.out.println(user.get("BGIMG_PATH"));
 
