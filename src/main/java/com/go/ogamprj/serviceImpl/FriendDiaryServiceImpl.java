@@ -79,5 +79,12 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
         friendDiaryMapper.deleteFriendSend(fri_send_seq);
     }
 
+    // 상대 유저에게 신청 받은 valid 검사
+    @Override
+    public int sendValid(String myEmail) {
+        return friendDiaryMapper.sendValid(myEmail);
+    }
+
+
 
 }

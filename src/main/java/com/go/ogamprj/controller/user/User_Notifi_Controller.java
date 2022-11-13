@@ -18,6 +18,6 @@ public class User_Notifi_Controller {
 
         //notifiService.selectMember();
 
-        return "success";
+        return "redirect";
     }
 }
