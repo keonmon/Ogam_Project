@@ -46,7 +46,7 @@ public class Member {
         this.MEMBER_PHONE = member_phone;
     }
 
-}
+
 
     public Member(String MEMBER_BLACKYN, String MEMBER_BLACK_REASON) {
         this.MEMBER_BLACKYN = MEMBER_BLACKYN;

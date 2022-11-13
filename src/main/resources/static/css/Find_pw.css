@@ -62,3 +62,13 @@
     height: 30px;
     cursor: pointer;
 }
+
+.massage{
+    width: 100%;
+    font-size: 20px;
+    /* font-weight: bold; */
+    display: block;
+    color: #908BE8;
+    margin: 0 auto;
+    text-align: center;
+}

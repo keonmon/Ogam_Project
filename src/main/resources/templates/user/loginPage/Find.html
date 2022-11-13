@@ -4,50 +4,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아이디/비밀번호찾기</title>
-    <link rel="stylesheet" type="text/css" href="/css/find.css" />
+    <link rel="stylesheet" type="text/css" href="css/find.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
         <div class="container">
             <div class="wrapper">
                <form action="/Find_id" method="get">
-                <div class="checkId">
+
+                <div class="divBox underLine">
                     <p>아이디 찾기</p>
-                    <div class="birthday">
+                    <div class="div">
                         <label>생년월일</label>
-                        <input type="text" id="member_birth1" name="birth1" required>
-                        <input type="text" id="member_birth2" name="birth2" required>
-                        <input type="text" id="member_birth3" name="birth3" required>
+                        <input class="input" type="text" id="member_birth1" name="birth" required placeholder="1990/01/01"
+                            pattern="^(19[0-9][0-9]|20\d{2})/(0[0-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])$">
                     </div>
 
-                    <div class="phoneNum">
+                    <div class="div">
                         <label>휴대폰번호</label>
-                        <input type="text" id="member_phone" name="member_phone" required>
+                        <input class="input" type="text" id="member_phone" name="member_phone" required
+                            pattern="^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}">
                     </div>
+                    <th:div class="message">[[${idMsg}]]</th:div>
 
-                    <div class="id_submitBtn">
+
+                    <div class="btn mar-bott">
                         <button>아이디 찾기</button>
                     </div>
                 </div>
                </form>
+
                 <form action="/Find_pw" method="get">
-                <div class="checkPw">
+                <div class="divBox">
                     <p>비밀번호 찾기</p>
 
 
-                <div class="emailBox">
-                    <label>이메일</label>
-                    <input type="email" id="member_email" name="member_email" required>
-                </div>
+                    <div class="div">
+                        <label>이메일</label>
+                        <input class="input" type="email" id="member_email" name="member_email" required th:value="${member_email}">
+                    </div>
 
-                <div class="phoneNum">
-                    <label for="member_phone2">휴대폰번호</label>
-                    <input type="text" id="member_phone2" name="member_phone" required>
-
-                </div>
-                <div class="pw_Reissue">
-                    <button>비밀번호 재발급</button>
-                </div>
+                    <div class="div">
+                        <label for="member_phone2">휴대폰번호</label>
+                        <input class="input" type="text" id="member_phone2" name="member_phone" required
+                               pattern="^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}" >
+                    </div>
+                    <th:div class="message">[[${pWMsg}]]</th:div>
+                    <div class="btn">
+                        <button>비밀번호 재발급</button>
+                    </div>
                 </div>
                 </form>
             </div>

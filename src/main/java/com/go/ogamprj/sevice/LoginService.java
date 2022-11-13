@@ -8,7 +8,7 @@ public interface LoginService {
 
     public Map<String,Object> memberSelectOne(String member_email);
 
-    public boolean findid(String member_birth, String member_phone);
+    public String idFindSelectOne(String member_birth, String member_phone);
 
     public boolean findpw(String member_email, String member_phone);
 }
