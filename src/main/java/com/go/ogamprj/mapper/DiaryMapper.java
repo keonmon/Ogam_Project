@@ -79,5 +79,12 @@ public interface DiaryMapper {
     List<Map<String,Object>> calendarDiarySelectAll(String memberSeq);
 
     List<Map<String, Object>> frndCalendarDiarySelectAll(String memberSeq);
+
+    void notifyReplyInsert(Map<String, Object> replyMap);
+
+    void notifyLikeInsert(Map<String, Object> map);
+
+    @Select("select count(*) from notifi where diary_seq = #{diarySeq} and noti_email = #{loginUser} and noti_type = 'like'")
+    int notifyLikeSelectCnt(Map<String, Object> map);
 }
 

@@ -70,7 +70,16 @@
     margin-right: 10px;
 }
 
-#files {
+#proImg{
+    width: 9.5vw;
+    height: 9.5vw;
+}
+
+input[type="file"]{
+    display: none;
+}
+
+#member_image{
     cursor: pointer;
     display:flex;
     justify-content: center;
@@ -84,18 +93,9 @@
     border-radius: 3px;
 }
 
-#member_image{
-    display: none;
-}
 
 .photo input {
     font-size: 1rem;
-}
-
-#imgBlock img{
-    width: 9.5vw;
-    height: 9.5vw;
-    /* border: 1px solid black; */
 }
 
 /* 소개글 */

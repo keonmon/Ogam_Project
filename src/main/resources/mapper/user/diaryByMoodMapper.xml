@@ -11,6 +11,8 @@
             on d.emotion_seq = e.emotion_seq
             join member m
             on d.member_email = m.member_email
+            join reply r
+            on r.diary_seq = d.diary_seq
     </select>
 
     <!--  기분별 diary 가져오기  -->
@@ -21,6 +23,6 @@
             on d.emotion_seq = e.emotion_seq
             join member m
             on d.member_email = m.member_email
-        where e.emotion = #{emotion}
+        where e.emotion = #{emotion} and d.diary_private = 'n'
     </select>
 </mapper>

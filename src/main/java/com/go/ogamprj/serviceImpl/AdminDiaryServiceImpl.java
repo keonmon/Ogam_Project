@@ -26,5 +26,11 @@ public class AdminDiaryServiceImpl implements AdminDiaryService {
         return adminDiaryMapper.userDiarySelectKeyword(type, keyword);
     }
 
+    /* 일기 삭제 */
+    @Override
+    public void diaryDelete(int diary_seq) {
+        adminDiaryMapper.diaryDelete(diary_seq);
+    }
+
 
 }

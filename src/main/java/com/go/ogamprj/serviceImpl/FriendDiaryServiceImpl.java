@@ -1,16 +1,12 @@
 package com.go.ogamprj.serviceImpl;
 
-import com.go.ogamprj.dto.friendApply;
-import com.go.ogamprj.dto.friendSend;
+import com.go.ogamprj.dto.FriendApply;
+import com.go.ogamprj.dto.FriendSend;
 import com.go.ogamprj.mapper.FriendDiaryMapper;
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -34,8 +30,8 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
 
     // 검색으로 친구리스트 가져오기
     @Override
-    public List<Map<String, Object>> search(String searchKeyword) {
-        return friendDiaryMapper.search(searchKeyword);
+    public List<Map<String, Object>> search(String myEmail, String searchKeyword) {
+        return friendDiaryMapper.search(myEmail, searchKeyword);
     }
 
     // 친구 리스트 삭제
@@ -59,19 +55,19 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
 
     // 친구 신청하기
     @Override
-    public void insertfriendSend(friendSend friendSend) {
+    public void insertfriendSend(FriendSend friendSend) {
         friendDiaryMapper.insertfriendSend(friendSend);
     }
 
     // 멤버 검색
     @Override
-    public List<Map<String, Object>> memberSearch(String searchKeyword) {
-        return friendDiaryMapper.memberSearch(searchKeyword);
+    public List<Map<String, Object>> memberSearch(String myEmail, String searchKeyword) {
+        return friendDiaryMapper.memberSearch(myEmail,searchKeyword);
     }
 
     // 친구 리스트에 insert
     @Override
-    public void insertfriendList(friendApply friendApply) {
+    public void insertfriendList(FriendApply friendApply) {
         friendDiaryMapper.insertfriendList(friendApply);
         friendDiaryMapper.insertfriendList2nd(friendApply);
     }
@@ -82,6 +78,13 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
         System.out.println(fri_send_seq);
         friendDiaryMapper.deleteFriendSend(fri_send_seq);
     }
+
+    // 상대 유저에게 신청 받은 valid 검사
+    @Override
+    public int sendValid(String myEmail) {
+        return friendDiaryMapper.sendValid(myEmail);
+    }
+
 
 
 }

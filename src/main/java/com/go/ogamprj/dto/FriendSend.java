@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @ToString
-public class friendSend {
+public class FriendSend {
     private int fri_send_seq;
     private String member_email;
     private String member_op_email;

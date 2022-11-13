@@ -6,7 +6,7 @@
     <!-- 신고 기록 전체 가져오기 -->
     <select id="notifySelectAll" resultType="java.util.Map">
         SELECT
-               BLACKLIST_DIARY_SEQ
+               BLACKLIST_DIARY_SEQ AS "BLACKLIST_SEQ"
              , CASE WHEN BLACKLIST_DIARY_SEQ IS NOT NULL THEN '일기' END AS "Category"
              , BLACKLIST_COMMENT
              , MEMBER_EMAIL
@@ -31,7 +31,7 @@
           FROM
         (
             SELECT
-                   BLACKLIST_DIARY_SEQ
+                   BLACKLIST_DIARY_SEQ AS "BLACKLIST_SEQ"
                  , CASE WHEN BLACKLIST_DIARY_SEQ IS NOT NULL THEN '일기' END AS "Category"
                  , BLACKLIST_COMMENT
                  , MEMBER_EMAIL

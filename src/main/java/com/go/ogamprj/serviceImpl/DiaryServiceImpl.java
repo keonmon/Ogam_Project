@@ -51,10 +51,10 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<HashMap<String, Object>> randomAllDiarySelectAll() {
 
-        // 랜덤하게 다이어리 가져오기 (10개)
+        // 랜덤하게 다이어리 가져오기 (15개)
         //List<HashMap<String,Object>> randomAllDiaryList = ;
         List<HashMap<String, Object>> result = changeDateFormat(diaryMapper.randomAllDiarySelectAll());
-        System.out.println(result);
+        //System.out.println(result);
 
         return result;
     }
@@ -182,6 +182,7 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public void replyInsert(Map<String, Object> replyMap) {
         diaryMapper.replyInsert(replyMap);
+
     }
 
     @Override
@@ -202,6 +203,22 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<Map<String, Object>> frndCalendarDiarySelectAll(String memberSeq) {
         return diaryMapper.frndCalendarDiarySelectAll(memberSeq);
+    }
+
+    @Override
+    public void notifyReplyInsert(Map<String, Object> replyMap) {
+        diaryMapper.notifyReplyInsert(replyMap);
+    }
+
+    @Override
+    public void notifyLikeInsert(Map<String, Object> map) {
+
+        int cnt = diaryMapper.notifyLikeSelectCnt(map);  // 이미 좋아요를 했는지 확인
+
+        // count 결과가 0이면 좋아요 알림 전송
+        if(cnt == 0){
+            diaryMapper.notifyLikeInsert(map);
+        }
     }
 
 

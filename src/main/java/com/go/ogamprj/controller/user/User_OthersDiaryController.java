@@ -25,24 +25,22 @@ public class User_OthersDiaryController {
 
         // 모두의 일기 가져오기
         List<Map<String, Object>> selectDiaryByMood =  user_othersDiaryService.selectDiaryAll();
+
         model.addAttribute("selectDiaryByMood",selectDiaryByMood);
 
-        System.out.println(selectDiaryByMood);
         return "/user/userDiary/diaryAll";
     }
 
-    // 기쁨 다이어리 select
+    // 기분별 다이어리 select
     @RequestMapping(value = "/happyDiary", method = {RequestMethod.POST})
     public String happyDiary(@RequestBody String reqEmotion, Model model) throws  Exception {
 
         JSONObject jObject = new JSONObject(reqEmotion);
         String emotion = jObject.getString("reqEmotion");
-
-
+        String diary_private = "n";
 
         List<Map<String, Object>> selectDiaryByMood = user_othersDiaryService.selectDiaryByHappy(emotion);
 
-        System.out.println(selectDiaryByMood);
         model.addAttribute("selectDiaryByMood",selectDiaryByMood);
         return "/user/userDiary/diaryAll :: .diaryContainer";
     }

@@ -101,7 +101,7 @@ for(let i = 0; i < accept.length; i++){
     let response = answer[i].value.innerHTML = 'y';
     let nickname = op_nickname[i].innerHTML;
     let member_op_email = op_email[i].value;
-
+    let fri_send_seq = friSeq[i].value;
         Swal.fire({
           title: '친구등록을 완료했습니다',
           showClass: {
@@ -114,7 +114,7 @@ for(let i = 0; i < accept.length; i++){
             $.ajax({
                url:"/response",
                type:"post",
-               data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email},
+               data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email, "fri_send_seq" : fri_send_seq},
                success:function(data) {
                     window.location.href = "/sendList";
                },

@@ -115,12 +115,14 @@
 
 .contents article .mod2_innerSlide {
     display: flex;
-    justify-content: space-evenly;
-    width: 2000px;
+    justify-content: flex-start;
+    width: auto;
     height: 100%;
     position: absolute;
     left: 0px;
     top: 80px;
+    gap: .7%;
+    margin: 0px 20px 0px 20px;
 }
 
 .contents article .active {
@@ -129,20 +131,21 @@
   }
 
 .contents article .mod2_innerContents {
-    width: 9%;
+    width: auto;
     height: 60%;
     position: relative;
     float: left;
     /* margin-right: 0; */
     transition: 0.5s;
 }
+
 .contents article .mod2_innerContents:hover{
     transform: scale(1.05);
 }
 
 .contents article .mod2_d_bg {
     background-color: #ececec;
-    width: 100%;
+    width: 180px;
     height: 105%;
     position: relative;
     border-top-left-radius: 20px;
@@ -157,6 +160,7 @@
     position: relative;
     left: 15px;
     top: 15px;
+    padding: 0px;
 }
 
 .contents article .mod2_d_nick {
@@ -390,4 +394,14 @@
 
 a{
     color:#282828;
+}
+
+.noData{
+    display: flex;
+    font-size: 2.5em;
+    text-align: center;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pretendard-Regular';
 }

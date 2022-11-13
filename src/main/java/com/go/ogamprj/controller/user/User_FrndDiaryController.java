@@ -1,7 +1,7 @@
 package com.go.ogamprj.controller.user;
 
-import com.go.ogamprj.dto.friendApply;
-import com.go.ogamprj.dto.friendSend;
+import com.go.ogamprj.dto.FriendApply;
+import com.go.ogamprj.dto.FriendSend;
 import com.go.ogamprj.sevice.DiaryService;
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.json.simple.JSONArray;
@@ -23,11 +23,10 @@ public class User_FrndDiaryController {
 
     @Autowired
     FriendDiaryService friendDiaryService;
-
+    
     @Autowired
     DiaryService diaryService;
-    
-    
+
     // 친구 리스트 목록 가져오기
     @RequestMapping("/friendList")
     public String friendList(HttpServletRequest request,String searchKeyword, Model model) {
@@ -44,7 +43,7 @@ public class User_FrndDiaryController {
 
         // 친구 검색 리스트
 
-        List<Map<String, Object>> search = friendDiaryService.search(searchKeyword.trim());
+        List<Map<String, Object>> search = friendDiaryService.search(myEmail,searchKeyword);
 
         model.addAttribute("friendList", search);
 
@@ -77,10 +76,12 @@ public class User_FrndDiaryController {
 
         // 친구 신청 가져오기
         List<Map<String, Object>> friendSendList = friendDiaryService.friendSendSelectAll(myEmail);
-
         // member 전체 유저 가져오기
         List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
-        System.out.println("asdasdas : " + memberList);
+
+        // 상대 유저에게 신청 받았는지 valid
+        int vaild = friendDiaryService.sendValid(myEmail);
+        System.out.println(vaild);
 
         model.addAttribute("memberList",memberList);
         model.addAttribute("friendSendList",friendSendList);
@@ -94,16 +95,18 @@ public class User_FrndDiaryController {
 
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
-        friendDiaryService.insertfriendSend(new friendSend(0,myEmail,member_email,response,null));
+        friendDiaryService.insertfriendSend(new FriendSend(0,myEmail,member_email,response,null));
 
         return "success";
     }
 
     // modal member 검색하기
     @RequestMapping(value = "modalSearch", method = {RequestMethod.POST})
-    public String modalSearch(@RequestParam String searchKeyword, Model model) {
+    public String modalSearch(HttpServletRequest request, @RequestParam String searchKeyword, Model model) {
 
-        List<Map<String, Object>> memberSearch = friendDiaryService.memberSearch(searchKeyword);
+        String myEmail = (String)request.getSession().getAttribute("loginUser");
+
+        List<Map<String, Object>> memberSearch = friendDiaryService.memberSearch(myEmail,searchKeyword);
 
         System.out.println(memberSearch);
 
@@ -119,7 +122,7 @@ public class User_FrndDiaryController {
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         if(response.equals("y")) {
-            friendDiaryService.insertfriendList(new friendApply(0,myEmail,member_op_email,null,0));
+            friendDiaryService.insertfriendList(new FriendApply(0,myEmail,member_op_email,null,0));
             friendDiaryService.deleteFriendSend(fri_send_seq);
         } else {
             friendDiaryService.deleteFriendSend(fri_send_seq);
@@ -128,7 +131,7 @@ public class User_FrndDiaryController {
     }
 
     // 친구의 다이어리로 이동
-    @RequestMapping(value="/frndDiary", method = {RequestMethod.POST})
+    @RequestMapping(value="/frndDiary")
     public String friendDiary(HttpServletRequest request,
                               Model model,
                               @RequestParam String frndEmail) {
@@ -170,5 +173,6 @@ public class User_FrndDiaryController {
         //System.out.println("json으로 변환 : "+ result);
         return result;
     }
+
 
 }

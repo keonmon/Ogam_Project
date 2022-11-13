@@ -21,45 +21,32 @@
             <span>
                 <img src="/img/logoImg.png" id="user_img">
             </span>
+            <th:block th:unless="${session.loginUser}">
             <span class="login">
-                <a href="#">
+                <a href="/loginPage">
                     <span>로그인</span>
                 </a>
             </span>
+            </th:block>
+            <th:block th:if="${session.loginUser}">
             <span class="logout">
-                <a href="#">
+                <a href='#' onclick="if(confirm('정말로 로그아웃 하시려고요..?😨')) location.href='/logout'">
                     <span>로그아웃</span>
                 </a>
             </span>
+            </th:block>
         </div>
+
         <div id="notifi_modal notifi_wrapModal" class="notifi_wrapModal">
             <div id="notifi_title">알림</div>
             <div class="titleText">최근 알림</div>
             <div class="currentNotifi">
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
+                <th:block th:each="friend : ${friendSendList}">
+                    <div class="currentNotifi_contents" id="currentNotifi_contents">
+                        <img th:src="${friend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
+                            <p>[[ ${friend.MEMBER_NICK} ]]님이 친구신청을 요청 했습니다.</p>
+                    </div>
+                </th:block>
             </div>
             <div class="titleText">이전 알림</div>
             <div class="previewNotifi">
@@ -67,39 +54,6 @@
                     <img src="/Img/logoImg.png" />
                     <p>호준님이 친구신청을 요청 했습니다.</p>
                 </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-
             </div>
             <div class="notifi_wrapModal"></div>
         </div>

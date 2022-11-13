@@ -7,4 +7,5 @@ public interface User_OthersDiaryService {
     List<Map<String, Object>> selectDiaryAll();
 
     List<Map<String, Object>> selectDiaryByHappy(String emotion);
+
 }
