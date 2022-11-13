@@ -85,7 +85,7 @@ public class User_LoginController {
 //        System.out.println("참거짓 여부=" + findid);
 
         if(findid == true) {
-            System.out.println("데이터가 넘어가나요?");
+//           System.out.println("데이터가 넘어가나요?");
             return "user/loginPage/Find_id";
         } else {
 
@@ -101,10 +101,10 @@ public class User_LoginController {
 
         boolean findpw = loginService.findpw(member_email, member_phone);
 
-        System.out.println("참거짓 여부=" + findpw);
+//        System.out.println("참거짓 여부=" + findpw);
 
         if (findpw == true) {
-            System.out.println("데이터가 넘어가나요?");
+//           System.out.println("데이터가 넘어가나요?");
             return "user/loginPage/Find_pw";
         } else {
 

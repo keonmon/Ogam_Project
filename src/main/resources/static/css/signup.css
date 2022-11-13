@@ -68,14 +68,15 @@ html, body {
     width: 70px;
     min-width: 70px;
     margin-left: 19px;
+    margin-right: 50px;
     text-align: end;
 }
 
 #member_email {
-    margin-left: 50px;
+    width: 22vw;
     height: 40px;
-    width: 37vw;
-    margin-right: 2.2vw;
+    font-size: 1.1rem;
+    margin-right: 10px;
     font-size: 1.1rem;
 }
 
@@ -130,7 +131,7 @@ html, body {
 #member_nick:focus {
     outline-color: #A7BAFF;
 }
-
+#email_chk,
 #nick_chk {
     height: 45px;
     font-size: 1.1rem;
@@ -162,7 +163,7 @@ html, body {
  #member_birth2,
  #member_birth3{
     height: 40px;
-    width: 22%;
+    width: 21%;
     margin-left: 20px;
     font-size: 1.1rem;
 }
@@ -186,7 +187,7 @@ html, body {
 #member_gender1,
 #member_gender2 {
     height: 25px;
-    width: 25%;
+    width: 10%;
     margin-left: 15px;
 }
 
@@ -235,4 +236,9 @@ html, body {
     border-radius: 5px;
     color: white;
     cursor: pointer;
+}
+
+.fa{
+    position: relative;
+    right: 75px;
 }

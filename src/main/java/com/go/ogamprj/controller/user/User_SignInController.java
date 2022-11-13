@@ -30,6 +30,17 @@ public class User_SignInController {
 
         return "user/loginPage/loginPage";
     }
+
+    // 이메일 중복확인
+    @RequestMapping("/findByEmail")
+    @ResponseBody
+    public int uniquemail(@RequestParam String member_email) {
+
+        int uniquEmail = signupService.uniqueEmail(member_email);
+
+        return uniquEmail;
+    }
+
     // 닉네임 중복확인
     @RequestMapping("/findByNick")
     @ResponseBody

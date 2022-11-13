@@ -18,7 +18,7 @@ var member_pw = document.getElementById("member_pw"),
 
 function validatePassword(){
     if(member_pw.value != member_repw.value){
-    member_repw.setCustomValidity("비밀번호가 일치하지 않습니다.");
+    member_repw.setCustomValidity("비밀번호가 일치하지 않습니다!!");
     }
     else {
     member_repw.setCustomValidity('');
@@ -28,3 +28,20 @@ function validatePassword(){
 member_pw.onchange = validatePassword;
 member_repw.onchange = validatePassword;
 
+/*라디오 버튼 체크 여부*/
+document.getElementById('signup').onclick = function() {
+    var selected = false;
+    var radios = document.getElementsByName('gender');
+    for(var radio of radios)
+    {
+        if(radio.type === 'radio' && radio.checked)
+        {
+            selected = true;
+        }
+    }
+    if (!selected) {
+        alert('성별을 선택해 주세요!!');
+    }
+}
+
+/*이메일 중복 체크*/

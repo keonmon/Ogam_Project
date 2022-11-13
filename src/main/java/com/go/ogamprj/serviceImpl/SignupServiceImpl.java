@@ -24,6 +24,12 @@ public class SignupServiceImpl implements SignupService {
     }
 
     @Override
+    public int uniqueEmail(String member_email) {
+        int uniqueEmail = signupMapper.uniqueEmail(member_email);
+        return uniqueEmail;
+    }
+
+    @Override
     public int uniqueChk(String member_nick) {
         int uniqueChk = signupMapper.uniqueChk(member_nick);
         return uniqueChk;

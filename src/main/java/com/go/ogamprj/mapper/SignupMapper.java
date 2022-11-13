@@ -10,4 +10,7 @@ public interface SignupMapper {
 
     @Select("select count(*) from member where member_nick = #{member_nick}")
     int uniqueChk(String member_nick);
+
+    @Select("select count(*) from member where member_email = #{member_email}")
+    int uniqueEmail(String member_email);
 }
