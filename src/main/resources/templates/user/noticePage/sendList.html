@@ -43,7 +43,7 @@
                         <th:block th:unless="${#lists.size(friendSendList)} == 0">
                             <th:block th:each="friendSend : ${friendSendList}">
                                     <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
-                                    <input type="text" class="op_email" th:value="${friendSend.MEMBER_OP_EMAIL}" style="display:none">
+                                    <input type="text" class="op_email" th:value="${friendSend.MEMBER_EMAIL}" style="display:none">
                                     <input type="text" class="friSeq" th:value="${friendSend.FRI_SEND_SEQ}" style="display:none">
                                     <div class="send_date" th:text="|친구 신청일 : ${#dates.format(friendSend.SEND_DATE, 'yyyy-MM-dd')}|"></div>
                                     <div class="send_list">

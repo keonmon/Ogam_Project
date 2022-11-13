@@ -1,9 +1,8 @@
 package com.go.ogamprj.mapper;
 
-import com.go.ogamprj.dto.friendApply;
-import com.go.ogamprj.dto.friendSend;
+import com.go.ogamprj.dto.FriendApply;
+import com.go.ogamprj.dto.FriendSend;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ public interface FriendDiaryMapper {
     int friendListCount(String myEmail);
 
     // 친구 검색
-    List<Map<String, Object>> search(String searchKeyword);
+    List<Map<String, Object>> search(String myEmail, String searchKeyword);
 
     // 친구 리스트 삭제
     void deleteFriend(String myEmail, String nickname);
@@ -31,17 +30,17 @@ public interface FriendDiaryMapper {
 
     // 멤버 검색
 
-    List<Map<String, Object>> memberSearch(String searchKeyword);
+    List<Map<String, Object>> memberSearch(String myEmail,String searchKeyword);
 
     // 친구 리스트 insert
-    void insertfriendList(friendApply friendApply);
+    void insertfriendList(FriendApply friendApply);
 
-    void insertfriendList2nd(friendApply friendApply);
+    void insertfriendList2nd(FriendApply friendApply);
 
     // 친구 신청 리스트 삭제
     void deleteFriendSend(Integer fri_send_seq);
 
     // 친구 신청하기
-    void insertfriendSend(friendSend friendSend);
+    void insertfriendSend(FriendSend friendSend);
 
 }

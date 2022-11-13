@@ -1,4 +1,3 @@
-
 // 메뉴바 스크립트
 const friendList = document.querySelector(".friendList");
 const sendList = document.querySelector(".sendList");
@@ -63,8 +62,9 @@ for(let i = 0; i < op_nicknameDiv.length; i++) {
 
         console.log(frndEmails[i].value);
 
-//        location.href = "frndDiary?frndEmail=" + frndEmails[i].value
-        $.post("/frndDiary"), {frndEmail : frndEmails[i].value};
+        location.href = "frndDiary?frndEmail=" + frndEmails[i].value
+        //$.post("/frndDiary"), {frndEmail : frndEmails[i].value};
+
     })
 }
 
