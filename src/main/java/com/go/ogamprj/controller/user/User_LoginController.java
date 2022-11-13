@@ -81,6 +81,7 @@ public class User_LoginController {
         if(member_email == null || member_email.equals("")) {
             model.addAttribute("idMsg","회원이 존재하지 않습니다");
             return "user/loginPage/Find"; // 이메일/비밀번호 찾기 창
+
         } else {
             model.addAttribute("member_email",member_email);
             model.addAttribute("msg", "회원님의 이메일은\n'" +member_email+ "'\n입니다");
@@ -95,8 +96,8 @@ public class User_LoginController {
         boolean findpw = loginService.findpw(member_email, member_phone);
 
 
-        if (findpw == true) {
 
+        if (findpw == true) {
             return "user/loginPage/Find_pw";
         } else {
             model.addAttribute("pwMsg","회원이 존재하지 않습니다");
