@@ -11,9 +11,7 @@
             on m.member_email = f.member_email
             left join bgimage b
             on b.bgimg_seq = m.bgimg_seq
-        where f.member_email in (select member_op_email
-                from friend_apply
-                where member_email = #{myEmail})
+        where f.member_op_email =#{myEmail}
         order by f.friend_date desc
     </select>
     <!--  친구리스트 count  -->
@@ -32,9 +30,9 @@
         where f.member_email
                 in (select member_op_email
                 from friend_apply
-                where member_email = 'user1@ogam.com')
+                where member_email = #{myEmail})
         and member_nick like '%${searchKeyword}%'
-        order by f.friend_date
+        order by f.friend_date desc
     </select>
 
     <!--  친구리스트 delete  -->
@@ -103,25 +101,25 @@
         join (
         (select member_email
         from member
-        where member_email != 'user8@ogam.com')
+        where member_email != #{myEmail})
 
         minus
 
         (select member_op_email
         from friend_apply
-        where member_email = 'user8@ogam.com')
+        where member_email = #{myEmail})
 
         minus
 
         (select member_op_email
         from FRIEND_send
-        where member_email = 'user8@ogam.com')
+        where member_email = #{myEmail})
 
         minus
 
         (select member_email
         from FRIEND_send
-        where member_op_email = 'user8@ogam.com')
+        where member_op_email = #{myEmail})
 
         ) t
 
@@ -133,10 +131,11 @@
 
 
     <!--  친구리스트에 insert  -->
-    <insert id="insertfriendList" parameterType="com.go.ogamprj.dto.friendApply">
+    <insert id="insertfriendList" parameterType="com.go.ogamprj.dto.FriendApply">
         insert into friend_apply
             values(fri_app_seq.nextval, #{member_email},#{member_op_email},current_date, (select NVL(max(FRIEND_KEY),0)+1 from friend_apply))
     </insert>
+
 
     <!--  친구신청에 insert  -->
     <insert id="insertfriendSend" parameterType="com.go.ogamprj.dto.friendSend">
@@ -144,10 +143,17 @@
         values(fri_send_seq.nextval, #{member_email},#{member_op_email},#{response},current_date)
     </insert>
 
+
     <!--  상대 이메일로 친구리스트 insert  -->
-    <insert id="insertfriendList2nd" parameterType="com.go.ogamprj.dto.friendApply">
+    <insert id="insertfriendList2nd" parameterType="com.go.ogamprj.dto.FriendApply">
         insert into friend_apply
             values(fri_app_seq.nextval, #{member_op_email},#{member_email},current_date, (select max(FRIEND_KEY) from friend_apply))
+    </insert>
+
+    <!--  친구신청에 insert  -->
+    <insert id="insertfriendSend" parameterType="com.go.ogamprj.dto.FriendSend">
+        insert into friend_send
+        values(fri_send_seq.nextval, #{member_email},#{member_op_email},#{response},sysdate)
     </insert>
 
     <!--  친구 신성 delete  -->

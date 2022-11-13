@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor
 @ToString
-public class friendApply {
+public class FriendApply {
 
     private int fri_app_seq;        // 친구목록_고유번호
     private String member_email;    // 이메일

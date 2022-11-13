@@ -32,34 +32,17 @@
                 </a>
             </span>
         </div>
+
         <div id="notifi_modal notifi_wrapModal" class="notifi_wrapModal">
             <div id="notifi_title">알림</div>
             <div class="titleText">최근 알림</div>
             <div class="currentNotifi">
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="currentNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
+                <th:block th:each="friend : ${friendSendList}">
+                    <div class="currentNotifi_contents" id="currentNotifi_contents">
+                        <img th:src="${friend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
+                            <p>[[ ${friend.MEMBER_NICK} ]]님이 친구신청을 요청 했습니다.</p>
+                    </div>
+                </th:block>
             </div>
             <div class="titleText">이전 알림</div>
             <div class="previewNotifi">
@@ -67,39 +50,6 @@
                     <img src="/Img/logoImg.png" />
                     <p>호준님이 친구신청을 요청 했습니다.</p>
                 </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-                <div id="previewNotifi_contents">
-                    <img src="/Img/logoImg.png" />
-                    <p>호준님이 친구신청을 요청 했습니다.</p>
-                </div>
-
             </div>
             <div class="notifi_wrapModal"></div>
         </div>
