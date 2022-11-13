@@ -5,7 +5,7 @@
 <mapper namespace="com.go.ogamprj.mapper.DiaryMapper">
     <!-- 내 다이어리 전부 가져오기 -->
     <select id="oneDiarySelectAll" resultType="java.util.HashMap">
-        select m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ
+        select m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ, d.DIARY_PRIVATE
           from diary d join emotions e
             on e.EMOTION_SEQ = d.EMOTION_SEQ
           join member m
@@ -42,7 +42,7 @@
                                 from DUAL CONNECT BY LEVEL 	&lt;= 20000)
           and d.diary_private = 'n'
           and d.diary_del = 'n'
-          and rownum 	&lt;= 10
+          and rownum 	&lt;= 15
     </select>
 
     <!-- 다이어리 배경이미지 insert -->
@@ -158,6 +158,7 @@
                 and member_email = #{member_email}
     </delete>
 
+    <!-- 나의 감정 캘린더 -->
     <select id="calendarDiarySelectAll" resultType="java.util.Map">
         SELECT T1.DIARY_DATE as "start", T1.DIARY_SEQ as "id", T2.emoji as "title"
         FROM(SELECT TRUNC(DIARY_DATE,'DD')as DIARY_DATE, MAX(DIARY_SEQ) AS DIARY_SEQ
@@ -171,4 +172,21 @@
         WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ) T2
         WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
     </select>
+
+    <!-- 친구 감정 캘린더 -->
+    <select id="frndCalendarDiarySelectAll" resultType="java.util.Map">
+        SELECT T1.DIARY_DATE as "start", T1.DIARY_SEQ as "id", T2.emoji as "title"
+        FROM(SELECT TRUNC(DIARY_DATE,'DD')as DIARY_DATE, MAX(DIARY_SEQ) AS DIARY_SEQ
+        FROM DIARY
+        where MEMBER_EMAIL = #{memberSeq}
+        AND diary_del = 'n'
+        AND diary_private = 'n'
+        GROUP BY TRUNC(DIARY_DATE,'DD')) T1,
+
+        (SELECT T1.DIARY_SEQ, T2.EMOJI
+        FROM DIARY T1, EMOTIONS T2
+        WHERE T1.EMOTION_SEQ = T2.EMOTION_SEQ) T2
+        WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
+    </select>
+
 </mapper>

@@ -7,7 +7,8 @@ import com.go.ogamprj.sevice.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -15,18 +16,20 @@ public class MemberServiceImpl implements MemberService {
     MemberMapper memberMapper;
 
     @Override
-    public Member findMember(String member_email) {
+    public HashMap<String, Object> findMember(String member_email) {
         return memberMapper.findMember(member_email);
     }
 
     @Override
-    public void reviseUpdate(Member member) {
+    public void reviseUpdate(Member member, Bgimage bgimgDto) {
         memberMapper.reviseUpdate(member);
+        memberMapper.proPhotoUpdate(bgimgDto);
     }
 
     @Override
-    public Optional<Bgimage> profile(Long id) {
-        return Optional.empty();
+    public void noProfile(Member member) {
+        memberMapper.noProfile(member);
     }
+
 
 }

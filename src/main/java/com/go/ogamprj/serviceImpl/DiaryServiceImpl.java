@@ -51,10 +51,10 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<HashMap<String, Object>> randomAllDiarySelectAll() {
 
-        // 랜덤하게 다이어리 가져오기 (10개)
+        // 랜덤하게 다이어리 가져오기 (15개)
         //List<HashMap<String,Object>> randomAllDiaryList = ;
         List<HashMap<String, Object>> result = changeDateFormat(diaryMapper.randomAllDiarySelectAll());
-        System.out.println(result);
+        //System.out.println(result);
 
         return result;
     }
@@ -97,6 +97,10 @@ public class DiaryServiceImpl implements DiaryService {
         SimpleDateFormat sdf = new SimpleDateFormat("yy. MM. dd. EEE", Locale.ENGLISH);
 
         HashMap<String,Object> resultMap = diaryMapper.diarySelectOne(diarySeq);
+        if(resultMap == null){
+            return resultMap;
+        }
+
 
         // 날짜변경
         Date diary_date = (Date)resultMap.get("DIARY_DATE");
@@ -193,6 +197,11 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public List<Map<String,Object>> calendarDiarySelectAll(String memberSeq) {
         return diaryMapper.calendarDiarySelectAll(memberSeq);
+    }
+
+    @Override
+    public List<Map<String, Object>> frndCalendarDiarySelectAll(String memberSeq) {
+        return diaryMapper.frndCalendarDiarySelectAll(memberSeq);
     }
 
 

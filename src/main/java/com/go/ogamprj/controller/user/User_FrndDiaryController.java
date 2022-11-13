@@ -3,6 +3,7 @@ package com.go.ogamprj.controller.user;
 import com.go.ogamprj.dto.FriendApply;
 import com.go.ogamprj.dto.FriendSend;
 import com.go.ogamprj.sevice.DiaryService;
+
 import com.go.ogamprj.sevice.FriendDiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +22,10 @@ public class User_FrndDiaryController {
 
     @Autowired
     FriendDiaryService friendDiaryService;
-
+    
     @Autowired
     DiaryService diaryService;
-    
-    
+
     // 친구 리스트 목록 가져오기
     @RequestMapping("/friendList")
     public String friendList(HttpServletRequest request,String searchKeyword, Model model) {

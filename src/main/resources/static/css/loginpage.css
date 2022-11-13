@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
 .container{
     border: 1px solid black;
     width: 1000px;
@@ -9,8 +16,8 @@
     display: block;
     margin: auto;
     width: 50%;
- 
 }
+
 
 label{
     text-align: end;
@@ -19,6 +26,7 @@ label{
     width: 20%;
     margin-right: 10px;
 }
+
 
 .idBox,
 .passwordBox{
@@ -29,59 +37,59 @@ label{
     width: 50%;
 }
 
-.idBox input{
+input{
     border-width: medium;
     padding: 10px;
     width: 300px;
     size: 40px;
 }
+.logins{
 
+}
 .loginBox{
-    display: block;
-    margin-left: 350px;
-    width: 50%;
-
+    display: flex;
+    /* margin-left: 350px; */
+    width: 100%;
+    justify-content: center;
 }
 
 .loginBox button{
-    border-radius: 50px;
+    border-radius: 9px;
     background-color: #a7baff;
     color: white;
-    font-size: 30px;
-    font-weight: bold;
-    width: 330px;
-    padding: 10px;
+    font-size: 1.2em;
+    /* font-weight: bold; */
+    width: 225px;
+    padding: 14px 0 14px 0;
     margin: 10px;
     cursor: pointer;
+    border: 0;
 }
 
 .kakaoLoginBox{ 
-    display: block;
-    margin-left: 350px;
-    width: 50%;
-}
-
-.kakaoLoginBox button{
-    border-radius: 50px;
-    background-color: #ffd702;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-    width: 330px;
-    padding: 10px;
-    margin: 10px;
+    display: flex;
+    justify-content: center;
     cursor: pointer;
 }
 
-.findId {
-    width: 50%;
-    margin: 20px auto;
-    text-align: center;
-    font-size: 20px;
+.kakaoLoginBox img{
+    width:225px;
 }
 
-.findId a:first-child {
-    margin: 10px 40px;
-} 
+.findId {
+    font-size: 20px;
+        display: flex;
+        justify-content: center;
+}
 
+.findId a{
+    margin: 15px 20px 0 20px;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+}
 
+body{
+    font-family: 'Pretendard-Regular';
+}
