@@ -73,13 +73,15 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
-                                        <a class="mod1_innerContents" th:href="|/viewDiary?diarySeq=${myDiary.DIARY_SEQ}|" th:each="myDiary : ${myDiaryList}">
+                                        <th:a class="mod1_innerContents noData" th:unless="${session.loginUser}" href="/loginPage"> 로그인 후 일기를 확인하세요🤗 </th:a>
+                                        <th:a class="mod1_innerContents noData" th:if="${session.loginUser} and ${#lists.isEmpty(myDiaryList)}" href="/writeDiary1"> 당신의 첫번째 감정을 기록하세요!🥳 </th:a>
+                                        <a class="mod1_innerContents" th:if="${['myDiaryList']}" th:href="|/viewDiary?diarySeq=${myDiary['DIARY_SEQ']}|" th:each="myDiary : ${['myDiaryList']}">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
-                                                    <span class="mod1_d_nick">[[${myDiary.MEMBER_NICK}]]</span>
-                                                    <span class="mod1_d_date">[[${myDiary.DIARY_DATE}]]</span>
-                                                    <span class="mod1_d_diary">[[${myDiary.CONTENTS}]]</span>
-                                                    <span class="mod1_d_imoji">[[${myDiary.EMOJI}]]</span>
+                                                    <span class="mod1_d_nick">[[${myDiary['MEMBER_NICK']}]]</span>
+                                                    <span class="mod1_d_date">[[${myDiary['DIARY_DATE']}]]</span>
+                                                    <span class="mod1_d_diary">[[${myDiary['CONTENTS']}]]</span>
+                                                    <span class="mod1_d_imoji">[[${myDiary['EMOJI']}]]</span>
                                                 </div>
                                             </div>
                                         </a>
@@ -105,13 +107,15 @@
                                     <div class="mod1_innerSlide">
                                         <!-- 최대 10개 의 mod1_innerContents
                                             10 * ( width:230px + margin-right:20px ) -->
-                                        <a class="mod1_innerContents" th:href="|/viewDiary?diarySeq=${friendDiary.DIARY_SEQ}|" th:each="friendDiary : ${friendDiaryList}">
+                                        <th:a class="mod1_innerContents noData" th:unless="${session.loginUser}" href="/loginPage"> 로그인 후 이용이 가능합니다😥 </th:a>
+                                        <th:a class="mod1_innerContents noData" th:if="${session.loginUser} and ${#lists.isEmpty(friendDiaryList)}" href="/friendList"> 친구가 작성한 일기가 없어요😥 </th:a>
+                                        <a class="mod1_innerContents" th:if="${['friendDiaryList']}" th:href="|/viewDiary?diarySeq=${friendDiary['DIARY_SEQ']}|" th:each="friendDiary : ${['friendDiaryList']}">
                                             <div class="mod1_d_bg">
                                                 <div class="mod1_d_set">
-                                                    <span class="mod1_d_nick">[[${friendDiary.MEMBER_NICK}]]</span>
-                                                    <span class="mod1_d_date">[[${friendDiary.DIARY_DATE}]]</span>
-                                                    <span class="mod1_d_diary">[[${friendDiary.CONTENTS}]]</span>
-                                                    <span class="mod1_d_imoji">[[${friendDiary.EMOJI}]]</span>
+                                                    <span class="mod1_d_nick">[[${friendDiary['MEMBER_NICK']}]]</span>
+                                                    <span class="mod1_d_date">[[${friendDiary['DIARY_DATE']}]]</span>
+                                                    <span class="mod1_d_diary">[[${friendDiary['CONTENTS']}]]</span>
+                                                    <span class="mod1_d_imoji">[[${friendDiary['EMOJI']}]]</span>
                                                 </div>
                                             </div>
                                         </a>

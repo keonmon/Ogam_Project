@@ -21,16 +21,20 @@
             <span>
                 <img src="/img/logoImg.png" id="user_img">
             </span>
+            <th:block th:unless="${session.loginUser}">
             <span class="login">
                 <a href="/loginPage">
                     <span>로그인</span>
                 </a>
             </span>
+            </th:block>
+            <th:block th:if="${session.loginUser}">
             <span class="logout">
-                <a href="/logout">
+                <a href='#' onclick="if(confirm('정말로 로그아웃 하시려고요..?😨')) location.href='/logout'">
                     <span>로그아웃</span>
                 </a>
             </span>
+            </th:block>
         </div>
 
         <div id="notifi_modal notifi_wrapModal" class="notifi_wrapModal">

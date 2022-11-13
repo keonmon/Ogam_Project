@@ -24,4 +24,8 @@ public interface MemberMapper {
 
     public void delMember(String member_quited_reason, String member_email);
 
+    void kakaoUserInsert(HashMap<String, Object> userInfo);
+
+    @Select("select * from member where kakaoId = #{kakaoId}")
+    HashMap<String,Object> kakaoUserCheck(Object kakaoId);
 }

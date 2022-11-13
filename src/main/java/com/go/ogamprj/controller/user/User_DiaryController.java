@@ -154,7 +154,7 @@ public class User_DiaryController {
                             @RequestParam int diarySeq){
         Object loginUser = request.getSession().getAttribute("loginUser");
         if(loginUser == null){
-            return "redirect:/";
+            return "redirect:/loginPage";
         }else {
             // 다이어리와 배경이미지를 조인한 결과를 해시맵에 담음
             HashMap<String, Object> diaryDto = diaryService.diarySelectOne(diarySeq);
