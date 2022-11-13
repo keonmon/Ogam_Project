@@ -420,6 +420,8 @@ public class User_DiaryController {
     @RequestMapping(value = "/replyInsert", method={RequestMethod.POST})
     public String replyInsert(@RequestParam Map<String,Object> replyMap,
                               Model model, HttpServletRequest request ) {
+
+        //replyMap = diarySeq(해당 일기의 seq번호), reply(댓글내용)
         Object loginUser = request.getSession().getAttribute("loginUser");
         if (loginUser == null) {
             return "redirect:/";
@@ -427,6 +429,10 @@ public class User_DiaryController {
             // 댓글저장
             replyMap.put("member_email", (String) loginUser);
             diaryService.replyInsert(replyMap);
+
+            // 알림(notifi) 테이블에 insert하기
+            replyMap.put("loginUser",loginUser.toString());
+            diaryService.notifyReplyInsert(replyMap);
 
             // 댓글 리스트 가져오기
             int diarySeq = Integer.parseInt((String) replyMap.get("diarySeq"));
@@ -451,6 +457,12 @@ public class User_DiaryController {
             if(map.get("do").toString().equals("insert")){
                 // insert
                 diaryService.likeInsert(loginUser.toString(), diary_seq);
+
+
+                // 알림(notifi) 테이블에 insert하기
+                map.put("loginUser",loginUser.toString());
+                diaryService.notifyLikeInsert(map);
+
             }else{
                 // delete
                 diaryService.likeDelete(loginUser.toString(), diary_seq);
