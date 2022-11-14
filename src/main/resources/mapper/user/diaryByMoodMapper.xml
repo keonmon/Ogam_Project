@@ -13,6 +13,13 @@
             on d.member_email = m.member_email
             join reply r
             on r.diary_seq = d.diary_seq
+        where m.member_email in (
+                (select member_email from member)
+                minus
+                (select block_email from block where member_email = 'montoo@kakao.com')
+                minus
+                (select member_email from block where block_email ='montoo@kakao.com')
+        )
     </select>
 
     <!--  기분별 diary 가져오기  -->
@@ -24,5 +31,12 @@
             join member m
             on d.member_email = m.member_email
         where e.emotion = #{emotion} and d.diary_private = 'n'
+        and m.member_email in (
+                (select member_email from member)
+                minus
+                (select block_email from block where member_email = 'montoo@kakao.com')
+                minus
+                (select member_email from block where block_email ='montoo@kakao.com')
+        )
     </select>
 </mapper>

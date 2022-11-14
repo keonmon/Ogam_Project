@@ -13,8 +13,11 @@
             on i.bgimg_seq = m.bgimg_seq
         where f.member_op_email =#{myEmail}
         and f.member_email in(
-                    (select member_email from member) minus
+                    (select member_email from member)
+                    minus
                     (select block_email from block where member_email = #{myEmail})
+                    minus
+                    (select member_email from block where block_email =#{myEmail})
         )
         order by f.friend_date desc
     </select>
@@ -33,8 +36,11 @@
             on i.bgimg_seq = m.bgimg_seq
         where f.member_op_email =#{myEmail}
         and f.member_email in(
-                    (select member_email from member) minus
+                    (select member_email from member)
+                    minus
                     (select block_email from block where member_email =#{myEmail}))
+                    minus
+                    (select member_email from block where block_email =#{myEmail})
         and member_nick like '%${searchKeyword}%'
         order by f.friend_date desc
 

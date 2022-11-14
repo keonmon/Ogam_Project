@@ -25,4 +25,10 @@ public class NotifiImpl implements NotifiService {
         System.out.println("값아 들어와라 : "+notifiMapper.notifiSelect(myEmail));
         return notifiMapper.notifiSelect(myEmail);
     }
+
+    @Override
+    public void deleteNotifi(int noti_seq) {
+
+        notifiMapper.deleteNotifi(noti_seq);
+    }
 }
