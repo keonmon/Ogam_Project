@@ -14,19 +14,19 @@
                 </div>
                 <div id="middle">
                     <span class="box" >
-                        <div class="sTitle">게시자이메일</div> 
+                        <div class="sTitle">게시자이메일</div>
                         <input type="text" id="member_email" th:field="*{member.MEMBER_EMAIL}" readonly />
                     </span>
                     <span class="box" >
-                        <div class="sTitle">닉네임</div> 
+                        <div class="sTitle">닉네임</div>
                         <input type="text" id="member_nick" th:field="*{member.MEMBER_NICK}" readonly />
                     </span>
                     <span class="box" >
-                        <span class="sTitle">내용</span> 
+                        <span class="sTitle">내용</span>
                         <textarea type="text" id="member_content" th:field="*{reply.REPLY}" readonly></textarea>
                     </span>
                     <span class="box" >
-                        <div class="sTitle">신고 횟수</div> 
+                        <div class="sTitle">신고 횟수</div>
                         <input type="text" id="black_count" th:field="*{reply.REPLY_DATE}" readonly/>
                     </span>
                 </div>

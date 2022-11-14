@@ -46,12 +46,11 @@ public class Admin_DiaryController {
     /* 일기 상세보기 */
     @RequestMapping("/diaryPopup/{diarySeq}")
     public String diaryPopup(HttpServletRequest request, @PathVariable int diary_seq, Model model) {
-
+        System.out.println(diary_seq);
 //        String member_email = "user1@ogam.com";
 
 //        HashMap<String, Object> user = memberService.findMember(member_email);
 //        model.addAttribute("member",user);
-        System.out.println(diary_seq);
 //        model.addAttribute("member",user);
         model.addAttribute("diary",diaryService.diarySelectOne(diary_seq));
 

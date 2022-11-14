@@ -62,7 +62,9 @@
                             <td>[[${notify.BLACKLIST_DATE}]]</td>
                             <td>
                               <th:block th:switch="${notify.CATEGORY}">
-                                  <a th:case="일기" onclick="diaryPopup( )">보기</a>
+                                  <input type="hidden" name="diary_seq" th:value="${notify.BLACK_SEQ}" />
+                                  <a th:case="일기" href="javascript:void(0);" th:onclick="|window.open('/diaryPopup/${notify.BLACK_SEQ}', 'pop01'
+                                        , 'width=550px, height=625px, status=no, menubar=no, toolbar=no, resizable=no')|">보기</a>
                                   <a th:case="댓글" onclick="commentPopup( )">보기</a>
                               </th:block>
                             </td>
@@ -82,5 +84,6 @@
     </div>
     <!-- 팝업 -->
     <script type="text/javascript" src="js/popup.js"></script>
+
 </body>
 </html>
