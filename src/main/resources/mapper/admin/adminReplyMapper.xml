@@ -53,4 +53,23 @@
            SET REPLY_DEL = 'y'
          WHERE REPLY_SEQ = #{REPLY_SEQ}
     </update>
+
+    <!-- 댓글 상세 보기 -->
+    <select id="replySelectOne" resultType="java.util.Map">
+        SELECT
+               R.REPLY_SEQ
+             , R.MEMBER_EMAIL
+             , M.MEMBER_NICK
+             , R.REPLY
+          FROM REPLY R JOIN MEMBER M
+           ON R.MEMBER_EMAIL = M.MEMBER_EMAIL
+        WHERE R.REPLY_SEQ = #{REPLY_SEQ}
+    </select>
+
+    <!-- 댓글 신고 수 -->
+    <select id="replyCount" resultType="Integer">
+        SELECT count(*)
+          FROM blacklist_reply
+         WHERE REPLY_SEQ = #{REPLY_SEQ}
+    </select>
 </mapper>

@@ -31,19 +31,11 @@
           </div>
           <!-- 테이블 -->
           <form action="/deleteDiary">
-<!--            <input type="hidden" name="member_email" th:value="${member.MEMBER_EMAIL}"/>-->
             <div>
             <table class="table">
               <thead>
                 <tr>
-                  <th>
-                    <input
-                      type="checkbox"
-                      name="check"
-                      value="selectall"
-                      onclick="selectAll(this)"
-                    />
-                  </th>
+                  <th><input type="checkbox" name="check" value="selectall" onclick="selectAll(this)" /></th>
                   <th>공개/비공개</th>
                   <th>감정 분류</th>
                   <th>이모지</th>
@@ -53,16 +45,14 @@
                 </tr>
               </thead>
               <tbody>
-
                 <tr th:each="diary : ${userDiaryList}">
-                   <input type="hidden" name="diary_seq" id="diary_seq" th:value="${diary.DIARY_SEQ}"/>
                   <td><input type="checkbox"  name="check" th:value="${diary.DIARY_SEQ}" /></td>
                   <td>[[${diary.DIARY_PRIVATE}]]</td>
                   <td>[[${diary.EMOTION}]]</td>
                   <td>[[${diary.EMOJI}]]</td>
                   <td>[[${diary.MEMBER_EMAIL}]]</td>
                   <td>[[${diary.MEMBER_NICK}]]</td>
-                  <td><a onclick="diaryPopup(diary_seq)">보기</a></td>
+                  <td><a onclick="diaryPopup()">보기</a></td>
                 </tr>
               </tbody>
             </table>
@@ -78,7 +68,7 @@
     </div>
     <!-- 팝업 -->
     <script type="text/javascript" src="js/popup.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js%22%3E"></script>
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.js%22%3E"></script>
     <script>
       const diarySeq =$("#diary_seq").val();
       var diary = window.open("about:blank",:_blank);
@@ -93,6 +83,6 @@
         }
 
       })
-    </script>
+    </script>-->
   </body>
 </html>

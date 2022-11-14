@@ -55,7 +55,10 @@
                                     <td th:if="${member.MEMBER_GENDER == 'female'}">
                                         <i class="iconF"></i>
                                     </td>
-                                    <!-- 정지 유무 -->
+                                    <td th:unless="${member.MEMBER_GENDER}">
+                                        (null)
+                                    </td>
+                                   <!-- 정지 유무 -->
                                     <td th:if="${member.MEMBER_BLACKYN == 'y'}">
                                         <i class="icon1"></i>
                                     </td>

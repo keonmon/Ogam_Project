@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 public interface AdminUserMapper {
 
-    @Select("select * from member")
+//    @Select("select * from member")
     ArrayList<Member> userSelectAll();                                      // USER 전체 가져오기
     
     ArrayList<Member> userSelectKeyword(String type, String keyword);       // 키워드 검색

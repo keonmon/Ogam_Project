@@ -14,25 +14,27 @@
                 </div>
                 <div id="middle">
                     <span class="box" >
-                        <div class="sTitle">게시자이메일</div>
-                        <input type="text" id="member_email" th:field="*{member.MEMBER_EMAIL}" readonly />
+
+                        <div class="sTitle">게시자이메일</div> 
+                        <input type="text" id="member_email" th:value="${reply.MEMBER_EMAIL}" readonly />
                     </span>
                     <span class="box" >
-                        <div class="sTitle">닉네임</div>
-                        <input type="text" id="member_nick" th:field="*{member.MEMBER_NICK}" readonly />
+                        <div class="sTitle">닉네임</div> 
+                        <input type="text" id="member_nick" th:value="${reply.MEMBER_NICK}" readonly />
                     </span>
                     <span class="box" >
-                        <span class="sTitle">내용</span>
-                        <textarea type="text" id="member_content" th:field="*{reply.REPLY}" readonly></textarea>
+                        <span class="sTitle">내용</span> 
+                        <textarea type="text" id="member_content" readonly>[[ ${reply.REPLY} ]]</textarea>
                     </span>
                     <span class="box" >
-                        <div class="sTitle">신고 횟수</div>
-                        <input type="text" id="black_count" th:field="*{reply.REPLY_DATE}" readonly/>
+                        <div class="sTitle">신고 횟수</div> 
+                        <input type="text" id="black_count" th:value="${count}" readonly/>
+                        
                     </span>
                 </div>
                 <div id="delBtn">
                     <input type="submit" class="commentDel" value="게시물 삭제"/>
-<!--                    <input type="hidden" name="reply_seq" th:value="${reply.REPLY_SEQ}"/>-->
+                    <input type="hidden" name="member_email" th:value="${reply.MEMBER_EMAIL}"/>
                 </div>
             </div>
         </form>

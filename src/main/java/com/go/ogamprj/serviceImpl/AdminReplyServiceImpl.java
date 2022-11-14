@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminReplyServiceImpl implements AdminReplyService {
@@ -28,8 +29,22 @@ public class AdminReplyServiceImpl implements AdminReplyService {
         return adminReplyMapper.userReplySelectKeyword(type, keyword);
     }
 
+    /* 댓글 상세 보기 */
+    @Override
+    public Map<String, Object> replySelectOne(int reply_seq) {
+        return adminReplyMapper.replySelectOne(reply_seq);
+    }
+
+    /* 댓글 신고 수 */
+    @Override
+    public int replyCount(int reply_seq) {
+        return adminReplyMapper.replyCount(reply_seq);
+    }
+    /* 댓글 삭제 - (목록) */
     @Override
     public void replyDelete(int reply_seq) {
         adminReplyMapper.replyDelete(reply_seq);
     }
+
+
 }
