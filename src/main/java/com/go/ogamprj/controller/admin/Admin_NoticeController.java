@@ -72,7 +72,7 @@ public class Admin_NoticeController {
         return "redirect:/admin_noticeList";
     }
 
-    @RequestMapping("deleteNotice")
+    @RequestMapping("/deleteNotice")
     public String deleteNotice(@RequestParam List<Integer> check) {
         if(check.size() > 0) {
             for(Integer num : check) boardService.boardDelete(num);

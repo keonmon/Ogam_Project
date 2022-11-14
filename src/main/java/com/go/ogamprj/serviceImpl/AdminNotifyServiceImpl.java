@@ -5,6 +5,7 @@ import com.go.ogamprj.sevice.AdminNotifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,11 @@ public class AdminNotifyServiceImpl implements AdminNotifyService {
     @Override
     public List<Map<String, Object>> notifySelectKeyword(String type, String keyword) {
         return adminNotifyMapper.notifySelectKeyword(type, keyword);
+    }
+
+    @Override
+    public List<HashMap<String, Object>> allBlackList() {
+        return adminNotifyMapper.allBlackList();
     }
 
     @Override
