@@ -10,4 +10,6 @@ public interface NotifiService {
     void notifiInsert(Notifi notifi);
 
     List<Map<String, Object>> notifiSelect(String myEmail);
+
+    void deleteNotifi(int noti_seq);
 }

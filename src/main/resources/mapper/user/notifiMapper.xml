@@ -17,6 +17,8 @@
             on m.bgimg_seq = i.bgimg_seq
             join notifi n
             on n.member_email = m.member_email
+            join diary d
+        on d.member_email = m.member_email
         where n.noti_email =#{myEmail}
         and m.member_email in (
                 (select member_email from member)
@@ -26,4 +28,9 @@
                 (select block_email from block where member_email =#{myEmail})
         )
     </select>
+
+    <delete id="deleteNotifi">
+        delete from notifi where noti_seq = #{noti_seq}
+    </delete>
+
 </mapper>

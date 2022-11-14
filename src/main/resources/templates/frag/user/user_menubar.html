@@ -52,6 +52,8 @@
             <div class="currentNotifi">
                 <th:block th:each="notifiSelect : ${notifiSelectList}">
                     <div class="currentNotifi_contents" id="currentNotifi_contents">
+                        <p class="seq" style="display:none;">[[${notifiSelect.NOTI_SEQ}]]</p>
+                        <p class="seq">[[${notifiSelect.DIARY_SEQ}]]</p>
                         <img th:src="${notifiSelect['BGIMG_PATH'] == null ? 'img/basicProfile.png' : notifiSelect['BGIMG_PATH']}" />
                         <div class="currentNotifi_message" id="currentNotifi_message">
                             <span>[[ ${notifiSelect.MEMBER_NICK} ]] [[ ${notifiSelect.NOTI_COMM} ]]</span>
@@ -69,6 +71,7 @@
             <div class="notifi_wrapModal"></div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="/js/notifi.js" type="text/javascript"></script>
     <script>
         const myMenu = document.querySelector(".myMenu")    // 마우스를 올리면 보여야 할 메뉴
