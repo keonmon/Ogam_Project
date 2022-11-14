@@ -30,6 +30,7 @@
                   </form>
                 </div>
                 <!-- 테이블 -->
+                <form action="/notifyDelete" method="post">
                 <div>                  
                   <table class="table">
                     <thead>
@@ -50,28 +51,31 @@
                         <th>컨텐츠 확인</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr th:each="notify : ${notifyList}">
-                        <td><input type="checkbox" name="check" th:value="${notify.BLACKLIST_SEQ}" /></td>
-                        <td>[[${notify.Category}]]</td>
-                        <td>[[${notify.BLACKLIST_COMMENT}]]</td>
-                        <td><a onclick="memberPopup( )">[[${notify.MEMBER_EMAIL}]]</a></td>
-                        <td><a onclick="memberPopup( )">[[${notify.BLACKLIST_USER_EMAIL}]]</a></td>
-                        <td>[[${notify.BLACKLIST_DIARY_DATE}]]</td>
-                        <td>
-                          <th:block th:switch="${notify.Category}">
-                              <a th:case="일기" onclick="diaryPopup( )">보기</a>
-                              <a th:case="댓글" onclick="commentPopup( )">보기</a>
-                          </th:block>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>                  
+                      <tbody>
+                          <tr th:each="notify, N : ${notifyList}">
+                            <td><input type="checkbox" name="check" th:value="${notify.BLACKLIST_SEQ}" /></td>
+                            <td  th:text="${notify.Category}"></td>
+                              <input type="hidden" th:value="${notify.Category}" name="category">
+                              <td>[[${notify.BLACKLIST_COMMENT}]]</td>
+                            <td><a onclick="memberPopup( )">[[${notify.MEMBER_EMAIL}]]</a></td>
+                            <td><a onclick="memberPopup( )">[[${notify.BLACKLIST_MEMBER_EMAIL}]]</a></td>
+                            <td>[[${notify.BLACKLIST_DIARY_DATE}]]</td>
+                            <td>
+                              <th:block th:switch="${notify.Category}">
+                                  <a th:case="일기" onclick="diaryPopup( )">보기</a>
+                                  <a th:case="댓글" onclick="commentPopup( )">보기</a>
+                              </th:block>
+                            </td>
+                          </tr>
+                      </tbody>
+                  </table>
                 </div>
                 <!-- 테이블 end-->
                 <div class="footerBtn">
-                    <span class="deleteBtn"><i class="fa-solid fa-trash"></i><input type="submit" value="선택 삭제"/></a></span>
+                    <span class="deleteBtn"><i class="fa-solid fa-trash"></i><input type="submit" class="selectBtn" value="선택 삭제"/></a></span>
                 </div>
+                </form>
+                </form>
               </div>
             <!-- content end -->
         </main>
