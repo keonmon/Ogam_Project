@@ -67,6 +67,7 @@
     height: 50px;
     background-color: white;
     border-radius: 15px;
+    cursor:pointer;
 }
 
 #currentNotifi_contents img{
@@ -75,7 +76,7 @@
     height:40px;
 }
 
-#currentNotifi_contents p{
+#currentNotifi_message{
     display: flex;
     align-items: center;
     margin: 0px 0px 0px 10px;
@@ -83,6 +84,10 @@
     font-weight: bold;
     width:100%;
 }
+#currentNotifi_message span:first-child{
+    width:100%;
+}
+
 /* 이전 알림 스타일 */
 .previewNotifi{
     width: 100%;

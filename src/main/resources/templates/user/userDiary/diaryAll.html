@@ -16,7 +16,7 @@
     <div class="container">
         <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='diaryAll') " class="sidebar"></aside>
         <main class="bodyContainer">
-            <div th:replace="~{frag/user/user_menubar :: userMenubar }" class="menubar"></div>
+            <div th:replace="~{frag/user/user_menubar :: userMenubar(${notifiSelectList}) }" class="menubar"></div>
             <div class="contents">
                 <div class="moodSelect">
                     <div class="happy">

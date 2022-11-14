@@ -85,6 +85,10 @@ public class User_FrndDiaryController {
         // member 전체 유저 가져오기
         List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
 
+        // 알림 myEmail 유저한테 온거 select
+        List<Map<String, Object>> notifiSelect = notifiService.notifiSelect(myEmail);
+
+        model.addAttribute("notifiSelectList",notifiSelect);
         model.addAttribute("memberList",memberList);
         model.addAttribute("friendSendList",friendSendList);
         return "user/noticePage/sendList";
