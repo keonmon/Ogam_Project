@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -21,9 +20,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void reviseUpdate(Member member, Bgimage bgimgDto) {
-        memberMapper.reviseUpdate(member);
+    public void reviseUpdate(Bgimage bgimgDto, Member member) {
         memberMapper.proPhotoUpdate(bgimgDto);
+        memberMapper.reviseUpdate(member);
     }
 
     @Override

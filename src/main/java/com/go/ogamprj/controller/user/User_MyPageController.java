@@ -108,7 +108,7 @@ public class User_MyPageController {
                 throw new RuntimeException(e);
             }
 
-            memberService.reviseUpdate(member, bgimageDto);
+            memberService.reviseUpdate(bgimageDto, member);
         }
         return "redirect:/MyPage";
     }

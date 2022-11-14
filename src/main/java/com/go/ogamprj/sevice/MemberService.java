@@ -9,7 +9,7 @@ import java.util.List;
 public interface MemberService {
     public HashMap<String, Object> findMember(String member_email);
 
-    public void reviseUpdate(Member member, Bgimage bgimgDto);
+    public void reviseUpdate(Bgimage bgimgDto, Member member);
 
     public void noProfile(Member member);
 
