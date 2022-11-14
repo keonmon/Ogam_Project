@@ -8,15 +8,17 @@
         SELECT
                BLACKLIST_DIARY_SEQ AS "BLACKLIST_SEQ"
              , CASE WHEN BLACKLIST_DIARY_SEQ IS NOT NULL THEN '일기' END AS "Category"
+             , DIARY_SEQ as BLACK_SEQ
              , BLACKLIST_COMMENT
              , MEMBER_EMAIL
-             , BLACKLIST_USER_EMAIL
+             , BLACKLIST_MEMBER_EMAIL
              , BLACKLIST_DIARY_DATE
           FROM BLACKLIST_DIARY
          UNION ALL
         SELECT
                BLACKLIST_COM_SEQ
              , CASE WHEN BLACKLIST_COM_SEQ IS NOT NULL THEN '댓글' END
+             , REPLY_SEQ
              , BLACKLIST_COMMENT
              , MEMBER_EMAIL
              , BLACKLIST_MEMBER_EMAIL
@@ -35,7 +37,7 @@
                  , CASE WHEN BLACKLIST_DIARY_SEQ IS NOT NULL THEN '일기' END AS "Category"
                  , BLACKLIST_COMMENT
                  , MEMBER_EMAIL
-                 , BLACKLIST_USER_EMAIL
+                 , BLACKLIST_MEMBER_EMAIL
                  , BLACKLIST_DIARY_DATE
               FROM BLACKLIST_DIARY
              UNION ALL
@@ -63,8 +65,8 @@
                         <when test="'MEMBER_EMAIL'.equals( type )">
                             AND MEMBER_EMAIL LIKE #{keyword}
                         </when>
-                        <when test="'BLACKLIST_USER_EMAIL'.equals( type )">
-                            AND BLACKLIST_USER_EMAIL LIKE #{keyword}
+                        <when test="'BLACKLIST_MEMBER_EMAIL'.equals( type )">
+                            AND BLACKLIST_MEMBER_EMAIL LIKE #{keyword}
                         </when>
                         <when test="'BLACKLIST_DIARY_DATE'.equals( type )">
                             AND BLACKLIST_DIARY_DATE LIKE #{keyword}
@@ -75,4 +77,13 @@
         </if>
         ORDER BY BLACKLIST_DIARY_DATE DESC
     </select>
+
+    <delete id="delBlackDiary">
+       DELETE FROM BLACKLIST_DIARY WHERE BLACKLIST_DIARY_SEQ = #{BLACKLIST_DIARY_SEQ}
+    </delete>
+
+    <delete id="delBlackRely">
+        DELETE FROM BLACKLIST_REPLY WHERE BLACKLIST_COM_SEQ = #{BLACKLIST_COM_SEQ}
+    </delete>
+
 </mapper>
