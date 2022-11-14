@@ -43,7 +43,7 @@
             <div class="currentNotifi">
                 <th:block th:each="notifiSelect : ${notifiSelectList}">
                     <div class="currentNotifi_contents" id="currentNotifi_contents">
-                        <img th:src="${notifiSelect['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
+                        <img th:src="${notifiSelect['BGIMG_PATH'] == null ? 'img/basicProfile.png' : notifiSelect['BGIMG_PATH']}" />
                         <div class="currentNotifi_message" id="currentNotifi_message">
                             <span>[[ ${notifiSelect.MEMBER_NICK} ]] [[ ${notifiSelect.NOTI_COMM} ]]</span>
                         </div>
