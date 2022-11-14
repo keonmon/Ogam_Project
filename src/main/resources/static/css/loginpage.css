@@ -40,10 +40,11 @@ label{
 
 
 input{
-    border-width: medium;
     padding: 10px;
     width: 300px;
     size: 40px;
+    border-radius: 10px;
+    border: 1px solid #908be8;
 }
 .logins{
 

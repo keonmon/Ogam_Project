@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class User_LoginController {
@@ -68,8 +69,8 @@ public class User_LoginController {
 
 
     @RequestMapping("/Find")
-    public String Find(){
-
+    public String Find(String member_email, Model model){
+        model.addAttribute("member_email", member_email);
         return "user/loginPage/Find";
     }
 
@@ -79,30 +80,57 @@ public class User_LoginController {
         String member_email = loginService.idFindSelectOne(birth, member_phone);
         System.out.println(member_email);
         if(member_email == null || member_email.equals("")) {
-            model.addAttribute("idMsg","회원이 존재하지 않습니다");
-            return "user/loginPage/Find"; // 이메일/비밀번호 찾기 창
+            model.addAttribute("idMsg","일치하는 회원이 존재하지 않습니다");
+            return "user/loginPage/find"; // 이메일/비밀번호 찾기 창
 
         } else {
             model.addAttribute("member_email",member_email);
-            model.addAttribute("msg", "회원님의 이메일은\n'" +member_email+ "'\n입니다");
-            return "user/loginPage/Find_id";    // 결과 이메일 창
+            model.addAttribute("msg", "회원님의 이메일은 [" +member_email+ "] 입니다");
+            model.addAttribute("idpw","이메일");
+            return "user/loginPage/find_result";    // 결과 이메일 창
         }
     }
 
     @RequestMapping("Find_pw")
     public String findpw(@RequestParam String member_email, String member_phone, Model model) {
 
+        // 이메일을 통해 회원정보 가져옴
+        Map<String,Object> memberMap = loginService.memberSelectOne(member_email);
+        System.out.println(memberMap);
 
-        boolean findpw = loginService.findpw(member_email, member_phone);
+        if(memberMap == null) {
+            model.addAttribute("pwMsg", "일치하는 회원이 존재하지 않습니다");
+            return "user/loginPage/find"; // 이메일/비밀번호 찾기 창
 
+        }else{
+            // 번호 비교
+            if(memberMap.get("MEMBER_PHONE") == null || !memberMap.get("MEMBER_PHONE").equals(member_phone)) {
 
+                // 폰번이 다르면 카카오id유무 확인
+                // 카카오id 있으면 '카카오 가입계정입니다.'
+                if (memberMap.get("KAKAOID") != null) {
+                    model.addAttribute("pwMsg", "해당 계정은 카카오 가입계정입니다");
+                    return "user/loginPage/find"; // 이메일/비밀번호 찾기 창
 
-        if (findpw == true) {
-            return "user/loginPage/Find_pw";
-        } else {
-            model.addAttribute("pwMsg","회원이 존재하지 않습니다");
-            return "redirect:/Find";
+                // '폰번이 일치하지 않을 경우'
+                }else{
+                    model.addAttribute("pwMsg", "일치하는 회원이 존재하지 않습니다");
+                    return "user/loginPage/find"; // 이메일/비밀번호 찾기 창
+                }
+
+            // input 폰번과 db 폰번이 같으면 난수로직 시작
+            }else {
+                // 카카오 아이디 없으면 난수 생성
+                String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // -를 제거해 주었다.
+                uuid = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌.
+                System.out.println(uuid);
+
+                loginService.updateUserPassword(uuid, member_email);
+
+                model.addAttribute("msg", "회원님의 임시 비밀번호는 [" + uuid + "]입니다");
+                model.addAttribute("idpw", "비밀번호");
+                return "user/loginPage/find_result";    // 결과 이메일 창
+            }
         }
-//      return "user/loginPage/Find";
     }
 }

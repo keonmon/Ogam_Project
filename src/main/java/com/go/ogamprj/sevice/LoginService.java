@@ -10,5 +10,6 @@ public interface LoginService {
 
     public String idFindSelectOne(String member_birth, String member_phone);
 
-    public boolean findpw(String member_email, String member_phone);
+
+    void updateUserPassword(String uuid, String member_email);
 }
