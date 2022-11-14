@@ -27,6 +27,11 @@
                                   where MEMBER_EMAIL = #{myEmail})
            and diary_private = 'n'
            and d.diary_del = 'n'
+           and d.member_email in ((select member_email from member)
+                                    minus
+                                    (select block_email from block where member_email = 'montoo@kakao.com')
+                                    minus
+                                    (select member_email from block where block_email = 'montoo@kakao.com'))
          order by d.diary_seq desc
     </select>
 
@@ -42,6 +47,11 @@
                                 from DUAL CONNECT BY LEVEL 	&lt;= 20000)
           and d.diary_private = 'n'
           and d.diary_del = 'n'
+          and d.member_email in ((select member_email from member)
+                                minus
+                                (select block_email from block where member_email = 'montoo@kakao.com')
+                                minus
+                                (select member_email from block where block_email = 'montoo@kakao.com'))
           and rownum 	&lt;= 15
     </select>
 
