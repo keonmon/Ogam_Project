@@ -17,8 +17,6 @@ public class Admin_NoticeController {
     @Autowired
     BoardService boardService;
 
-
-
     @RequestMapping("/admin_noticeList")
     public String admin_noticeList(HttpServletRequest request, String type, String keyword, Model model) {
 
@@ -48,18 +46,17 @@ public class Admin_NoticeController {
         return "redirect:/admin_noticeList";
     }
 
-
-
+//   해당 공지로 넘어가기
     @RequestMapping("/boardRevise/{board_seq}")
     public String goAdminUpdate(@PathVariable int board_seq, Model model) {
 
         Board findBoard = boardService.selectOneBoard(board_seq);
-        System.out.println(findBoard);
 
         model.addAttribute("board", findBoard);
         return "admin/boardRevise";
     }
 
+//    공지사항 수정하기
     @RequestMapping("/adminUpdate")
     public String adminUpdate(@RequestParam String board_title, @RequestParam String board_contents
             , @RequestParam(defaultValue = "n") String board_yn, @RequestParam int board_seq) {
@@ -72,6 +69,7 @@ public class Admin_NoticeController {
         return "redirect:/admin_noticeList";
     }
 
+//    공지사항 삭제하기
     @RequestMapping("/deleteNotice")
     public String deleteNotice(@RequestParam List<Integer> check) {
         if(check.size() > 0) {

@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface DashboardMapper {
 
-    @Select("SELECT COUNT(*) FROM MEMBER WHERE MEMBER_QUITED IS NULL AND MEMBER_EMAIL <> 'admin'")  // 탈퇴환 회원 제외, admin 계정 제외
+    @Select("SELECT COUNT(*) FROM MEMBER WHERE MEMBER_QUITED IS NULL AND MEMBER_EMAIL <> 'admin'")  // 탈퇴 회원 제외, admin 계정 제외
     int users();
 
     @Select("SELECT COUNT(*) FROM MEMBER WHERE MEMBER_QUITED IS NOT NULL AND MEMBER_EMAIL <> 'admin'") // 탈퇴한 회원만 admin 계정 제외
@@ -21,7 +21,7 @@ public interface DashboardMapper {
 
     List<HashMap<String, Object>> blackcnt();  // 신고 요청된 개수(일기 + 댓글)
 
-    ArrayList<String> emotionList(); // 차트 1달 이내의 데이터만 가져오기 Emoation
+    ArrayList<String> emotionList(); // 차트 1달 이내의 데이터만 가져오기 Emotion
     ArrayList<Integer> cntList(); // 차트 1달 이내의 데이터만 가져오기 CNT
 
     int diaryCnt(); // 오늘 하루동안 몇명이 일기쓴 일기 개수

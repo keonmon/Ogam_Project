@@ -1,6 +1,7 @@
 package com.go.ogamprj.controller.admin;
 
 import com.go.ogamprj.mapper.DashboardMapper;
+import com.go.ogamprj.sevice.DashboardService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,15 +17,18 @@ import java.util.List;
 
 @Controller
 public class Admin_DashboardController {
+
+    @Autowired
+    DashboardService dashboardService;
     @Autowired
     DashboardMapper dashboardMapper;
 
     @RequestMapping("/adminMain") // application root
     public String main(Model model) {
-        model.addAttribute("users", dashboardMapper.users() + "명");
-        model.addAttribute("removeUser", dashboardMapper.removeUser() + "명");
-        model.addAttribute("diary", dashboardMapper.diary() + "개");
-        model.addAttribute("reply", dashboardMapper.blackcnt().size() + "개");
+        model.addAttribute("users", dashboardService.users() + "명");
+        model.addAttribute("removeUser", dashboardService.removeUser() + "명");
+        model.addAttribute("diary", dashboardService.diary() + "개");
+        model.addAttribute("reply", dashboardService.blackcnt().size() + "개");
 
         return "admin/main";
     }
@@ -32,8 +36,8 @@ public class Admin_DashboardController {
     @RequestMapping("/emotion")
     @ResponseBody
     public List<EmotionStatus> emotionChart() {
-        ArrayList<String> emotion = dashboardMapper.emotionList();
-        ArrayList<Integer> cnt = dashboardMapper.cntList();
+        ArrayList<String> emotion = dashboardService.emotionList();
+        ArrayList<Integer> cnt = dashboardService.cntList();
         String[] emoji = {"😭", "😄", "😡", "😔", "😥", "🥰"};
         List<EmotionStatus> map = new ArrayList<>();
         for (int i = 0; i < emotion.size(); i++) {
@@ -46,16 +50,16 @@ public class Admin_DashboardController {
     @RequestMapping("/diaryCnt")
     @ResponseBody
     public int diaryCnt() {
-        int dCnt = dashboardMapper.diaryCnt();
-        System.out.println(dCnt);
+        int dCnt = dashboardService.diaryCnt();
+//        System.out.println(dCnt);
         return dCnt;
     }
 
     @RequestMapping("/memberCnt")
     @ResponseBody
     public int memberCnt() {
-        int mCnt = dashboardMapper.memberCnt();
-        System.out.println(mCnt);
+        int mCnt = dashboardService.memberCnt();
+//        System.out.println(mCnt);
         return mCnt;
     }
 

@@ -78,4 +78,5 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
         System.out.println(fri_send_seq);
         friendDiaryMapper.deleteFriendSend(fri_send_seq);
     }
+
 }
