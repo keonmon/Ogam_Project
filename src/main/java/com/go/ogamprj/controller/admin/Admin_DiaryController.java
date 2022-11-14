@@ -2,6 +2,7 @@ package com.go.ogamprj.controller.admin;
 
 import com.go.ogamprj.sevice.AdminDiaryService;
 import com.go.ogamprj.sevice.AdminUserService;
+import com.go.ogamprj.sevice.DiaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ public class Admin_DiaryController {
     @Autowired
     AdminDiaryService adminDiaryService;
 
+    @Autowired
+    DiaryService diaryService;
 
 
     /* USER 일기 전체 가져오기 */
@@ -42,8 +45,9 @@ public class Admin_DiaryController {
         System.out.println(diary_seq);
 
         model.addAttribute("diary",diaryService.diarySelectOne(diary_seq));
-        
-        
+
+        return "admin/diaryPopup";
+    }
 
     @RequestMapping("/diaryPopup")
     public String diaryPopup(HttpServletRequest request, Model model) {
