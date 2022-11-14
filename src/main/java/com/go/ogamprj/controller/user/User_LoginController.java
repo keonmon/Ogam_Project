@@ -44,8 +44,11 @@ public class User_LoginController {
         } else if(!memberMap.get("MEMBER_PW").equals(member_pw)) {
             model.addAttribute("msg", "비밀번호가 다릅니다.😅");
             model.addAttribute("member_email",member_email);
+
+        // 로그인 성공
         } else if(memberMap.get("MEMBER_PW").equals(member_pw)) {
             request.getSession().setAttribute("loginUser",member_email);
+            request.getSession().setAttribute("loginUserNick",memberMap.get("MEMBER_NICK").toString());
             return "redirect:/";
         }else{
             model.addAttribute("msg", "알 수 없는 오류가 발생했습니다.😅");

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,29 +37,39 @@ public class User_MyPageController {
 
     @RequestMapping("/MyPage")
     public String MyPage(HttpServletRequest request, Model model) {
-        String member_email = "annjin21@naver.com";
-//        request.getSession().setAttribute("member_email", "user2@ogam.com");
-//        String member_email = (String) request.getSession().getAttribute("member_email");
-        System.out.println(member_email);
-        HashMap<String, Object> user = memberService.findMember(member_email);
-//        System.out.println(user.get("BGIMG_PATH"));
 
-        model.addAttribute("member", user);
-        String[] birth = user.get("MEMBER_BIRTH").toString().split("/");
-        model.addAttribute("year", birth[0]);
-        model.addAttribute("month", birth[1]);
-        model.addAttribute("day", birth[2]);
-//        System.out.println(birth.length);
-        return "user/myPage/reviseInfo";
+        Object loginUser = request.getSession().getAttribute("loginUser");
+
+        if (loginUser == null) {
+            return "redirect:/";
+        } else {
+
+            HashMap<String, Object> user = memberService.findMember(loginUser.toString());
+  //        System.out.println(user.get("BGIMG_PATH"));
+
+            model.addAttribute("member", user);
+            String[] birth = user.get("MEMBER_BIRTH").toString().split("/");
+            model.addAttribute("year", birth[0]);
+            model.addAttribute("month", birth[1]);
+            model.addAttribute("day", birth[2]);
+            System.out.println(birth[0] +" "+ birth[1] +" "+ birth[2] );
+            return "user/myPage/reviseInfo";
+        }
     }
 
     @RequestMapping("/unique")
     @ResponseBody
-    public int unique(@RequestParam String member_nick) {
-        String member_email = "user3@ogam.com";
-        int name = memberMapper.uniqueChk(member_nick, member_email);
+    public int unique(@RequestParam String member_nick, HttpServletRequest request) {
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser == null){
+            return 1;
+        } else {
+            int name = memberMapper.uniqueChk(member_nick, loginUser.toString());
+            return name;
 
-        return name;
+
+        }
+
     }
 
     @RequestMapping("/reviseInfo")
@@ -123,7 +134,9 @@ public class User_MyPageController {
             out.flush();
         }
         memberMapper.delMember(member_quited_reason, member_email);
-        return "redirect:/";
+
+
+        return "redirect:/kakaoUnlink";
     }
 
 
