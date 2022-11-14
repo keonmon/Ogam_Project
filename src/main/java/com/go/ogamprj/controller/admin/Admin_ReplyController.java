@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class Admin_ReplyController {
@@ -39,10 +40,14 @@ public class Admin_ReplyController {
     @RequestMapping("/commentPopup")
     public String commentPopup(HttpServletRequest request, Model model) {
 
-        String member_email = "user1@ogam.com";
-        HashMap<String, Object> user = memberService.findMember(member_email);
+        int reply_seq = 5;
 
-        model.addAttribute("member",user);
+        Map<String, Object> reply = adminReplyService.replySelectOne(reply_seq);
+
+        model.addAttribute("reply", reply);
+
+        // 신고횟수
+        model.addAttribute("count", adminReplyService.replyCount(reply_seq));
 
         return "admin/commentPopup";
     }

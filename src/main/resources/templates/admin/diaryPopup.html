@@ -22,16 +22,16 @@
                         <input type="text" id="member_nick" th:value="${diary.MEMBER_NICK}" readonly />
                     </span>
                     <span class="box" >
-                        <div class="sTitle">업로드이미지</div> <!-- 모르겠소 -->
-                        <img id="diary_image" th:src="${diary.bgimg_path}" readonly />
+                        <div id="sTitle">업로드이미지</div>
+                        <img id="diary_image" th:src="${diary['BGIMG_PATH'] == null ? ' ' : diary['BGIMG_PATH']}"/>
                     </span>
                     <span class="box" >
                         <span class="sTitle">내용</span> 
-                        <textarea type="text" id="member_content" th:value=${diary.CONTENTS}" readonly></textarea>
+                        <textarea type="text" id="member_content" readonly>[[ ${diary.CONTENTS} ]]</textarea>
                     </span>
                     <span class="box" >
-                        <div class="sTitle">신고 횟수</div> <!-- 이것도 모르겠소 -->
-                        <input type="text" id="black_count" th:value="${diary.CONTENTS}" readonly />
+                        <div class="sTitle">신고 횟수</div>
+                        <input type="text" id="black_count" th:value="${count}" readonly />
                     </span>
                 </div>
                 <div id="delBtn">

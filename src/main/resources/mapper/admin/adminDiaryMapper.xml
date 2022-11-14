@@ -65,4 +65,29 @@
            SET DIARY_DEL = 'y'
          WHERE DIARY_SEQ = #{DIARY_SEQ}
     </update>
+
+    <!-- 일기 상세 보기 -->
+    <select id="diarySelectOne" resultType="java.util.Map">
+        SELECT
+               D.DIARY_SEQ
+             , D.MEMBER_EMAIL
+             , M.MEMBER_NICK
+             , D.BGIMG_SEQ
+             , I.BGIMG_PATH
+             , D.CONTENTS
+          FROM
+               DIARY D LEFT JOIN BGIMAGE I
+            ON D.BGIMG_SEQ = I.BGIMG_SEQ
+          JOIN MEMBER M
+            ON D.MEMBER_EMAIL = M.MEMBER_EMAIL
+         WHERE D.DIARY_SEQ = #{DIARY_SEQ}
+    </select>
+
+    <!-- 일기 신고 수 -->
+    <select id="diaryCount" resultType="Integer">
+        SELECT count(*)
+          FROM blacklist_diary
+         WHERE DIARY_SEQ = #{DIARY_SEQ}
+    </select>
+
 </mapper>

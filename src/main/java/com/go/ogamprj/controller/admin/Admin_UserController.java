@@ -29,7 +29,9 @@ public class Admin_UserController {
     public String userList(HttpServletRequest request, String type, String keyword, Model model) {
 
         if ( keyword == null) {
-            model.addAttribute("userList", adminUserService.userSelectAll());
+            List<Member> members =  adminUserService.userSelectAll();
+            System.out.println(members);
+            model.addAttribute("userList", members);
         } else {
             model.addAttribute("userList", adminUserService.userSelectKeyword(type, "%"+ keyword + "%"));
         }

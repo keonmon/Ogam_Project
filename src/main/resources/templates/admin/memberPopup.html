@@ -17,10 +17,6 @@
                     <span class="box">
                         <div id="sTitle" >프로필 사진</div>
                         <img th:src="${member['BGIMG_PATH'] == null ? 'img/basicProfile.png' : member['BGIMG_PATH']}" id="proImg"/>
-<!--                        <img src="img/profile.jpeg" id="member_profile" /> &lt;!&ndash; 여기에 사진 넣어줌&ndash;&gt;-->
-<!--                        <th:block th:if="${member.BGIMG_SEQ}">  &lt;!&ndash;사진이 null이면 안 보임&ndash;&gt;-->
-<!--                            <img th:src="${member.BGIMG_SEQ}"/>-->
-<!--                        </th:block>-->
                     </span>
                     <span class="box" >
                         <span class="sTitle">소개글</span>
@@ -46,8 +42,8 @@
                         <input type="text" id="member_phone" th:value="${member['MEMBER_PHONE'] == null ? ' ' : member['MEMBER_PHONE']}" readonly/>
                     </span>
                     <span class="box" >
-                        <div class="sTitle">신고 횟수</div> <!-- 아직 못함-->
-                        <input type="text" id="black_count" th:value="${count}" readonly /> <!-- value=""  -->
+                        <div class="sTitle">신고 횟수</div>
+                        <input type="text" id="black_count" th:value="${count}" readonly />
                     </span>
                     <span class="box" >
                         <div class="chkBox">
