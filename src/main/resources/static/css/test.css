@@ -141,6 +141,37 @@
     transition-duration: 2s;
 }
 
+.myProfile{
+    font-size: 20px;
+    width: 200px;
+    font-weight: bold;
+    color: #5c5c5c;
+    text-align: right;
+    line-height: 75px;
+    cursor: pointer;
+}
+
+.myMenu{
+        display: none;
+        position: absolute;
+        width: 150px;
+        height: 63px;
+        right: 19%;
+        top: 10%;
+        z-index: 3;
+        text-align: center;
+        background-color: hwb(0deg 100% 0%);
+}
+
+
+.subMenu{
+     position: relative;
+     width: 100%;
+     height: 30px;
+     font-size: 15px;
+}
+
+
 /* 알림 스타일 */
 .notifi{
     font-size: 2em;

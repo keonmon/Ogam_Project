@@ -15,6 +15,15 @@
                     <span>공지</span>
                 </a>
             </span>
+            <th:span class="myProfile" th:if="${session.loginUserNick}">[[${session.loginUserNick}]]님 반가워요!😆</th:span>
+            <div class="myMenu ">
+                <a href="/MyPage">
+                    <div class="subMenu">내 정보 수정</div>
+                </a>
+                <a href="/blockPage">
+                    <div class="subMenu">차단 사용자 목록</div>
+                </a>
+            </div>
             <span class="notifi">
                 <i class="fa-regular fa-comment-dots"></i>
             </span>
@@ -61,5 +70,18 @@
         </div>
     </div>
     <script src="/js/notifi.js" type="text/javascript"></script>
+    <script>
+        const myMenu = document.querySelector(".myMenu")    // 마우스를 올리면 보여야 할 메뉴
+        const myProfile = document.querySelector(".myProfile")  // 상단 닉네임표시부분
+        // 마우스가 들어갈 때
+        const mouseOver = myProfile.addEventListener("mouseover",()=>{
+            myMenu.style.display='block';
+        });
+        // 마우스가 나갈 때
+        const mouseOut = myMenu.addEventListener("mouseleave",(e)=>{
+            myMenu.style.display='none';
+            e.preventDefault()
+        });
+    </script>
 </th:block>
 </html>

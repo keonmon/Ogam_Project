@@ -49,6 +49,7 @@ public class User_KakaoAPIController {
         if(userInfo.get("email") != null){
             session.setAttribute("loginUser",userInfo.get("email"));
             session.setAttribute("accessToken",accessToken);
+            session.setAttribute("loginUserNick",userInfo.get("nickname"));
         }
 
         return "redirect:/";

@@ -7,6 +7,7 @@ function chk_pwd() {
         alert("비밀번호가 일치하지 않습니다");
         new_pw.style.backgroundColor = "#F8D4E2";
         re_pw.style.backgroundColor = "#F8D4E2";
+        re_pw.value = "";
         return false;
     } else {
         new_pw.style.backgroundColor = "white";
@@ -25,14 +26,17 @@ function new_pw_chk() {
    if(new_pw.value.length < 8 || new_pw.value.length > 16){
         alert("최소 8자 최대 16자 이내로 입력해주세요.");
         new_pw.style.backgroundColor = "#F8D4E2";
+        new_pw.value=""
         return false;
    } else if(new_pw.value.search(/\s/) != -1){
         alert("비밀번호는 공백 없이 입력해주세요.");
         new_pw.style.backgroundColor = "#F8D4E2";
+        new_pw.value=""
         return false;
     } else if(num < 0 || eng < 0 || spe < 0 ){
         alert("영문, 숫자, 특수문자를 혼합하여 입력해주세요.");
         new_pw.style.backgroundColor = "#F8D4E2";
+        new_pw.value=""
         return false;
     } else {
    	    new_pw.style.backgroundColor = "white";
@@ -40,6 +44,14 @@ function new_pw_chk() {
     }
 
 }
+
+function allchk(){
+
+
+
+}
+
+
 
 
 

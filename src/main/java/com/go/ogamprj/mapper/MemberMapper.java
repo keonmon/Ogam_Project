@@ -11,7 +11,7 @@ import java.util.HashMap;
 public interface MemberMapper {
     public HashMap<String, Object> findMember(String member_email);
 
-    @Select("SELECT COUNT(*) FROM MEMBER WHERE MEMBER_NICK = #{member_nick} AND MEMBER_EMAIL <> #{member_email}")
+    @Select("SELECT COUNT(*) FROM MEMBER WHERE MEMBER_EMAIL <> #{member_email} and MEMBER_NICK = #{member_nick} ")
     public int uniqueChk(String member_nick, String member_email);
 
     public void reviseUpdate(Member member);
