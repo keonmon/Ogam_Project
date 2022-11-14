@@ -52,16 +52,16 @@
                       </tr>
                     </thead>
                       <tbody>
-                          <tr th:each="notify, N : ${notifyList}">
-                            <td><input type="checkbox" name="check" th:value="${notify.BLACKLIST_SEQ}" /></td>
-                            <td  th:text="${notify.Category}"></td>
-                              <input type="hidden" th:value="${notify.Category}" name="category">
+                          <tr th:each="notify : ${notifyList}">
+                            <td><input type="checkbox" name="check" th:value="${notify.BLACK_SEQ}" /></td>
+                              <input type="hidden" th:name="${notify.BLACK_SEQ}" th:value="${notify.CATEGORY}" />
+                              <td th:text="${notify.CATEGORY}"></td>
                               <td>[[${notify.BLACKLIST_COMMENT}]]</td>
                             <td><a onclick="memberPopup( )">[[${notify.MEMBER_EMAIL}]]</a></td>
-                            <td><a onclick="memberPopup( )">[[${notify.BLACKLIST_MEMBER_EMAIL}]]</a></td>
-                            <td>[[${notify.BLACKLIST_DIARY_DATE}]]</td>
+                            <td><a onclick="memberPopup( )">[[${notify.BLACKLIST_EMAIL}]]</a></td>
+                            <td>[[${notify.BLACKLIST_DATE}]]</td>
                             <td>
-                              <th:block th:switch="${notify.Category}">
+                              <th:block th:switch="${notify.CATEGORY}">
                                   <a th:case="일기" onclick="diaryPopup( )">보기</a>
                                   <a th:case="댓글" onclick="commentPopup( )">보기</a>
                               </th:block>
