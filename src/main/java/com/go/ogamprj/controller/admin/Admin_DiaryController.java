@@ -1,18 +1,15 @@
 package com.go.ogamprj.controller.admin;
 
-import com.go.ogamprj.dto.Diary;
-import com.go.ogamprj.dto.Member;
 import com.go.ogamprj.sevice.AdminDiaryService;
-import com.go.ogamprj.sevice.DiaryService;
-import com.go.ogamprj.sevice.MemberService;
+import com.go.ogamprj.sevice.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class Admin_DiaryController {
@@ -21,11 +18,6 @@ public class Admin_DiaryController {
     @Autowired
     AdminDiaryService adminDiaryService;
 
-    @Autowired
-    MemberService memberService;
-
-    @Autowired
-    DiaryService diaryService;
 
 
     /* USER 일기 전체 가져오기 */
@@ -44,16 +36,17 @@ public class Admin_DiaryController {
     }
 
     /* 일기 상세보기 */
-    @RequestMapping("/diaryPopup/{diarySeq}")
-    public String diaryPopup(HttpServletRequest request, @PathVariable int diary_seq, Model model) {
+    @RequestMapping("/diaryPopup")
+    public String diaryPopup(HttpServletRequest request, Model model) {
 
-//        String member_email = "user1@ogam.com";
+        int diary_seq = 107;
 
-//        HashMap<String, Object> user = memberService.findMember(member_email);
-//        model.addAttribute("member",user);
-        System.out.println(diary_seq);
-//        model.addAttribute("member",user);
-        model.addAttribute("diary",diaryService.diarySelectOne(diary_seq));
+        Map<String, Object> diary = adminDiaryService.diarySelectOne(diary_seq);
+
+        model.addAttribute("diary", diary);
+
+        // 신고횟수
+        model.addAttribute("count", adminDiaryService.diaryCount(diary_seq));
 
 
         return "admin/diaryPopup";
@@ -71,6 +64,11 @@ public class Admin_DiaryController {
     }
 
     /* 일기 삭제 - 팝업에서 삭제 */
+    @RequestMapping("/deleteDiaryPopup")
+    public String deleteDiaryPopup(@RequestParam String diary_seq) {
+
+        return "";
+    }
 
 
 }

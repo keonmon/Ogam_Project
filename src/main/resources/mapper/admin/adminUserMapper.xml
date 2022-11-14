@@ -4,16 +4,16 @@
 
 <mapper namespace="com.go.ogamprj.mapper.AdminUserMapper">
     <!-- USER 전체 가져오기 -->
-<!--    <select id="userSelectAll" resultType="com.go.ogamprj.dto.Member">-->
-<!--        SELECT-->
-<!--               MEMBER_EMAIL-->
-<!--             , MEMBER_NICK-->
-<!--             , MEMBER_BIRTH-->
-<!--             , MEMBER_PHONE-->
-<!--             , NVL(MEMBER_GENDER, 'X')-->
-<!--             , MEMBER_BLACKYN-->
-<!--          FROM MEMBER-->
-<!--    </select>-->
+    <select id="userSelectAll" resultType="com.go.ogamprj.dto.Member">
+        SELECT
+               MEMBER_EMAIL
+             , MEMBER_NICK
+             , MEMBER_BIRTH
+             , MEMBER_PHONE
+             , MEMBER_GENDER
+             , MEMBER_BLACKYN
+        FROM MEMBER
+    </select>
 
     <!-- 키워드 검색 -->
     <select id="userSelectKeyword" resultType="com.go.ogamprj.dto.Member">
@@ -63,7 +63,7 @@
         SELECT count(*)
           FROM member m, blacklist_diary bd
          WHERE m.member_email = bd.member_email
-           AND bd.BLACKLIST_USER_EMAIL = #{BLACKLIST_USER_EMAIL}
+           AND bd.BLACKLIST_MEMBER_EMAIL = #{BLACKLIST_MEMBER_EMAIL}
     </select>
 
     <!-- 댓글 신고 수 -->
