@@ -96,7 +96,7 @@
 
         (select member_email
         from block
-        where member_email = #{myEmail})
+        where block_email = #{myEmail})
 
         minus
 
