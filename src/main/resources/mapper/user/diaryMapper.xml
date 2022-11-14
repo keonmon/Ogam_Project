@@ -132,7 +132,7 @@
 
     <!-- 일기 신고 -->
     <insert id="diaryReportInsert">
-        insert into Blacklist_diary(diary_seq,member_email,blacklist_user_email,blacklist_comment)
+        insert into Blacklist_diary(diary_seq,member_email,blacklist_member_email,blacklist_comment)
         values( #{diary_seq}, #{member_email}, #{blacklist_user_email}, #{blacklist_comment})
     </insert>
 

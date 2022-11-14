@@ -36,17 +36,18 @@ body{
 }
 
 .wrapper p {
-        font-size: 30px;
-        text-align: center;
-        margin: 6% auto;
+    font-size: 30px;
+    text-align: center;
+    margin: 6% auto;
 }
 
 label{
     text-align: end;
     display: inline-block;
-    font-size: 20px;
+    font-size: 16px;
     margin-right: 10px;
     width: 50%;
+    line-height: 31px;
 }
 
 .divBox{
@@ -85,22 +86,27 @@ display: flex;
 
 .btn button{
     background-color: #a7baff;
-        color: white;
-        font-size: 15px;
-        font-weight: bold;
-        width: 300px;
-        height: 35px;
-        margin: auto;
-        cursor: pointer;
-        border-radius: 5px;
-        border: 0;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    width: 300px;
+    height: 35px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 0;
 }
 
 .input{
     width: 54vh;
     height: 20px;
     padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+    border: 1px solid #908be8;
+    size: 40px;
 }
+
+
 
 .mar-bott{
 

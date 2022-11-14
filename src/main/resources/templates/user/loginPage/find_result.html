@@ -1,25 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>비밀번호찾기</title>
-    <link rel="stylesheet" type="text/css" href="/css/Find_pw.css" />
+    <title>회원정보 찾기 결과</title>
+    <link rel="stylesheet" type="text/css" href="/css/find_result.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <form action="/loginPage" value="get">
         <div class="container">
             <div class="wrapper">
-                <div class="sendPw">
-                    <p>비밀번호 찾기</p>
+                <div class="sendId">
+                   <th:p>[[${idpw}]] 찾기</th:p>
                 </div>
-                <div class="text">
-                    <p>ooo님의 이메일로 임시 비밀번호가 전송되었습니다.</p>
-                </div>
+                <th:div class="message">[[${msg}]]</th:div>
                 <div class="loginbtn">
                     <button>로그인</button>
+                </div>
+                <div class="goFind_pw">
+                    <a th:unless="${idpw}=='비밀번호'" th:href="|/Find?member_email=${member_email}|">비밀번호 찾기</a>
                 </div>
             </div>
         </div>
