@@ -9,7 +9,7 @@
 </head>
 <body>
 <div id="wrap">
-    <form action="/signup" method="post">
+    <form action="/signup" id="frm" method="post">
         <div class="line">
             <div id="top">
                 <span id="title">회원가입</span>
@@ -20,6 +20,7 @@
                     <input type="email" id="member_email" name="member_email" required title="이메일 형식으로 작성해주세요!"
                            pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}"/>
                     <input type="button" id="email_chk" onclick="uniqueEmail()" value="중복확인">
+                    <input type="hidden" id="email_checked" value="">
                 </div>
                 <div class="password">
                     <span class="pwTitle">비밀번호</span>
@@ -41,6 +42,7 @@
                     <input type="text" id="member_nick" name="member_nick" required title="두 글자 이상 작성바랍니다!"
                            pattern="(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}"/>
                     <input type="button" id="nick_chk" onclick="uniqueChk()" value="중복확인">
+                    <input type="hidden" id="checked_nick" val="">
                 </div>
                 <div class="birthday">
                     <div class="bTitle">생년월일</div>
@@ -65,7 +67,7 @@
                 </div>
             </div>
             <div class="btn_bottom">
-                <button type="submit" id="signup">가입하기</button>
+                <button type="button" id="signup">가입하기</button>
             </div>
         </div>
     </form>
@@ -82,7 +84,8 @@ function uniqueEmail() {
         success: function(success) {
             console.log(success);
             if(success == 0){
-                alert("아이디 사용 가능!");
+                alert("아이디로 사용 가능합니다!");
+                document.getElementById("email_checked").value = member_email
             } else if(success == 1){
                 alert("이미 사용중인 이메일입니다.");
                 return;
@@ -107,6 +110,7 @@ function uniqueChk() {
                 alert("닉네임이 짧습니다.");
             } else if(success == 0){
                 alert("닉네임으로 사용가능합니다");
+                document.getElementById("checked_nick").value = member_nick
             } else if(success == 1){
                 alert("이미 사용중인 닉네임입니다.");
                 return;

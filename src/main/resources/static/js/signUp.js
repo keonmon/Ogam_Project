@@ -30,6 +30,12 @@ member_repw.onchange = validatePassword;
 
 /*라디오 버튼 체크 여부*/
 document.getElementById('signup').onclick = function() {
+
+    const email = document.getElementById("member_email").value
+    const email2 = document.getElementById("email_checked").value
+    const nick = document.getElementById("member_nick").value
+    const nick2 = document.getElementById("checked_nick").value
+
     var selected = false;
     var radios = document.getElementsByName('gender');
     for(var radio of radios)
@@ -42,6 +48,11 @@ document.getElementById('signup').onclick = function() {
     if (!selected) {
         alert('성별을 선택해 주세요!!');
     }
+     if( email != email2) {
+            alert("이메일 중복 확인이 필요합니다!")
+        } else if (nick != nick2){
+            alert("닉네임 중복 확인이 필요합니다!")
+        } else {
+            document.getElementById("frm").submit()
+        }
 }
-
-/*이메일 중복 체크*/
