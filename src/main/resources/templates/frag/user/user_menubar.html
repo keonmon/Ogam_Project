@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 
-<th:block th:fragment="userMenubar">
+<th:block th:fragment="userMenubar(notifiSelectList)" class="frg">
     <link rel="stylesheet" type="text/css" href="/css/notifi.css" />
     <div class="menubar">
         <div id="left-menu">
@@ -41,10 +41,12 @@
             <div id="notifi_title">알림</div>
             <div class="titleText">최근 알림</div>
             <div class="currentNotifi">
-                <th:block th:each="friend : ${friendSendList}">
+                <th:block th:each="notifiSelect : ${notifiSelectList}">
                     <div class="currentNotifi_contents" id="currentNotifi_contents">
-                        <img th:src="${friend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
-                            <p>[[ ${friend.MEMBER_NICK} ]]님이 친구신청을 요청 했습니다.</p>
+                        <img th:src="${notifiSelect['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
+                        <div class="currentNotifi_message" id="currentNotifi_message">
+                            <span>[[ ${notifiSelect.MEMBER_NICK} ]] [[ ${notifiSelect.NOTI_COMM} ]]</span>
+                        </div>
                     </div>
                 </th:block>
             </div>

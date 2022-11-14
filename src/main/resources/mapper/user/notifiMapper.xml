@@ -11,29 +11,19 @@
 
     <!-- 멤버 정보 가져오기 (사진, 닉네임)  -->
     <select id="notifiSelect" resultType="java.util.Map">
-        select * from member m
-            join bgimage i
-            on i.bgimg_seq = m.bgimg_seq
-        where m.member_email in (
-                (select m.member_email
-                from notifi n
-                    join member m
-                    on m.member_email = n.member_email
-                    left join bgimage i
-                    on i.bgimg_seq = m.bgimg_seq
-                where n.noti_type = 'friend')
-
+        select *
+        from member m
+            left join bgimage i
+            on m.bgimg_seq = i.bgimg_seq
+            join notifi n
+            on n.member_email = m.member_email
+        where n.noti_email =#{myEmail}
+        and m.member_email in (
+                (select member_email from member)
                 minus
-
-                (select m.member_email
-                from notifi n
-                    join member m
-                    on m.member_email = n.member_email
-                    left join bgimage i
-                    on i.bgimg_seq = m.bgimg_seq
-                    join block b
-                    on b.block_email = m.member_email
-                where n.noti_type = 'friend')
+                (select member_email from block where block_email =#{myEmail})
+                minus
+                (select block_email from block where member_email =#{myEmail})
         )
     </select>
 </mapper>

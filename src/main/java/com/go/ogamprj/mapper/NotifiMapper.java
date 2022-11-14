@@ -12,5 +12,5 @@ public interface NotifiMapper {
 
     void notifiInsert(Notifi notifi);
 
-    List<Map<String, Object>> notifiSelect();
+    List<Map<String, Object>> notifiSelect(String myEmail);
 }

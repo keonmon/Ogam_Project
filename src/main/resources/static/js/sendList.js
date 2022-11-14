@@ -67,6 +67,7 @@ searchKeyword = searchInput.value;
         type: "post",
         data:{"searchKeyword":searchKeyword},
     }).done(function (memberList){
+        console.log(memberList)
         $(".modalBody").replaceWith(memberList);
     })
 })
