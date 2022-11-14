@@ -36,6 +36,15 @@ public class Admin_DiaryController {
     }
 
     /* 일기 상세보기 */
+
+    @RequestMapping("/diaryPopup/{diarySeq}")
+    public String diaryPopup(HttpServletRequest request, @PathVariable int diary_seq, Model model) {
+        System.out.println(diary_seq);
+
+        model.addAttribute("diary",diaryService.diarySelectOne(diary_seq));
+        
+        
+
     @RequestMapping("/diaryPopup")
     public String diaryPopup(HttpServletRequest request, Model model) {
 
@@ -48,9 +57,11 @@ public class Admin_DiaryController {
         // 신고횟수
         model.addAttribute("count", adminDiaryService.diaryCount(diary_seq));
 
-
         return "admin/diaryPopup";
     }
+    
+    
+    
 
     /* 일기 삭제 - 목록에서 삭제 */
     @RequestMapping("/deleteDiary")

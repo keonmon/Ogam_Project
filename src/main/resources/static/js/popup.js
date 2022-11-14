@@ -7,8 +7,8 @@ function memberPopup( ) {
     iniform.action="/memberPopup";
     
     iniform.submit( );
-    
 }
+
 
 
 function diaryPopup() {
