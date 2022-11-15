@@ -76,7 +76,7 @@ public class Admin_UserController {
 
         adminUserService.userUpdate(member);
 
-        return "<script>window.close();</script>";
+        return "<script>window.opener.location.reload(); window.close();</script>";
 
     }
 

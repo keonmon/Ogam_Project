@@ -7,8 +7,7 @@
 </head>
 <body>
     <div id="wrap">
-<!--        <form action="/deleteDiary" method="post">-->
-        <form id="diaryPopup" method="post"></form>
+        <form action="/deleteDiaryPopup" method="post">
             <div class="line">
                 <div id="top">
                     <span id="title">일기 확인</span>
@@ -36,20 +35,12 @@
                     </span>
                 </div>
                 <div id="delBtn">
-                    <input type="submit" class="commentDel" id="diaryDel" value="게시물 삭제"/>
+                    <input type="submit" class="commentDel" value="게시물 삭제"/>
                     <input type="hidden" name="diary_seq" th:value="${diary.DIARY_SEQ}"/>
                 </div>
             </div>
         </form>
     </div>
-    <!-- 삭제 버튼 -->
-    <script>
-    $(function(){
-        $("#diaryDel").click(function() {
-            $("#diaryPopup").attr("action","/deleteDiaryPopup").submit();
-        })
-    })
-    </script>
 
 </body>
 </html>
