@@ -46,7 +46,7 @@
                         <td>[[${reply.MEMBER_EMAIL}]]</td>
                         <td>[[${reply.MEMBER_NICK}]]</td>
                         <td class="replyBox">[[${reply.REPLY}]]</td>
-                        <td><a onclick="commentPopup( )">보기</a></td>
+                        <td><a th:onclick="|javascript:commentPopup('${reply.REPLY_SEQ}')|">보기</a></td>
                       </tr>
                     </tbody>
                   </table>

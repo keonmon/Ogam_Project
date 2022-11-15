@@ -41,7 +41,7 @@
                   <th>이모지</th>
                   <th>작성자 이메일</th>
                   <th>닉네임</th>
-                  <th>일기</th>
+                  <th>일기2</th>
                 </tr>
               </thead>
               <tbody>
@@ -52,7 +52,7 @@
                   <td>[[${diary.EMOJI}]]</td>
                   <td>[[${diary.MEMBER_EMAIL}]]</td>
                   <td>[[${diary.MEMBER_NICK}]]</td>
-                  <td><a onclick="diaryPopup()">보기</a></td>
+                  <td><a th:onclick="|javascript:diaryPopup('${diary.DIARY_SEQ}')|">보기</a></td>
                 </tr>
               </tbody>
             </table>
