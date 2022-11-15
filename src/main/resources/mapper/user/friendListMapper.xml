@@ -23,7 +23,25 @@
     </select>
     <!--  친구리스트 count  -->
     <select id="friendListCount" resultType="int">
-        select count(*) from friend_apply where member_email = #{myEmail}
+        select count(*) from member
+        where member_email in (
+            (
+                select a.member_op_email from friend_apply a
+                    join member m
+                    on m.member_email = a.member_email
+                where a.member_email =#{myEmail}
+            )
+            minus
+            (
+                select block_email from block
+                where member_email =#{myEmail}
+            )
+            minus
+            (
+                select member_email from block
+                where block_email =#{myEmail}
+            )
+        )
     </select>
 
     <!--  친구리스트 검색 sql  -->
