@@ -43,8 +43,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="member : ${userList}">
-<!--                                    <td th:text="${user.MEMBER_EMAIL}" onclick="memberPopup()"></td>-->
-                                    <td><a onclick="memberPopup()">[[${member.MEMBER_EMAIL}]]</a></td>
+                                    <td><a th:onclick="javascript:memberPopup([[${member.MEMBER_EMAIL}]])">[[${member.MEMBER_EMAIL}]]</a></td>
                                     <td>[[${member.MEMBER_NICK}]]</td>
                                     <td>[[${member.MEMBER_BIRTH}]]</td>
                                     <td>[[${member.MEMBER_PHONE}]]</td>

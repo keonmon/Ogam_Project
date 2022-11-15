@@ -54,7 +54,7 @@ public class User_BlockController {
     @RequestMapping("/blockPlus")
     public String blockPlus(HttpServletRequest request
                             , HttpServletResponse response
-                            , @RequestParam String member_nick) throws IOException {
+                            , @RequestParam(defaultValue = "") String member_nick) throws IOException {
 
         String member_email = (String) request.getSession().getAttribute("loginUser");
 //        String member_email = "user1@ogam.com";
@@ -62,17 +62,20 @@ public class User_BlockController {
         init(response);
         PrintWriter out = response.getWriter();
 
-        String block_email = blockService.findId(member_nick);
+        String block_email="";
+        if(!member_nick.isEmpty()) {
+            block_email = blockService.findId(member_nick);
+            if(block_email == null || block_email.isEmpty()){
+                return "redirect:/blockPage";
+            }
+            if(blockService.doubleBlock(new Block(member_email, block_email)) == 1) {
+                out.println("<script>alert('이미 차단한 유저입니다''); location.href='/blockPage'</script>");
+                out.flush();
+            } else {
+                blockService.blockPlus(new Block(0, member_email, block_email));
+            }
 
-        String a = null;
-
-        if(blockService.doubleBlock(new Block(member_email, block_email)) == 1) {
-            out.println("<script>alert('이미 차단한 유저입니다'); location.href='/blockPage'</script>");
-            out.flush();
-        } else {
-            blockService.blockPlus(new Block(0, member_email, block_email));
         }
-
         return "redirect:/blockPage";
     }
 

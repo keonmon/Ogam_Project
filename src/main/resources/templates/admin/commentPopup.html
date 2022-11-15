@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="wrap">
-        <form action="/deleteReply" method="post">
+        <form action="/deleteReplyPopup" method="post">
             <div class="line">
                 <div id="top">
                     <span id="title">댓글 확인</span>
@@ -33,11 +33,19 @@
                     </span>
                 </div>
                 <div id="delBtn">
-                    <input type="submit" class="commentDel" value="게시물 삭제"/>
-                    <input type="hidden" name="member_email" th:value="${reply.MEMBER_EMAIL}"/>
+                    <input type="submit" class="commentDel" id="commentDel" value="게시물 삭제" />
+                    <input type="hidden" name="reply_seq" th:value="${reply.REPLY_SEQ}"/>
                 </div>
             </div>
         </form>
     </div>
+    <!-- 삭제 버튼 -->
+    <script>
+    $(function(){
+        $("#commentDel").click(function() {
+            $("#replyPopup").attr("action","/deleteReplyPopup").submit();
+        })
+    })
+    </script>
 </body>
 </html>

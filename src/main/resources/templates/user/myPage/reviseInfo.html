@@ -23,7 +23,7 @@
 
                  <!-- 마이 프로필 시작 -->
                 <div id="wrap">
-                    <form action="/reviseUpdate" method="post" enctype="multipart/form-data">
+                    <form action="/reviseUpdate" method="post" enctype="multipart/form-data" id="frm">
                        <div class="base">
                             <div id="top">
                                 <span id="myTitle">마이프로필</span>
@@ -41,7 +41,9 @@
                                         <label for="member_image">
                                             <div>사진 선택</div>
                                         </label>
-                                        <input type="file" accept="image/*" id="member_image" name="file" style="display:none"/>
+                                        <span class="proDel" style="margin-left:20px;">사진 삭제</span>
+                                        <input type="file" style="display:none;" accept="image/*" id="member_image" name="file" th:value="${member['BGIMG_PATH']}"/>
+                                       
                                     </div>
                                 </div>
                                 <div id="intro">
@@ -58,14 +60,15 @@
                                     <span class="pwTitle">
                                         <div>비밀번호</div>
                                     </span>
-                                    <input type="password" id="member_pw" name="member_pw" th:value="${member['MEMBER_PW'] == null ? '' : member['member_pw']}" onchange="new_pw_chk()"/>
+                                    <input type="password" th:placeholder="${session['accessToken']} ? 'Kakao 로그인' " th:disabled="${session['accessToken']} ? 'disabled'" id="member_pw" name="member_pw" th:value="${member['MEMBER_PW'] == null ? '' : member['member_pw']}" onchange="new_pw_chk()"/>
                                 </div>
                                 <div class="password">
                                     <span>
                                         <div class="pwTitle">비밀번호</div>
                                         <div class="pwTitle">재확인</div>
                                     </span>
-                                    <input type="password" id="member_repw" onchange="chk_pwd()"/>
+                                    <input type="password" th:placeholder="${session['accessToken']} ? 'Kakao 로그인' " th:disabled="${session['accessToken']} ? 'disabled'" id="member_repw" onchange="chk_pwd()" />
+                                    <input hidden id="kakaoLoginChk" th:value="${session['accessToken']}"/>
                                 </div>
                                 <div class="nickName">
                                     <div class="nTitle">닉네임</div>
@@ -84,7 +87,7 @@
                                 </div>
                             </div>
                             <div class="btn_bottom">
-                                <input type="submit" id="finish" value="회원정보 수정하기" onclick="allchk()">
+                                <input type="button" id="finish" value="회원정보 수정하기" onclick="reviseInfoSubmit()">
                                 <input type="hidden" name="member_email" th:value="${member.MEMBER_EMAIL}"/>
                             </div>
                            <div class="btn_delete">
@@ -161,7 +164,7 @@
                                     ></textarea>
                                 </div>
                                 <input type="hidden" name="member_pw" id="member_pass" value=""/>
-                                <button type="submit" class="deleteBtn">탈퇴하기 😥</button>
+                                <button type="submit" class="deleteBtn" >탈퇴하기 😥</button>
                                 <!-- <a href="../userDashboard.html" class="deleteBtn">탈퇴하기 😥</a> -->
                             </form>
                             <!-- form end -->
@@ -203,9 +206,9 @@
             })
         }
 
-<!--        이미지 선택하면 미리보기-->
+        //이미지 선택하면 미리보기
         $('#member_image').on("change", function(event) {
-            var file = event.target.files[0];
+            var file = event.target.files[0].empty();
 
             var reader = new FileReader();
             reader.onload = function(e) {
@@ -214,7 +217,17 @@
             reader.readAsDataURL(file);
         })
 
-<!--        탈퇴할 때 비밀번호 확인 -->
+        // 사진삭제버튼
+        $('.proDel').on("click", function() {
+            //$("#member_image")[0].target.files[0].empty();
+            $('#proImg').attr("src", 'img/basicProfile.png');
+            $("#member_image").val("");
+            //document.getElementById('member_image').select();
+            //document.selection.clear();
+
+        });
+
+        //탈퇴할 때 비밀번호 확인
        $('#member_pwd').on("change", function() {
             var pw = $('#member_pwd').val();
             $("#member_pass").val(pw);
@@ -228,7 +241,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-    <script src="js/friendList.js" type="text/javascript"></script>
     <script src="js/reviseInfo.js" type="text/javascript"></script>
 </body>
 

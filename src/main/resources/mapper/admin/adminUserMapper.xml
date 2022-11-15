@@ -13,6 +13,7 @@
              , MEMBER_GENDER
              , MEMBER_BLACKYN
         FROM MEMBER
+       ORDER BY MEMBER_EMAIL
     </select>
 
     <!-- 키워드 검색 -->
