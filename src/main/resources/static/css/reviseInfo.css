@@ -250,6 +250,14 @@ option {
     font-size: 1.1rem;
 }
 
+.ymd{
+    position: relative;
+    left: -24px;
+    font-size: 20px;
+    width: 0px;
+}
+
+
 /* 휴대폰 번호 */
 
 .phone {

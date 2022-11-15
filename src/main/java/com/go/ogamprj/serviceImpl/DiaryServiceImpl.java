@@ -223,6 +223,11 @@ public class DiaryServiceImpl implements DiaryService {
         }
     }
 
+    @Override
+    public void diaryUpdateResetBgimg(Diary diaryDto) {
+        diaryMapper.diaryUpdateResetBgimg(diaryDto);
+    }
+
 
     /**
      * 날짜 형식 바꾸기 함수
