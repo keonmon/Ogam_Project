@@ -24,10 +24,10 @@ public class User_Notifi_Controller {
     public String notifi(HttpServletRequest request, Model model) {
 
         String myEmail = (String)request.getSession().getAttribute("loginUser");
+        System.out.println("asdkjahsdkjashjkdashd : "+myEmail);
 
         // 알림 myEmail 유저한테 친구 신청 온거 select
         List<Map<String, Object>> notifiSelect = notifiService.notifiSelect(myEmail);
-        System.out.println(notifiSelect);
 
         model.addAttribute("notifiSelectList",notifiSelect);
         return "frag/user/user_menubar :: .currentNotifi";
@@ -37,6 +37,7 @@ public class User_Notifi_Controller {
     @ResponseBody
     public String deleteNotifi(HttpServletRequest request,@RequestParam int noti_seq, Model model) {
 
+        System.out.println(noti_seq);
         // 알림 읽으면 삭제
         notifiService.deleteNotifi(noti_seq);
 
