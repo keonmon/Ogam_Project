@@ -25,7 +25,7 @@ public interface DiaryMapper {
 
     public List<HashMap<String,Object>> friendDiarySelectAll(String myEmail);
 
-    public List<HashMap<String,Object>> randomAllDiarySelectAll();
+    public List<HashMap<String,Object>> randomAllDiarySelectAll(String myEmail);
 
     @Select("select * from emotions where emotion = #{emotion}")
     public ArrayList<Emotions> getEmotions(String emotion);

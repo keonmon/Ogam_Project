@@ -29,9 +29,9 @@
            and d.diary_del = 'n'
            and d.member_email in ((select member_email from member)
                                     minus
-                                    (select block_email from block where member_email = 'montoo@kakao.com')
+                                    (select block_email from block where member_email = #{myEmail})
                                     minus
-                                    (select member_email from block where block_email = 'montoo@kakao.com'))
+                                    (select member_email from block where block_email = #{myEmail}))
          order by d.diary_seq desc
     </select>
 
@@ -44,9 +44,9 @@
         on m.member_email = d.MEMBER_EMAIL
         where d.member_email in ((select member_email from member)
                                 minus
-                                (select block_email from block where member_email = 'montoo@kakao.com')
+                                (select block_email from block where member_email = #{myEmail})
                                 minus
-                                (select member_email from block where block_email = 'montoo@kakao.com'))
+                                (select member_email from block where block_email = #{myEmail}))
 
         and d.DIARY_SEQ in (select CEIL(DBMS_RANDOM.VALUE(0, (select max(DIARY_SEQ)
                                 from diary)))DIARY_SEQ
@@ -206,7 +206,7 @@
                      , #{diarySeq}                          as diary_seq
                      , #{loginUser}                         as noti_email
                      , 'reply'                              as noti_type
-                     , '일기에 새로운 댓글이 달렸습니다'         as noti_comm
+                     , '님이 일기에 댓글을 작성했습니다'         as noti_comm
                   from diary d join member m
                     on d.member_email = m.member_email
                  where d.diary_seq = #{diarySeq})
@@ -218,7 +218,7 @@
                      , #{diarySeq}                              as diary_seq
                      , #{loginUser}                             as noti_email
                      , 'like'                                   as noti_type
-                     , '작성한 일기가 좋아요를 받았습니다'           as noti_comm
+                     , '님이 일기에 좋아요를 했습니다'           as noti_comm
                   from diary d join member m
                     on d.member_email = m.member_email
                  where d.diary_seq = #{diarySeq})
