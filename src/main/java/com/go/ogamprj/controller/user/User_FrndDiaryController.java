@@ -39,28 +39,34 @@ public class User_FrndDiaryController {
 
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
-        if(searchKeyword == null) {
-
-        // 친구 전체 리스트
-        List<Map<String, Object>> friendList = friendDiaryService.friendListSelectAll(myEmail);
-
-        model.addAttribute("friendList",friendList);
+        if(myEmail == null){
+            return "redirect:/";
         } else {
+            if(searchKeyword == null) {
 
-        // 친구 검색 리스트
+            // 친구 전체 리스트
+            List<Map<String, Object>> friendList = friendDiaryService.friendListSelectAll(myEmail);
 
-        List<Map<String, Object>> search = friendDiaryService.search(myEmail,searchKeyword);
+            model.addAttribute("friendList",friendList);
+            } else {
 
-        model.addAttribute("friendList", search);
+            // 친구 검색 리스트
 
+            List<Map<String, Object>> search = friendDiaryService.search(myEmail,searchKeyword);
+
+            model.addAttribute("friendList", search);
+
+            }
+
+            // 친구리스트 카운트해서 가져오기
+            int friendListCount = friendDiaryService.friendListCount(myEmail);
+
+            model.addAttribute("friendListCount",friendListCount);
+
+            return "user/noticePage/friendList";
         }
 
-        // 친구리스트 카운트해서 가져오기
-        int friendListCount = friendDiaryService.friendListCount(myEmail);
 
-        model.addAttribute("friendListCount",friendListCount);
-
-        return "user/noticePage/friendList";
     }
 
     // 친구 리스트 삭제
@@ -84,7 +90,6 @@ public class User_FrndDiaryController {
         List<Map<String, Object>> friendSendList = friendDiaryService.friendSendSelectAll(myEmail);
         // member 전체 유저 가져오기
         List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
-
         // 알림 myEmail 유저한테 온거 select
         List<Map<String, Object>> notifiSelect = notifiService.notifiSelect(myEmail);
 
@@ -118,8 +123,6 @@ public class User_FrndDiaryController {
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         List<Map<String, Object>> memberSearch = friendDiaryService.memberSearch(myEmail,searchKeyword);
-
-        System.out.println(memberSearch);
 
         model.addAttribute("memberList",memberSearch);
         return "user/noticePage/sendList :: .modalBody";

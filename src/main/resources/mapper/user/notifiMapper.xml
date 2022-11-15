@@ -5,40 +5,35 @@
 
     <!--  친구 추가가 될때 알림에 insert  -->
     <insert id="notifiInsert" parameterType="com.go.ogamprj.dto.Notifi">
-        insert into notifi
-        values(noti_seq.nextval,#{member_email},0,#{noti_email},#{noti_type},current_date,null,'님에게 친구 신청이 왔습니다')
+        insert into notifi (member_email, diary_seq, noti_email,noti_type,noti_date,noti_readdate,noti_comm)
+        values(#{member_email},null,#{noti_email},#{noti_type},current_date,null,'님에게 친구 신청이 왔습니다')
     </insert>
 
     <!-- 멤버 정보 가져오기 (사진, 닉네임)  -->
     <select id="notifiSelect" resultType="java.util.Map">
         select
-            n.noti_seq as NOTI_SEQ,
-            n.noti_comm as NOTI_COMM,
-            nvl(n.diary_seq,0) as DIARY_SEQ,
-            m.member_nick as MEMBER_NICK
+        n.noti_seq as NOTI_SEQ,
+        n.noti_comm as NOTI_COMM,
+        nvl(n.diary_seq,0) as DIARY_SEQ,
+        m.member_nick as MEMBER_NICK
         from member m
-            join notifi n
-            on n.noti_email = m.member_email
-            left join bgimage b
-            on b.bgimg_seq = m.bgimg_seq
+        join notifi n
+        on n.noti_email = m.member_email
+        left join bgimage b
+        on b.bgimg_seq = m.bgimg_seq
         where n.noti_email in (
-                    select a.member_op_email from member m
-                        join friend_apply a
-                        on a.member_email = m.member_email
-                    where m.member_email = #{myEmail}
-                    and a.member_op_email in(
-                            (select member_email from member where member_email != #{myEmail})
+        (select member_email from member where member_email != #{myEmail})
 
-                            minus
+        minus
 
-                            (select member_email from block where block_email =#{myEmail})
+        (select member_email from block where block_email = #{myEmail})
 
-                            minus
+        minus
 
-                            (select block_email from block where member_email =#{myEmail})
-                    )
-            )
+        (select block_email from block where member_email = #{myEmail})
+        )
         and n.member_email = #{myEmail}
+
     </select>
 
     <delete id="deleteNotifi">

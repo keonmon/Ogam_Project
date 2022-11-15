@@ -16,15 +16,13 @@ function closeModal1() {
 // 모달창 버튼 스크립트
 const addBtn = document.querySelectorAll(".addBtn");
 const add = document.querySelectorAll(".add");
-const complete = document.querySelectorAll(".complete");
 const email = document.querySelectorAll(".member_email");
-const nickname = document.querySelectorAll(".member_nickname span");
 const list = document.querySelectorAll(".member_list");
-const modal_op_email = document.querySelectorAll(".member_op_email");
 
 for (let i = 0; i < addBtn.length; i++) {
     add[i].addEventListener("click", () => {
-    let member_email = email[i].value;
+    let member_email = email[i].innerHTML;
+    console.log(member_email)
     let member_list = list[i];
     let response = 'n';
 
@@ -67,10 +65,49 @@ searchKeyword = searchInput.value;
         type: "post",
         data:{"searchKeyword":searchKeyword},
     }).done(function (memberList){
-        console.log(memberList)
         $(".modalBody").replaceWith(memberList);
+        addEventHanlder();
     })
 })
+
+// ajax 로 추가버튼 함수
+function addEventHanlder() {
+const tmpAddBtn = document.querySelectorAll(".addBtn");
+const tmpAdd = document.querySelectorAll(".add");
+const tmpEmail = document.querySelectorAll(".member_email");
+const tmpList = document.querySelectorAll(".member_list");
+
+for (let i = 0; i < tmpAddBtn.length; i++) {
+    tmpAdd[i].addEventListener("click", () => {
+    let member_email = tmpEmail[i].value;
+    let member_list = tmpList[i];
+    let response = 'n';
+
+    Swal.fire({
+      title: '친구신청을 했습니다',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    }).then(function () {
+          $.ajax({
+             url:"/addSendList",
+             type:"post",
+             data:{"member_email" : member_email, "response" : response},
+             success:function(data) {
+                console.log(data);
+                member_list.remove();
+             },
+             error:function(e) {
+                  console.log(e);
+             }
+          })
+      })
+    })
+}
+}
 
 // 친구신청 / 친구 리스트 메뉴바 스크립트
 const friendList = document.querySelector(".friendList");
@@ -94,15 +131,16 @@ const accept = document.querySelectorAll("#accept");
 const refuse = document.querySelectorAll("#refuse");
 const answer = document.querySelectorAll(".answer");
 const op_nickname = document.querySelectorAll(".op_nickname span");
-const op_email = document.querySelectorAll(".op_email");
 const friSeq = document.querySelectorAll(".friSeq");
+const op_email = document.querySelectorAll(".op_email");
 
 for(let i = 0; i < accept.length; i++){
     accept[i].addEventListener("click", () => {
     let response = answer[i].value.innerHTML = 'y';
     let nickname = op_nickname[i].innerHTML;
-    let member_op_email = op_email[i].value;
-    let fri_send_seq = friSeq[i].value;
+    let member_op_email = op_email[i].innerHTML;
+    let fri_send_seq = friSeq[i].innerHTML;
+    console.log(fri_send_seq)
         Swal.fire({
           title: '친구등록을 완료했습니다',
           showClass: {
@@ -131,8 +169,8 @@ for(let i = 0; i < refuse.length; i++){
     refuse[i].addEventListener("click", () => {
     let response = answer[i].value.innerHTML = 'n';
     let nickname = op_nickname[i].innerHTML;
-    let member_op_email = op_email[i].value;
-    let fri_send_seq = friSeq[i].value;
+    let member_op_email = op_email[i].innerHTML;
+    let fri_send_seq = friSeq[i].innerHTML;
     Swal.fire({
           title: '친구등록을 거절했습니다',
           showClass: {

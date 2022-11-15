@@ -24,10 +24,12 @@ public class User_Notifi_Controller {
     public String notifi(HttpServletRequest request, Model model) {
 
         String myEmail = (String)request.getSession().getAttribute("loginUser");
-        System.out.println("asdkjahsdkjashjkdashd : "+myEmail);
 
         // 알림 myEmail 유저한테 친구 신청 온거 select
         List<Map<String, Object>> notifiSelect = notifiService.notifiSelect(myEmail);
+        System.out.println(notifiSelect);
+
+        // 알림 데이트 비교해서 삭제 후 return preview에 데이터 넣기
 
         model.addAttribute("notifiSelectList",notifiSelect);
         return "frag/user/user_menubar :: .currentNotifi";

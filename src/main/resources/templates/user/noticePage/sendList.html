@@ -43,8 +43,8 @@
                         <th:block th:unless="${#lists.size(friendSendList)} == 0">
                             <th:block th:each="friendSend : ${friendSendList}">
                                     <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
-                                    <input type="text" class="op_email" th:value="${friendSend.MEMBER_EMAIL}" style="display:none">
-                                    <input type="text" class="friSeq" th:value="${friendSend.FRI_SEND_SEQ}" style="display:none">
+                                    <p class="op_email" th:text="${friendSend.MEMBER_EMAIL}" style="display:none">
+                                    <p class="friSeq" th:text="${friendSend.FRI_SEND_SEQ}" style="display:none">
                                     <div class="send_date" th:text="|친구 신청일 : ${#dates.format(friendSend.SEND_DATE, 'yyyy-MM-dd')}|"></div>
                                     <div class="send_list">
                                         <div class="send_contents">
@@ -95,7 +95,7 @@
                             </th:block>
                             <th:block th:unless="${#lists.size(memberList)} == 0">
                                 <div class="member_list" th:each="member : ${memberList}">
-                                    <input type="text" class="member_email" th:value="${member.MEMBER_EMAIL}" style="display:none">
+                                    <p class="member_email" th:text="${member.MEMBER_EMAIL}" style="display:none">
                                     <div class="member_contents">
                                         <span class="member_img">
                                              <img th:src="${member['BGIMG_PATH'] == null ? 'img/basicProfile.png' : member['BGIMG_PATH']}" />

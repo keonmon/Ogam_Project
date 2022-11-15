@@ -50,16 +50,19 @@
             <div id="notifi_title">알림</div>
             <div class="titleText">최근 알림</div>
             <div class="currentNotifi">
-                <th:block th:each="notifiSelect : ${notifiSelectList}">
-                    <div class="currentNotifi_contents" id="currentNotifi_contents">
-                        <p class="nSeq" style="display:none;">[[${notifiSelect.NOTI_SEQ}]]</p>
-                        <p class="seq" style="display:none;">[[${notifiSelect.DIARY_SEQ}]]</p>
-                        <img th:src="${notifiSelect['BGIMG_PATH'] == null ? 'img/basicProfile.png' : notifiSelect['BGIMG_PATH']}" />
-                        <div class="currentNotifi_message" id="currentNotifi_message">
-                            <span>[[ ${notifiSelect.MEMBER_NICK} ]] [[ ${notifiSelect.NOTI_COMM} ]]</span>
+
+
+                    <th:block th:each="notifiSelect : ${notifiSelectList}">
+                        <div class="currentNotifi_contents" id="currentNotifi_contents">
+                            <p class="nSeq" style="display:none;">[[${notifiSelect.NOTI_SEQ}]]</p>
+                            <p class="seq" style="display:none;">[[${notifiSelect.DIARY_SEQ}]]</p>
+                            <img th:src="${notifiSelect['BGIMG_PATH'] == null ? 'img/basicProfile.png' : notifiSelect['BGIMG_PATH']}" />
+                            <div class="currentNotifi_message" id="currentNotifi_message">
+                                <span>[[ ${notifiSelect.MEMBER_NICK} ]] [[ ${notifiSelect.NOTI_COMM} ]]</span>
+                            </div>
                         </div>
-                    </div>
-                </th:block>
+                    </th:block>
+
             </div>
             <div class="titleText">이전 알림</div>
             <div class="previewNotifi">
