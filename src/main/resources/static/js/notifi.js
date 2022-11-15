@@ -23,10 +23,12 @@ notifi.addEventListener("click", () => {
 
 function notifiEventHandler() {
     const tmpCurrent = document.querySelectorAll(".currentNotifi_contents");
-    const seq = document.querySelectorAll(".seq");
+    const nSeq = document.querySelectorAll(".nSeq");
+    const Seq = document.querySelectorAll(".seq");
     for(let i = 0; i < tmpCurrent.length; i++ ) {
         tmpCurrent[i].addEventListener("click", () => {
-            const noti_seq= seq[i].innerHTML;
+            const noti_seq = nSeq[i].innerHTML;
+            const diarySeq = Seq[i].innerHTML;
 
             Swal.fire({
               position: 'top-end',
@@ -40,7 +42,11 @@ function notifiEventHandler() {
                    type: "get",
                    data:{"noti_seq":noti_seq},
                    success:function(data) {
-                       fraCalHandler();
+                      if(diarySeq == 0){
+                       window.location.href="/sendList";
+                      } else {
+                       window.location.href="/viewDiary?diarySeq="+ diarySeq;
+                      }
                     },
                     error:function(e) {
                          console.log(e);
@@ -49,16 +55,4 @@ function notifiEventHandler() {
             })
         })
     }
-}
-
-// fragment call 함수
-
-function fraCalHandler() {
- $.ajax({
-         url: "/notifi",
-         type: "post",
-     }).done(function (notifiSelectList){
-         $(".currentNotifi").replaceWith(notifiSelectList);
-         notifiEventHandler();
-     })
 }

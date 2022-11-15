@@ -102,12 +102,15 @@ public class User_MyPageController {
             String savedPath = realPath + fileDir + savName; // 서버 저장 경로
 
             Bgimage bgimageDto = new Bgimage(0, fileDir + savName, savName);
+
+            System.out.println("사진 서버의 저장 : "+bgimageDto);
+
             try {
                 file.transferTo(new File(savedPath));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
+            System.out.println(bgimageDto);
             memberService.reviseUpdate(member, bgimageDto);
         }
         return "redirect:/MyPage";
