@@ -62,9 +62,9 @@
                             <td>[[${notify.BLACKLIST_DATE}]]</td>
                             <td>
                               <th:block th:switch="${notify.CATEGORY}">
-                                  <input type="hidden" name="diary_seq" th:value="${notify.BLACK_SEQ}" />
-                                  <a th:case="일기" href="javascript:void(0);" th:onclick="|window.open('/diaryPopup/${notify.BLACK_SEQ}', 'pop01'
-                                        , 'width=550px, height=625px, status=no, menubar=no, toolbar=no, resizable=no')|">보기</a>
+                                  <input type="hidden" id="diary_seq" name="diary_seq" th:value="${notify.ALL_SEQ}" />
+                                  <a th:case="일기" href="javascript:void(0);" th:onclick="|window.open('/diaryPopup/${notify.ALL_SEQ}', 'pop01'
+                                        , 'width=550px, height=625px, status=no, menubar=no, toolbar=no, resizable=no')|" id="show" >보기</a>
                                   <a th:case="댓글" onclick="commentPopup( )">보기</a>
                               </th:block>
                             </td>
@@ -84,6 +84,39 @@
     </div>
     <!-- 팝업 -->
     <script type="text/javascript" src="js/popup.js"></script>
+    <script>
+
+      const diary_seq = ('#diary_seq').val();
+
+        var  $('#show').on('click', function() {
+            $.ajax({
+                url: '/diaryPopup/{diarySeq}',
+                data : {'diary_seq' : diary_seq},
+                type: 'json',
+                success: function() {
+                 console.log("??");
+                } ,
+                error : function() {
+                    console.log("error");
+                }
+            })
+        })
+
+
+
+<!--        무한 스크롤-->
+    var loading = false;
+    var page = 15;
+
+    function next_load() {
+        $.ajax({
+            url:
+            type: 'post',
+
+        })
+    }
+
+    </script>
 
 </body>
 </html>

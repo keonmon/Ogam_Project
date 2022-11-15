@@ -12,6 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +24,26 @@ public class Admin_DashboardController {
 
     @Autowired
     DashboardService dashboardService;
-    @Autowired
-    DashboardMapper dashboardMapper;
+//    @Autowired
+//    DashboardMapper dashboardMapper;
+
+    public static void init(HttpServletResponse response) {
+        response.setContentType("text/html; charset=euc-kr");
+        response.setCharacterEncoding("euc-kr");
+    }
 
     @RequestMapping("/adminMain") // application root
-    public String main(Model model) {
+    public String main(HttpServletRequest request, HttpServletResponse response
+                        , Model model) throws IOException {
+        init(response);
+
+        PrintWriter out = response.getWriter();
+        String admin_email = (String)request.getSession().getAttribute("loginUser");
+        if(!admin_email.equals("admin@ogam.com") || admin_email == null) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        }
+
         model.addAttribute("users", dashboardService.users() + "명");
         model.addAttribute("removeUser", dashboardService.removeUser() + "명");
         model.addAttribute("diary", dashboardService.diary() + "개");
