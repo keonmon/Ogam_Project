@@ -38,9 +38,10 @@
         and f.member_email in(
                     (select member_email from member)
                     minus
-                    (select block_email from block where member_email =#{myEmail}))
+                    (select block_email from block where member_email =#{myEmail})
                     minus
                     (select member_email from block where block_email =#{myEmail})
+                )
         and member_nick like '%${searchKeyword}%'
         order by f.friend_date desc
 
@@ -49,14 +50,14 @@
     <!--  친구리스트 delete  -->
     <delete id="deleteFriend">
         delete from friend_apply
-        where friend_key = (select f.friend_key
-                            from friend_apply f
-                                join member m
-                                on f.member_email = m.member_email
-                            where f.member_email
-                                in (select member_op_email
-                                    from friend_apply
-                                    where member_email = #{myEmail}) and member_nick = #{nickname})
+        where friend_key = (select distinct (friend_key) from friend_apply
+                                where friend_key in
+                                        (select f.friend_key
+                                        from member m
+                                                join friend_apply f
+                                                on m.member_email = f.member_email
+                                            where f.member_op_email = #{myEmail}
+                                            and m.member_nick = #{nickname}))
     </delete>
 
     <!--  친구신청 리스트 전체 가져오기  -->

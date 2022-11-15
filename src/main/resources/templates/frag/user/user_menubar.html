@@ -52,8 +52,8 @@
             <div class="currentNotifi">
                 <th:block th:each="notifiSelect : ${notifiSelectList}">
                     <div class="currentNotifi_contents" id="currentNotifi_contents">
-                        <p class="seq" style="display:none;">[[${notifiSelect.NOTI_SEQ}]]</p>
-                        <p class="seq">[[${notifiSelect.DIARY_SEQ}]]</p>
+                        <p class="nSeq" style="display:none;">[[${notifiSelect.NOTI_SEQ}]]</p>
+                        <p class="seq" style="display:none;">[[${notifiSelect.DIARY_SEQ}]]</p>
                         <img th:src="${notifiSelect['BGIMG_PATH'] == null ? 'img/basicProfile.png' : notifiSelect['BGIMG_PATH']}" />
                         <div class="currentNotifi_message" id="currentNotifi_message">
                             <span>[[ ${notifiSelect.MEMBER_NICK} ]] [[ ${notifiSelect.NOTI_COMM} ]]</span>

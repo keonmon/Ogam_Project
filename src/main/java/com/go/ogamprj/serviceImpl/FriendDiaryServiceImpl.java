@@ -25,6 +25,7 @@ public class FriendDiaryServiceImpl implements FriendDiaryService {
     // 친구 리스트 카운트
     @Override
     public int friendListCount(String myEmail) {
+
         return friendDiaryMapper.friendListCount(myEmail);
     }
 
