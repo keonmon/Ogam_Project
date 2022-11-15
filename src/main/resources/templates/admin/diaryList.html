@@ -45,15 +45,17 @@
                 </tr>
               </thead>
               <tbody>
-                <tr th:each="diary : ${userDiaryList}">
-                  <td><input type="checkbox"  name="check" th:value="${diary.DIARY_SEQ}" /></td>
-                  <td>[[${diary.DIARY_PRIVATE}]]</td>
-                  <td>[[${diary.EMOTION}]]</td>
-                  <td>[[${diary.EMOJI}]]</td>
-                  <td>[[${diary.MEMBER_EMAIL}]]</td>
-                  <td>[[${diary.MEMBER_NICK}]]</td>
-                  <td><a th:onclick="|javascript:diaryPopup('${diary.DIARY_SEQ}')|">보기</a></td>
-                </tr>
+                <ul th:each="diary : ${userDiaryList}" id="numbers">
+                  <li>
+                    <td><input type="checkbox"  name="check" th:value="${diary.DIARY_SEQ}" /></td>
+                    <td>[[${diary.DIARY_PRIVATE}]]</td>
+                    <td>[[${diary.EMOTION}]]</td>
+                    <td>[[${diary.EMOJI}]]</td>
+                    <td>[[${diary.MEMBER_EMAIL}]]</td>
+                    <td>[[${diary.MEMBER_NICK}]]</td>
+                    <td><a th:onclick="|javascript:diaryPopup('${diary.DIARY_SEQ}')|">보기</a></td>
+                  </li>
+                </ul>
               </tbody>
             </table>
           </div>
@@ -67,22 +69,23 @@
       </main>
     </div>
     <!-- 팝업 -->
-    <script type="text/javascript" src="js/popup.js"></script>
-<!--    <script src="https://code.jquery.com/jquery-3.5.1.js%22%3E"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script>
-      const diarySeq =$("#diary_seq").val();
-      var diary = window.open("about:blank",:_blank);
-      $.ajax ({
-        url: "/diaryPopup",
-        method: "post",
-        dataType: "html",
-        data: "diarySeq",
-        success: function(data) {
-            diary.location.href="/diaryPopup/{diarySeq}"
 
-        }
+      $(document).ready(function() {
+        var offset = $('#numbers li').length;
 
-      })
-    </script>-->
+        $('#numbers').endlessScroll({
+          fireOnce: false,
+          fireDelay: false,
+          loader: '',
+          insertAfter: '#numbers li:last',
+          content: function(i) {
+            return '<li>' + (i + offset) + '</li>';
+          }
+        });
+      });
+
+    </script>
   </body>
 </html>

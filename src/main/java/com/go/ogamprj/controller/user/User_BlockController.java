@@ -31,10 +31,6 @@ public class User_BlockController {
     public String blockPage(HttpServletRequest request, Model model) {
         String member_email = (String) request.getSession().getAttribute("loginUser");
 
-        if(member_email == null) {
-
-        }
-
 //        String member_email = "user1@ogam.com";
         List<HashMap<String, Object>> blockList = blockService.blockList(member_email);
         model.addAttribute("blockList", blockList);
