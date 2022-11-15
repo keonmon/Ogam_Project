@@ -41,20 +41,20 @@ public class User_FrndDiaryController {
 
         if(myEmail == null){
             return "redirect:/";
-        } else {
+        }else {
             if(searchKeyword == null) {
 
-            // 친구 전체 리스트
-            List<Map<String, Object>> friendList = friendDiaryService.friendListSelectAll(myEmail);
+                // 친구 전체 리스트
+                List<Map<String, Object>> friendList = friendDiaryService.friendListSelectAll(myEmail);
 
-            model.addAttribute("friendList",friendList);
+                model.addAttribute("friendList",friendList);
             } else {
 
-            // 친구 검색 리스트
+                // 친구 검색 리스트
 
-            List<Map<String, Object>> search = friendDiaryService.search(myEmail,searchKeyword);
+                List<Map<String, Object>> search = friendDiaryService.search(myEmail,searchKeyword);
 
-            model.addAttribute("friendList", search);
+                model.addAttribute("friendList", search);
 
             }
 
@@ -65,8 +65,6 @@ public class User_FrndDiaryController {
 
             return "user/noticePage/friendList";
         }
-
-
     }
 
     // 친구 리스트 삭제
@@ -111,7 +109,7 @@ public class User_FrndDiaryController {
         // 알림 insert
         // 알림 구분자
         String noti_type = "friend";
-        notifiService.notifiInsert(new Notifi(0,myEmail,0,member_email,noti_type,null,null,null));
+        notifiService.notifiInsert(new Notifi(0,member_email,0,myEmail,noti_type,null,null,null));
 
         return "success";
     }
@@ -187,6 +185,5 @@ public class User_FrndDiaryController {
         //System.out.println("json으로 변환 : "+ result);
         return result;
     }
-
 
 }

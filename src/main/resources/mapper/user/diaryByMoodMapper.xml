@@ -3,7 +3,17 @@
         PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.go.ogamprj.mapper.User_OthersDiaryMapper">
 
-    <!--  전체 diary 가져오기  -->
+    <!--  비로그인시 전체 diary 가져오기  -->
+    <select id="selectDiary" resultType="java.util.Map">
+        select *
+        from diary d
+            join emotions e
+            on d.emotion_seq = e.emotion_seq
+            join member m
+            on d.member_email = m.member_email
+    </select>
+
+    <!--  로그인 했을 때 전체 diary 가져오기  -->
     <select id="selectDiaryAll" resultType="java.util.Map">
         select *
         from diary d
@@ -11,14 +21,12 @@
             on d.emotion_seq = e.emotion_seq
             join member m
             on d.member_email = m.member_email
-            join reply r
-            on r.diary_seq = d.diary_seq
         where m.member_email in (
                 (select member_email from member)
                 minus
-                (select block_email from block where member_email = 'montoo@kakao.com')
+                (select block_email from block where member_email = #{myEmail})
                 minus
-                (select member_email from block where block_email ='montoo@kakao.com')
+                (select member_email from block where block_email =#{myEmail})
         )
     </select>
 
@@ -34,9 +42,9 @@
         and m.member_email in (
                 (select member_email from member)
                 minus
-                (select block_email from block where member_email = 'montoo@kakao.com')
+                (select block_email from block where member_email = #{myEmail})
                 minus
-                (select member_email from block where block_email ='montoo@kakao.com')
+                (select member_email from block where block_email =#{myEmail})
         )
     </select>
 </mapper>

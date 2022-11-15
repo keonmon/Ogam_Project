@@ -15,6 +15,11 @@ public class User_OthersDiaryImpl implements User_OthersDiaryService {
     User_OthersDiaryMapper user_othersDiaryMapper;
 
     @Override
+    public List<Map<String, Object>> selectDiary() {
+        return user_othersDiaryMapper.selectDiary();
+    }
+
+    @Override
     public List<Map<String, Object>> selectDiaryAll(String myEmail) {
         return user_othersDiaryMapper.selectDiaryAll(myEmail);
     }
