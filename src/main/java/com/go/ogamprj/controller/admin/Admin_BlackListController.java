@@ -38,10 +38,8 @@ public class Admin_BlackListController {
         init(response);
         PrintWriter out = response.getWriter();
 
-        request.getSession().setAttribute("loginUser", "admin@ogam.com");
-
         // 어드민 로그인
-        String admin_email = (String)request.getSession().getAttribute("loginUser");
+        String admin_email = (String)request.getSession().getAttribute("admin_email");
         if(admin_email == null) {
             out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
             out.flush();

@@ -34,6 +34,11 @@ public class User_LoginController {
                         @RequestParam String member_email,
                         @RequestParam String member_pw) {
 
+        if(member_email.equals("admin@ogam.com") && member_pw.equals("Rkqhwkrh0000")){
+            request.getSession().setAttribute("admin_email",member_email);
+            return "redirect:/adminMain";
+        }
+
         // MEMBER_EMAIL, MEMBER_PW 담김
         Map<String,Object> memberMap = loginService.memberSelectOne(member_email);
         if (memberMap == null) {
