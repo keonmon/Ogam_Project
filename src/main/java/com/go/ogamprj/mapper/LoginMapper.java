@@ -15,8 +15,6 @@ public interface LoginMapper {
    @Select("SELECT member_email FROM MEMBER WHERE MEMBER_BIRTH = #{member_birth} AND MEMBER_PHONE = #{member_phone}")
    String idFindSelectOne(String member_birth, String member_phone);
 
-
-
    @Update("update member set MEMBER_PW = #{uuid} where MEMBER_EMAIL = #{member_email}")
    void updateUserPassword(String uuid, String member_email);
 }

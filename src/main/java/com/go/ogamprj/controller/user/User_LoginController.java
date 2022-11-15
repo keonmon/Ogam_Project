@@ -32,7 +32,7 @@ public class User_LoginController {
     @RequestMapping("/login")
     public String login(HttpServletRequest request, Model model,
                         @RequestParam String member_email,
-                        @RequestParam String member_pw ) {
+                        @RequestParam String member_pw) {
 
         // MEMBER_EMAIL, MEMBER_PW 담김
         Map<String,Object> memberMap = loginService.memberSelectOne(member_email);
@@ -47,9 +47,18 @@ public class User_LoginController {
 
         // 로그인 성공
         } else if(memberMap.get("MEMBER_PW").equals(member_pw)) {
+
+            System.out.println(memberMap.get("MEMBER_BLACKYN"));
+
+            if(memberMap.get("MEMBER_BLACKYN").equals("y")){
+                model.addAttribute("msg", "정지사유:" + memberMap.get("MEMBER_BLACK_REASON"));
+                return "user/loginPage/loginPage";
+            }
+
             request.getSession().setAttribute("loginUser",member_email);
             request.getSession().setAttribute("loginUserNick",memberMap.get("MEMBER_NICK").toString());
             return "redirect:/";
+
         }else{
             model.addAttribute("msg", "알 수 없는 오류가 발생했습니다.😅");
         }
@@ -59,6 +68,7 @@ public class User_LoginController {
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession session){
         request.getSession().removeAttribute("loginUser");
+        request.getSession().removeAttribute("loginUserNick");
         Object accessToken = request.getSession().getAttribute("accessToken");
 
         // 카카오로 로그인 되어있다면?

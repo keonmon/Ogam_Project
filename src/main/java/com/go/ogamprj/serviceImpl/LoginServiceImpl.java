@@ -26,7 +26,6 @@ public class LoginServiceImpl implements LoginService{
         return loginMapper.idFindSelectOne(member_birth, member_phone);
     }
 
-
     @Override
     public void updateUserPassword(String uuid, String member_email) {
         loginMapper.updateUserPassword(uuid, member_email);
