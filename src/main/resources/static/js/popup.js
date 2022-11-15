@@ -24,3 +24,9 @@ function commentPopup(reply_seq) {
     ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=510px'] );
 
 }
+
+/* 창닫기 */
+function reload(){
+    window.opener.location.reload();
+    window.close();
+}

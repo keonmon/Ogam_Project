@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -69,10 +70,13 @@ public class Admin_ReplyController {
     }
 
     /* 댓글 삭제 - 팝업에서 삭제 */
-    @RequestMapping("/deleteReplyPopup/{diary_seq}")
-    public String deleteReplyPopup(@RequestParam int diary_seq) {
+    @RequestMapping("/deleteReplyPopup")
+    @ResponseBody
+    public String deleteReplyPopup(HttpServletRequest request, @RequestParam int reply_seq) {
 
-        return "<script>window.close();</script>";
+        adminReplyService.replyDelete(reply_seq);
+
+        return "<script>window.opener.location.reload(); window.close();</script>";
     }
 
 }
