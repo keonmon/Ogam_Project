@@ -39,7 +39,10 @@ public class Admin_DashboardController {
 
         PrintWriter out = response.getWriter();
         String admin_email = (String)request.getSession().getAttribute("loginUser");
-        if(!admin_email.equals("admin@ogam.com") || admin_email == null) {
+        if(admin_email == null) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        } else if (!admin_email.equals("admin@ogam.com")) {
             out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
             out.flush();
         }
