@@ -69,8 +69,8 @@ for(let i = 0; i < op_nicknameDiv.length; i++) {
         });
 
 
-        location.href = "frndDiary?frndEmail=" + frndEmails[i].value
-        //$.post("/frndDiary"), {frndEmail : frndEmails[i].value};
+//        location.href = "frndDiary?frndEmail=" + frndEmails[i].value
+        $.post("/frndDiary"), {frndEmail : frndEmails[i].value};
 
 
     })

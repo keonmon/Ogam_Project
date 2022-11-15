@@ -63,87 +63,113 @@ public class User_DiaryController {
     }
 
     @RequestMapping("/writeDiary1")
-    public String writeDiary1(Model model){
-        model.addAttribute("emotions", diaryService.getEmotions("기쁨"));
-        return "user/userDiary/writeDiary1";
+    public String writeDiary1(HttpServletRequest request, Model model){
+        // 로그인유저의 세션정보 가져오기 (이메일주소)
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser == null){
+            return "redirect:/";
+        }else {
+            model.addAttribute("emotions", diaryService.getEmotions("기쁨"));
+            return "user/userDiary/writeDiary1";
+        }
     }
 
     @RequestMapping("/writeDiary2")
     public String writeDiary2(HttpServletRequest request, Model model, @RequestParam int emotion_seq){
-        request.getSession().setAttribute("writeEmotionSeq",emotion_seq);
+        // 로그인유저의 세션정보 가져오기 (이메일주소)
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser == null){
+            return "redirect:/";
+        }else {
+            request.getSession().setAttribute("writeEmotionSeq",emotion_seq);
 
-        model.addAttribute("emoji", diaryService.getEmojiSelectOne(emotion_seq));
-        return "user/userDiary/writeDiary2";
+
+            model.addAttribute("emoji", diaryService.getEmojiSelectOne(emotion_seq));
+            return "user/userDiary/writeDiary2";
+
+        }
     }
 
     @RequestMapping("/writeDiary3")
     public String writeDiary3(HttpServletRequest request, Model model,
                               @RequestParam String contents,
                               @RequestParam(defaultValue = "n") String diary_private){
-        request.getSession().setAttribute("writeContents",contents);
-        //request.getSession().setAttribute("writePrivate",diary_private);
+        // 로그인유저의 세션정보 가져오기 (이메일주소)
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser == null){
+            return "redirect:/";
+        }else {
+            request.getSession().setAttribute("writeContents",contents);
+            //request.getSession().setAttribute("writePrivate",diary_private);
 
 
-        int emotion_seq = (int)request.getSession().getAttribute("writeEmotionSeq");
-        model.addAttribute("emoji", diaryService.getEmojiSelectOne(emotion_seq));
-        model.addAttribute("writePrivate",diary_private);
-        return "user/userDiary/writeDiary3";
+            int emotion_seq = (int)request.getSession().getAttribute("writeEmotionSeq");
+            model.addAttribute("emoji", diaryService.getEmojiSelectOne(emotion_seq));
+            model.addAttribute("writePrivate",diary_private);
+            return "user/userDiary/writeDiary3";
+        }
     }
 
     @RequestMapping(value = "/insertDiary",method = RequestMethod.POST)
     public String insertDiary(HttpServletRequest request, Model model,
                               @RequestParam(defaultValue = "n") String diary_private,
                               @RequestParam MultipartFile file){
-
-        request.getSession().setAttribute("writePrivate",diary_private);
-        int writeEmotionSeq = (int)request.getSession().getAttribute("writeEmotionSeq");
-        String writeContents = (String)request.getSession().getAttribute("writeContents");
+        // 로그인유저의 세션정보 가져오기 (이메일주소)
         String loginUser = (String)request.getSession().getAttribute("loginUser");
+        if(loginUser == null || loginUser.equals("")){
+            return "redirect:/";
+        }else {
 
-        Diary diaryDto = new Diary(0, loginUser, 0, writeEmotionSeq, writeContents.trim(), null, diary_private, "n");
+            request.getSession().setAttribute("writePrivate",diary_private);
+            int writeEmotionSeq = (int)request.getSession().getAttribute("writeEmotionSeq");
+            String writeContents = (String)request.getSession().getAttribute("writeContents");
 
-        // 업로드된 파일 처리
-            // 이미지를 업로드하지 않는 경우
-        if(file.isEmpty()) {
-            // 배경이미지를 제외하고 다이어리 저장
-            diaryService.diaryInsertNoBgimg(diaryDto);
-        } else {
+            Diary diaryDto = new Diary(0, loginUser, 0, writeEmotionSeq, writeContents.trim(), null, diary_private, "n");
 
-            // 파일 업로드 준비
-            // 서버 webapp 경로 추출
-            String realPath = request.getSession().getServletContext().getRealPath("/");
+            // 업로드된 파일 처리
+                // 이미지를 업로드하지 않는 경우
+            if(file.isEmpty()) {
+                // 배경이미지를 제외하고 다이어리 저장
+                diaryService.diaryInsertNoBgimg(diaryDto);
+            } else {
 
-            // file의 실제이름 추출
-            String origName = file.getOriginalFilename();
+                // 파일 업로드 준비
+                // 서버 webapp 경로 추출
+                String realPath = request.getSession().getServletContext().getRealPath("/");
 
-            // 파일 이름으로 쓸 uuid 생성
-            String uuid = UUID.randomUUID().toString();
+                // file의 실제이름 추출
+                String origName = file.getOriginalFilename();
 
-            // 확장자 추출(ex : .png)
-            String extension = origName.substring(origName.lastIndexOf("."));
+                // 파일 이름으로 쓸 uuid 생성
+                String uuid = UUID.randomUUID().toString();
 
-            // uuid와 확장자 결합
-            String savedName = uuid + extension;
+                // 확장자 추출(ex : .png)
+                String extension = origName.substring(origName.lastIndexOf("."));
 
-            // 파일을 불러올 때 사용할 파일 경로
-            String savedPath = realPath + fileDir + savedName;
+                // uuid와 확장자 결합
+                String savedName = uuid + extension;
 
-            Bgimage bgimageDto = new Bgimage(0, fileDir + savedName, savedName);
-            // 파일 서버에 저장
-            try {
-                file.transferTo(new File(savedPath));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                // 파일을 불러올 때 사용할 파일 경로
+                String savedPath = realPath + fileDir + savedName;
+
+                Bgimage bgimageDto = new Bgimage(0, fileDir + savedName, savedName);
+                // 파일 서버에 저장
+                try {
+                    file.transferTo(new File(savedPath));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                // 다이어리 DB에 저장(파일과 함께 가져감
+                diaryService.diaryInsertWithBgimg(bgimageDto, diaryDto);
             }
 
-            // 다이어리 DB에 저장(파일과 함께 가져감
-            diaryService.diaryInsertWithBgimg(bgimageDto, diaryDto);
+            // 마지막 저장된 diarySeq 조회
+            int diarySeq = diaryService.diarySelectLastOne();
+
+            return "redirect:/viewDiary?diarySeq="+diarySeq;
         }
 
-        // 마지막 저장된 diarySeq 조회
-        int diarySeq = diaryService.diarySelectLastOne();
-
-        return "redirect:/viewDiary?diarySeq="+diarySeq;
     }
 
 
@@ -282,14 +308,24 @@ public class User_DiaryController {
             if (file.isEmpty()) {
                 // 배경이미지를 제외하고 다이어리 수정
                 diaryService.diaryUpdateNoBgimg(diaryDto);
-            } else {
 
-                // 파일 업로드 준비
+            // 파일 이미지를 업로드 하는 경우
+            } else {
                 // 서버 webapp 경로 추출
                 String realPath = request.getSession().getServletContext().getRealPath("/");
 
                 // file의 실제이름 추출
                 String origName = file.getOriginalFilename();
+
+                // DB에 배경이미지가 있다면?
+                if(diaryMap.containsKey("BGIMG_TITLE")){
+                    // db의 파일명과 input File의 이름 비교해서 같다면
+                    if (diaryMap.get("BGIMG_TITLE").equals(origName)){
+                        // 배경이미지 제외하고 다이어리 수정
+                        diaryService.diaryUpdateNoBgimg(diaryDto);
+                        return "redirect:/viewDiary?diarySeq=" + Integer.parseInt(id);
+                    }
+                }
 
                 // 파일 이름으로 쓸 uuid 생성
                 String uuid = UUID.randomUUID().toString();
@@ -313,6 +349,7 @@ public class User_DiaryController {
 
                 // 다이어리 DB에 수정(파일과 함께 가져감)
                 diaryService.diaryUpdateWithBgimg(bgimageDto, diaryDto);
+
             }
 
             return "redirect:/viewDiary?diarySeq=" + Integer.parseInt(id);

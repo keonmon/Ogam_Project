@@ -139,6 +139,8 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public void diaryUpdateWithBgimg(Bgimage bgimageDto, Diary diaryDto) {
+
+
         // 파일경로, 파일명 db에 저장
         diaryMapper.bgimageInsert(bgimageDto);
 

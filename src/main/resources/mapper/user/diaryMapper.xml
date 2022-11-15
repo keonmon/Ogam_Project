@@ -42,17 +42,18 @@
         on e.EMOTION_SEQ = d.EMOTION_SEQ
         join member m
         on m.member_email = d.MEMBER_EMAIL
-        where d.DIARY_SEQ in (select CEIL(DBMS_RANDOM.VALUE(0, (select max(DIARY_SEQ)
-                                                                  from diary)))DIARY_SEQ
-                                from DUAL CONNECT BY LEVEL 	&lt;= 20000)
-          and d.diary_private = 'n'
-          and d.diary_del = 'n'
-          and d.member_email in ((select member_email from member)
+        where d.member_email in ((select member_email from member)
                                 minus
                                 (select block_email from block where member_email = 'montoo@kakao.com')
                                 minus
                                 (select member_email from block where block_email = 'montoo@kakao.com'))
-          and rownum 	&lt;= 15
+
+        and d.DIARY_SEQ in (select CEIL(DBMS_RANDOM.VALUE(0, (select max(DIARY_SEQ)
+                                from diary)))DIARY_SEQ
+                                from DUAL CONNECT BY LEVEL 	&lt;= 20000)
+        and d.diary_private = 'n'
+        and d.diary_del = 'n'
+        and rownum 	&lt;= 15
     </select>
 
     <!-- 다이어리 배경이미지 insert -->

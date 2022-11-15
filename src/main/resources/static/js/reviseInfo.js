@@ -45,11 +45,24 @@ function new_pw_chk() {
 
 }
 
-function allchk(){
+ const finish = document.getElementById("finish")
+ const frm = document.getElementById("frm")
+ const KakaoLoginCheck = document.getElementById("kakaoLoginChk");
+ function reviseInfoSubmit(){
+    
+    if(kakaoLoginChk.value==''){
+        if(!chk_pwd()){
+                return false;
+            } else if(!new_pw_chk()){
+                return false;
+            }
+    }
+
+    frm.submit();
+ }
 
 
 
-}
 
 
 

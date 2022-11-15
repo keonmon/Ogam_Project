@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -80,21 +81,37 @@ public class User_MyPageController {
 
     @RequestMapping("/reviseUpdate")
     public String reviseUpdate(HttpServletRequest request
-                              , @RequestParam String member_email, @RequestParam String member_pw
+                              , @RequestParam String member_email, @RequestParam(defaultValue = "") String member_pw
                               , @RequestParam String member_nick, @RequestParam String member_birth1
                               , @RequestParam String member_birth2, @RequestParam String member_birth3
-                              , @RequestParam String member_phone, @RequestParam MultipartFile file
+                              , @RequestParam(defaultValue = "") String member_phone, @RequestParam MultipartFile file
                               , @RequestParam String member_intro) {
 
         String member_birth = member_birth1 + "/" + member_birth2 + "/" + member_birth3;
         Member member = new Member(member_pw, member_nick, member_birth, member_phone, member_intro, 0);
         member.setMEMBER_EMAIL(member_email);
 
+        // 수정 전 유저 정보
+        Map<String,Object> memberMap = memberService.findMember(member_email);
+
         if(file.isEmpty()) {
+            // 프로필 사진 없이 저장
             memberService.noProfile(member);
         } else {
+
             String realPath = request.getSession().getServletContext().getRealPath("/");
             String originName = file.getOriginalFilename();
+
+            // DB에 배경이미지가 있다면?
+            if(memberMap.containsKey("BGIMG_TITLE")) {
+                // db의 파일명과 input File의 이름 비교해서 같다면
+                if (memberMap.get("BGIMG_TITLE").equals(originName)) {
+                    // 배경이미지 제외하고 다이어리 수정
+                    memberService.noProfile(member);
+                    return "redirect:/MyPage";
+                }
+            }
+
             String uuid = UUID.randomUUID().toString();
             String extension = originName.substring(originName.lastIndexOf("."));
             String savName = uuid + extension;
@@ -113,6 +130,7 @@ public class User_MyPageController {
 
             memberService.reviseUpdate(bgimageDto, member);
             System.out.println(bgimageDto);
+
 
         }
         return "redirect:/MyPage";
@@ -135,7 +153,7 @@ public class User_MyPageController {
         init(response);
 
         if(pwd == 0) {
-            out.println("<script>alert('not matched password!'); location.href='/MyPage'</script>");
+            out.println("<script>alert('비밀번호가 일치하지 않아요!'); location.href='/MyPage'</script>");
             out.flush();
         }
         memberMapper.delMember(member_quited_reason, member_email);
