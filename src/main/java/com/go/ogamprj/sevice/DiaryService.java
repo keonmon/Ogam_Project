@@ -15,7 +15,7 @@ public interface DiaryService {
 
     public List<HashMap<String,Object>> friendDiarySelectAll(String myEmail);
 
-    public List<HashMap<String,Object>> randomAllDiarySelectAll();
+    public List<HashMap<String,Object>> randomAllDiarySelectAll(String myEmail);
 
     public ArrayList<Emotions> getEmotions(String emotion);
 
