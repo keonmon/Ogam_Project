@@ -6,7 +6,7 @@
     <!--  친구 추가가 될때 알림에 insert  -->
     <insert id="notifiInsert" parameterType="com.go.ogamprj.dto.Notifi">
         insert into notifi
-        values(noti_seq.nextval,#{member_email},null,#{noti_email},#{noti_type},current_date,null,'님에게 친구 신청이 왔습니다')
+        values(noti_seq.nextval,#{member_email},0,#{noti_email},#{noti_type},current_date,null,'님에게 친구 신청이 왔습니다')
     </insert>
 
     <!-- 멤버 정보 가져오기 (사진, 닉네임)  -->

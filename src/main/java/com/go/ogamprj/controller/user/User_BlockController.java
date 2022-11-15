@@ -54,7 +54,7 @@ public class User_BlockController {
         String member_email = (String) request.getSession().getAttribute("loginUser");
 //        String member_email = "user1@ogam.com";
 //        System.out.println(member_email);
-
+        init(response);
         PrintWriter out = response.getWriter();
 
         String block_email = blockService.findId(member_nick);
