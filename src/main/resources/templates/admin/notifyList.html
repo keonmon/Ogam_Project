@@ -18,11 +18,11 @@
                 <div class="searchTap">
                   <form action="/admin_notifyList" method="get">
                     <select class="searchList" id="type" name="type">
-                      <option value="Category" selected>카테고리</option>
+                      <option value="CATEGORY" selected>카테고리</option>
                       <option value="BLACKLIST_COMMENT">신고 분류</option>
                       <option value="MEMBER_EMAIL">신고자 이메일</option>
-                      <option value="BLACKLIST_USER_EMAIL">피신고자 이메일</option>
-                      <option value="BLACKLIST_DIARY_DATE">신고일</option>
+                      <option value="BLACKLIST_EMAIL">피신고자 이메일</option>
+                      <option value="BLACKLIST_DATE">신고일</option>
                     </select>
                       <input class="searchInput" type="text" id="keyword" name="keyword"
                              placeholder="해당 정보를 입력해주세요." value="" />
@@ -35,14 +35,7 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>
-                          <input
-                            type="checkbox"
-                            name="check"
-                            value="selectall"
-                            onclick="selectAll(this)"
-                          />
-                        </th>
+                        <th><input type="checkbox" name="check" value="selectall" onclick="selectAll(this)" /></th>
                         <th>카테고리</th>
                         <th>신고 분류</th>
                         <th>신고자 이메일</th>
@@ -54,18 +47,17 @@
                       <tbody class="showTable">
                           <tr th:each="notify : ${notifyList}">
                             <td><input type="checkbox" name="check" th:value="${notify.BLACK_SEQ}" /></td>
-                              <input type="hidden" th:name="${notify.BLACK_SEQ}" th:value="${notify.CATEGORY}" />
-                              <td th:text="${notify.CATEGORY}"></td>
-                              <td>[[${notify.BLACKLIST_COMMENT}]]</td>
-                            <td><a onclick="memberPopup( )">[[${notify.MEMBER_EMAIL}]]</a></td>
-                            <td><a onclick="memberPopup( )">[[${notify.BLACKLIST_EMAIL}]]</a></td>
+                            <input type="hidden" th:name="${notify.BLACK_SEQ}" th:value="${notify.CATEGORY}" />
+                            <td th:text="${notify.CATEGORY}"></td>
+                            <td>[[${notify.BLACKLIST_COMMENT}]]</td>
+                            <td><a th:onclick="javascript:memberPopup([[${notify.MEMBER_EMAIL}]])">[[${notify.MEMBER_EMAIL}]]</a></td>
+                            <td><a th:onclick="javascript:memberPopup([[${notify.BLACKLIST_EMAIL}]])">[[${notify.BLACKLIST_EMAIL}]]</a></td>
                             <td>[[${notify.BLACKLIST_DATE}]]</td>
                             <td>
                               <th:block th:switch="${notify.CATEGORY}">
                                   <input type="hidden" id="diary_seq" name="diary_seq" th:value="${notify.ALL_SEQ}" />
-                                  <a th:case="일기" href="javascript:void(0);" th:onclick="|window.open('/diaryPopup/${notify.ALL_SEQ}', 'pop01'
-                                        , 'width=550px, height=625px, status=no, menubar=no, toolbar=no, resizable=no')|" id="show" >보기</a>
-                                  <a th:case="댓글" onclick="commentPopup( )">보기</a>
+                                  <a th:case="일기" th:onclick="|javascript:diaryPopup('${notify.ALL_SEQ}')|">보기</a>
+                                  <a th:case="댓글" th:onclick="|javascript:commentPopup('${notify.ALL_SEQ}')|">보기</a>
                               </th:block>
                             </td>
                           </tr>
@@ -77,18 +69,11 @@
                     <span class="deleteBtn"><i class="fa-solid fa-trash"></i><input type="submit" class="selectBtn" value="선택 삭제"/></a></span>
                 </div>
                 </form>
-                </form>
-              </div>
+            </div>
             <!-- content end -->
         </main>
     </div>
     <!-- 팝업 -->
     <script type="text/javascript" src="js/popup.js"></script>
-    <script>
-
-
-
-    </script>
-
 </body>
 </html>
