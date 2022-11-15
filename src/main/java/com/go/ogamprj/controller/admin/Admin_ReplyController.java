@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -21,26 +23,38 @@ public class Admin_ReplyController {
     @Autowired
     AdminReplyService adminReplyService;
 
+    public static void init(HttpServletResponse response) {
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+    }
+
     /* USER 댓글 전체 가져오기 */
     @RequestMapping("/admin_replyList")
-    public String replyList(HttpServletRequest request, String type, String keyword, Model model) {
+    public String replyList(HttpServletRequest request, HttpServletResponse response,
+                            String type, String keyword, Model model) throws IOException {
 
-        // 로그인유저의 세션정보 가져오기 (이메일주소)
-//        Object loginUser = request.getSession().getAttribute("loginUser");
-//
-//        if(loginUser == null){
-//            return "redirect:/";
-//        } else {
+        init(response);
+        PrintWriter out = response.getWriter();
 
-            if (keyword == null) {
-                model.addAttribute("userReplyList", adminReplyService.userReplySelectAll());
-            } else {
-                model.addAttribute("userReplyList", adminReplyService.userReplySelectKeyword(type, "%" + keyword + "%"));
-            }
+        // ADMIN 로그인
+        String admin_email = (String)request.getSession().getAttribute("admin_email");
 
-            return "admin/replyList";
+        if(admin_email == null) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        } else if (!admin_email.equals("admin@ogam.com")) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        }
 
-//        }
+        if (keyword == null) {
+            model.addAttribute("userReplyList", adminReplyService.userReplySelectAll());
+        } else {
+            model.addAttribute("userReplyList", adminReplyService.userReplySelectKeyword(type, "%" + keyword + "%"));
+        }
+
+        return "admin/replyList";
+
     }
 
     /* 댓글 상세보기 */

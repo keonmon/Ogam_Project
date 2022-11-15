@@ -27,8 +27,8 @@ public class Admin_BlackListController {
 
 
     public static void init(HttpServletResponse response) {
-        response.setContentType("text/html; charset=euc-kr");
-        response.setCharacterEncoding("euc-kr");
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
     }
 
     /* 신고 기록 전체 가져오기 */
@@ -38,8 +38,9 @@ public class Admin_BlackListController {
         init(response);
         PrintWriter out = response.getWriter();
 
-        // 어드민 로그인
+        // ADMIN 로그인
         String admin_email = (String)request.getSession().getAttribute("admin_email");
+
         if(admin_email == null) {
             out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
             out.flush();
