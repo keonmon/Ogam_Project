@@ -8,12 +8,13 @@
     <title>차단된 사용자 목록</title>
     <link rel="stylesheet" type="text/css" href="/css/blockList.css?after" />
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/css/test.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="container">
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='')" class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar(${notifiSelectList}) }" class="menubar"></div>
             <div class="contents">

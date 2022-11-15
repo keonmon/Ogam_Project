@@ -36,11 +36,11 @@
                             <div class="selectImg" onclick="selectImg()">
                                 <span class="beforeFont">사진 변경</span>
                             </div>
-                            <input type="file" name="file" class="inputFile" accept="image/jpg,image/jpeg,image/png " onchange="fileCheck(this)">
+                            <input type="file" name="file" class="inputFile" accept="image/jpg,image/jpeg,image/png " onchange="fileCheck(this)" th:value="|background-image:url(${diaryMap['BGIMG_PATH']});|">
 
                             <div class="innerOutline">
                                 <div class="innerBg">
-                                    <div class="innerImg" th:style="|background-image:url(${diaryMap.BGIMG_PATH});|"></div>
+                                    <div class="innerImg" th:style="|background-image:url(${diaryMap['BGIMG_PATH']})|"></div>
                                 </div>
 
                                 <div class="titles">

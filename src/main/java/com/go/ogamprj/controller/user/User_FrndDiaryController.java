@@ -145,7 +145,7 @@ public class User_FrndDiaryController {
     }
 
     // 친구의 다이어리로 이동
-    @RequestMapping(value="/frndDiary")
+    @RequestMapping(value="/frndDiary", method = {RequestMethod.POST})
     public String friendDiary(HttpServletRequest request,
                               Model model,
                               @RequestParam String frndEmail) {

@@ -9,13 +9,14 @@
     <link rel="stylesheet" type="text/css" href="/css/notice.css" />
     <link rel="stylesheet" type="text/css" href="/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="/css/notifi.css" />
+    <link rel="stylesheet" type="text/css" href="css/test.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <aside th:replace="~{frag/user/user_sidebar :: userSidebar }" class="sidebar"></aside>
+        <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='')" class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar(${notifiSelectList}) }" class="menubar"></div>
             <div class="contents">
