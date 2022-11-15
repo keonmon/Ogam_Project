@@ -20,27 +20,32 @@ public class Admin_ReplyController {
     @Autowired
     AdminReplyService adminReplyService;
 
-    @Autowired
-    MemberService memberService;
-
     /* USER 댓글 전체 가져오기 */
     @RequestMapping("/admin_replyList")
     public String replyList(HttpServletRequest request, String type, String keyword, Model model) {
 
-        if ( keyword == null) {
-            model.addAttribute("userReplyList", adminReplyService.userReplySelectAll());
-        } else {
-            model.addAttribute("userReplyList", adminReplyService.userReplySelectKeyword(type, "%"+ keyword + "%"));
-        }
+        // 로그인유저의 세션정보 가져오기 (이메일주소)
+//        Object loginUser = request.getSession().getAttribute("loginUser");
+//
+//        if(loginUser == null){
+//            return "redirect:/";
+//        } else {
 
-        return "admin/replyList";
+            if (keyword == null) {
+                model.addAttribute("userReplyList", adminReplyService.userReplySelectAll());
+            } else {
+                model.addAttribute("userReplyList", adminReplyService.userReplySelectKeyword(type, "%" + keyword + "%"));
+            }
+
+            return "admin/replyList";
+
+//        }
     }
 
     /* 댓글 상세보기 */
     @RequestMapping("/commentPopup")
-    public String commentPopup(HttpServletRequest request, Model model) {
-
-        int reply_seq = 5;
+    public String commentPopup(HttpServletRequest request,
+                               @RequestParam int reply_seq, Model model) {
 
         Map<String, Object> reply = adminReplyService.replySelectOne(reply_seq);
 
@@ -51,7 +56,6 @@ public class Admin_ReplyController {
 
         return "admin/commentPopup";
     }
-
 
     /* 댓글 삭제 - 목록에서 삭제 */
     @RequestMapping("/deleteReply")
@@ -65,5 +69,10 @@ public class Admin_ReplyController {
     }
 
     /* 댓글 삭제 - 팝업에서 삭제 */
+    @RequestMapping("/deleteReplyPopup/{diary_seq}")
+    public String deleteReplyPopup(@RequestParam int diary_seq) {
+
+        return "<script>window.close();</script>";
+    }
 
 }

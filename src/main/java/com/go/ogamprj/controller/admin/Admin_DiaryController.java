@@ -49,9 +49,10 @@ public class Admin_DiaryController {
     }
 
     @RequestMapping("/diaryPopup")
-    public String diaryPopup(HttpServletRequest request, Model model) {
+    public String diaryPopup(HttpServletRequest request,
+                             @RequestParam int diary_seq, Model model) {
 
-        int diary_seq = 107;
+//        int diary_seq = 107;
 
         Map<String, Object> diary = adminDiaryService.diarySelectOne(diary_seq);
 
@@ -76,9 +77,9 @@ public class Admin_DiaryController {
 
     /* 일기 삭제 - 팝업에서 삭제 */
     @RequestMapping("/deleteDiaryPopup")
-    public String deleteDiaryPopup(@RequestParam String diary_seq) {
+    public String deleteDiaryPopup(@RequestParam int diary_seq) {
 
-        return "";
+        return "<script>window.close();</script>";
     }
 
 

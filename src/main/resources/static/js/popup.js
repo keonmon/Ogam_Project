@@ -1,37 +1,26 @@
-function memberPopup( ) {
+/* 사용자 상세 정보*/
+function memberPopup(member_email) {
+    console.log("member: " + member_email)
         
-    window.open("/memberPopup", "memberPopup",
+    window.open("/memberPopup?member_email=" + member_email, "memberPopup",
     ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=750px'] );
-    
-    iniform.target="memberPopup";
-    iniform.action="/memberPopup";
-    
-    iniform.submit( );
+
 }
 
+/* 일기 상세 정보 */
+function diaryPopup(diary_seq) {
+    console.log("seq: " + diary_seq)
 
-
-function diaryPopup() {
-        
-    window.open("/diaryPopup", "diaryPopup",
+    window.open("/diaryPopup?diary_seq=" + diary_seq, "diaryPopup",
     ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=625px'] );
-    
-    iniform.target="diaryPopup";
-    iniform.action="/diaryPopup";
-
-    iniform.submit( );
 
 }
 
+/* 댓글 상세 정보 */
+function commentPopup(reply_seq) {
+    console.log("seq: " + reply_seq)
 
-function commentPopup( ) {
-        
-    window.open("/commentPopup", "commentPopup",
+    window.open("/commentPopup?reply_seq=" + reply_seq, "commentPopup",
     ['fullscreen=no,menubar=no,status=no,toolbar=no,titlebar=no,location=no,scrollbar=auto,width=550px,height=510px'] );
-    
-    iniform.target="commentPopup";
-    iniform.action="/commentPopup";
-    
-    iniform.submit( );
-    
+
 }

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -30,8 +31,9 @@ public class Admin_UserController {
 
         if ( keyword == null) {
             List<Member> members =  adminUserService.userSelectAll();
-            System.out.println(members);
+
             model.addAttribute("userList", members);
+
         } else {
             model.addAttribute("userList", adminUserService.userSelectKeyword(type, "%"+ keyword + "%"));
         }
@@ -41,9 +43,8 @@ public class Admin_UserController {
 
     /* 사용자 상세 정보 */
     @RequestMapping("/memberPopup")
-    public String memberPopup(HttpServletRequest request, Model model) {
-
-        String member_email = "user5@ogam.com";
+    public String memberPopup(HttpServletRequest request,
+                                @RequestParam String member_email, Model model) {
 
         Map<String, Object> member = adminUserService.userSelectOne(member_email);
 
@@ -64,10 +65,10 @@ public class Admin_UserController {
 
     /* 사용자 정보 수정 */
     @RequestMapping("/admin_userUpdate")
+    @ResponseBody
     public String userUpdate(HttpServletRequest request,
+                             @RequestParam String member_email,
                              @RequestParam String member_blackYn, @RequestParam String member_black_reason) {
-
-        String member_email = "user5@ogam.com";
 
         Member member = new Member(member_blackYn, member_black_reason);
 
@@ -75,8 +76,8 @@ public class Admin_UserController {
 
         adminUserService.userUpdate(member);
 
-        return "redirect:/memberPopup";
-    }
+        return "<script>window.close();</script>";
 
+    }
 
 }
