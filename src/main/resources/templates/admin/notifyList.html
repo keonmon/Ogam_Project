@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>[관리자] 신고 목록</title>
-    <link rel="stylesheet" type="text/css" href="css/admin.css" />
-    <link rel="stylesheet" type="text/css" href="css/adminList.css" />
+    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />
+    <link rel="stylesheet" type="text/css" href="css/adminList.css?after" />
     <script type="text/javascript" src="js/adminList.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
@@ -51,7 +51,7 @@
                         <th>컨텐츠 확인</th>
                       </tr>
                     </thead>
-                      <tbody>
+                      <tbody class="showTable">
                           <tr th:each="notify : ${notifyList}">
                             <td><input type="checkbox" name="check" th:value="${notify.BLACK_SEQ}" /></td>
                               <input type="hidden" th:name="${notify.BLACK_SEQ}" th:value="${notify.CATEGORY}" />
@@ -86,35 +86,7 @@
     <script type="text/javascript" src="js/popup.js"></script>
     <script>
 
-      const diary_seq = ('#diary_seq').val();
 
-        var  $('#show').on('click', function() {
-            $.ajax({
-                url: '/diaryPopup/{diarySeq}',
-                data : {'diary_seq' : diary_seq},
-                type: 'json',
-                success: function() {
-                 console.log("??");
-                } ,
-                error : function() {
-                    console.log("error");
-                }
-            })
-        })
-
-
-
-<!--        무한 스크롤-->
-    var loading = false;
-    var page = 15;
-
-    function next_load() {
-        $.ajax({
-            url:
-            type: 'post',
-
-        })
-    }
 
     </script>
 

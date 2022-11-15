@@ -30,6 +30,11 @@ public class User_BlockController {
     @RequestMapping("/blockPage")
     public String blockPage(HttpServletRequest request, Model model) {
         String member_email = (String) request.getSession().getAttribute("loginUser");
+
+        if(member_email == null) {
+
+        }
+
 //        String member_email = "user1@ogam.com";
         List<HashMap<String, Object>> blockList = blockService.blockList(member_email);
         model.addAttribute("blockList", blockList);
@@ -59,8 +64,10 @@ public class User_BlockController {
 
         String block_email = blockService.findId(member_nick);
 
+        String a = null;
+
         if(blockService.doubleBlock(new Block(member_email, block_email)) == 1) {
-            out.println("<script>alert('already blocked'); location.href='/blockPage'</script>");
+            out.println("<script>alert('이미 차단한 유저입니다'); location.href='/blockPage'</script>");
             out.flush();
         } else {
             blockService.blockPlus(new Block(0, member_email, block_email));
