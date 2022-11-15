@@ -30,5 +30,10 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.noProfile(member);
     }
 
+    @Override
+    public void memberUpdateResetBgimg(Member member) {
+        memberMapper.memberUpdateResetBgimg(member);
+    }
+
 
 }

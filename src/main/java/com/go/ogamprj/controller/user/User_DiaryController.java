@@ -288,7 +288,7 @@ public class User_DiaryController {
     @RequestMapping(value = "/updateDiary",method = RequestMethod.POST)
     public String updateDiary(HttpServletRequest request, Model model,
                               @RequestParam(defaultValue = "n") String diary_private,
-                              @RequestParam MultipartFile file){
+                              @RequestParam MultipartFile file, @RequestParam String deleteImg){
         Object loginUser = request.getSession().getAttribute("loginUser");
         if(loginUser == null){
             return "redirect:/";
@@ -303,12 +303,17 @@ public class User_DiaryController {
 
             Diary diaryDto = new Diary(Integer.parseInt(id), (String) loginUser, 0, writeEmotionSeq, writeContents.trim(), null, diary_private, "n");
 
+
+
             // 업로드된 파일 처리
             // 이미지를 업로드하지 않는 경우
             if (file.isEmpty()) {
-                // 배경이미지를 제외하고 다이어리 수정
-                diaryService.diaryUpdateNoBgimg(diaryDto);
-
+                if(!deleteImg.isEmpty()) {
+                    // 배경이미지를 초기화하고 다이어리 수정
+                    diaryService.diaryUpdateResetBgimg(diaryDto);
+                }else {
+                    diaryService.diaryUpdateNoBgimg(diaryDto);
+                }
             // 파일 이미지를 업로드 하는 경우
             } else {
                 // 서버 webapp 경로 추출

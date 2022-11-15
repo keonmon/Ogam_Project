@@ -7,6 +7,7 @@ import com.go.ogamprj.dto.Emotions;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -86,5 +87,8 @@ public interface DiaryMapper {
 
     @Select("select count(*) from notifi where diary_seq = #{diarySeq} and noti_email = #{loginUser} and noti_type = 'like'")
     int notifyLikeSelectCnt(Map<String, Object> map);
+
+    @Update("update diary set emotion_seq = #{EMOTION_SEQ}, contents = #{CONTENTS} , diary_private=#{DIARY_PRIVATE},BGIMG_SEQ=NULL where diary_seq = #{DIARY_SEQ} ")
+    void diaryUpdateResetBgimg(Diary diaryDto);
 }
 

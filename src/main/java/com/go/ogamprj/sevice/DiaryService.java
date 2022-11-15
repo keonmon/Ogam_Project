@@ -63,4 +63,6 @@ public interface DiaryService {
     void notifyReplyInsert(Map<String, Object> replyMap);
 
     void notifyLikeInsert(Map<String, Object> map);
+
+    void diaryUpdateResetBgimg(Diary diaryDto);
 }
