@@ -29,8 +29,8 @@ public class User_BlockController {
 
     @RequestMapping("/blockPage")
     public String blockPage(HttpServletRequest request, Model model) {
-//        request.getSession().getAttribute("MEMBER_EMAIL");
-        String member_email = "user1@ogam.com";
+        String member_email = (String) request.getSession().getAttribute("loginUser");
+//        String member_email = "user1@ogam.com";
         List<HashMap<String, Object>> blockList = blockService.blockList(member_email);
         model.addAttribute("blockList", blockList);
         model.addAttribute("blockCnt", blockList.size());
@@ -50,8 +50,10 @@ public class User_BlockController {
     public String blockPlus(HttpServletRequest request
                             , HttpServletResponse response
                             , @RequestParam String member_nick) throws IOException {
-        String member_email = "user1@ogam.com";
-        System.out.println(member_email);
+
+        String member_email = (String) request.getSession().getAttribute("loginUser");
+//        String member_email = "user1@ogam.com";
+//        System.out.println(member_email);
 
         PrintWriter out = response.getWriter();
 

@@ -15,7 +15,6 @@ import java.util.Map;
 @Controller
 public class Admin_DiaryController {
 
-
     @Autowired
     AdminDiaryService adminDiaryService;
 
@@ -41,10 +40,10 @@ public class Admin_DiaryController {
     /* 일기 상세보기 */
 
     @RequestMapping("/diaryPopup/{diarySeq}")
-    public String diaryPopup(HttpServletRequest request, @PathVariable int diary_seq, Model model) {
+    public String diaryPopup(@PathVariable String diary_seq, Model model) {
         System.out.println(diary_seq);
-
-        model.addAttribute("diary",diaryService.diarySelectOne(diary_seq));
+        diary_seq = "2";
+        model.addAttribute("diary",diaryService.diarySelectOne(Integer.parseInt(diary_seq)));
 
         return "admin/diaryPopup";
     }
@@ -63,9 +62,6 @@ public class Admin_DiaryController {
 
         return "admin/diaryPopup";
     }
-    
-    
-    
 
     /* 일기 삭제 - 목록에서 삭제 */
     @RequestMapping("/deleteDiary")

@@ -14,7 +14,7 @@
         AND T1.MEMBER_EMAIL = #{MEMBER_EMAIL}
     </select>
 <!--    유저 정보 업데이트-->
-    <update id="reviseUpdate">
+    <update id="reviseUpdate" parameterType="com.go.ogamprj.dto.Member">
         UPDATE MEMBER
         SET MEMBER_PW = #{MEMBER_PW}
         , MEMBER_NICK = #{MEMBER_NICK}, MEMBER_BIRTH = #{MEMBER_BIRTH}
@@ -24,7 +24,7 @@
     </update>
 
 <!--    사진없는 정보 업데이트-->
-    <update id="noProfile">
+    <update id="noProfile" parameterType="com.go.ogamprj.dto.Member">
         UPDATE MEMBER
         SET MEMBER_PW = #{MEMBER_PW}
         , MEMBER_NICK = #{MEMBER_NICK}, MEMBER_BIRTH = #{MEMBER_BIRTH}
@@ -33,9 +33,10 @@
     </update>
 <!--    사진 있을 때 정보 업데이트-->
     <insert id="proPhotoUpdate" parameterType="com.go.ogamprj.dto.Bgimage">
-        INSERT INTO
-        BGIMAGE VALUES(#{BGIMG_SEQ}, #{BGIMG_PATH}, #{BGIMG_TITLE})
+        INSERT INTO BGIMAGE (bgimg_path, bgimg_title)
+         VALUES(#{bgimg_path}, #{bgimg_title})
     </insert>
+
     <update id="delMember">
         UPDATE MEMBER
         SET MEMBER_QUITED = CURRENT_DATE

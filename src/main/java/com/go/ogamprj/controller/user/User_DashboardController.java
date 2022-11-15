@@ -22,6 +22,7 @@ public class User_DashboardController {
         // **임시** 작업중 임시로 무조건 user1으로 로그인된 상태
        //request.getSession().setAttribute("loginUser", "user1@ogam.com");
 
+
         // 현재 세션에 저장된 로그인유저의 이메일 주소 가져오기
         Object myEmail = request.getSession().getAttribute("loginUser");
 
