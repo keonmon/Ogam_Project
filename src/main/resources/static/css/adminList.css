@@ -5,7 +5,6 @@
     font-style: normal;
 }
 
-
 /* 검색하기 */
 .searchTap {
     position:relative;
@@ -24,11 +23,11 @@
     font-family: 'Pretendard-Regular';
 }
 i,
-#selectBnt {
-    color: #13056C;
+.selectBnt{
+    color: #13056C !important;
     font-family: 'Pretendard-Regular';
-    border: none;
-    font-size: 1.2vw;
+    border: none !important;
+    font-size: 1.2vw !important;
 }
 
 .searchInput {

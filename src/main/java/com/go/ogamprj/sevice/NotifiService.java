@@ -12,4 +12,6 @@ public interface NotifiService {
     List<Map<String, Object>> notifiSelect(String myEmail);
 
     void deleteNotifi(int noti_seq);
+
+
 }
