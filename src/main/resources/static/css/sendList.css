@@ -269,6 +269,7 @@ padding : 10px;
     top: 0;
     bottom: 0;
     background: #000000b3;
+    z-index:2;
 }
 
 .wrapModal {
