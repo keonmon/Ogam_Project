@@ -151,18 +151,18 @@ public class User_MyPageController {
                                , HttpServletResponse response
                                , @RequestParam String member_pw,
                                 @RequestParam(defaultValue = "") String member_quited_reason) throws IOException {
-        String member_email = "user2@ogam.com";
+//        String member_email = "user2@ogam.com";
+        String member_email = (String)request.getSession().getAttribute("loginUser");
 
         int pwd = memberMapper.delMemberPwd(member_email, member_pw);
-        PrintWriter out = response.getWriter();
         init(response);
+        PrintWriter out = response.getWriter();
 
         if(pwd == 0) {
             out.println("<script>alert('비밀번호가 일치하지 않아요!'); location.href='/MyPage'</script>");
             out.flush();
         }
         memberMapper.delMember(member_quited_reason, member_email);
-
 
         return "redirect:/kakaoUnlink";
     }

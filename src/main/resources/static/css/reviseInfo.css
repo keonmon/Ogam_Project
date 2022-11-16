@@ -5,9 +5,14 @@
     font-style: normal;
 }
 
+html {
+    height: 100vh;
+}
+
 body{
     font-family: 'Pretendard-Regular';
-
+    height: 100vh;
+    background: linear-gradient(130deg, #defcfa, #cba8e9);
 }
 
 .contents {
@@ -35,6 +40,7 @@ body{
     padding: 0px 5px;
     text-align: center;
     align-items:center;
+    cursor: pointer;
 }
 
 .base {
@@ -137,7 +143,8 @@ input[type="file"]{
 .iTitle {
     font-size: 1.3rem;
     text-align: end;
-    width: 75px;
+    width: 57px;
+    min-width: 57px;
     margin-left: 27px;
     margin-right: 58px;
     color: #565656;
@@ -219,6 +226,7 @@ option {
     background-color: white;
     outline-color: #A7BAFF;
     border: 1px solid #b9b8b8;
+    cursor: text;
 }
 
 /* 닉네임 */
