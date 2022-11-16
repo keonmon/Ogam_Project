@@ -9,10 +9,7 @@ import java.util.Map;
 @Mapper
 public interface LoginMapper {
 
-   @Select("SELECT * FROM MEMBER m " +
-           "join bgimage b " +
-           "on b.bgimg_seq = m.bgimg_seq " +
-           "WHERE m.MEMBER_EMAIL = #{member_email}")
+   @Select("SELECT * FROM MEMBER m left join bgimage b on b.bgimg_seq = m.bgimg_seq WHERE m.MEMBER_EMAIL = #{member_email}")
    Map<String,Object> memberSelectOne(String member_email);
 
    @Select("SELECT member_email FROM MEMBER WHERE MEMBER_BIRTH = #{member_birth} AND MEMBER_PHONE = #{member_phone}")

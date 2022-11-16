@@ -46,6 +46,8 @@ public class User_SignInController {
     @ResponseBody
     public int unique(@RequestParam String member_nick) {
 
+        System.out.println(member_nick);
+
         int uniqueChk = signupService.uniqueChk(member_nick);
 
         return uniqueChk;
