@@ -13,7 +13,7 @@ function closeModal1() {
     window.location.href="/sendList";
 }
 
-// 모달창 버튼 스크립트
+// 모달창 버튼 스크립트 친구 신청하기
 const addBtn = document.querySelectorAll(".addBtn");
 const add = document.querySelectorAll(".add");
 const email = document.querySelectorAll(".member_email");
@@ -79,7 +79,7 @@ const tmpList = document.querySelectorAll(".member_list");
 
 for (let i = 0; i < tmpAddBtn.length; i++) {
     tmpAdd[i].addEventListener("click", () => {
-    let member_email = tmpEmail[i].value;
+    let member_email = tmpEmail[i].innerHTML;
     let member_list = tmpList[i];
     let response = 'n';
 
@@ -171,30 +171,39 @@ for(let i = 0; i < refuse.length; i++){
     let nickname = op_nickname[i].innerHTML;
     let member_op_email = op_email[i].innerHTML;
     let fri_send_seq = friSeq[i].innerHTML;
-    Swal.fire({
-          title: '친구등록을 거절했습니다',
-          showClass: {
-            popup: 'animate__animated animate__fadeInDown'
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp'
-          }
-        }).then(function () {
-            $.ajax({
-             url:"/response",
-             type:"post",
-             data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email, "fri_send_seq" : fri_send_seq},
-             success:function(data) {
-                console.log(data)
-                window.location.href = "/sendList";
-             },
-             error:function(e) {
-                  console.log(e);
-             }
-            })
-        })
-    })
 
+    Swal.fire({
+      title: '정말 거절하시겠습니까?',
+      text: "거절하면! 친구등록이 안됩니다",
+      icon: '경고',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '삭제',
+      cancelButtonText: '취소'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          '거절!',
+          '친구 신청이 거절되었습니다.!!',
+          'success'
+        )
+      }.then(function () {
+           $.ajax({
+            url:"/response",
+            type:"post",
+            data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email, "fri_send_seq" : fri_send_seq},
+            success:function(data) {
+               console.log(data)
+               window.location.href = "/sendList";
+            },
+            error:function(e) {
+                 console.log(e);
+            }
+           })
+       })
+    })
+  })
 }
 
 // 다크모드

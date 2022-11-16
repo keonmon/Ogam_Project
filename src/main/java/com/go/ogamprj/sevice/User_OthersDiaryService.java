@@ -9,4 +9,5 @@ public interface User_OthersDiaryService {
 
     List<Map<String, Object>> selectDiaryByHappy(String myEmail,String emotion);
 
+    List<Map<String, Object>> nloginselectDiaryByMood(String emotion);
 }

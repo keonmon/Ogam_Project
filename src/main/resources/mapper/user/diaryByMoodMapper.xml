@@ -11,6 +11,7 @@
             on d.emotion_seq = e.emotion_seq
             join member m
             on d.member_email = m.member_email
+        where d.diary_del = 'n'
     </select>
 
     <!--  로그인 했을 때 전체 diary 가져오기  -->
@@ -28,6 +29,7 @@
                 minus
                 (select member_email from block where block_email =#{myEmail})
         )
+        and d.diary_del = 'n'
     </select>
 
     <!--  기분별 diary 가져오기  -->
@@ -46,5 +48,18 @@
                 minus
                 (select member_email from block where block_email =#{myEmail})
         )
+        and d.diary_del = 'n'
+    </select>
+
+    <!--  기분별 diary 가져오기  -->
+    <select id="nloginselectDiaryByMood" resultType="java.util.Map">
+        select *
+        from diary d
+            join emotions e
+            on d.emotion_seq = e.emotion_seq
+            join member m
+            on d.member_email = m.member_email
+        where e.emotion = #{emotion} and d.diary_private = 'n'
+        and d.diary_del = 'n'
     </select>
 </mapper>
