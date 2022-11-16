@@ -41,6 +41,7 @@ public class User_LoginController {
 
         // MEMBER_EMAIL, MEMBER_PW 담김
         Map<String,Object> memberMap = loginService.memberSelectOne(member_email);
+
         if (memberMap == null) {
             model.addAttribute("msg", "아이디가 존재하지 않습니다😅");
         } else if(memberMap.get("MEMBER_PW") == null) {
@@ -50,8 +51,13 @@ public class User_LoginController {
             model.addAttribute("msg", "비밀번호가 다릅니다.😅");
             model.addAttribute("member_email",member_email);
 
-        // 로그인 성공
-        } else if(memberMap.get("MEMBER_PW").equals(member_pw)) {
+
+        } else if(memberMap.get("MEMBER_QUITED") != null ) {
+
+            model.addAttribute("msg","탈퇴 날짜: " + memberMap.get("MEMBER_QUITED"));
+
+            // 로그인 성공
+        }  else if(memberMap.get("MEMBER_PW").equals(member_pw)) {
 
             System.out.println(memberMap.get("MEMBER_BLACKYN"));
 
