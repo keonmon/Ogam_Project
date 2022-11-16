@@ -46,12 +46,24 @@ document.getElementById('signup').onclick = function() {
         }
     }
     if (!selected) {
-        alert('성별을 선택해 주세요!!');
+        swal({
+            title: "성별을 선택해주세요!!",
+            icon: "warning",
+            button: "확인",
+            });
     }
      if( email != email2) {
-            alert("이메일 중복 확인이 필요합니다!")
+            swal({
+                 title: "이메일 중복확인이 필요합니다!",
+                 icon: "warning",
+                 button: "확인",
+                 });
         } else if (nick != nick2){
-            alert("닉네임 중복 확인이 필요합니다!")
+            swal({
+                 title: "닉네임 중복확인이 필요합니다!",
+                 icon: "warning",
+                 button: "확인",
+                 });
         } else {
             document.getElementById("frm").submit()
         }
