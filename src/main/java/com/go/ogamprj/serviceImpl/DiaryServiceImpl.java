@@ -49,11 +49,11 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public List<HashMap<String, Object>> randomAllDiarySelectAll() {
+    public List<HashMap<String, Object>> randomAllDiarySelectAll(String myEmail) {
 
         // 랜덤하게 다이어리 가져오기 (15개)
         //List<HashMap<String,Object>> randomAllDiaryList = ;
-        List<HashMap<String, Object>> result = changeDateFormat(diaryMapper.randomAllDiarySelectAll());
+        List<HashMap<String, Object>> result = changeDateFormat(diaryMapper.randomAllDiarySelectAll(myEmail));
         //System.out.println(result);
 
         return result;
@@ -221,6 +221,11 @@ public class DiaryServiceImpl implements DiaryService {
         if(cnt == 0){
             diaryMapper.notifyLikeInsert(map);
         }
+    }
+
+    @Override
+    public void diaryUpdateResetBgimg(Diary diaryDto) {
+        diaryMapper.diaryUpdateResetBgimg(diaryDto);
     }
 
 

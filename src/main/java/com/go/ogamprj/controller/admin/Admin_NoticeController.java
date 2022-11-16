@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -17,8 +20,28 @@ public class Admin_NoticeController {
     @Autowired
     BoardService boardService;
 
+    public static void init(HttpServletResponse response) {
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+    }
+
     @RequestMapping("/admin_noticeList")
-    public String admin_noticeList(HttpServletRequest request, String type, String keyword, Model model) {
+    public String admin_noticeList(HttpServletRequest request, HttpServletResponse response,
+                                   String type, String keyword, Model model) throws IOException {
+
+        init(response);
+        PrintWriter out = response.getWriter();
+
+        // ADMIN 로그인
+        String admin_email = (String)request.getSession().getAttribute("admin_email");
+
+        if(admin_email == null) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        } else if (!admin_email.equals("admin@ogam.com")) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        }
 
         if ( keyword == null) {
             model.addAttribute("boards", boardService.adminBoardSelectAll());

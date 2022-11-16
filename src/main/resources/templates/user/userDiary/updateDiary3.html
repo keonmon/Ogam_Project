@@ -36,7 +36,9 @@
                             <div class="selectImg" onclick="selectImg()">
                                 <span class="beforeFont">사진 변경</span>
                             </div>
-                            <input type="file" name="file" class="inputFile" accept="image/jpg,image/jpeg,image/png " onchange="fileCheck(this)" th:value="|background-image:url(${diaryMap['BGIMG_PATH']});|">
+                            <span class="proDel" style="margin-left:20px;">사진 삭제</span>
+                            <input type="file" name="file" class="inputFile" accept="image/jpg,image/jpeg,image/png " onchange="fileCheck(this)" th:value="${diaryMap['BGIMG_PATH']}">
+                            <input type="hidden" id="deleteImg" name="deleteImg" value="">
 
                             <div class="innerOutline">
                                 <div class="innerBg">
@@ -113,6 +115,7 @@
                             // innerImg.src = e.target.result;
                         }   
                         reader.readAsDataURL(input.files[0]);
+                        $("#deleteImg").val("");
                 
                     }else{
                         innerImg.style.backgroundImage = "";
@@ -130,6 +133,12 @@
                 function selectImg() {
                     inputFile.click();
                 }
+
+                // 사진삭제버튼
+                $('.proDel').on("click", function() {
+                    $('.innerImg').css('background-image','url()');
+                    $("#deleteImg").val("Y");
+                });
 
                 // textarea 크기 자동화
                 function resize(obj) {

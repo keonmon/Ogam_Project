@@ -37,9 +37,12 @@ public class User_DashboardController {
             model.addAttribute("myDiaryList", myDiaryList);
             model.addAttribute("friendDiaryList", friendDiaryList);
         }
+        if(myEmail == null){
+            myEmail = "";
+        }
+            // 모두의 일기 랜덤으로 가져오기 15개
+            List<HashMap<String, Object>> randomAllDiaryList = diaryService.randomAllDiarySelectAll(myEmail.toString());
 
-        // 모두의 일기 랜덤으로 가져오기 15개
-        List<HashMap<String, Object>> randomAllDiaryList = diaryService.randomAllDiarySelectAll();
 
         model.addAttribute("randomAllDiaryList", randomAllDiaryList);
 

@@ -378,6 +378,26 @@
     display:none;
 }
 
+.proDel{
+    width: 100px;
+    height: 40px;
+    background: #8bb8e8;
+    position: absolute;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    text-align: center;
+    top: 6%;
+    right: 23%;
+    cursor: pointer;
+    font-family: 'Pretendard-Regular';
+    line-height: 40px;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .emojiSlider{
     position:relative;
     width: 100%;

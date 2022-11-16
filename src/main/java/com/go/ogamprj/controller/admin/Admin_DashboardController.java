@@ -28,17 +28,20 @@ public class Admin_DashboardController {
 //    DashboardMapper dashboardMapper;
 
     public static void init(HttpServletResponse response) {
-        response.setContentType("text/html; charset=euc-kr");
-        response.setCharacterEncoding("euc-kr");
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
     }
 
     @RequestMapping("/adminMain") // application root
     public String main(HttpServletRequest request, HttpServletResponse response
                         , Model model) throws IOException {
-        init(response);
 
+        init(response);
         PrintWriter out = response.getWriter();
-        String admin_email = (String)request.getSession().getAttribute("loginUser");
+
+        // ADMIN 로그인
+        String admin_email = (String)request.getSession().getAttribute("admin_email");
+
         if(admin_email == null) {
             out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
             out.flush();
