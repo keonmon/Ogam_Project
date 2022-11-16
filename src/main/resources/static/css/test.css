@@ -78,9 +78,12 @@ position: fixed;
 /* 사이드바 메인 이미지 */
 #mainImg {
     width: auto;
+    border-radius: 20px;
+    background: rgb(255 255 255 / 40%);
 }
 #mainImg img{
-    width: 100%;
+    width: 80%;
+    margin: 25px 0 25px 0;
 }
 
 .sidebar span:first-child{
@@ -173,11 +176,11 @@ position: fixed;
     position: absolute;
     width: 150px;
     height: 60px;
-    right: 340px;
-    top: 80px;
+    right: 638px;
+    top: 95px;
     z-index: 3;
     text-align: center;
-    background-color: hwb(0deg 100% 0%);
+    background-color: rgb(255 255 255 / 40%);
 }
 
 

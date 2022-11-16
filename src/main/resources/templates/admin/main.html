@@ -5,7 +5,7 @@
     <title>[관리자] 메인</title>
     <link rel="stylesheet" type="text/css" href="css/admin.css" />
     <link rel="stylesheet" type="text/css" href="css/adminMain.css" />
-    <link rel="stylesheet" type="text/css" href="css/diaryCount.css" />
+<!--    <link rel="stylesheet" type="text/css" href="css/diaryCount.css" />-->
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
@@ -17,8 +17,12 @@
             <div class="content">
                 <div id="mCol1">
                     <div class="mCol1-1">
-                        <i class="fa-solid fa-user"></i> 이용 사용자
+                        <i class="fa-solid fa-user"></i> 총 이용자
                         <div th:text="${users}"></div> <!--여기에 이용자 수 -->
+                    </div>
+                    <div class="mCol1-1" id="newface">
+                        <i class="fa-solid fa-user"></i> 이번달 신규
+                        <div id="joinCount"></div>
                     </div>
                     <div class="mCol1-1">
                         <i class="fa-solid fa-user-slash"></i> 탈퇴한 회원
@@ -28,6 +32,10 @@
                         <i class="fa-sharp fa-solid fa-book-medical"></i> 일기 등록
                         <div th:text="${diary}"></div> <!--여기에 일기 등록-->
                     </div>
+                    <div class="mCol1-1" id="todayCount">
+                        <i class="fa-sharp fa-solid fa-book-medical"></i>오늘의 일기
+                        <div id="diaryCount"></div>
+                    </div>
                     <div class="mCol1-1">
                         <i class="fa-sharp fa-solid fa-handcuffs"></i> 신고 요청
                         <div th:text="${reply}"></div> <!--여기에 신고 내용-->
@@ -35,9 +43,6 @@
                 </div>
                 <div class="mCol2">
                     <div id="chart"> <!--일기 등록 건수 그래프-->
-                        <div id="diary">
-                            <div th:replace="~{/admin/chart/diaryCount :: diaryChart}" ></div>
-                        </div>
                         <div id="emotion">
                             <div th:replace="~{/admin/chart/emotionChart :: emojiChart}" ></div>
                         </div>
@@ -46,5 +51,36 @@
             </div>
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+<!--            오늘 일기 등록 개수-->
+            var diaryCnt = $.ajax({
+                url: '/diaryCnt',
+                type: 'post',
+                dataType: 'json',
+                success: function(dCnt) {
+                    $('#diaryCount').text(dCnt).val();
+                },
+                error: function() {
+                    console.log(dCnt);
+                    alert("error");
+                }
+            })
+<!--            한달동안 가입한 회원 수 -->
+            var memberCnt = $.ajax({
+                url: '/memberCnt',
+                type: 'post',
+                dataType: 'json',
+                success: function(mCnt) {
+                    $('#joinCount').text(mCnt).val();
+                },
+                error: function() {
+                    console.log(mCnt);
+                    alert("error");
+                }
+            })
+
+    </script>
 </body>
 </html>

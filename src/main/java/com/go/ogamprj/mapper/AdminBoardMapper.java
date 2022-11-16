@@ -14,7 +14,7 @@ public interface AdminBoardMapper {
 
     ArrayList<Board> adminBoardSelectKeyword(String type, String keyword);  // 키워드 검색
 
-    @Select("select * from board where board_yn = 'y'")
+    @Select("select * from board where board_yn = 'y' order by BOARD_DATE desc")
     public ArrayList<Board> selectAll();
 
     public void boardInsert(Board board);

@@ -9,16 +9,16 @@
 .searchTap {
     position:relative;
     margin-top: 5%;
-    margin-left: 30%;
+    margin-left: 25%;
     font-family: 'Pretendard-Regular';
 }
 
 .searchList {
     width: 18%;
-    height: 50px;
+    height: 30px;
     border-radius: 10px;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1vw;
     font-weight: bold;
     font-family: 'Pretendard-Regular';
 }
@@ -27,32 +27,32 @@ i,
     color: #13056C !important;
     font-family: 'Pretendard-Regular';
     border: none !important;
-    font-size: 1.2vw !important;
+    font-size: 1vw !important;
 }
 
 .searchInput {
     width: 40%;
-    height: 50px;
+    height: 30px;
     border-radius: 10px;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1vw;
     font-weight: bold;
     font-family: 'Pretendard-Regular';
 }
 
 .searchBtn {
-    width: 60px;
-    height: 50px;
+    width: 50px;
+    height: 30px;
     border-radius: 10px;
     background-color: #FFFFFF;
     text-align: center;
-    font-size: 1.1rem;
+    font-size: 1vw;
     font-weight: bold;
     font-family: 'Pretendard-Regular';
 }
 
 th{
-    font-size: 1.3rem;
+    font-size: 1rem;
 }
 
 /* 테이블 디자인 */
@@ -62,12 +62,12 @@ th{
     align-items: center;
     margin: 20px auto;
     top: 15%;
-    width: 95%;
+    width: 90%;
     table-layout: fixed;
     border-collapse: collapse;
     border-radius: 15px !important;
     background-color: white;
-    font-size: 1.3rem;
+    font-size: 1vw;
     font-family: 'Pretendard-Regular';
 }
 
@@ -75,24 +75,24 @@ th{
 .table th {
     position : sticky;
     top: 0;
-    padding: 30px;
+    padding: 10px;
     width: 100%;
     text-align: center;
-    font-size: 1.5vw;
-    background: #908BE8;
-    color: #FFFFFF;
+    font-size: 1vw;
+    background: #c1bbffe8;
+    color: #ffffff;
 }
 
 .table td {
-    padding: 20px;
+    padding: 10px;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 0.8vw;
     text-align: center;
 }
 
-.table tbody tr:nth-child(2n-1){
+/*.table tbody tr:nth-child(2n-1){
     background-color: #ECEBFF;
-}
+}*/
 
 
 /* 테이블 컬럼 */
@@ -135,14 +135,14 @@ input[type=checkbox] {
     display: inline-block; 
     float: right;
     padding: 35px;
-    font-size: 1vw;
+    font-size: 0.7vw;
     text-decoration: none;
     color:black"
 }
 
 .noticeBtn {
     margin-right: 20px;
-    font-size: 1.2vw;
+    font-size: 0.7vw;
 }
 
 /* 댓글 너무 길면 뒤는 ...으로 보이게 */
@@ -153,6 +153,6 @@ input[type=checkbox] {
 }
 
 .boardFont {
-    font-size: 1.2rem;
+    font-size: 1vw;
 }
 

@@ -18,63 +18,64 @@
         <aside th:replace="frag/user/user_sidebar :: userSidebar(currMenu='friendList') " class="sidebar"></aside>
         <main class="bodyContainer">
             <div th:replace="frag/user/user_menubar :: userMenubar(${notifiSelectList})" class="menubar"></div>
-            <div class="contents">
-                <div class="friend-send">
-                    <div class="sendHeader">
-                        <div></div>
-                        <div></div>
-                        <span>친구 신청</span>
-                        <div class="search_friend" onclick="friend_Modal()">
-                            <div>
-                                친구 검색
-                            </div>
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </div>
-                    </div>
-                    <div class="sendBody">
-                        <th:block th:if="${#lists.size(friendSendList)} == 0">
-                            <div class="send_date"></div>
-                            <div class="send_list">
-                                <div class="send_contents">
-                                      <span>받은 친구신청이 없습니다.</span>
+                <div class="contents">
+                    <div class="article">
+                    <div class="friend-send">
+                        <div class="sendHeader">
+                            <div></div>
+                            <div></div>
+                            <span>친구 신청</span>
+                            <div class="search_friend" onclick="friend_Modal()">
+                                <div>
+                                    친구 검색
                                 </div>
+                                <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
-                        </th:block>
-                        <th:block th:unless="${#lists.size(friendSendList)} == 0">
-                            <th:block th:each="friendSend : ${friendSendList}">
-                                    <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
-                                    <p class="op_email" th:text="${friendSend.MEMBER_EMAIL}" style="display:none">
-                                    <p class="friSeq" th:text="${friendSend.FRI_SEND_SEQ}" style="display:none">
-                                    <div class="send_date" th:text="|친구 신청일 : ${#dates.format(friendSend.SEND_DATE, 'yyyy-MM-dd')}|"></div>
-                                    <div class="send_list">
-                                        <div class="send_contents">
-                                            <span class="op_img">
-                                                 <img th:src="${friendSend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friendSend['BGIMG_PATH']}" />
-                                            </span>
-                                            <div class="op_nickname">
-                                                <span>[[ ${friendSend.MEMBER_NICK} ]]</span>
-                                                <p>[[ ${friendSend['MEMBER_INTRO']} ]]</p>
-                                            </div>
-                                            <div class="response">
-                                                <div id="accept">수락</div>
-                                                <div id="refuse">거절</div>
+                        </div>
+                        <div class="sendBody">
+                            <th:block th:if="${#lists.size(friendSendList)} == 0">
+                                <div class="send_date"></div>
+                                <div class="send_list">
+                                    <div class="send_contents">
+                                          <span>받은 친구신청이 없습니다.</span>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block th:unless="${#lists.size(friendSendList)} == 0">
+                                <th:block th:each="friendSend : ${friendSendList}">
+                                        <input type="text" class="answer" th:value="${friendSend.RESPONSE}" style="display:none">
+                                        <p class="op_email" th:text="${friendSend.MEMBER_EMAIL}" style="display:none">
+                                        <p class="friSeq" th:text="${friendSend.FRI_SEND_SEQ}" style="display:none">
+                                        <div class="send_date" th:text="|친구 신청일 : ${#dates.format(friendSend.SEND_DATE, 'yyyy-MM-dd')}|"></div>
+                                        <div class="send_list">
+                                            <div class="send_contents">
+                                                <span class="op_img">
+                                                     <img th:src="${friendSend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friendSend['BGIMG_PATH']}" />
+                                                </span>
+                                                <div class="op_nickname">
+                                                    <span>[[ ${friendSend.MEMBER_NICK} ]]</span>
+                                                    <p>[[ ${friendSend['MEMBER_INTRO']} ]]</p>
+                                                </div>
+                                                <div class="response">
+                                                    <div id="accept">수락</div>
+                                                    <div id="refuse">거절</div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <hr />
+                                        <hr />
+                                </th:block>
                             </th:block>
-                        </th:block>
+                        </div>
                     </div>
                 </div>
-                <div class="moon_background">
-                    <i class="fa-solid fa-moon btn_theme"></i>
+                <div class="listButton">
+                    <div class="friendList">
+                        <span>친구 목록</span>
+                    </div>
+                    <div class="sendList">
+                        <span>친구 신청</span>
+                    </div>
                 </div>
-            </div>
-            <div class="friendList">
-                <span>친구 목록</span>
-            </div>
-            <div class="sendList">
-                <span>친구 신청</span>
             </div>
             <div id="modal" class="modalContainer">
                 <div class="wrapModal">
@@ -111,6 +112,9 @@
                                 </div>
                             </th:block>
                         </div>
+                    </div>
+                    <div class="btnBox">
+                        <button onclick="closeModal1()">닫기</button>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 @Service
 @Transactional
@@ -28,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 
     // user 페이지에 공지 보여주기
     @Override
-    public ArrayList<Board> selectAll() {
+    public ArrayList<Board> selectAll() throws ParseException {
         return adminBoardMapper.selectAll();
     }
 

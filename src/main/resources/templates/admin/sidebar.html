@@ -4,74 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <title>[관리자]</title>
-    <link rel="stylesheet" type="text/css" href="css/admin.css" />
-    <script type="text/javascript" src="js/adminList.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <aside class="sidebar" th:fragment="sidebar">
-        <div class="top-menu">
-            <ul>
-                <li>
-                    <div id="mainImg">
-                        <a href="/adminMain">
-                            <img src="img/logoImg.png" />
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <a href="/admin_userList">
-                        <span><i class="fa-solid fa-users-gear"></i></span>
-                        <span>사용자 목록</span>
+<aside class="sidebar" th:fragment="sidebar">
+    <!-- 기본 CSS -->
+    <link rel="stylesheet" type="text/css" href="css/admin.css" />
+    <div class="top-menu">
+        <ul>
+            <li>
+                <div id="mainImg">
+                    <a href="/adminMain">
+                        <img src="img/logo_bgRemove.png" />
                     </a>
-                </li>
-                <li>
-                    <a href="/admin_diaryList">
-                        <span><i class="fa-solid fa-list"></i></span>
-                        <span>일기장 목록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin_replyList">
-                        <span><i class="fa-solid fa-list"></i></span>
-                        <span>댓글 목록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin_notifyList">
-                        <span><i class="fa-solid fa-eye-slash"></i></span>
-                        <span>신고 목록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin_noticeList">
-                        <span><i class="fa-solid fa-pen-to-square"></i></span>
-                        <span>공지 목록</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="footer">
-            <ul>
-                <li>
-                    대표 : 가보자GO
-                </li>
-                <li>
-                    대표번호 : 036 - 0913 - 1118
-                </li>
-                <li>
-                    개인정보취급방침
-                </li>
-                <li>
-                    이용약관
-                </li>
-                <li>
-                    COPYRIGHT 2022 BY diary. <br />
-                    All Rights Reserved.
-                </li>
-            </ul>
-        </div>
-    </aside>
+                </div>
+            </li>
+            <li>
+                <a href="/admin_userList">
+                    <span><i class="fa-solid fa-users-gear"></i></span>
+                    <span>사용자 목록</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin_diaryList">
+                    <span><i class="fa-solid fa-list"></i></span>
+                    <span>일기장 목록</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin_replyList">
+                    <span><i class="fa-solid fa-list"></i></span>
+                    <span>댓글 목록</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin_notifyList">
+                    <span><i class="fa-solid fa-eye-slash"></i></span>
+                    <span>신고 목록</span>
+                </a>
+            </li>
+            <li>
+                <a href="/admin_noticeList">
+                    <span><i class="fa-solid fa-pen-to-square"></i></span>
+                    <span>공지 목록</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer">
+        <ul>
+            <li>
+                대표 : 가보자GO
+            </li>
+            <li>
+                대표번호 : 036 - 0913 - 1118
+            </li>
+            <li>
+                개인정보취급방침
+            </li>
+            <li>
+                이용약관
+            </li>
+            <li>
+                COPYRIGHT 2022 BY diary. <br />
+                All Rights Reserved.
+            </li>
+        </ul>
+    </div>
+</aside>
 </body>
 </html>

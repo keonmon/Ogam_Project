@@ -3,64 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <title>[관리자] 댓글 목록</title>
-    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />
+    <!--    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />-->
     <link rel="stylesheet" type="text/css" href="css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-  <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-      <aside th:replace="~{admin/sidebar :: sidebar }"></aside>
-      <main class="bodyContainer">
+<div class="container">
+    <aside th:replace="~{admin/sidebar :: sidebar }"></aside>
+    <main class="bodyContainer">
         <div th:replace="~{admin/menubar :: menubar }"></div>
-            <div class="content">
-                <div class="searchTap">
-                  <form action="/admin_replyList" method="get">
+        <div class="content">
+            <div class="searchTap">
+                <form action="/admin_replyList" method="get">
                     <select class="searchList" id="type" name="type">
-                      <option value="MEMBER_EMAIL">이메일</option>
-                      <option value="MEMBER_NICK">닉네임</option>
-                      <option value="REPLY">내용</option>
+                        <option value="MEMBER_EMAIL">이메일</option>
+                        <option value="MEMBER_NICK">닉네임</option>
+                        <option value="REPLY">내용</option>
                     </select>
-                      <input class="searchInput" type="text" id="keyword" name="keyword"
-                             placeholder="해당 정보를 입력해주세요." value="" />
-                      <input type="submit" class="searchBtn" value="검색" />
-                  </form>
-                </div>
-                <!-- 테이블 -->
-                <form action="/deleteReply">
+                    <input class="searchInput" type="text" id="keyword" name="keyword"
+                           placeholder="해당 정보를 입력해주세요." value="" />
+                    <input type="submit" class="searchBtn" value="검색" />
+                </form>
+            </div>
+            <!-- 테이블 -->
+            <form action="/deleteReply">
                 <div>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th><input type="checkbox" name="check" value="selectall" onclick="selectAll(this)" /></th>
-                        <th>작성자 이메일</th>
-                        <th>닉네임</th>
-                        <th>내용</th>
-                        <th>댓글</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr th:each="reply : ${userReplyList}">
-                        <td><input type="checkbox" name="check" th:value="${reply.REPLY_SEQ}" /></td>
-                        <td>[[${reply.MEMBER_EMAIL}]]</td>
-                        <td>[[${reply.MEMBER_NICK}]]</td>
-                        <td class="replyBox">[[${reply.REPLY}]]</td>
-                        <td><a th:onclick="|javascript:commentPopup('${reply.REPLY_SEQ}')|">보기</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" name="check" value="selectall" onclick="selectAll(this)" /></th>
+                            <th>작성자 이메일</th>
+                            <th>닉네임</th>
+                            <th>내용</th>
+                            <th>댓글</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="reply, status : ${userReplyList}" id="clones" th:if = "${status.index} < 10">
+                            <td><input type="checkbox" name="check" th:value="${reply.REPLY_SEQ}" /></td>
+                            <td>[[${reply.MEMBER_EMAIL}]]</td>
+                            <td>[[${reply.MEMBER_NICK}]]</td>
+                            <td class="replyBox">[[${reply.REPLY}]]</td>
+                            <td><a th:onclick="|javascript:commentPopup('${reply.REPLY_SEQ}')|">보기</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <!-- 테이블 end-->
                 <div class="footerBtn">
                     <span class="deleteBtn"><i class="fa-solid fa-trash"></i><input type="submit" value="선택 삭제"/></a></span>
                 </div>
-                </form>
-              </div>
-            <!-- content end -->
-        </main>
-    </div>
-    <!-- 팝업 -->
-    <script type="text/javascript" src="js/popup.js"></script>
+            </form>
+        </div>
+        <!-- content end -->
+    </main>
+</div>
+<!-- 팝업 -->
+<script type="text/javascript" src="js/popup.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script th:inline="javascript">
+      const replyList = [[${userReplyList}]];
+      const pageCount = parseInt(replyList.length / 10);
+      console.log(pageCount);
+      let startPage = 1;
+      console.log(replyList);
+<!--      console.log(type(replyList));-->
+
+     $(document).ready(function () {
+
+        $(document).scroll(function() {
+          var maxHeight = $(document).height();
+          var currentScroll = $(window).scrollTop() + $(window).height();
+
+          var pageCnt = 10;
+          var html = "";
+        try{
+          if (maxHeight <= currentScroll + 250) {                                            <!-- 40   - 1 = 39                39 % 10 = 10 - 9 = '1'-->
+              for(var i = startPage * pageCnt;  i < (replyList.length % 10 != 0 ? ((startPage + 1 * pageCnt) - (10 - (replyList.length % 10))) : (startPage + 1) * pageCnt); i++) {
+                  html += '<tr>' +
+                          '<td>' + '<input type="checkbox" name="check" value="' + replyList[i].REPLY_SEQ + '" /></td>' +
+                          '<td>' + replyList[i].MEMBER_EMAIL + '</td>' +
+                          '<td>' + replyList[i].MEMBER_NICK + '</td>' +
+                          '<td class="replyBox">' + replyList[i].REPLY + '</td>' +
+                          '<td><a onclick="javascript:commentPopup(' + replyList[i].REPLY_SEQ + ')">보기</a></td>' +
+                          '</tr>';
+              }
+               $('#rows').append(html);
+          }
+          startPage++;
+          }
+          catch(error) {
+              console.error(error);
+          }
+        })
+      });
+    </script>
 </body>
 </html>

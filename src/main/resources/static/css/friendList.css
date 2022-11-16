@@ -8,18 +8,9 @@
     position: relative;
 }
 
-
 .bodyContainer{
     width: 100vw;
     min-width: 900px;
-}
-
-
-
-/* 바디콘테이너 스타일 */
-.bodyContainer{
-    background-color: #f1f1f1;
-    position: relative;
 }
 
 /* 메뉴바 스타일 */
@@ -80,136 +71,6 @@
     transition-duration: 2s;
 }
 
-/* 알림 스타일 */
-.notifi{
-    font-size: 2em;
-    font-weight: bold;
-    color: #13056C;
-    cursor: pointer;
-}
-
-/* 알림창 모달 스타일 */
-
-.notifi_wrapModal {
-    position: absolute;
-    display: none;
-    top: 40%;
-    left: 85%;
-    width: 300px;
-    height: 550px;
-    transform: translate(-50%, -50%);
-    border-radius: 20px;
-    background: rgb(202, 202, 202);
-    max-height: 100vh;
-}
-
-.toggle {
-    display: block;
-}
-
-#notifi_title{
-    margin: 10px auto;
-    padding: 5px;
-    text-align: center;
-    width: 80%;
-    font-size: 25px;
-    color: white;
-    font-weight: bold;
-    background-color: #908BE8;
-    border-radius: 15px;
-}
-.title{
-    width: 25%;
-    padding: 5px;
-    height: 30px;
-    margin-left: 10px;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    background-color: #908BE8;
-    border-radius: 15px;
-}
-
-/* 최근 알림 스타일 */
-.currentNotifi{
-    width: 100%;
-    height: 38%;
-    margin-bottom: 5px;
-    overflow-y: auto;
-}
-.currentNotifi::-webkit-scrollbar {
-    display: none;
-}
-#currentNotifi_contents{
-    display: flex;
-    margin: 5px auto;
-    width: 80%;
-    height: 50px;
-    background-color: white;
-    border-radius: 15px;
-}
-
-#currentNotifi_contents img{
-    border-radius: 50%;
-    width: 50px;
-}
-
-#currentNotifi_contents p{
-    display: flex;
-    align-items: center;
-    margin: 0px 0px 0px 10px;
-    font-size: 13px;
-    font-weight: bold;
-    width:100%;
-}
-/* 이전 알림 스타일 */
-.previewNotifi{
-    width: 100%;
-    height: 38%;
-    margin-bottom: 5px;
-    overflow-y: auto;
-}
-.previewNotifi::-webkit-scrollbar {
-    display: none;
-}
-#previewNotifi_contents{
-    display: flex;
-    margin: 5px auto;
-    width: 80%;
-    height: 50px;
-    background-color: white;
-    border-radius: 15px;
-}
-
-#previewNotifi_contents img{
-    border-radius: 50%;
-    width: 50px;
-}
-
-#previewNotifi_contents p{
-    display: flex;
-    align-items: center;
-    margin: 0px 0px 0px 10px;
-    font-size: 13px;
-    font-weight: bold;
-    width:100%;
-}
-
-/* 알림 모달창 버튼 */
-.notifi_btnBox {
-    display: flex;
-    justify-content: center;
-}
-.notifi_btnBox button {
-    border-style: none;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 10px;
-    margin-left: 10px;
-    box-shadow: 0px 0px 5px 1px rgba(156, 156, 156, 0.6);
-    cursor: pointer;
-}
-
 /* 이미지 스타일 */
 #user_img{
     width: 60%;
@@ -233,20 +94,12 @@
 
 /* 콘텐츠 스타일 */
 
-.contents{
-    justify-content: center;
-    height: 88vh;
-    position: relative;
-}
-
 .friendList{
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 24%;
-    left: 27%;
-    width: 160px;
+    margin-bottom : 15px;
+    width: 130px;
     height: 50px;
     font-size: 20px;
     font-weight: bold;
@@ -259,10 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    top: 30%;
-    left: 27%;
-    width: 160px;
+    width: 130px;
     height: 50px;
     font-size: 20px;
     font-weight: bold;
@@ -278,10 +128,8 @@
 .friend-send{
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 90%;
     height: 95%;
-    background-color: rgb(231, 233, 233);
-    /* border: 1px solid rgb(134, 134, 134); */
     border-radius: 15px;
     box-shadow: 0px 5px 9px #9d9d9d;
 }
@@ -301,25 +149,44 @@
 .sendHeader span{
     font-size: 1.9rem;
 }
+.contents {
+margin-left:50px;
+padding : 10px;
+}
+
+.contents .article {
+    display:flex;
+    justify-content:end;
+    margin: 0px auto;
+    width: 95%;
+    height: 100%;
+    position: relative;
+}
+
+.listButton{
+    position:absolute;
+
+    margin-top:80px;
+}
 
 /* 친구리스트 검색 스타일 */
 .searchContainer{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3vw;
+    min-width: 100px;
+    height: 60px;
 }
 .searchBox{
     display: flex;
     justify-content: center;
-    min-width: 60%;
- 
+    min-width: 400px;
+    min-height: 10px
 }
 
 .searchBox input{
     /* font-size: 1.3vw; */
-    width: 80%;
-    height: 1.8vw;
+    min-width: 250px;
     border-style: none;
     box-shadow: 0px 0px 5px 1px rgba(156, 156, 156, 0.6);
 }
@@ -331,11 +198,11 @@
 .searchImg{
     width: 4vw;
     border-style: none;
-    background-color: rgb(231, 233, 233);
+    background-color : #cba8e900;
 }
 
 .searchImg img{
-    height: 1.7vw;
+    height: 30px;
     cursor: pointer;
 }
 
@@ -370,7 +237,7 @@
     height: 7rem;
     margin: 0px auto 20px;
     border-radius: 15px;
-    background-color: #f1f1f1;
+    background-color:#ffffffd4;
 }
 
 .send_contents{

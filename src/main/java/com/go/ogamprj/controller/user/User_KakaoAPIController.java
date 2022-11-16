@@ -40,6 +40,7 @@ public class User_KakaoAPIController {
 
         // 넘어온 데이터와 일치하는 데이터가 있는지 확인
         HashMap<String,Object> checkUser = kakaoApiService.kakaoUserCheck(userInfo.get("kakaoId"));
+        System.out.println(checkUser);
         if(checkUser == null){
             // 데이터 insert
             kakaoApiService.kakaoUserInsert(userInfo);

@@ -25,17 +25,17 @@
                         <p>공지사항</p>
                     </div>
                     <div class="notice-container">
-                        <th:block th:each="board : ${boards}">
-                            <div class="dropdown">
-                                <button class="dropbtn">
-                                    <div class="notice_date" th:text="${board.board_date}"></div>
-                                    <div class="drop_title">
-                                        <div class="notice_content" th:text="${board.board_title}"></div>
-                                        <div class="dropbtn_click" id="dropbtn_click">▼</div>
-                                    </div>
-                                </button>
-                                <div class="dropdown_content show" th:text="${board.board_contents}"></div>
-                            </div>
+                        <th:block th:each="board, s : ${boards}">
+                                <div class="dropdown">
+                                    <button class="dropbtn">
+                                        <div class="notice_date" th:text="${boardDate[s.index]}"></div>
+                                        <div class="drop_title">
+                                            <div class="notice_content" th:text="${board.board_title}"></div>
+                                            <div class="dropbtn_click" id="dropbtn_click">▼</div>
+                                        </div>
+                                    </button>
+                                    <div class="dropdown_content show" th:text="${board.board_contents}"></div>
+                                </div>
                         </th:block>
                     </div>
                 </div>
