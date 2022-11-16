@@ -21,61 +21,65 @@
         <main class="bodyContainer">
             <div th:replace="~{frag/user/user_menubar :: userMenubar(${notifiSelectList}) }" class="menubar"></div>
             <div class="contents">
-                <div class="friend-send">
-                    <div class="sendHeader">
-                        <span>친구 목록</span>
-                    </div>
-                    <form action="/friendList" method="get">
-                        <div class="searchContainer">
-                            <div class="searchBox">
-                                <input type="text" id="searchKeyword" name="searchKeyword" placeholder="아이디 입력" />
-                                <button type="submit" class="searchImg">
-                                    <img src="/img/search.png" />
-                                </button>
-                            </div>
-                            <div class="friendCnt">
-                                <span>[[ ${friendListCount} ]]</span> 친구
-                            </div>
+                <div class="article">
+                    <div class="friend-send">
+                        <div class="sendHeader">
+                            <span>친구 목록</span>
                         </div>
-                        <span id="search_explain">** 검색어 없이 검색할 경우 전체 리스트 보여줍니다 **</span>
-                    </form>
-                    <div class="sendBody">
-                        <th:block th:if="${#lists.size(friendList)} == 0">
-                            <div class="send_date"></div>
-                            <div class="send_list">
-                                <div class="send_contents">
-                                    <span class="message">친구가 없습니다.</span>
+                        <form action="/friendList" method="get">
+                            <div class="searchContainer">
+                                <div class="searchBox">
+                                    <input type="text" id="searchKeyword" name="searchKeyword" placeholder="아이디 입력" />
+                                    <button type="submit" class="searchImg">
+                                        <img src="/img/search.png" />
+                                    </button>
+                                </div>
+                                <div class="friendCnt">
+                                    <span>[[ ${friendListCount} ]]</span> 친구
                                 </div>
                             </div>
-                        </th:block>
-                        <th:block th:unless="${#lists.size(friendList)} == 0">
-                            <th:block th:each="friend : ${friendList}">
-                                <div class="send_date" th:text="|친구 된 날짜 : ${#dates.format(friend.FRIEND_DATE, 'yyyy-MM-dd')}|"></div>
+                            <span id="search_explain">** 검색어 없이 검색할 경우 전체 리스트 보여줍니다 **</span>
+                        </form>
+                        <div class="sendBody">
+                            <th:block th:if="${#lists.size(friendList)} == 0">
+                                <div class="send_date"></div>
                                 <div class="send_list">
                                     <div class="send_contents">
-                                        <div class="op_img">
-                                            <img th:src="${friend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
-                                        </div>
-                                        <div class="op_nickname">
-                                            <span>[[ ${friend.MEMBER_NICK} ]]</span>
-                                            <p>[[ ${friend['MEMBER_INTRO']} ]]</p>
-                                        </div>
-                                        <div class="response">
-                                            <div class="deleteBtn">삭제</div>
-                                        </div>
+                                        <span class="message">친구가 없습니다.</span>
                                     </div>
                                 </div>
-                                <input hidden class="frndEmail" name="email" th:value="${friend.MEMBER_EMAIL}"/>
                             </th:block>
-                        </th:block>
+                            <th:block th:unless="${#lists.size(friendList)} == 0">
+                                <th:block th:each="friend : ${friendList}">
+                                    <div class="send_date" th:text="|친구 된 날짜 : ${#dates.format(friend.FRIEND_DATE, 'yyyy-MM-dd')}|"></div>
+                                    <div class="send_list">
+                                        <div class="send_contents">
+                                            <div class="op_img">
+                                                <img th:src="${friend['BGIMG_PATH'] == null ? 'img/basicProfile.png' : friend['BGIMG_PATH']}" />
+                                            </div>
+                                            <div class="op_nickname">
+                                                <span>[[ ${friend.MEMBER_NICK} ]]</span>
+                                                <p>[[ ${friend['MEMBER_INTRO']} ]]</p>
+                                            </div>
+                                            <div class="response">
+                                                <div class="deleteBtn">삭제</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input hidden class="frndEmail" name="email" th:value="${friend.MEMBER_EMAIL}"/>
+                                </th:block>
+                            </th:block>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="friendList">
-                <span>친구 목록</span>
-            </div>
-            <div class="sendList">
-                <span>친구 신청</span>
+                <div class="listButton">
+                    <div class="friendList">
+                        <span>친구 목록</span>
+                    </div>
+                    <div class="sendList">
+                        <span>친구 신청</span>
+                    </div>
+                </div>
             </div>
         </main>
     </div>

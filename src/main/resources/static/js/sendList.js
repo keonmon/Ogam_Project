@@ -182,27 +182,19 @@ for(let i = 0; i < refuse.length; i++){
       confirmButtonText: '삭제',
       cancelButtonText: '취소'
     }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          '거절!',
-          '친구 신청이 거절되었습니다.!!',
-          'success'
-        )
-      }.then(function () {
-           $.ajax({
-            url:"/response",
-            type:"post",
-            data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email, "fri_send_seq" : fri_send_seq},
-            success:function(data) {
-               console.log(data)
-               window.location.href = "/sendList";
-            },
-            error:function(e) {
-                 console.log(e);
-            }
-           })
+       $.ajax({
+        url:"/response",
+        type:"post",
+        data:{"response" : response, "nickname" : nickname, "member_op_email" : member_op_email, "fri_send_seq" : fri_send_seq},
+        success:function(data) {
+           console.log(data)
+           window.location.href = "/sendList";
+        },
+        error:function(e) {
+             console.log(e);
+        }
        })
-    })
+     })
   })
 }
 
