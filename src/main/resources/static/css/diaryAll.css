@@ -12,13 +12,10 @@
 
 /* 사이드바 스타일 */
 
-
-
 .bodyContainer{
     width: 99vw;
     min-width: 900px;
 }
-
 
 .top-menu li:hover{
     background-color: #d1cef2;
@@ -38,13 +35,6 @@
     padding: 5px 0px;
     border-bottom: none;
     background-color: none;
-}
-
-
-
-/* 바디콘테이너 스타일 */
-.bodyContainer{
-    background-color: #f1f1f1;
 }
 
 /* 메뉴바 스타일 */
@@ -147,7 +137,8 @@
     justify-content: space-around;
     margin: auto;
     width: 80%;
-    height: 20%;
+    height: 100px;
+    margin-bottom: 20px;
     cursor: pointer;
 }
 .moodSelect div:hover{
@@ -160,7 +151,7 @@
     background-color: rgb(139, 184, 232, 60%);
     border-radius: 20px;
     width: 13%;
-    height: 90%;
+    height: 100%;
     min-width: 110px;
     text-align: center;
     flex-direction: column;
@@ -169,10 +160,10 @@
 }
 
 .moodSelect div > span {
-    font-size: 70px;
+    font-size: 50px;
 }
 .moodSelect div > p{
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     margin: 0;
 }
@@ -181,10 +172,11 @@
 .mood_diary {
     border-radius: 20px;
     margin : auto;
-    width: 90%;
-    height: 75%;
+    width: 95%;
+    height: 80%;
     box-shadow: 0px 0px 14px #9d9d9d;
 }
+
 .titleContainer {
     display: flex;
     justify-content: center;
@@ -196,53 +188,41 @@
     border-top-right-radius: 20px;
     background-color: #BA99FF;
     width: 100%;
-    height: 15%;
+    height: 55px;
 }
 
 .diaryContainer{
     display:grid;
     grid-template-columns : repeat(4, 1fr);
-    background-color: #D9D9D9;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    height: 85%;
-    overflow-y: scroll;
-}
-.diaryContainer::-webkit-scrollbar-thumb {
-    background-color: #2f3542;
-    border-radius: 10px;
-    background-clip: padding-box;
-    border: 2px solid transparent;
-}
-.diaryContainer::-webkit-scrollbar-track {
-background-color: grey;
-border-radius: 10px;
-box-shadow: inset 0px 0px 5px white;
+    height: 600px;
+    overflow-y: auto;
 }
 
+.diaryContainer::-webkit-scrollbar {
+    width: 10px;
+  }
+  .diaryContainer::-webkit-scrollbar-thumb {
+    background-color: #ba94d1;
+    border-radius: 10px;
+  }
+  .diaryContainer::-webkit-scrollbar-track {
+    background-color: #7f669d;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+  }
 .diaryBox {
     margin: 1vw;
 }
 
 .diary {
     position: relative;
-    width: 16vw;
     border-radius: 20px;
-    background-color: #ECECEC;
+    background-color: rgb(255 255 255 / 50%);
     box-shadow: 0px 0px 10px 10px rgba(156, 156, 156, 0.2);
-    height: 15vw;
+    height: 200px;
     cursor:pointer;
-}
-
-.diary-scrollbar, .diary-scrollbar, .diary-customized-scrollbar {
-  display: block;
-  width: 10em;
-  overflow: auto;
-  height: 2em;
-}
-
-.diary-scrollbar::-webkit-scrollbar {
-  display: none;
 }
 
 .diary:hover{
@@ -251,7 +231,7 @@ box-shadow: inset 0px 0px 5px white;
 }
 .diaryContents {
     height: 65%;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     padding: 10px;
     border-top-left-radius: 20px;
@@ -266,17 +246,13 @@ box-shadow: inset 0px 0px 5px white;
 .diaryContentsFooter {
     display: flex;
     flex-direction:column;
-    height: 35%;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
 }
 
 .diaryEmoji {
     position: absolute;
     align-items: flex-start;
-    font-size: 5vw;
-    bottom: 10px;
-    left: 15px;
+    font-size: 2vw;
+    top: 152px;
 
 }
 
@@ -287,7 +263,7 @@ box-shadow: inset 0px 0px 5px white;
     width: 100%;
     height:100%;
     padding: 10px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
 }
 

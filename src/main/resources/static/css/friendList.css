@@ -237,7 +237,7 @@ padding : 10px;
     height: 7rem;
     margin: 0px auto 20px;
     border-radius: 15px;
-    background-color:#ffffffd4;
+    background-color:rgb(255 255 255 / 50%);
 }
 
 .send_contents{
