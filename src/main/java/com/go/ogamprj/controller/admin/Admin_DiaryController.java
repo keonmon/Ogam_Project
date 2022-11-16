@@ -91,5 +91,12 @@ public class Admin_DiaryController {
         return "<script>window.opener.location.reload(); window.close();</script>";
     }
 
+    @RequestMapping("/scrollData")
+    @ResponseBody
+    public List scrollData() {
+        List<Map<String, Object>> scrollData = adminDiaryService.userDiarySelectAll();
+
+        return scrollData;
+    }
 
 }

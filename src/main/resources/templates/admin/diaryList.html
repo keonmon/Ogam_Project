@@ -44,18 +44,16 @@
                   <th>일기2</th>
                 </tr>
               </thead>
-              <tbody>
-                <ul th:each="diary : ${userDiaryList}" id="numbers">
-                  <li>
-                    <td><input type="checkbox"  name="check" th:value="${diary.DIARY_SEQ}" /></td>
-                    <td>[[${diary.DIARY_PRIVATE}]]</td>
-                    <td>[[${diary.EMOTION}]]</td>
-                    <td>[[${diary.EMOJI}]]</td>
-                    <td>[[${diary.MEMBER_EMAIL}]]</td>
-                    <td>[[${diary.MEMBER_NICK}]]</td>
-                    <td><a th:onclick="|javascript:diaryPopup('${diary.DIARY_SEQ}')|">보기</a></td>
-                  </li>
-                </ul>
+              <tbody id="rows">
+              <tr th:each="diary, status : ${userDiaryList}" id="clones" th:if = "${status.index} < 10">
+                <td><input type="checkbox"  name="check" th:value="${diary.DIARY_SEQ}" /></td>
+                <td>[[${diary.DIARY_PRIVATE}]]</td>
+                <td>[[${diary.EMOTION}]]</td>
+                <td>[[${diary.EMOJI}]]</td>
+                <td>[[${diary.MEMBER_EMAIL}]]</td>
+                <td>[[${diary.MEMBER_NICK}]]</td>
+                <td><a th:onclick="|javascript:diaryPopup('${diary.DIARY_SEQ}')|">보기</a></td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -70,20 +68,49 @@
     </div>
     <!-- 팝업 -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script>
 
-      $(document).ready(function() {
-        var offset = $('#numbers li').length;
+    <script th:inline="javascript">
+      const diaryList = [[${userDiaryList}]];
+      const pageCount = parseInt(diaryList.length / 10);
+      console.log(pageCount);
+      let startPage = 1;
+      console.log(diaryList);
+<!--      console.log(type(diaryList));-->
 
-        $('#numbers').endlessScroll({
-          fireOnce: false,
-          fireDelay: false,
-          loader: '',
-          insertAfter: '#numbers li:last',
-          content: function(i) {
-            return '<li>' + (i + offset) + '</li>';
+     $(document).ready(function () {
+<!--      const diaryList = JSON.parse(String([[${userDiaryList}]]));-->
+<!--      console.log(diaryList);-->
+<!--      console.log(type(diaryList));-->
+
+        $(document).scroll(function() {
+          var maxHeight = $(document).height();
+          var currentScroll = $(window).scrollTop() + $(window).height();
+
+          var pageCnt = 10;
+          var html = "";
+<!--          var change = ? diaryList++ : diaryList);-->
+        try{
+          if (maxHeight <= currentScroll + 250) {                                            <!-- 40   - 1 = 39                39 % 10 = 10 - 9 = '1'-->
+              for(var i = startPage * pageCnt;  i < (diaryList.length % 10 != 0 ? ((startPage + 1 * pageCnt) - (10 - (diaryList.length % 10))) : (startPage + 1) * pageCnt); i++) {
+                  html += '<tr>' +
+                          '<td><input type="checkbox"  name="check" value="' + diaryList[i].DIARY_SEQ + '" /></td>' +
+                          '<td>' + diaryList[i].DIARY_PRIVATE + '</td>' +
+                          '<td>' + diaryList[i].EMOTION + '</td>' +
+                          '<td>' + diaryList[i].EMOJI + '</td>' +
+                          '<td>' + diaryList[i].MEMBER_EMAIL + '</td>' +
+                          '<td>' + diaryList[i].MEMBER_NICK + i + '</td>' +
+                          '<td><a onclick="javascript:diaryPopup(' + diaryList[i].DIARY_SEQ + ')">보기</a></td>' +
+                          '</tr>';
+
+              }
+               $('#rows').append(html);
           }
-        });
+          startPage++;
+          }
+          catch(error) {
+              console.error(error);
+          }
+        })
       });
 
     </script>
