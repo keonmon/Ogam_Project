@@ -198,7 +198,7 @@
 }
 
 /* 이미지 스타일 */
-#user_img{
+.user_img{
     width: 65px;
     height: 65px;
     border: 1px solid gainsboro;

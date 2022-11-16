@@ -234,7 +234,6 @@
 /* 콘텐츠 스타일 */
 
 .contents{
-    display: flex;
     justify-content: center;
     height: 88vh;
     position: relative;

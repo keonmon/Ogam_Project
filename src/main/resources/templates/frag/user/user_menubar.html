@@ -24,11 +24,17 @@
                     <div class="subMenu">차단 사용자 목록</div>
                 </a>
             </div>
-            <span class="notifi">
+            <span th:if="${session.loginUser}" class="notifi" th:style="${'display:flex; justify-content:center; align-items:center;'}">
                 <i class="fa-regular fa-comment-dots"></i>
             </span>
-            <span>
-                <img src="/img/logoImg.png" id="user_img">
+            <span th:unless="${session.loginUser}" class="notifi" th:style="${'display:none;'}">
+                <i class="fa-regular fa-comment-dots"></i>
+            </span>
+            <span th:if="${session.loginUser}" th:style="${'display:flex; justify-content:center; align-items:center;'}">
+                <img th:src="${session.BGIMG_PATH}" class="user_img">
+            </span>
+            <span th:unless="${session.loginUser}" th:style="${'display:none;'}">
+                <img src="/img/logoImg.png" class="user_img">
             </span>
             <th:block th:unless="${session.loginUser}">
             <span class="login">

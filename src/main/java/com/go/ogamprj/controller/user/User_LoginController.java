@@ -62,9 +62,10 @@ public class User_LoginController {
 
             request.getSession().setAttribute("loginUser",member_email);
             request.getSession().setAttribute("loginUserNick",memberMap.get("MEMBER_NICK").toString());
+            request.getSession().setAttribute("loginImage",memberMap.get("BGIMG_PATH").toString());
             return "redirect:/";
 
-        }else{
+        } else{
             model.addAttribute("msg", "알 수 없는 오류가 발생했습니다.😅");
         }
             return "user/loginPage/loginPage";
