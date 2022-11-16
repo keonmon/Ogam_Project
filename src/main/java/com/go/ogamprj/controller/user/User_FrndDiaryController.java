@@ -40,7 +40,7 @@ public class User_FrndDiaryController {
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
         if(myEmail == null){
-            return "redirect:/";
+            return "redirect:/loginPage";
         }else {
             if(searchKeyword == null) {
 
