@@ -6,10 +6,19 @@
 }
 
 .container{
-    border: 1px solid black;
-    width: 1000px;
-    height: 700px;
+    border: 15px solid transparent;
+    background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, #cba8e9 0%,  #defcfa 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 100%;
+    width: 800px;
+    height: 800px;
     margin: auto;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .mainLogo img{
@@ -22,9 +31,12 @@
 
 label{
     text-align: end;
-    display: inline-block;
+    width: 30px;
+    display: flex;
     font-size: 20px;
-    width: 20%;
+    width: 19%;
+    align-items: center;
+    justify-content: end;
     margin-right: 10px;
 }
 
@@ -32,17 +44,17 @@ label{
 .idBox,
 .passwordBox{
     font-weight: bold;
-    display: block;
+    display: flex;
     margin: 10px auto 10px;
     padding: 10px;
-    width: 50%;
 }
 
 
 input{
     padding: 10px;
     width: 300px;
-    size: 40px;
+    height: 27px;
+    font-size: 1.1rem;
     border-radius: 10px;
     border: 1px solid #908be8;
 }
@@ -80,7 +92,7 @@ input{
 }
 
 .findId {
-    font-size: 20px;
+
         display: flex;
         justify-content: center;
 }
@@ -90,11 +102,14 @@ input{
         color: black;
         text-decoration: none;
         font-weight: bold;
-        font-size: 12px;
+        font-size: 0.9rem;
 }
 
 body{
     font-family: 'Pretendard-Regular';
+    display: flex;
+    align-items: center;
+    height: 100vh;
 }
 
 .message{

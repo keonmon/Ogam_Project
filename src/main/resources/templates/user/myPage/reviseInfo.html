@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지</title>
     <link rel="stylesheet" type="text/css" href="css/deleteUser.css" />
-    <link rel="stylesheet" type="text/css" href="css/friendList.css" />
-    <link rel="stylesheet" type="text/css" href="css/reviseInfo.css" />
+    <link rel="stylesheet" type="text/css" href="css/reviseInfo.css?after" />
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/test.css" />
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
@@ -39,7 +38,7 @@
                                                 <img th:src="${member['BGIMG_PATH'] == null ? 'img/basicProfile.png' : member['BGIMG_PATH']}" id="proImg"/>
                                         </span>
                                         <label for="member_image">
-                                            <div>사진 선택</div>
+                                            <div id="photoPick">사진 선택</div>
                                         </label>
                                         <span class="proDel" style="margin-left:20px;">사진 삭제</span>
                                         <input type="file" style="display:none;" accept="image/*" id="member_image" name="file" th:value="${member['BGIMG_PATH']}" />
