@@ -9,7 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import java.util.List;
 import java.util.Map;
 
@@ -19,15 +22,29 @@ public class Admin_DiaryController {
     @Autowired
     AdminDiaryService adminDiaryService;
 
-    @Autowired
-    DiaryService diaryService;
-
+    public static void init(HttpServletResponse response) {
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+    }
 
     /* USER 일기 전체 가져오기 */
     @RequestMapping("/admin_diaryList")
-    public String diaryList(HttpServletRequest request, String type, String keyword, Model model) {
+    public String diaryList(HttpServletRequest request, HttpServletResponse response,
+                            String type, String keyword, Model model) throws IOException {
 
-//        model.addAttribute("member",memberService.findMember(member_email));
+        init(response);
+        PrintWriter out = response.getWriter();
+
+        // ADMIN 로그인
+        String admin_email = (String)request.getSession().getAttribute("admin_email");
+
+        if(admin_email == null) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        } else if (!admin_email.equals("admin@ogam.com")) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        }
 
         if ( keyword == null) {
             model.addAttribute("userDiaryList", adminDiaryService.userDiarySelectAll());

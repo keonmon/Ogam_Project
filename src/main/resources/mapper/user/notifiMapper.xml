@@ -8,13 +8,13 @@
         insert into notifi (member_email, diary_seq, noti_email,noti_type,noti_date,noti_readdate,noti_comm)
         values(#{member_email},null,#{noti_email},#{noti_type},current_date,null,'님에게 친구 신청이 왔습니다')
     </insert>
-
     <!-- 멤버 정보 가져오기 (사진, 닉네임)  -->
     <select id="notifiSelect" resultType="java.util.Map">
         select
         n.noti_seq as NOTI_SEQ,
         n.noti_comm as NOTI_COMM,
         nvl(n.diary_seq,0) as DIARY_SEQ,
+        to_char(n.noti_date,'YYYY-MM-DD HH:MI:SS') as NOTI_DATE,
         m.member_nick as MEMBER_NICK
         from member m
         join notifi n
@@ -33,6 +33,7 @@
         (select block_email from block where member_email = #{myEmail})
         )
         and n.member_email = #{myEmail}
+
 
     </select>
 

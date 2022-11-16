@@ -42,8 +42,8 @@
                                             <div>사진 선택</div>
                                         </label>
                                         <span class="proDel" style="margin-left:20px;">사진 삭제</span>
-                                        <input type="file" style="display:none;" accept="image/*" id="member_image" name="file" th:value="${member['BGIMG_PATH']}"/>
-                                       
+                                        <input type="file" style="display:none;" accept="image/*" id="member_image" name="file" th:value="${member['BGIMG_PATH']}" />
+                                        <input type="hidden" id="deleteImg" name="deleteImg" value="">
                                     </div>
                                 </div>
                                 <div id="intro">
@@ -77,9 +77,9 @@
                                 </div>
                                 <div class="birthday">
                                     <div class="bTitle">생년월일</div>
-                                    <input type="text" placeholder="YYYY" required pattern="19[0-9][0-9]|20\d{2}" id="member_birth1" name="member_birth1" th:value="${year}"/>
-                                    <input type="text" placeholder="MM" required pattern="0[0-9]|1[0-2]" id="member_birth2" name="member_birth2" th:value="${month}"/>
-                                    <input type="text" placeholder="DD" required pattern="0[1-9]|[1-2][0-9]|3[0-1]" id="member_birth3" name="member_birth3" th:value="${day}"/>
+                                    <input type="text" placeholder="YYYY" required pattern="19[0-9][0-9]|20\d{2}" id="member_birth1" name="member_birth1" th:value="${year}"/><span class="ymd">년</span>
+                                    <input type="text" placeholder="MM" required pattern="0[0-9]|1[0-2]" id="member_birth2" name="member_birth2" th:value="${month}"/><span class="ymd">월</span>
+                                    <input type="text" placeholder="DD" required pattern="0[1-9]|[1-2][0-9]|3[0-1]" id="member_birth3" name="member_birth3" th:value="${day}"/><span class="ymd">일</span>
                                 </div>
                                 <div class="phone">
                                     <div class="phTitle">휴대폰번호</div>
@@ -208,23 +208,20 @@
 
         //이미지 선택하면 미리보기
         $('#member_image').on("change", function(event) {
-            var file = event.target.files[0].empty();
+            var file = event.target.files[0];
 
             var reader = new FileReader();
             reader.onload = function(e) {
                 $('#proImg').attr("src", e.target.result);
             }
             reader.readAsDataURL(file);
+            $("#deleteImg").val("");
         })
 
         // 사진삭제버튼
         $('.proDel').on("click", function() {
-            //$("#member_image")[0].target.files[0].empty();
             $('#proImg').attr("src", 'img/basicProfile.png');
-            $("#member_image").val("");
-            //document.getElementById('member_image').select();
-            //document.selection.clear();
-
+            $("#deleteImg").val("Y");
         });
 
         //탈퇴할 때 비밀번호 확인

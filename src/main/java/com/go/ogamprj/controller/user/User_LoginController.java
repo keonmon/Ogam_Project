@@ -34,6 +34,11 @@ public class User_LoginController {
                         @RequestParam String member_email,
                         @RequestParam String member_pw) {
 
+        if(member_email.equals("admin@ogam.com") && member_pw.equals("Rkqhwkrh0000")){
+            request.getSession().setAttribute("admin_email",member_email);
+            return "redirect:/adminMain";
+        }
+
         // MEMBER_EMAIL, MEMBER_PW 담김
         Map<String,Object> memberMap = loginService.memberSelectOne(member_email);
         if (memberMap == null) {
@@ -57,9 +62,10 @@ public class User_LoginController {
 
             request.getSession().setAttribute("loginUser",member_email);
             request.getSession().setAttribute("loginUserNick",memberMap.get("MEMBER_NICK").toString());
+            request.getSession().setAttribute("loginImage",memberMap.get("BGIMG_PATH").toString());
             return "redirect:/";
 
-        }else{
+        } else{
             model.addAttribute("msg", "알 수 없는 오류가 발생했습니다.😅");
         }
             return "user/loginPage/loginPage";

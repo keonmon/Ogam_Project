@@ -49,14 +49,18 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public List<HashMap<String, Object>> randomAllDiarySelectAll() {
+    public List<HashMap<String, Object>> randomAllDiarySelectAll(String myEmail) {
 
-        // 랜덤하게 다이어리 가져오기 (15개)
-        //List<HashMap<String,Object>> randomAllDiaryList = ;
-        List<HashMap<String, Object>> result = changeDateFormat(diaryMapper.randomAllDiarySelectAll());
-        //System.out.println(result);
+        // 전체 다이어리 가져오기 ( 차단, 비공개, 삭제된거 제외 )
+        List<HashMap<String, Object>> result = changeDateFormat(diaryMapper.randomAllDiarySelectAll(myEmail));
 
-        return result;
+        // 출력한 리스트 셔플
+        Collections.shuffle(result);
+
+        // 셔플된 리스트 15개만 추리기
+        List<HashMap<String, Object>> subList = new ArrayList<>(result.subList(0,15)) ;
+
+        return subList;
     }
 
     @Override
@@ -221,6 +225,11 @@ public class DiaryServiceImpl implements DiaryService {
         if(cnt == 0){
             diaryMapper.notifyLikeInsert(map);
         }
+    }
+
+    @Override
+    public void diaryUpdateResetBgimg(Diary diaryDto) {
+        diaryMapper.diaryUpdateResetBgimg(diaryDto);
     }
 
 

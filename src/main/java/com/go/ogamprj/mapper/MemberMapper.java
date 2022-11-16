@@ -4,6 +4,7 @@ import com.go.ogamprj.dto.Bgimage;
 import com.go.ogamprj.dto.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.HashMap;
 
@@ -26,6 +27,9 @@ public interface MemberMapper {
 
     void kakaoUserInsert(HashMap<String, Object> userInfo);
 
-    @Select("select * from member where kakaoId = #{kakaoId}")
+    @Select("select * from member m join BGIMAGE b on b.bgimg_seq = m.bgimg_seq where kakaoId = #{kakaoId}")
     HashMap<String,Object> kakaoUserCheck(Object kakaoId);
+
+    @Update("UPDATE MEMBER SET MEMBER_PW = #{MEMBER_PW}, MEMBER_NICK = #{MEMBER_NICK}, MEMBER_BIRTH = #{MEMBER_BIRTH}, MEMBER_PHONE = #{MEMBER_PHONE}, MEMBER_INTRO = #{MEMBER_INTRO}, BGIMG_SEQ = NULL WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}")
+    void memberUpdateResetBgimg(Member member); // 사진은 null 하고 나머지 업데이트
 }

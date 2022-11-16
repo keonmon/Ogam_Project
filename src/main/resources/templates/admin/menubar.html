@@ -24,11 +24,13 @@
                     <span>관리자</span>
                 </a>
             </span>
-            <span class="login">
-                <a href="#">
+            <th:block th:if="${session.admin_email}">
+            <span class="logout">
+                <a href='#' onclick="if(confirm('정말로 로그아웃 하시려고요..?😨')) location.href='/logout'">
                     <span>로그아웃</span>
                 </a>
             </span>
+            </th:block>
         </div>
     </div>
 </body>

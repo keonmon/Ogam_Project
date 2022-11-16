@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>회원가입</title>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -55,7 +56,7 @@
                 </div>
                 <div class="gender" >
                     <div class="gTitle">성별</div>
-                    <input type="radio" id="member_gender1" name="gender" value="male" />
+                    <input type="radio" id="member_gender1" name="gender" value="male" required/>
                     <label for="member_gender1">남성</label>
                     <input type="radio" id="member_gender2" name="gender" value="female"/>
                     <label for="member_gender2">여성</label>
@@ -82,17 +83,29 @@ function uniqueEmail() {
         data: {"member_email":member_email},
         type:'post',
         success: function(success) {
-            console.log(success);
+//           console.log(success);
             if(success == 0){
-                alert("아이디로 사용 가능합니다!");
+                swal({
+                    title: "사용가능한 이메일 입니다!",
+                    icon: "success",
+                    button: "확인",
+                    });
                 document.getElementById("email_checked").value = member_email
             } else if(success == 1){
-                alert("이미 사용중인 이메일입니다.");
+                swal({
+                    title: "이미 사용중인 이메일입니다!",
+                    icon: "error",
+                    button: "확인",
+                    });
                 return;
             }
         },
         error: function() {
-            alert("error");
+            swal({
+                 title: "ERROR",
+                 icon: "error",
+                 button: "확인",
+                 });
         }
     })
 }
@@ -105,19 +118,35 @@ function uniqueChk() {
         data: {"member_nick":member_nick},
         type:'post',
         success: function(success) {
-            console.log(success);
+//            console.log(success);
             if(member_nick.length <= 1){
-                alert("닉네임이 짧습니다.");
+                swal({
+                    title: "닉네임이 짧습니다.",
+                    icon: "warning",
+                    button: "확인",
+                    });
             } else if(success == 0){
-                alert("닉네임으로 사용가능합니다");
+                swal({
+                    title: "사용가능한 닉네임입니다!",
+                    icon: "success",
+                    button: "확인",
+                    });
                 document.getElementById("checked_nick").value = member_nick
             } else if(success == 1){
-                alert("이미 사용중인 닉네임입니다.");
+                swal({
+                    title: "이미 사용중인 닉네임입니다.",
+                    icon: "error",
+                    button: "확인",
+                    });
                 return;
             }
         },
         error: function() {
-            alert("error");
+            swal({
+                 title: "ERROR",
+                 icon: "error",
+                 button: "확인",
+                 });
         }
     })
 }

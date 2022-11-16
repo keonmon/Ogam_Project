@@ -22,7 +22,6 @@ public class NotifiImpl implements NotifiService {
 
     @Override
     public List<Map<String, Object>> notifiSelect(String myEmail) {
-        System.out.println("값아 들어와라 : "+notifiMapper.notifiSelect(myEmail));
         return notifiMapper.notifiSelect(myEmail);
     }
 

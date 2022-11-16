@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import java.util.List;
 import java.util.Map;
 
@@ -22,12 +25,29 @@ public class Admin_UserController {
     @Autowired
     AdminUserService adminUserService;
 
-    @Autowired
-    MemberService memberService;
+    public static void init(HttpServletResponse response) {
+        response.setContentType("text/html; charset=utf-8");
+        response.setCharacterEncoding("utf-8");
+    }
 
     /* USER 전체 가져오기 */
     @RequestMapping("/admin_userList")
-    public String userList(HttpServletRequest request, String type, String keyword, Model model) {
+    public String userList(HttpServletRequest request, HttpServletResponse response,
+                           String type, String keyword, Model model) throws IOException {
+
+        init(response);
+        PrintWriter out = response.getWriter();
+
+        // ADMIN 로그인
+        String admin_email = (String)request.getSession().getAttribute("admin_email");
+
+        if(admin_email == null) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        } else if (!admin_email.equals("admin@ogam.com")) {
+            out.println("<script>alert('ADMIN계정으로 로그인해주세요'); location.href='/'</script>");
+            out.flush();
+        }
 
         if ( keyword == null) {
             List<Member> members =  adminUserService.userSelectAll();

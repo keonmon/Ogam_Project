@@ -29,96 +29,153 @@
 
     <!-- 키워드 검색 -->
     <select id="notifySelectKeyword" resultType="java.util.Map">
-        SELECT *
-          FROM
-        (
-            SELECT
-                   BLACKLIST_DIARY_SEQ AS "BLACKLIST_SEQ"
-                 , CASE WHEN BLACKLIST_DIARY_SEQ IS NOT NULL THEN '일기' END AS "Category"
-                 , BLACKLIST_COMMENT
-                 , MEMBER_EMAIL
-                 , BLACKLIST_MEMBER_EMAIL
-                 , BLACKLIST_DIARY_DATE
-              FROM BLACKLIST_DIARY
-             UNION ALL
-            SELECT
-                   BLACKLIST_COM_SEQ
-                 , CASE WHEN BLACKLIST_COM_SEQ IS NOT NULL THEN '댓글' END
-                 , BLACKLIST_COMMENT
-                 , MEMBER_EMAIL
-                 , BLACKLIST_MEMBER_EMAIL
-                 , BLACKLIST_REPLY_DATE
-              FROM BLACKLIST_REPLY
-        )
-         WHERE MEMBER_EMAIL IS not null
+        SELECT CASE WHEN A.REPLY_SEQ > 0 THEN A.REPLY_SEQ
+                    WHEN B.DIARY_SEQ > 0 THEN B.DIARY_SEQ
+                    END AS "ALL_SEQ"
+             , CASE WHEN A.BLACKLIST_COM_SEQ > 0 THEN  A.BLACKLIST_COM_SEQ
+                    WHEN B.BLACKLIST_DIARY_SEQ > 0 THEN B.BLACKLIST_DIARY_SEQ
+                    END AS "BLACK_SEQ"
+             , CASE WHEN A.BLACKLIST_COM_SEQ > 0 THEN  '댓글'
+                    WHEN B.BLACKLIST_DIARY_SEQ > 0 THEN '일기'
+                    END AS "CATEGORY"
+             , CASE WHEN A.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN A.BLACKLIST_MEMBER_EMAIL
+                    WHEN B.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN B.BLACKLIST_MEMBER_EMAIL
+                    END AS "BLACKLIST_EMAIL"
+             , CASE WHEN A.MEMBER_EMAIL != 'NULL' THEN A.MEMBER_EMAIL
+                    WHEN B.MEMBER_EMAIL != 'NULL' THEN B.MEMBER_EMAIL
+                    END AS "MEMBER_EMAIL"
+             , CASE WHEN A.BLACKLIST_COMMENT != 'NULL' THEN A.BLACKLIST_COMMENT
+                    WHEN B.BLACKLIST_COMMENT != 'NULL' THEN B.BLACKLIST_COMMENT
+                    END AS "BLACKLIST_COMMENT"
+             , CASE WHEN A.BLACKLIST_REPLY_DATE != TO_DATE(CURRENT_DATE + 1) THEN A.BLACKLIST_REPLY_DATE
+                    WHEN B.BLACKLIST_DIARY_DATE != TO_DATE(CURRENT_DATE + 1) THEN B.BLACKLIST_DIARY_DATE
+                    END AS "BLACKLIST_DATE"
+          FROM (SELECT
+                    T1.BLACKLIST_COM_SEQ
+                    , T2.DIARY_SEQ
+                    , T1.REPLY_SEQ
+                    , T1.MEMBER_EMAIL
+                    , T1.BLACKLIST_MEMBER_EMAIL
+                    , T1.BLACKLIST_COMMENT
+                    , T1.BLACKLIST_REPLY_DATE
+                FROM BLACKLIST_REPLY T1
+                    , REPLY T2
+                WHERE T1.REPLY_SEQ = T2.REPLY_SEQ
+                AND T2.REPLY_DEL = 'n') A
+          FULL OUTER JOIN
+                (SELECT
+                        T1.BLACKLIST_DIARY_SEQ
+                      , T1.DIARY_SEQ
+                      , T1.MEMBER_EMAIL
+                      , T1.BLACKLIST_MEMBER_EMAIL
+                      , T1.BLACKLIST_COMMENT
+                      , T1.BLACKLIST_DIARY_DATE
+                   FROM BLACKLIST_DIARY T1
+                      , DIARY T2
+                  WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
+                    AND T2.DIARY_DEL = 'n') B
+            ON A.DIARY_SEQ = B.DIARY_SEQ
+         WHERE (CASE WHEN A.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN A.BLACKLIST_MEMBER_EMAIL
+                     WHEN B.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN B.BLACKLIST_MEMBER_EMAIL
+                     END) IS not null
         <if test=" keyword != null and keyword != '' ">
             <choose>
                 <!-- 검색 유형이 있을 때 -->
                 <when test="type != null and type != ''">
                     <choose>
-                        <when test="'Category'.equals( type )">
-                            AND "Category" LIKE #{keyword}
+                        <when test="'CATEGORY'.equals( type )">
+                            AND (CASE WHEN A.BLACKLIST_COM_SEQ > 0 THEN  '댓글'
+                                      WHEN B.BLACKLIST_DIARY_SEQ > 0 THEN '일기'
+                                      END) LIKE #{keyword}
                         </when>
                         <when test="'BLACKLIST_COMMENT'.equals( type )">
-                            AND BLACKLIST_COMMENT LIKE #{keyword}
+                            AND (CASE WHEN A.BLACKLIST_COMMENT != 'NULL' THEN A.BLACKLIST_COMMENT
+                                      WHEN B.BLACKLIST_COMMENT != 'NULL' THEN B.BLACKLIST_COMMENT
+                                      END) LIKE #{keyword}
                         </when>
                         <when test="'MEMBER_EMAIL'.equals( type )">
-                            AND MEMBER_EMAIL LIKE #{keyword}
+                            AND (CASE WHEN A.MEMBER_EMAIL != 'NULL' THEN A.MEMBER_EMAIL
+                                      WHEN B.MEMBER_EMAIL != 'NULL' THEN B.MEMBER_EMAIL
+                                      END) LIKE #{keyword}
                         </when>
-                        <when test="'BLACKLIST_MEMBER_EMAIL'.equals( type )">
-                            AND BLACKLIST_MEMBER_EMAIL LIKE #{keyword}
+                        <when test="'BLACKLIST_EMAIL'.equals( type )">
+                            AND (CASE WHEN A.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN A.BLACKLIST_MEMBER_EMAIL
+                                      WHEN B.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN B.BLACKLIST_MEMBER_EMAIL
+                                      END) LIKE #{keyword}
                         </when>
-                        <when test="'BLACKLIST_DIARY_DATE'.equals( type )">
-                            AND BLACKLIST_DIARY_DATE LIKE #{keyword}
+                        <when test="'BLACKLIST_DATE'.equals( type )">
+                            AND (CASE WHEN A.BLACKLIST_REPLY_DATE != TO_DATE(CURRENT_DATE + 1) THEN A.BLACKLIST_REPLY_DATE
+                                      WHEN B.BLACKLIST_DIARY_DATE != TO_DATE(CURRENT_DATE + 1) THEN B.BLACKLIST_DIARY_DATE
+                                      END) LIKE #{keyword}
                         </when>
                     </choose>
                 </when>
             </choose>
         </if>
-        ORDER BY BLACKLIST_DIARY_DATE DESC
+        ORDER BY BLACKLIST_DATE DESC
     </select>
 
-<!--    댓글, 일기 신고 모두 나오는 쿼리-->
+    <!-- 댓글, 일기 신고 모두 나오는 쿼리 -->
     <select id="allBlackList" resultType="java.util.HashMap">
-        SELECT  CASE WHEN A.REPLY_SEQ > 0 THEN A.REPLY_SEQ
-                WHEN B.DIARY_SEQ > 0 THEN B.DIARY_SEQ
-                END AS ALL_SEQ
-                , CASE WHEN A.BLACKLIST_COM_SEQ > 0 THEN  A.BLACKLIST_COM_SEQ
-                WHEN B.BLACKLIST_DIARY_SEQ > 0 THEN B.BLACKLIST_DIARY_SEQ
-                END AS BLACK_SEQ
-                , CASE WHEN A.BLACKLIST_COM_SEQ > 0 THEN  '댓글'
-                WHEN B.BLACKLIST_DIARY_SEQ > 0 THEN '일기'
-                END AS CATEGORY
-                , CASE WHEN A.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN A.BLACKLIST_MEMBER_EMAIL
-                WHEN B.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN B.BLACKLIST_MEMBER_EMAIL
-                END AS BLACKLIST_EMAIL
-                , CASE WHEN A.MEMBER_EMAIL != 'NULL' THEN A.MEMBER_EMAIL
-                WHEN B.MEMBER_EMAIL != 'NULL' THEN B.MEMBER_EMAIL
-                END AS MEMBER_EMAIL
-                , CASE WHEN A.BLACKLIST_COMMENT != 'NULL' THEN A.BLACKLIST_COMMENT
-                WHEN B.BLACKLIST_COMMENT != 'NULL' THEN B.BLACKLIST_COMMENT
-                END AS BLACKLIST_COMMENT
-                , CASE WHEN A.BLACKLIST_REPLY_DATE != TO_DATE(CURRENT_DATE + 1) THEN A.BLACKLIST_REPLY_DATE
-                WHEN B.BLACKLIST_DIARY_DATE != TO_DATE(CURRENT_DATE + 1) THEN B.BLACKLIST_DIARY_DATE
-                END AS BLACKLIST_DATE
-        FROM (SELECT T1.BLACKLIST_COM_SEQ, T2.DIARY_SEQ, T1.REPLY_SEQ, T1.MEMBER_EMAIL, T1.BLACKLIST_MEMBER_EMAIL, T1.BLACKLIST_COMMENT, T1.BLACKLIST_REPLY_DATE
-        FROM BLACKLIST_REPLY T1, REPLY T2
-        WHERE T1.REPLY_SEQ = T2.REPLY_SEQ) A
-        FULL OUTER JOIN
-        (SELECT T1.BLACKLIST_DIARY_SEQ, T1.DIARY_SEQ, T1.MEMBER_EMAIL, T1.BLACKLIST_MEMBER_EMAIL, T1.BLACKLIST_COMMENT, T1.BLACKLIST_DIARY_DATE
-        FROM BLACKLIST_DIARY T1, DIARY T2
-        WHERE T1.DIARY_SEQ = T2.DIARY_SEQ) B
-        ON A.DIARY_SEQ = B.DIARY_SEQ
+        SELECT CASE WHEN A.REPLY_SEQ > 0 THEN A.REPLY_SEQ
+                    WHEN B.DIARY_SEQ > 0 THEN B.DIARY_SEQ
+                    END AS ALL_SEQ
+             , CASE WHEN A.BLACKLIST_COM_SEQ > 0 THEN  A.BLACKLIST_COM_SEQ
+                    WHEN B.BLACKLIST_DIARY_SEQ > 0 THEN B.BLACKLIST_DIARY_SEQ
+                    END AS BLACK_SEQ
+             , CASE WHEN A.BLACKLIST_COM_SEQ > 0 THEN  '댓글'
+                    WHEN B.BLACKLIST_DIARY_SEQ > 0 THEN '일기'
+                    END AS CATEGORY
+             , CASE WHEN A.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN A.BLACKLIST_MEMBER_EMAIL
+                    WHEN B.BLACKLIST_MEMBER_EMAIL != 'NULL' THEN B.BLACKLIST_MEMBER_EMAIL
+                    END AS BLACKLIST_EMAIL
+             , CASE WHEN A.MEMBER_EMAIL != 'NULL' THEN A.MEMBER_EMAIL
+                    WHEN B.MEMBER_EMAIL != 'NULL' THEN B.MEMBER_EMAIL
+                    END AS MEMBER_EMAIL
+             , CASE WHEN A.BLACKLIST_COMMENT != 'NULL' THEN A.BLACKLIST_COMMENT
+                    WHEN B.BLACKLIST_COMMENT != 'NULL' THEN B.BLACKLIST_COMMENT
+                    END AS BLACKLIST_COMMENT
+             , CASE WHEN A.BLACKLIST_REPLY_DATE != TO_DATE(CURRENT_DATE + 1) THEN A.BLACKLIST_REPLY_DATE
+                    WHEN B.BLACKLIST_DIARY_DATE != TO_DATE(CURRENT_DATE + 1) THEN B.BLACKLIST_DIARY_DATE
+                    END AS BLACKLIST_DATE
+          FROM (SELECT
+                       T1.BLACKLIST_COM_SEQ
+                     , T2.DIARY_SEQ
+                     , T1.REPLY_SEQ
+                     , T1.MEMBER_EMAIL
+                     , T1.BLACKLIST_MEMBER_EMAIL
+                     , T1.BLACKLIST_COMMENT
+                     , T1.BLACKLIST_REPLY_DATE
+                  FROM BLACKLIST_REPLY T1
+                     , REPLY T2
+                 WHERE T1.REPLY_SEQ = T2.REPLY_SEQ
+                   AND T2.REPLY_DEL = 'n') A
+          FULL OUTER JOIN
+               (SELECT
+                       T1.BLACKLIST_DIARY_SEQ
+                     , T1.DIARY_SEQ
+                     , T1.MEMBER_EMAIL
+                     , T1.BLACKLIST_MEMBER_EMAIL
+                     , T1.BLACKLIST_COMMENT
+                     , T1.BLACKLIST_DIARY_DATE
+                  FROM BLACKLIST_DIARY T1
+                     , DIARY T2
+                 WHERE T1.DIARY_SEQ = T2.DIARY_SEQ
+                   AND T2.DIARY_DEL = 'n') B
+            ON A.DIARY_SEQ = B.DIARY_SEQ
+         ORDER BY BLACKLIST_DATE DESC
     </select>
 
-<!--    일기 신고 삭제-->
+    <!-- 일기 신고 삭제 -->
     <delete id="delBlackDiary">
-       DELETE FROM BLACKLIST_DIARY WHERE BLACKLIST_DIARY_SEQ = #{BLACKLIST_DIARY_SEQ}
+        DELETE FROM BLACKLIST_DIARY
+         WHERE BLACKLIST_DIARY_SEQ = #{BLACKLIST_DIARY_SEQ}
     </delete>
 
-<!--    댓글 신고 삭제-->
+    <!-- 댓글 신고 삭제 -->
     <delete id="delBlackRely">
-        DELETE FROM BLACKLIST_REPLY WHERE BLACKLIST_COM_SEQ = #{BLACKLIST_COM_SEQ}
+        DELETE FROM BLACKLIST_REPLY
+         WHERE BLACKLIST_COM_SEQ = #{BLACKLIST_COM_SEQ}
     </delete>
 
 </mapper>

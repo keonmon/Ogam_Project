@@ -13,4 +13,5 @@ public interface MemberService {
 
     public void noProfile(Member member);
 
+    void memberUpdateResetBgimg(Member member);
 }

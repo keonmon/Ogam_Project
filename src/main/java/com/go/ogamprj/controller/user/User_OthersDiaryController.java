@@ -23,10 +23,16 @@ public class User_OthersDiaryController {
     public String diaryAll(HttpServletRequest request, Model model) {
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
-        // 모두의 일기 가져오기
-        List<Map<String, Object>> selectDiaryByMood =  user_othersDiaryService.selectDiaryAll(myEmail);
+        if(myEmail == null){
+            List<Map<String, Object>> selectDiaryAll =  user_othersDiaryService.selectDiary();
+            model.addAttribute("selectDiaryByMood",selectDiaryAll);
 
-        model.addAttribute("selectDiaryByMood",selectDiaryByMood);
+        } else {
+
+            // 모두의 일기 가져오기
+            List<Map<String, Object>> selectDiaryByMood =  user_othersDiaryService.selectDiaryAll(myEmail);
+            model.addAttribute("selectDiaryByMood",selectDiaryByMood);
+        }
 
         return "/user/userDiary/diaryAll";
     }
@@ -40,9 +46,16 @@ public class User_OthersDiaryController {
         String emotion = jObject.getString("reqEmotion");
         String diary_private = "n";
 
-        List<Map<String, Object>> selectDiaryByMood = user_othersDiaryService.selectDiaryByHappy(myEmail,emotion);
+        if(myEmail == null){
+            List<Map<String, Object>> nloginselectDiaryByMood = user_othersDiaryService.nloginselectDiaryByMood(emotion);
+            model.addAttribute("selectDiaryByMood",nloginselectDiaryByMood);
 
-        model.addAttribute("selectDiaryByMood",selectDiaryByMood);
+        } else {
+            List<Map<String, Object>> selectDiaryByHappy = user_othersDiaryService.selectDiaryByHappy(myEmail,emotion);
+
+            model.addAttribute("selectDiaryByMood",selectDiaryByHappy);
+        }
+
         return "/user/userDiary/diaryAll :: .diaryContainer";
     }
 

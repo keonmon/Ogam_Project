@@ -52,8 +52,9 @@
 /* 최근 알림 스타일 */
 .currentNotifi{
     width: 100%;
-    height: 38%;
+    height: 78%;
     margin-bottom: 5px;
+    margin-top : 5px
     overflow-y: auto;
 }
 .currentNotifi::-webkit-scrollbar {
@@ -84,39 +85,6 @@
     width:100%;
 }
 #currentNotifi_message span:first-child{
-    width:100%;
-}
-
-/* 이전 알림 스타일 */
-.previewNotifi{
-    width: 100%;
-    height: 38%;
-    margin-bottom: 5px;
-    overflow-y: auto;
-}
-.previewNotifi::-webkit-scrollbar {
-    display: none;
-}
-#previewNotifi_contents{
-    display: flex;
-    margin: 5px auto;
-    width: 80%;
-    height: 50px;
-    background-color: white;
-    border-radius: 15px;
-}
-
-#previewNotifi_contents img{
-    border-radius: 50%;
-    width: 50px;
-}
-
-#previewNotifi_contents p{
-    display: flex;
-    align-items: center;
-    margin: 0px 0px 0px 10px;
-    font-size: 13px;
-    font-weight: bold;
     width:100%;
 }
 

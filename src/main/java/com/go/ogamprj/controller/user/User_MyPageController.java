@@ -85,7 +85,7 @@ public class User_MyPageController {
                               , @RequestParam String member_nick, @RequestParam String member_birth1
                               , @RequestParam String member_birth2, @RequestParam String member_birth3
                               , @RequestParam(defaultValue = "") String member_phone, @RequestParam MultipartFile file
-                              , @RequestParam String member_intro) {
+                              , @RequestParam String member_intro, @RequestParam String deleteImg){
 
         String member_birth = member_birth1 + "/" + member_birth2 + "/" + member_birth3;
         Member member = new Member(member_pw, member_nick, member_birth, member_phone, member_intro, 0);
@@ -95,8 +95,13 @@ public class User_MyPageController {
         Map<String,Object> memberMap = memberService.findMember(member_email);
 
         if(file.isEmpty()) {
-            // 프로필 사진 없이 저장
-            memberService.noProfile(member);
+
+            if(!deleteImg.isEmpty()){
+                memberService.memberUpdateResetBgimg(member);
+            }else{
+                // 프로필 사진 없이 저장
+                memberService.noProfile(member);
+            }
         } else {
 
             String realPath = request.getSession().getServletContext().getRealPath("/");
