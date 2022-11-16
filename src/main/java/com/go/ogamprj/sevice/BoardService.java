@@ -2,6 +2,7 @@ package com.go.ogamprj.sevice;
 
 import com.go.ogamprj.dto.Board;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public interface BoardService {
@@ -10,7 +11,7 @@ public interface BoardService {
 
     ArrayList<Board> adminBoardSelectKeyword(String type, String keyword);      // 키워드 검색
 
-    ArrayList<Board> selectAll();
+    ArrayList<Board> selectAll() throws ParseException;
 
     void boardInsert(Board board);
 
