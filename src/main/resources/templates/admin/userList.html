@@ -3,78 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <title>[관리자] 사용자 목록</title>
-    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />
+    <!--    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />-->
     <link rel="stylesheet" type="text/css" href="css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <aside th:replace="~{admin/sidebar :: sidebar }"></aside>
-        <main class="bodyContainer">
-            <div th:replace="~{admin/menubar :: menubar }"></div>
-            <div class="content">
+<div class="container">
+    <aside th:replace="~{admin/sidebar :: sidebar }"></aside>
+    <main class="bodyContainer">
+        <div th:replace="~{admin/menubar :: menubar }"></div>
+        <div class="content">
+            <div>
+                <div class="searchTap">
+                    <form action="/admin_userList" method="get">
+                        <select class="searchList" id="type" name="type">
+                            <option value="MEMBER_EMAIL" selected>이메일</option>
+                            <option value="MEMBER_NICK">닉네임</option>
+                            <option value="MEMBER_PHONE">전화번호</option>
+                        </select>
+                        <input class="searchInput" type="text" id="keyword" name="keyword"
+                               placeholder="해당 정보를 입력해주세요." value="" />
+                        <input type="submit" class="searchBtn" value="검색" />
+                    </form>
+                </div>
+                <!-- 테이블 -->
                 <div>
-                    <div class="searchTap">
-                        <form action="/admin_userList" method="get">
-                            <select class="searchList" id="type" name="type">
-                                <option value="MEMBER_EMAIL" selected>이메일</option>
-                                <option value="MEMBER_NICK">닉네임</option>
-                                <option value="MEMBER_PHONE">전화번호</option>
-                            </select>
-                            <input class="searchInput" type="text" id="keyword" name="keyword"
-                                   placeholder="해당 정보를 입력해주세요." value="" />
-                            <input type="submit" class="searchBtn" value="검색" />
-                        </form>
-                    </div>
-                    <!-- 테이블 -->
-                    <div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>이메일</th>
-                                    <th>닉네임</th>
-                                    <th>생년월일</th>
-                                    <th>전화번호</th>
-                                    <th>성별</th>
-                                    <th>정지유무</th>
-                                </tr>                                
-                            </thead>
-                            <tbody>
-                                <tr th:each="member : ${userList}">
-                                    <td><a th:onclick="javascript:memberPopup([[${member.MEMBER_EMAIL}]])">[[${member.MEMBER_EMAIL}]]</a></td>
-                                    <td>[[${member.MEMBER_NICK}]]</td>
-                                    <td>[[${member.MEMBER_BIRTH}]]</td>
-                                    <td>[[${member.MEMBER_PHONE}]]</td>
-                                    <!-- 성별 -->
-                                    <td th:if="${member.MEMBER_GENDER == 'male'}">
-                                        <i class="iconM"></i>
-                                    </td>
-                                    <td th:if="${member.MEMBER_GENDER == 'female'}">
-                                        <i class="iconF"></i>
-                                    </td>
-                                    <td th:unless="${member.MEMBER_GENDER}">
-                                        (null)
-                                    </td>
-                                   <!-- 정지 유무 -->
-                                    <td th:if="${member.MEMBER_BLACKYN == 'y'}">
-                                        <i class="icon1"></i>
-                                    </td>
-                                    <td th:if="${member.MEMBER_BLACKYN == 'n'}">
-                                        <i class="icon2"></i>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>   
-                    </div>
-                    <!-- 테이블 end--> 
-                </div>                
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>이메일</th>
+                            <th>닉네임</th>
+                            <th>생년월일</th>
+                            <th>전화번호</th>
+                            <th>성별</th>
+                            <th>정지유무</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="member, status : ${userList}" id="clones" th:if = "${status.index} < 10">
+                            <td><a th:onclick="javascript:memberPopup([[${member.MEMBER_EMAIL}]])">[[${member.MEMBER_EMAIL}]]</a></td>
+                            <td>[[${member.MEMBER_NICK}]]</td>
+                            <td>[[${member.MEMBER_BIRTH}]]</td>
+                            <td>[[${member.MEMBER_PHONE}]]</td>
+                            <!-- 성별 -->
+                            <td th:if="${member.MEMBER_GENDER == 'male'}">
+                                <i class="iconM"></i>
+                            </td>
+                            <td th:if="${member.MEMBER_GENDER == 'female'}">
+                                <i class="iconF"></i>
+                            </td>
+                            <td th:unless="${member.MEMBER_GENDER}">
+                                (null)
+                            </td>
+                            <!-- 정지 유무 -->
+                            <td th:if="${member.MEMBER_BLACKYN == 'y'}">
+                                <i class="icon1"></i>
+                            </td>
+                            <td th:if="${member.MEMBER_BLACKYN == 'n'}">
+                                <i class="icon2"></i>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 테이블 end-->
             </div>
+        </div>
 
-        </main>
-    </div>
-    <!-- 팝업 -->
-    <script type="text/javascript" src="js/popup.js"></script>
+    </main>
+</div>
+<!-- 팝업 -->
+<script type="text/javascript" src="js/popup.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script th:inline="javascript">
+      const userList = [[${userList}]];
+      const pageCount = parseInt(userList.length / 10);
+      console.log(pageCount);
+      let startPage = 1;
+      console.log(userList);
+<!--      console.log(type(userList));-->
+
+     $(document).ready(function () {
+
+        $(document).scroll(function() {
+          var maxHeight = $(document).height();
+          var currentScroll = $(window).scrollTop() + $(window).height();
+
+          var pageCnt = 10;
+          var html = "";
+        try{
+          if (maxHeight <= currentScroll + 250) {                                            <!-- 40   - 1 = 39                39 % 10 = 10 - 9 = '1'-->
+              for(var i = startPage * pageCnt;  i < (userList.length % 10 != 0 ? ((startPage + 1 * pageCnt) - (10 - (userList.length % 10))) : (startPage + 1) * pageCnt); i++) {
+                  html += '<tr>' +
+                          '<td><a th:onclick="javascript:memberPopup(' + userList[i].MEMBER_EMAIL + ')">' + userList[i].MEMBER_EMAIL + '</a></td>' +
+                          '<td>' + userList[i].MEMBER_NICK + '</td>' +
+                          '<td>' + userList[i].MEMBER_BIRTH + '</td>' +
+                          '<td>' + userList[i].MEMBER_PHONE + '</td>' +
+                          '<td th:if="' + userList[i].MEMBER_GENDER + ' == ' + male + '}"><i class="iconM"></i></td>' +
+                          '<td th:if="' + userList[i].MEMBER_GENDER + ' == ' + female + '}"><i class="iconF"></i></td>' +
+                          '<td th:unless="' + userList[i].MEMBER_GENDER + '">(null)</td>' +
+                          '<td th:if="' + userList[i].MEMBER_BLACKYN + ' == ' + y + '}"><i class="icon1"></i></td>' +
+                          '<td th:if="' + userList[i].MEMBER_BLACKYN + ' == ' +  n + '}"><i class="icon2"></i></td>' +
+                          '</tr>';
+              }
+               $('#rows').append(html);
+          }
+          startPage++;
+          }
+          catch(error) {
+              console.error(error);
+          }
+        })
+      });
+
+    </script>
 </body>
 </html>
