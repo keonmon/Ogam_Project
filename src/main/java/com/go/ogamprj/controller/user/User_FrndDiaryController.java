@@ -84,17 +84,21 @@ public class User_FrndDiaryController {
 
         String myEmail = (String)request.getSession().getAttribute("loginUser");
 
-        // 친구 신청 가져오기
-        List<Map<String, Object>> friendSendList = friendDiaryService.friendSendSelectAll(myEmail);
-        // member 전체 유저 가져오기
-        List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
-        // 알림 myEmail 유저한테 온거 select
-        List<Map<String, Object>> notifiSelect = notifiService.notifiSelect(myEmail);
+        if(myEmail == null) {
+            return "redirect:/loginPage";
+        }else{
+            // 친구 신청 가져오기
+            List<Map<String, Object>> friendSendList = friendDiaryService.friendSendSelectAll(myEmail);
+            // member 전체 유저 가져오기
+            List<Map<String, Object>> memberList = friendDiaryService.memberSelectAll(myEmail);
+            // 알림 myEmail 유저한테 온거 select
+            List<Map<String, Object>> notifiSelect = notifiService.notifiSelect(myEmail);
 
-        model.addAttribute("notifiSelectList",notifiSelect);
-        model.addAttribute("memberList",memberList);
-        model.addAttribute("friendSendList",friendSendList);
-        return "user/noticePage/sendList";
+            model.addAttribute("notifiSelectList", notifiSelect);
+            model.addAttribute("memberList", memberList);
+            model.addAttribute("friendSendList", friendSendList);
+            return "user/noticePage/sendList";
+        }
     }
 
     // 모달 친구신청
