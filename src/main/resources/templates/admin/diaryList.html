@@ -73,6 +73,7 @@
       console.log(pageCount);
       let startPage = 1;
       console.log(diaryList);
+
 <!--      console.log(type(diaryList));-->
 
      $(document).ready(function () {
@@ -86,26 +87,31 @@
 
           var pageCnt = 10;
           var html = "";
-<!--          var change = ? diaryList++ : diaryList);-->
-        try{
-          if (maxHeight <= currentScroll + 250) {                                            <!-- 40   - 1 = 39                39 % 10 = 10 - 9 = '1'-->
-              for(var i = startPage * pageCnt;  i < (diaryList.length % 10 != 0 ? ((startPage + 1 * pageCnt) - (10 - (diaryList.length % 10))) : (startPage + 1) * pageCnt); i++) {
-                  html += '<tr>' +
-                          '<td><input type="checkbox"  name="check" value="' + diaryList[i].DIARY_SEQ + '" /></td>' +
-                          '<td>' + diaryList[i].EMOTION + '</td>' +
-                          '<td>' + diaryList[i].EMOJI + '</td>' +
-                          '<td>' + diaryList[i].MEMBER_EMAIL + '</td>' +
-                          '<td>' + diaryList[i].MEMBER_NICK + i + '</td>' +
-                          '<td><a onclick="javascript:diaryPopup(' + diaryList[i].DIARY_SEQ + ')">보기</a></td>' +
-                          '</tr>';
 
-              }
-               $('#rows').append(html);
-          }
-          startPage++;
+        try{
+
+            if (maxHeight <= currentScroll + 300) {
+                for(var i = (startPage * pageCnt) - 1;  i < (startPage + 1) * pageCnt; i++) {
+                    html += '<tr>' +
+                            '<td><input type="checkbox"  name="check" value="' + diaryList[i].DIARY_SEQ + '" /></td>' +
+                            '<td>' + diaryList[i].DIARY_PRIVATE + '</td>' +
+                            '<td>' + diaryList[i].EMOTION + '</td>' +
+                            '<td>' + diaryList[i].EMOJI + '</td>' +
+                            '<td>' + diaryList[i].MEMBER_EMAIL + '</td>' +
+                            '<td>' + diaryList[i].MEMBER_NICK + i + '</td>' +
+                            '<td><a onclick="javascript:diaryPopup(' + diaryList[i].DIARY_SEQ + ')">보기</a></td>' +
+                            '</tr>';
+
+
+                }
+                 $('#rows').append(html);
+            }
+            console.log(startPage);
+            startPage++;
+            console.log(startPage);
           }
           catch(error) {
-              console.error(error);
+              console.log("에에에에에에러");
           }
         })
       });
