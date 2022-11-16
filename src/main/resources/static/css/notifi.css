@@ -9,17 +9,17 @@
 /* 알림창 모달 스타일 */
 
 .notifi_wrapModal {
-   position: absolute;
-   display: none;
-   top: 23%;
-   left: 90%;
-   width: 300px;
-   height: 380px;
-   transform: translate(-50%, -50%);
-   border-radius: 20px;
-   background: rgb(255 255 255 / 40%);
-   max-height: 100vh;
-   z-index: 2;
+    position: absolute;
+    display: none;
+    top: 250%;
+    left: 117%;
+    width: 300px;
+    height: 380px;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    background: rgb(255 255 255 / 40%);
+    max-height: 100vh;
+    z-index: 2;
 }
 
 .toggle {

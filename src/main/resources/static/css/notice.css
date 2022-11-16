@@ -126,7 +126,7 @@
 .notice_title{
     display: flex;
     justify-content: center;
-    font-size: 35px;
+    font-size: 25px;
     font-weight: bold;
     background-color: #ba99ff;
     width: 100%;
@@ -156,10 +156,11 @@
 .notice_content{
     display: flex;
     justify-content: start;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: 700;
     color: black;
     width: 100%;
+    font-family: 'Pretendard-Regular';
 }
 
 
@@ -173,6 +174,7 @@
 .notice_date {
     font-size: 1.2em;
     color: #9c9a9a;
+    font-family: 'Pretendard-Regular';
 }
 
 .dropbtn{
@@ -213,6 +215,7 @@
     font-size: 18px;
     overflow-y: auto;
     z-index: 1000;
+    font-family: 'Pretendard-Regular';
 }
 .dropbtn_click{
     display: flex;

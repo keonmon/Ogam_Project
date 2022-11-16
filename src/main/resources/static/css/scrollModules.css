@@ -36,6 +36,7 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     overflow: hidden;
+    z-index:0;
 }
 
 .contents article .mod2_Outline {
