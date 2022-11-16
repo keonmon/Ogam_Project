@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,16 +39,6 @@ public class Admin_DiaryController {
     }
 
     /* 일기 상세보기 */
-
-    @RequestMapping("/diaryPopup/{diarySeq}")
-    public String diaryPopup(@PathVariable String diary_seq, Model model) {
-        System.out.println(diary_seq);
-        diary_seq = "2";
-        model.addAttribute("diary",diaryService.diarySelectOne(Integer.parseInt(diary_seq)));
-
-        return "admin/diaryPopup";
-    }
-
     @RequestMapping("/diaryPopup")
     public String diaryPopup(HttpServletRequest request,
                              @RequestParam int diary_seq, Model model) {
@@ -83,5 +74,12 @@ public class Admin_DiaryController {
         return "<script>window.opener.location.reload(); window.close();</script>";
     }
 
+    @RequestMapping("/scrollData")
+    @ResponseBody
+    public List scrollData() {
+        List<Map<String, Object>> scrollData = adminDiaryService.userDiarySelectAll();
+
+        return scrollData;
+    }
 
 }
