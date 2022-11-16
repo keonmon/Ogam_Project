@@ -40,7 +40,7 @@ public class User_DashboardController {
         if(myEmail == null){
             myEmail = "";
         }
-            // 모두의 일기 랜덤으로 가져오기 15개
+            // 셔플된 15개의 다이어리 가져오기 ( 차단, 비공개, 삭제된거 제외 )
             List<HashMap<String, Object>> randomAllDiaryList = diaryService.randomAllDiarySelectAll(myEmail.toString());
 
 
