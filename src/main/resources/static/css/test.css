@@ -5,31 +5,44 @@
 
 .container{
     display: flex;
-}
+    margin: 0 auto;
+    width: 98%;
+    height: 96vh;}
 
 /* 사이드바 스타일 */
 
 
 .sidebar{
+    position: fixed;
     display: flex;
     flex-direction: column;
-    width: 280px;
-    height: 99vh;
-    min-height: 650px;
+    width: 270px;
+    height: 94%;
+    min-height: 700px;
+    border-radius: 20px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0px 5px 9px #9d9d9d;
+    z-index: 1;
+    margin: 20px 0 0 0;
 }
 
 .bodyContainer{
     width: 99vw;
     min-width: 900px;
+    padding-left: 270px;
 }
 
 .sidebar li{
     list-style: none;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: left;
-    padding: 30px 0px;
-    border-bottom: 2px solid #908BE8;
+     font-size: 23px;
+     font-weight: bold;
+     text-align: center;
+     margin: 0;
+     padding: 25px 0px;
+     /* padding-left: 0; */
+     /* border-bottom: 2px solid #cdcdcd; */
+     border-radius: 25px;
 }
 
 .sidebar li:first-child {
@@ -37,11 +50,11 @@
 }
 
 .top-menu li:hover{
-    background-color: #d1cef2;
+    background-color: #c1bbff2b;
 }
 
 .sidebar .active{
-    background-color: #d1cef2;
+    background-color: #c1bbff2b;
 }
 
 .footer{
@@ -64,18 +77,19 @@
 
 /* 사이드바 메인 이미지 */
 #mainImg {
-    width: 280px;
+    width: auto;
 }
 #mainImg img{
     width: 100%;
 }
 
 .sidebar span:first-child{
-    margin-left: 40px;
+    /*margin-left: 40px;*/
+    display:none;
 }
 .sidebar span:last-child{
-    margin-left: 30px;
-    color: #13056C;
+    /*margin-left: 30px;*/
+    color: #686868;
 }
 
 /* 바디콘테이너 스타일 */
@@ -93,22 +107,26 @@
     height: 75px;
     border-radius: 15px;
     background-color: white;
+    box-shadow: 0px 5px 9px #9d9d9d;
+    z-index: 1;
 }
 
 #left-menu {
     display: flex;
-    width: 100%;
+    width: auto;
 }
 
 #rigth-menu {
     display: flex;
+    width:auto;
     height: 100%;
 }
 
 .menubar span{
     display: flex;
     justify-content: space-around;
-    width: 100px;
+    width: auto;
+    margin:0 16px 0 16px ;
     justify-content: center;
     align-items: center;
 }
@@ -143,7 +161,7 @@
 
 .myProfile{
     font-size: 20px;
-    width: 200px;
+    width: auto;
     font-weight: bold;
     color: #5c5c5c;
     text-align: right;
@@ -181,10 +199,10 @@
 
 /* 이미지 스타일 */
 #user_img{
-    width: 80%;
-    height: 80%;
+    width: 65px;
+    height: 65px;
     border: 1px solid gainsboro;
-    border-radius: 50%;
+    border-radius: 40%;
     background-color: white;
 }
 

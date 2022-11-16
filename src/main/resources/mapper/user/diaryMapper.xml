@@ -48,11 +48,11 @@
                                 minus
                                 (select member_email from block where block_email = #{myEmail}))
 
+        and d.diary_private = 'n'
+        and d.diary_del = 'n'
         and d.DIARY_SEQ in (select CEIL(DBMS_RANDOM.VALUE(0, (select max(DIARY_SEQ)
                                 from diary)))DIARY_SEQ
                                 from DUAL CONNECT BY LEVEL 	&lt;= 20000)
-        and d.diary_private = 'n'
-        and d.diary_del = 'n'
         and rownum 	&lt;= 15
     </select>
 
