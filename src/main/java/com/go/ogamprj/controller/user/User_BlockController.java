@@ -29,22 +29,27 @@ public class User_BlockController {
 
     @RequestMapping("/blockPage")
     public String blockPage(HttpServletRequest request, Model model) {
-        String member_email = (String) request.getSession().getAttribute("loginUser");
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser == null){
+            return "redirect:/";
+        }else {
+            List<HashMap<String, Object>> blockList = blockService.blockList(loginUser.toString());
+            model.addAttribute("blockList", blockList);
+            model.addAttribute("blockCnt", blockList.size());
 
-//        String member_email = "user1@ogam.com";
-        List<HashMap<String, Object>> blockList = blockService.blockList(member_email);
-        model.addAttribute("blockList", blockList);
-        model.addAttribute("blockCnt", blockList.size());
-
-        return "user/noticePage/blockList";
+            return "user/noticePage/blockList";
+        }
     }
 
     @RequestMapping("/blockDel")
-    public String blockDel(@RequestParam int block_seq) {
-//        System.out.println(block_seq);
-
-        blockService.blockDel(block_seq);
-        return "redirect:/blockPage";
+    public String blockDel(HttpServletRequest request, @RequestParam int block_seq) {
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser == null){
+            return "redirect:/";
+        }else {
+            blockService.blockDel(block_seq);
+            return "redirect:/blockPage";
+        }
     }
 
     @RequestMapping("/blockPlus")
@@ -52,27 +57,29 @@ public class User_BlockController {
                             , HttpServletResponse response
                             , @RequestParam(defaultValue = "") String member_nick) throws IOException {
 
-        String member_email = (String) request.getSession().getAttribute("loginUser");
-//        String member_email = "user1@ogam.com";
-//        System.out.println(member_email);
-        init(response);
-        PrintWriter out = response.getWriter();
+        Object loginUser = request.getSession().getAttribute("loginUser");
+        if(loginUser == null){
+            return "redirect:/";
+        }else {
+            init(response);
+            PrintWriter out = response.getWriter();
 
-        String block_email="";
-        if(!member_nick.isEmpty()) {
-            block_email = blockService.findId(member_nick);
-            if(block_email == null || block_email.isEmpty()){
-                return "redirect:/blockPage";
-            }
-            if(blockService.doubleBlock(new Block(member_email, block_email)) == 1) {
-                out.println("<script>alert('이미 차단한 유저입니다''); location.href='/blockPage'</script>");
-                out.flush();
-            } else {
-                blockService.blockPlus(new Block(0, member_email, block_email));
-            }
+            String block_email = "";
+            if (!member_nick.isEmpty()) {
+                block_email = blockService.findId(member_nick);
+                if (block_email == null || block_email.isEmpty()) {
+                    return "redirect:/blockPage";
+                }
+                if (blockService.doubleBlock(new Block(loginUser.toString(), block_email)) == 1) {
+                    out.println("<script>alert('이미 차단한 유저입니다''); location.href='/blockPage'</script>");
+                    out.flush();
+                } else {
+                    blockService.blockPlus(new Block(0, loginUser.toString(), block_email));
+                }
 
+            }
+            return "redirect:/blockPage";
         }
-        return "redirect:/blockPage";
     }
 
 }
