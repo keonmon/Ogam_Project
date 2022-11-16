@@ -7,26 +7,26 @@
                 <li>
                     <div id="mainImg">
                         <a href="/">
-                            <img src="/Img/logoImg.png" />
+                            <img src="/Img/logo_bgRemove.png" />
                         </a>
                     </div>
                 </li>
                 <li th:classappend="${currMenu == 'myDiary'} ? active">
                     <a href="/myDiary">
                         <span> <i class="fa-solid fa-users-rectangle"></i></span>
-                        <span>내 일기장</span>
+                        <span>내 일기</span>
                     </a>
                 </li>
                 <li th:classappend="${currMenu == 'friendList'} ? active">
                     <a href="/friendList">
                         <span> <i class="fa-solid fa-table"></i></span>
-                        <span>친구의 일기장</span>
+                        <span>친구의 일기</span>
                     </a>
                 </li>
                 <li th:classappend="${currMenu == 'diaryAll'} ? active">
                     <a href="/diaryAll">
                         <span> <i class="fa-solid fa-house-user"></i></span>
-                        <span>오늘의 일기장</span>
+                        <span>모두의 일기</span>
                     </a>
                 </li>
             </ul>
