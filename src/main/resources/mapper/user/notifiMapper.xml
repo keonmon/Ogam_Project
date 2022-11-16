@@ -34,6 +34,7 @@
         )
         and n.member_email = #{myEmail}
 
+
     </select>
 
     <delete id="deleteNotifi">

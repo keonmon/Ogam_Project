@@ -28,4 +28,9 @@ public class User_OthersDiaryImpl implements User_OthersDiaryService {
     public List<Map<String, Object>> selectDiaryByHappy(String myEmail, String emotion) {
         return user_othersDiaryMapper.selectDiaryByHappy(myEmail,emotion);
     }
+
+    @Override
+    public List<Map<String, Object>> nloginselectDiaryByMood(String emotion) {
+        return user_othersDiaryMapper.nloginselectDiaryByMood(emotion);
+    }
 }

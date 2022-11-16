@@ -46,9 +46,16 @@ public class User_OthersDiaryController {
         String emotion = jObject.getString("reqEmotion");
         String diary_private = "n";
 
-        List<Map<String, Object>> selectDiaryByMood = user_othersDiaryService.selectDiaryByHappy(myEmail,emotion);
+        if(myEmail == null){
+            List<Map<String, Object>> nloginselectDiaryByMood = user_othersDiaryService.nloginselectDiaryByMood(emotion);
+            model.addAttribute("selectDiaryByMood",nloginselectDiaryByMood);
 
-        model.addAttribute("selectDiaryByMood",selectDiaryByMood);
+        } else {
+            List<Map<String, Object>> selectDiaryByHappy = user_othersDiaryService.selectDiaryByHappy(myEmail,emotion);
+
+            model.addAttribute("selectDiaryByMood",selectDiaryByHappy);
+        }
+
         return "/user/userDiary/diaryAll :: .diaryContainer";
     }
 

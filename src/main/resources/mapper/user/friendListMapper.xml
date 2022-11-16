@@ -87,7 +87,7 @@
             left join bgimage b
             on b.bgimg_seq = m.bgimg_seq
         where s.member_op_email = #{myEmail}
-        order by s.send_date
+        order by s.send_date desc
     </select>
 
     <!--  친구목록 뺴고 멤버리스트 가져오기  -->
@@ -202,7 +202,7 @@
         values(#{member_email},#{member_op_email},#{response})
     </insert>
 
-    <!--  친구 신성 delete  -->
+    <!--  친구 신청 delete  -->
     <delete id="deleteFriendSend">
         delete from friend_send
         where fri_send_seq = #{fri_send_seq}
