@@ -43,13 +43,18 @@ public class User_KakaoAPIController {
         if(checkUser == null){
             // 데이터 insert
             kakaoApiService.kakaoUserInsert(userInfo);
+
         }
 
         // 세션에 로그인 정보 담기
         if(userInfo.get("email") != null){
+            System.out.println(userInfo.get(userInfo.get("BGIMG_PATH")));
+            System.out.println(userInfo.toString());
+
             session.setAttribute("loginUser",userInfo.get("email"));
             session.setAttribute("accessToken",accessToken);
-            session.setAttribute("loginUserNick",userInfo.get("nickname"));
+            session.setAttribute("loginUserNick",checkUser.get("MEMBER_NICK"));
+            session.setAttribute("loginUserImage",checkUser.get("BGIMG_PATH"));
         }
 
         return "redirect:/";

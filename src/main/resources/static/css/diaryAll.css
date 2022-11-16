@@ -234,6 +234,17 @@ box-shadow: inset 0px 0px 5px white;
     cursor:pointer;
 }
 
+.diary-scrollbar, .diary-scrollbar, .diary-customized-scrollbar {
+  display: block;
+  width: 10em;
+  overflow: auto;
+  height: 2em;
+}
+
+.diary-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .diary:hover{
     transform: scale(1.04);
     transition-duration: 1s;

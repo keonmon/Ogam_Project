@@ -11,7 +11,7 @@ public interface LoginMapper {
 
    @Select("SELECT * FROM MEMBER m " +
            "join bgimage b " +
-           "on b.member_email = m.member_email " +
+           "on b.bgimg_seq = m.bgimg_seq " +
            "WHERE m.MEMBER_EMAIL = #{member_email}")
    Map<String,Object> memberSelectOne(String member_email);
 
