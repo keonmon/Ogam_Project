@@ -1,4 +1,14 @@
 
+// 로그인 시 데이터 가져오기
+$.ajax({
+         url: "/notifi",
+         type: "post",
+     }).done(function (notifiSelectList){
+         $(".currentNotifi").replaceWith(notifiSelectList);
+         notifiEventHandler();
+     })
+
+
 // 알림 모달 스크립트
 const notifi = document.querySelector(".notifi");
 const notifi_wrapModal = document.querySelector(".notifi_wrapModal");

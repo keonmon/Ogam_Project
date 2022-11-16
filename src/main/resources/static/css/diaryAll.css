@@ -5,7 +5,8 @@
 }
 
 .container{
-    display: flex;
+    display: block;
+    margin: auto;
     position :relative;
 }
 
@@ -135,7 +136,7 @@
 /* 콘텐츠 스타일 */
 
 .contents{
-    display:flex;
+    display:block !important;
     flex-direction: column;
     height: 88vh;
 }
@@ -179,7 +180,7 @@
 /* 일기 목록 박스 스타일 */
 .mood_diary {
     border-radius: 20px;
-    margin: 15px auto 0px;
+    margin : auto;
     width: 90%;
     height: 75%;
     box-shadow: 0px 0px 14px #9d9d9d;
@@ -205,7 +206,18 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     height: 85%;
-    overflow-y: auto;
+    overflow-y: scroll;
+}
+.diaryContainer::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+.diaryContainer::-webkit-scrollbar-track {
+background-color: grey;
+border-radius: 10px;
+box-shadow: inset 0px 0px 5px white;
 }
 
 .diaryBox {
@@ -217,29 +229,15 @@
     width: 16vw;
     border-radius: 20px;
     background-color: #ECECEC;
-    box-shadow: 0px 0px 10px 1px rgba(156, 156, 156, 0.2);
+    box-shadow: 0px 0px 10px 10px rgba(156, 156, 156, 0.2);
     height: 15vw;
     cursor:pointer;
 }
 
 .diary:hover{
-    animation: rotate 0.8s linear;
+    transform: scale(1.04);
+    transition-duration: 1s;
 }
-
-@keyframes rotate{
-     0%{
-        background-position: right bottom;
-    }
-    50%{
-        background-position: left bottom;
-        transform: rotateY(90deg);
-    }
-    100%{
-        background-position: right bottom;
-        transform: rotateY(0deg);
-    }
-}
-
 .diaryContents {
     height: 65%;
     font-size: 20px;
