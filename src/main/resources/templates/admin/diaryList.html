@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>[관리자] 일기 목록</title>
-    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />
+<!--    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />-->
     <link rel="stylesheet" type="text/css" href="css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
 <!--    <script type="text/javascript" src="js/popup.js"></script>-->
@@ -19,7 +19,6 @@
           <div class="searchTap">
             <form action="/admin_diaryList" method="get">
               <select class="searchList" id="type" name="type">
-                <option value="DIARY_PRIVATE" selected>공개/비공개</option>
                 <option value="EMOTION">감정</option>
                 <option value="MEMBER_EMAIL">이메일</option>
                 <option value="MEMBER_NICK">닉네임</option>
@@ -36,18 +35,16 @@
               <thead>
                 <tr>
                   <th><input type="checkbox" name="check" value="selectall" onclick="selectAll(this)" /></th>
-                  <th>공개/비공개</th>
                   <th>감정 분류</th>
                   <th>이모지</th>
                   <th>작성자 이메일</th>
                   <th>닉네임</th>
-                  <th>일기2</th>
+                  <th>일기</th>
                 </tr>
               </thead>
               <tbody id="rows">
               <tr th:each="diary, status : ${userDiaryList}" id="clones" th:if = "${status.index} < 10">
                 <td><input type="checkbox"  name="check" th:value="${diary.DIARY_SEQ}" /></td>
-                <td>[[${diary.DIARY_PRIVATE}]]</td>
                 <td>[[${diary.EMOTION}]]</td>
                 <td>[[${diary.EMOJI}]]</td>
                 <td>[[${diary.MEMBER_EMAIL}]]</td>
@@ -67,6 +64,7 @@
       </main>
     </div>
     <!-- 팝업 -->
+    <script type="text/javascript" src="js/popup.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
     <script th:inline="javascript">
@@ -94,7 +92,6 @@
               for(var i = startPage * pageCnt;  i < (diaryList.length % 10 != 0 ? ((startPage + 1 * pageCnt) - (10 - (diaryList.length % 10))) : (startPage + 1) * pageCnt); i++) {
                   html += '<tr>' +
                           '<td><input type="checkbox"  name="check" value="' + diaryList[i].DIARY_SEQ + '" /></td>' +
-                          '<td>' + diaryList[i].DIARY_PRIVATE + '</td>' +
                           '<td>' + diaryList[i].EMOTION + '</td>' +
                           '<td>' + diaryList[i].EMOJI + '</td>' +
                           '<td>' + diaryList[i].MEMBER_EMAIL + '</td>' +
