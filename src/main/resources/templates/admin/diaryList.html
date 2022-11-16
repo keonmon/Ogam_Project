@@ -6,7 +6,6 @@
 <!--    <link rel="stylesheet" type="text/css" href="css/admin2.css?after" />-->
     <link rel="stylesheet" type="text/css" href="css/adminList.css" />
     <script type="text/javascript" src="js/adminList.js"></script>
-<!--    <script type="text/javascript" src="js/popup.js"></script>-->
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
   </head>
@@ -94,7 +93,6 @@
                 for(var i = (startPage * pageCnt) - 1;  i < (startPage + 1) * pageCnt; i++) {
                     html += '<tr>' +
                             '<td><input type="checkbox"  name="check" value="' + diaryList[i].DIARY_SEQ + '" /></td>' +
-                            '<td>' + diaryList[i].DIARY_PRIVATE + '</td>' +
                             '<td>' + diaryList[i].EMOTION + '</td>' +
                             '<td>' + diaryList[i].EMOJI + '</td>' +
                             '<td>' + diaryList[i].MEMBER_EMAIL + '</td>' +

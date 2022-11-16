@@ -5,60 +5,63 @@
     font-style: normal;
 }
 
+html {
+    height: 100vh;
+}
+
 body{
+    display: flex;
     font-family: 'Pretendard-Regular';
-     display: flex;
-     height: 80vh;
+    background: linear-gradient(130deg, #defcfa, #cba8e9);
+    height: 100vh;
 }
 
 .container {
+    width: 550px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    border: 1px solid #DCE0ED;
-    background-color: #DCE0ED;
-    width: 620px;
-    height: 680px;
+    align-contents: center;
     margin: auto;
 }
 
-.wrapper {
-    border: 1px solid white;
-    background-color: white;
+ .wrapper {
+    box-shadow: 0px 3px 4px #afafaf;
+    background-color: rgb(243 243 243 / 54%);
+    border-radius: 20px;
     width: 97%;
     height: 97%;
     display: flex;
-    margin: 10px auto;
+    margin-top: 20px auto;
     align-content: center;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .wrapper p {
     font-size: 30px;
     text-align: center;
     margin: 6% auto;
+    color: #4c4c4c;
 }
 
 label{
     text-align: end;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1rem;
     margin-right: 10px;
-    width: 50%;
     line-height: 31px;
+    width: 10vh;
+    color: #353535a8;
 }
 
-.divBox{
-display: flex;
-    font-weight: bold;
-    font-size: 30px;
-    width: 40vh;
-    height: auto;
-    margin: auto;
-    flex-direction: column;
-    align-items: center;
+input[type="email"],
+input[type="text"] {
+    height: 25px;
+    border-radius: 5px;
+    border: 1px solid #ebc6ff;
+    width: 21vh;
+    font-size: 0.9rem;
 }
 
 .underLine{
@@ -67,12 +70,7 @@ display: flex;
 
 
 .div {
-display: flex;
-    width: 100%;
-    margin: auto;
     padding: 10px;
-    flex-direction: row;
-    justify-content: center;
 }
 
 
@@ -85,7 +83,6 @@ display: flex;
 }
 
 .btn button{
-    background-color: #a7baff;
     color: white;
     font-size: 15px;
     font-weight: bold;
@@ -93,13 +90,16 @@ display: flex;
     height: 35px;
     margin: auto;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 0;
+    background-color: #ba99fe;
+    font-size: 1rem;
+}
 }
 
 .input{
     width: 54vh;
-    height: 20px;
+    height: 25px;
     padding: 5px 10px 5px 10px;
     border-radius: 10px;
     border: 1px solid #908be8;
