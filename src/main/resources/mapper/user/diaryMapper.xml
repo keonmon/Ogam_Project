@@ -35,7 +35,7 @@
          order by d.diary_seq desc
     </select>
 
-    <!-- 랜덤하게 다이어리 가져오기 (10개) -->
+    <!-- 전체 다이어리 가져오기 ( 차단, 비공개, 삭제된거 제외 ) -->
     <select id="randomAllDiarySelectAll" resultType="java.util.HashMap">
         select rownum, m.MEMBER_NICK, d.diary_date, e.emoji, d.contents, d.DIARY_SEQ
         from diary d join emotions e
@@ -50,10 +50,6 @@
 
         and d.diary_private = 'n'
         and d.diary_del = 'n'
-        and d.DIARY_SEQ in (select CEIL(DBMS_RANDOM.VALUE(0, (select max(DIARY_SEQ)
-                                from diary)))DIARY_SEQ
-                                from DUAL CONNECT BY LEVEL 	&lt;= 20000)
-        and rownum 	&lt;= 15
     </select>
 
     <!-- 다이어리 배경이미지 insert -->
