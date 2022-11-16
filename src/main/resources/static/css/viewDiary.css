@@ -86,9 +86,8 @@
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     overflow: hidden;
+    box-shadow: 0px 7px 7px #cdcdcd;
 }
-
-
 
 .innerOutline {
     width: 84%;
@@ -103,6 +102,7 @@
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    box-shadow: 0px 5px 9px #2a2a2a;
 }
 .writerNick{
     position: absolute;
@@ -241,7 +241,7 @@
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    
+    box-shadow: 0px 5px 9px #2a2a2a;
 }
 
 .replyInput{
@@ -275,6 +275,7 @@ input:focus{
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    box-shadow: 0px 5px 9px #2a2a2a;
 }
 
 /* 스크롤 */
@@ -327,6 +328,7 @@ input:focus{
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    box-shadow: 0px 5px 9px #000000;
 }
 
 .contents article .mod2_d_set {
@@ -429,6 +431,7 @@ a{
     border-top-right-radius: 20px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    box-shadow: 0px 5px 9px #2a2a2a;
 }
 
 .modalClose{
