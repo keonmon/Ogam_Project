@@ -10,7 +10,6 @@
 
 /* 바디콘테이너 스타일 */
 .bodyContainer{
-    background-color: #f1f1f1;
     position: relative;
 }
 
@@ -273,11 +272,11 @@
     flex-direction: column;
     width: 50%;
     height: 95%;
-    background-color: rgb(231, 233, 233);
+    background-color: rgb(255 255 255 / 40%);
     /* border: 1px solid rgb(134, 134, 134); */
     border-radius: 15px;
-    z-index: 1;
-    box-shadow: 0px 5px 9px #9d9d9d;
+    z-index: 0;
+    box-shadow: 0px 5px 8px #0000005e;
 
 }
 .sendHeader{
@@ -295,7 +294,8 @@
 }
 
 .sendHeader span{
-    font-size: 1.3rem;
+    font-size: 18px;
+        color: white;
 }
 
 /* 친구리스트 검색 스타일 */
@@ -369,7 +369,7 @@
     height: 7rem;
     margin: 0px auto 20px;
     border-radius: 15px;
-    background-color: #f1f1f1;
+    background-color: rgb(255 255 255 / 40%);
 }
 
 /* 차단 사용자 */
@@ -407,9 +407,8 @@
 
 /* 차단 사용자 닉네임 */
 .op_nickname{
-
-    font-size: 18px;
-    padding: 20px;
+    font-size: 16px;
+    padding: 13px;
     width: 200rem;
 }
 

@@ -111,6 +111,7 @@ position: fixed;
     border-radius: 15px;
     background-color: rgb(255 255 255 / 40%);
     z-index: 1;
+    position: relative;
 }
 
 #left-menu {
@@ -172,15 +173,15 @@ position: fixed;
 }
 
 .myMenu{
-    display: none;
-    position: absolute;
-    width: 150px;
-    height: 60px;
-    right: 638px;
-    top: 95px;
-    z-index: 3;
-    text-align: center;
-    background-color: rgb(255 255 255 / 40%);
+        display: none;
+        position: absolute;
+        width: 150px;
+        height: 60px;
+        right: 282px;
+        top: 75px;
+        z-index: 3;
+        text-align: center;
+        background-color: rgb(255 255 255 / 40%);
 }
 
 
@@ -224,5 +225,5 @@ position: fixed;
 
 .contents{
     display: flex;
-    height: 88vh;
+    height: 87vh;
 }
