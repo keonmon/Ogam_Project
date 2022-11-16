@@ -132,7 +132,7 @@ public class User_MyPageController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
+            request.getSession().setAttribute("loginUserImage",fileDir + savName);
             memberService.reviseUpdate(bgimageDto, member);
             System.out.println(bgimageDto);
 

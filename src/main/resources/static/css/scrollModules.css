@@ -99,7 +99,7 @@
     font-family: 'Pretendard-Regular';
     text-align: center;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 26px;
 }
 
 .contents article .slider {
@@ -189,7 +189,7 @@
     top: 0px;
     font-family: 'KyoboHand';
     text-align: left;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -282,7 +282,7 @@
     font-family: 'Pretendard-Regular';
     text-align: center;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 26px;
 }
 
 /* .contents article .slider {
@@ -353,7 +353,7 @@
     left: 80px;
     font-family: 'Pretendard-Regular';
     text-align: left;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -364,7 +364,7 @@
     right: 4px;
     font-family: 'Pretendard-Regular';
     text-align: right;
-    font-size: 22px;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -374,7 +374,7 @@
     position: absolute;
     font-family: 'KyoboHand';
     text-align: left;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -386,7 +386,8 @@
 .contents article .mod1_d_imoji {
     position: relative;
     font-family: 'Pretendard-Regular';
-    font-size: 50px;
+    font-size: 40px;
+    line-height: 70px;
 }
 
 a{
@@ -395,7 +396,7 @@ a{
 
 .noData{
     display: flex;
-    font-size: 2.5em;
+    font-size: 1.5em;
     text-align: center;
     font-weight: bold;
     align-items: center;
