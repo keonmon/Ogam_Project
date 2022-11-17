@@ -18,10 +18,12 @@ var member_pw = document.getElementById("member_pw"),
 
 function validatePassword(){
     if(member_pw.value != member_repw.value){
-    member_repw.setCustomValidity("비밀번호가 일치하지 않습니다!!");
+        member_repw.setCustomValidity("비밀번호가 일치하지 않습니다!!");
+        return false;
     }
     else {
-    member_repw.setCustomValidity('');
+        member_repw.setCustomValidity('');
+        return false;
     }
 }
 
@@ -34,37 +36,44 @@ document.getElementById('signup').onclick = function() {
     const email = document.getElementById("member_email").value
     const email2 = document.getElementById("email_checked").value
     const nick = document.getElementById("member_nick").value
-    const nick2 = document.getElementById("checked_nick").value
+    const nick2 = document.getElementById("nick_checked").value
+
+    validatePassword();
 
     var selected = false;
     var radios = document.getElementsByName('gender');
-    for(var radio of radios)
-    {
-        if(radio.type === 'radio' && radio.checked)
-        {
+    for(var radio of radios){
+        if(radio.type === 'radio' && radio.checked){
             selected = true;
         }
     }
-    if (!selected) {
+
+     if( email != email2 || email2=="" ) {
         swal({
-            title: "성별을 선택해주세요!!",
-            icon: "warning",
-            button: "확인",
-            });
+             title: "이메일 중복확인이 필요합니다!",
+             icon: "warning",
+             button: "확인",
+             });
+             return false;
+    } else if (nick != nick2 || nick2=="") {
+        swal({
+             title: "닉네임 중복확인이 필요합니다!",
+             icon: "warning",
+             button: "확인",
+             });
+             return false;
+
+    } else if (!selected) {
+       swal({
+           title: "성별을 선택해주세요!!",
+           icon: "warning",
+           button: "확인",
+           });
+           return false;
+    }else{
+
+        $(".hide").trigger('click');
+
     }
-     if( email != email2) {
-            swal({
-                 title: "이메일 중복확인이 필요합니다!",
-                 icon: "warning",
-                 button: "확인",
-                 });
-        } else if (nick != nick2){
-            swal({
-                 title: "닉네임 중복확인이 필요합니다!",
-                 icon: "warning",
-                 button: "확인",
-                 });
-        } else {
-            document.getElementById("frm").submit()
-        }
+
 }

@@ -3,7 +3,7 @@
         PUBLIC "//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.go.ogamprj.mapper.SignupMapper">
     <insert id="signup" parameterType="com.go.ogamprj.dto.Member">
-        INSERT INTO MEMBER ( MEMBER_EMAIL, MEMBER_PW, MEMBER_NICK, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_PHONE)
-        VALUES(#{MEMBER_EMAIL}, #{MEMBER_PW}, #{MEMBER_NICK}, #{MEMBER_BIRTH}, #{MEMBER_GENDER}, #{MEMBER_PHONE})
+            INSERT INTO MEMBER ( MEMBER_EMAIL, MEMBER_PW, MEMBER_NICK, MEMBER_BIRTH, MEMBER_GENDER, MEMBER_PHONE)
+            VALUES(#{MEMBER_EMAIL}, #{MEMBER_PW}, #{MEMBER_NICK}, #{MEMBER_BIRTH}, #{MEMBER_GENDER}, #{MEMBER_PHONE})
     </insert>
 </mapper>

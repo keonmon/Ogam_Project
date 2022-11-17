@@ -242,3 +242,7 @@ html, body {
     position: relative;
     right: 75px;
 }
+
+.hide{
+    display:none;
+    }
