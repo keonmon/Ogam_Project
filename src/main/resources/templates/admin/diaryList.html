@@ -68,51 +68,52 @@
 
     <script th:inline="javascript">
       const diaryList = [[${userDiaryList}]];
+      <!-- diaryList.length % 10 == 0 ? 그대로 0이 아니면 +1 -->
       const pageCount = parseInt(diaryList.length / 10);
-      console.log(pageCount);
+      const totalPage = diaryList.length % 10 != 0 ? pageCount + 1 : pageCount;  <!-- totalPage -->
+
+<!--      console.log("total: " + totalPage + "pageCount: " +  pageCount + "length :" + diaryList.length);-->
       let startPage = 1;
-      console.log(diaryList);
-
-<!--      console.log(type(diaryList));-->
-
-     $(document).ready(function () {
-<!--      const diaryList = JSON.parse(String([[${userDiaryList}]]));-->
 <!--      console.log(diaryList);-->
 <!--      console.log(type(diaryList));-->
 
-        $(document).scroll(function() {
-          var maxHeight = $(document).height();
-          var currentScroll = $(window).scrollTop() + $(window).height();
+  $(document).ready(function () {
+<!--      const diaryList = JSON.parse(String([[${userDiaryList}]]));-->
+<!--      console.log(diaryList); -->
+<!--      console.log(type(diaryList)); -->
+
+     $(window).scroll(function() {
+          let $window = $(this);
+          let scrollTop = $window.scrollTop();
+          let windowHeight = $window.height();
+          let documentHeight = $(document).height();
 
           var pageCnt = 10;
           var html = "";
 
-        try{
-
-            if (maxHeight <= currentScroll + 300) {
+<!--          console.log("documentHeight:" + documentHeight + " | scrollTop:" + scrollTop + " | windowHeight: " + windowHeight );-->
+          if(startPage <= totalPage){
+            if (scrollTop + windowHeight + 30 > documentHeight ) {
+<!--              console.log("startPage: " + startPage);-->
                 for(var i = (startPage * pageCnt) - 1;  i < (startPage + 1) * pageCnt; i++) {
                     html += '<tr>' +
                             '<td><input type="checkbox"  name="check" value="' + diaryList[i].DIARY_SEQ + '" /></td>' +
                             '<td>' + diaryList[i].EMOTION + '</td>' +
                             '<td>' + diaryList[i].EMOJI + '</td>' +
                             '<td>' + diaryList[i].MEMBER_EMAIL + '</td>' +
-                            '<td>' + diaryList[i].MEMBER_NICK + i + '</td>' +
+                            '<td>' + diaryList[i].MEMBER_NICK + '</td>' +
                             '<td><a onclick="javascript:diaryPopup(' + diaryList[i].DIARY_SEQ + ')">보기</a></td>' +
                             '</tr>';
-
-
                 }
                  $('#rows').append(html);
+                ++startPage;
+<!--                console.log(startPage + "한바퀴 돌았어요");-->
+<!--                console.log(i+ "번 돌겠네");-->
+              }
             }
-            console.log(startPage);
-            startPage++;
-            console.log(startPage);
-          }
-          catch(error) {
-              console.log("에에에에에에러");
-          }
-        })
-      });
+
+     })
+  });
 
     </script>
   </body>
