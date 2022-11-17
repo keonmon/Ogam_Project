@@ -37,7 +37,7 @@ public class User_DiaryController {
         // 로그인유저의 세션정보 가져오기 (이메일주소)
         Object loginUser = request.getSession().getAttribute("loginUser");
         if(loginUser == null){
-            return "redirect:/";
+            return "redirect:/loginPage";
         }else {
 
             // 내 일기 가져오기
