@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <link rel="stylesheet" type="text/css" href="/css/signup.css" />
     <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
@@ -7,6 +7,7 @@
     <title>회원가입</title>
     <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <body>
 <div id="wrap">
@@ -19,56 +20,63 @@
                 <div class="email">
                     <span class="eTitle">이메일</span>
                     <input type="email" id="member_email" name="member_email" required title="이메일 형식으로 작성해주세요!"
-                           pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}"/>
+                           pattern="[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}" th:value="${member['MEMBER_EMAIL']}"/>
                     <input type="button" id="email_chk" onclick="uniqueEmail()" value="중복확인">
-                    <input type="hidden" id="email_checked" value="">
+                    <input type="hidden" id="email_checked" name="email_checked" >
+                    <th:p>[[${emailUnmatch}]]</th:p>
                 </div>
                 <div class="password">
                     <span class="pwTitle">비밀번호</span>
-                    <input type="password" id="member_pw" name="member_pw" required title="영대소문자, 숫자, 특수기호 1개이상 포함!"
-                           pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}"/>
+                    <input type="password" id="member_pw" name="member_pw" title="영대소문자, 숫자, 특수기호 1개이상 포함!"
+                           required pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}" th:value="${member['MEMBER_PW']}"/>
                     <i class="fa fa-eye fa-lg"></i>
                 </div>
+
                 <div class="password">
                         <span>
                             <div class="pwTitle">비밀번호</div>
                             <div class="pwTitle">재확인</div>
                         </span>
-                    <input type="password" id="member_repw" name="member_repw" required title="영대소문자, 숫자, 특수기호 1개이상 포함!"
-                           pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}"/>
+                    <!-- 영문 대소문자, 숫자, 특수문자를 꼭 포함하여 6~20자 -->
+                    <input type="password" id="member_repw" name="member_repw"  title="영대소문자, 숫자, 특수기호 1개이상 포함!"
+                           required pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_-+=[]{}~?:;`|/]).{6,20}$" />
                     <i class="fa fa-eye fa-lg"></i>
+                    <th:p>[[${pwdUnmatch}]]</th:p>
                 </div>
+
                 <div class="nickName">
                     <div class="nTitle">닉네임</div>
                     <input type="text" id="member_nick" name="member_nick" required title="두 글자 이상 작성바랍니다!"
-                           pattern="(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}"/>
+                           pattern="(?=.*[a-z0-9가-힣])[a-z0-9가-힣]{2,16}" th:value="${member['MEMBER_PW']}"/>
                     <input type="button" id="nick_chk" onclick="uniqueChk()" value="중복확인">
-                    <input type="hidden" id="checked_nick" val="">
+                    <input type="hidden" id="nick_checked" name="nick_checked">
+                    <th:p>[[${nickUnmatch}]]</th:p>
                 </div>
                 <div class="birthday">
                     <div class="bTitle">생년월일</div>
                     <input type="text" id="member_birth1" name="birth1" placeholder="YYYY" required
-                           title="년도를 입력하세요!" pattern="(19[[0-9][0-9]|20\d{2})"/>
+                           title="년도를 입력하세요!" pattern="(19[[0-9][0-9]|20\d{2})" maxlength="4" th:value="${year}"/>
                     <input type="text" id="member_birth2" name="birth2" placeholder="MM" required
-                           title="월을 입력하세요!" pattern="(0[0-9]|1[0-2])"/>
+                           title="월을 입력하세요!" pattern="(0[0-9]|1[0-2])" maxlength="2" th:value="${month}"/>
                     <input type="text" id="member_birth3" name="birth3" placeholder="DD" required
-                           title="일을 입력하세요!" pattern="(0[1-9]|[1-2][0-9]|3[0-1])"/>
+                           title="일을 입력하세요!" pattern="(0[1-9]|[1-2][0-9]|3[0-1])" maxlength="2" th:value="${day}"/>
                 </div>
                 <div class="gender" >
                     <div class="gTitle">성별</div>
-                    <input type="radio" id="member_gender1" name="gender" value="male" required/>
+                    <input type="radio" id="member_gender1" name="gender" value="male" required th:checked="${member['MEMBER_GENDER'].equals('male')}"/>
                     <label for="member_gender1">남성</label>
-                    <input type="radio" id="member_gender2" name="gender" value="female"/>
+                    <input type="radio" id="member_gender2" name="gender" value="female" th:checked="${member['MEMBER_GENDER'].equals('female')}"/>
                     <label for="member_gender2">여성</label>
                 </div>
                 <div class="phone">
                     <div class="phTitle">휴대폰번호</div>
                     <input type="text" id="member_phone" name="member_phone" placeholder="전화번호 입력" required
-                           pattern="(01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4}))"/>
+                           pattern="(01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4}))" th:value="${member['MEMBER_PHONE']}"/>
                 </div>
             </div>
             <div class="btn_bottom">
-                <button type="button" id="signup">가입하기</button>
+                <button type="button" id="signup" >가입하기</button>
+                <input type="submit" class="hide">
             </div>
         </div>
     </form>
@@ -84,7 +92,13 @@ function uniqueEmail() {
         type:'post',
         success: function(success) {
 //           console.log(success);
-            if(success == 0){
+            if(member_email.length <= 1){
+                swal({
+                    title: "이메일을 꼭 적어주세요.",
+                    icon: "warning",
+                    button: "확인",
+                    });
+            } else if(success == 0){
                 swal({
                     title: "사용가능한 이메일 입니다!",
                     icon: "success",
@@ -131,7 +145,7 @@ function uniqueChk() {
                     icon: "success",
                     button: "확인",
                     });
-                document.getElementById("checked_nick").value = member_nick
+                document.getElementById("nick_checked").value = member_nick
             } else if(success == 1){
                 swal({
                     title: "이미 사용중인 닉네임입니다.",
