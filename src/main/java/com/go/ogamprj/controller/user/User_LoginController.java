@@ -68,7 +68,7 @@ public class User_LoginController {
 
             request.getSession().setAttribute("loginUser",member_email);
             request.getSession().setAttribute("loginUserNick",memberMap.get("MEMBER_NICK").toString());
-            request.getSession().setAttribute("loginImage",memberMap.get("BGIMG_PATH").toString());
+            request.getSession().setAttribute("loginImage",memberMap.get("BGIMG_PATH"));
             return "redirect:/";
 
         } else{
