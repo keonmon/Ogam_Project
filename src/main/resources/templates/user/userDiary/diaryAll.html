@@ -62,7 +62,7 @@
                                         <div class="diaryContents">[[${selectDiary.CONTENTS}]]</div>
                                         <div class="diaryContentsFooter">
                                             <div class="diaryEmoji">[[${selectDiary.EMOJI}]]</div>
-                                            <div class="diaryDate">작성자 : [[${selectDiary.MEMBER_NICK}]]</div>
+                                            <div class="diaryDate">[[${selectDiary.MEMBER_NICK}]]</div>
                                             <div class="diaryDate" th:text="${#dates.format(selectDiary.DIARY_DATE, 'yyyy-MM-dd')}"></div>
                                         </div>
                                     </div>
