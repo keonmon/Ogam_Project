@@ -98,6 +98,7 @@ public class User_MyPageController {
 
             if(!deleteImg.isEmpty()){
                 memberService.memberUpdateResetBgimg(member);
+                request.getSession().removeAttribute("loginUserImage");
             }else{
                 // 프로필 사진 없이 저장
                 memberService.noProfile(member);
