@@ -46,8 +46,8 @@
                   <th>공개/비공개</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr th:each="board : ${boards}">
+              <tbody id="rows">
+                <tr th:each="board, status : ${boards}" id="clones" th:if="${status.index} < 10">
                   <td><input type="checkbox" name="check" th:value="${board.board_seq}" /></td>
                   <td><a th:href="|/boardRevise/${board.board_seq}|" target="_self" class="boardFont">[[ ${board.board_title}]]</a></td>
                   <td th:text="${board.board_date}" class="boardFont"></td>
@@ -68,6 +68,44 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+
+      const boardList = [[${boards}]];
+      const pageCount = parseInt(boardList.length / 10);
+      const totalPage = boardList.length % 10 != 0 ? pageCount + 1 : pageCount;
+
+      let startPage = 1;
+
+
+     $(document).ready(function () {
+
+        $(window).scroll(function() {
+          let $window = $(this);
+          let scrollTop = $window.scrollTop();
+          let windowHeight = $window.height();
+          let documentHeight = $(document).height();
+
+          var pageCnt = 10;
+          var html = "";
+
+          if(startPage <= totalPage){
+              if (scrollTop + windowHeight + 30 > documentHeight ) {
+                for(var i = (startPage * pageCnt) - 1;  i < (startPage + 1) * pageCnt; i++) {
+                  html += '<tr>' +
+                          '<td><input type="checkbox" name="check" value="' + boardList[i].board_seq + '" /></td>' +
+                          '<td><a href="/boardRevise/' + boardList[i].board_seq + '" target="_self" class="boardFont">' + boardList[i].board_title + '</a></td>' +
+                          '<td text="' + boardList[i].board_date + '" class="boardFont"></td>' +
+                          '<td text="' + boardList[i].board_yn + '" class="boardFont"></td>' +
+                          '</tr>';
+              }
+               $('#rows').append(html);
+               ++startPage;
+               }
+             }
+        })
+      });
+
+    </script>
 
   </body>
 </html>

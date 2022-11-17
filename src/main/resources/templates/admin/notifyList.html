@@ -44,8 +44,8 @@
                         <th>컨텐츠 확인</th>
                       </tr>
                     </thead>
-                      <tbody class="showTable">
-                          <tr th:each="notify : ${notifyList}">
+                      <tbody class="showTable" id="rows">
+                          <tr th:each="notify, status : ${notifyList}" id="clones" th:if="${status.index} < 10">
                             <td><input type="checkbox" name="check" th:value="${notify.BLACK_SEQ}" /></td>
                             <input type="hidden" th:name="${notify.BLACK_SEQ}" th:value="${notify.CATEGORY}" />
                             <td th:text="${notify.CATEGORY}"></td>
@@ -74,6 +74,52 @@
         </main>
     </div>
     <!-- 팝업 -->
-    <script type="text/javascript" src="js/popup.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script>
+      const notifyList = [[${notifyList}]];
+      const pageCount = parseInt(notifyList.length / 10);
+      const totalPage = notifyList.length % 10 != 0 ? pageCount + 1 : pageCount;
+
+      let startPage = 1;
+
+      $(document).ready(function () {
+
+        $(window).scroll(function() {
+          let $window = $(this);
+          let scrollTop = $window.scrollTop();
+          let windowHeight = $window.height();
+          let documentHeight = $(document).height();
+
+          var pageCnt = 10;
+          var html = "";
+            if(startPage <= totalPage){
+              if (scrollTop + windowHeight + 30 > documentHeight ) {
+                for(var i = (startPage * pageCnt) - 1;  i < (startPage + 1) * pageCnt; i++) {
+                  html += '<tr>' +
+                          '<td><input type="checkbox" name="check" value="' + notifyList[i].BLACK_SEQ + '" /></td>' +
+                          '<input type="hidden" name="' + notifyList[i].BLACK_SEQ + '" value="' + notifyList[i].CATEGORY + '" />' +
+                          '<td text="' + notify[i].CATEGORY + '"></td>' +
+                          '<td>' + notifyList[i]BLACKLIST_COMMENT + '</td>' +
+                          '<td><a onclick="javascript:memberPopup(' + notifyList[i].MEMBER_EMAIL + ')">' + notifyList[i].MEMBER_EMAIL + '</a></td>' +
+                          '<td><a onclick="javascript:memberPopup(' + notifyList[i].BLACKLIST_EMAIL + ')">' + notify[i].BLACKLIST_EMAIL + '</a></td>' +
+                          ' <td>' + notifyList[i].BLACKLIST_DATE + '</td>' +
+                          ' <td>' +
+                          '<block switch="' + notifyList[i].CATEGORY + '">' +
+                          '<input type="hidden" id="diary_seq" name="diary_seq" value="' + notifyList[i].ALL_SEQ + '" />' +
+                          '<a th:case="일기" onclick="javascript:diaryPopup(' + notifyList[i].ALL_SEQ + ')">보기</a>' +
+                          '<a th:case="댓글" onclick="javascript:commentPopup(' + notifyList[i].ALL_SEQ + ')">보기</a>' +
+                          '</th:block>' +
+                          '</td>' +
+                          '</tr>';
+              }
+               $('#rows').append(html);
+               ++startPage;
+               }
+             }
+        })
+      });
+
+    </script>
+
 </body>
 </html>

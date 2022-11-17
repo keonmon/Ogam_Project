@@ -31,7 +31,6 @@ public class Admin_DiaryController {
     @RequestMapping("/admin_diaryList")
     public String diaryList(HttpServletRequest request, HttpServletResponse response,
                             String type, String keyword, Model model) throws IOException {
-
         init(response);
         PrintWriter out = response.getWriter();
 

@@ -40,7 +40,7 @@
                             <th>댓글</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="rows">
                         <tr th:each="reply, status : ${userReplyList}" id="clones" th:if = "${status.index} < 10">
                             <td><input type="checkbox" name="check" th:value="${reply.REPLY_SEQ}" /></td>
                             <td>[[${reply.MEMBER_EMAIL}]]</td>
@@ -67,24 +67,30 @@
 <script th:inline="javascript">
       const replyList = [[${userReplyList}]];
       const pageCount = parseInt(replyList.length / 10);
-      console.log(pageCount);
+      const totalPage = replyList.length % 10 != 0 ? pageCount + 1 : pageCount;
+<!--      console.log(pageCount);-->
+
       let startPage = 1;
-      console.log(replyList);
+
+<!--      console.log(replyList);-->
 <!--      console.log(type(replyList));-->
 
      $(document).ready(function () {
 
-        $(document).scroll(function() {
-          var maxHeight = $(document).height();
-          var currentScroll = $(window).scrollTop() + $(window).height();
+        $(window).scroll(function() {
+          let $window = $(this);
+          let scrollTop = $window.scrollTop();
+          let windowHeight = $window.height();
+          let documentHeight = $(document).height();
 
           var pageCnt = 10;
           var html = "";
-        try{
-          if (maxHeight <= currentScroll + 250) {                                            <!-- 40   - 1 = 39                39 % 10 = 10 - 9 = '1'-->
-              for(var i = startPage * pageCnt;  i < (replyList.length % 10 != 0 ? ((startPage + 1 * pageCnt) - (10 - (replyList.length % 10))) : (startPage + 1) * pageCnt); i++) {
+
+          if(startPage <= totalPage){
+              if (scrollTop + windowHeight + 30 > documentHeight ) {
+                for(var i = (startPage * pageCnt) - 1;  i < (startPage + 1) * pageCnt; i++) {
                   html += '<tr>' +
-                          '<td>' + '<input type="checkbox" name="check" value="' + replyList[i].REPLY_SEQ + '" /></td>' +
+                          '<td><input type="checkbox" name="check" value="' + replyList[i].REPLY_SEQ + '" /></td>' +
                           '<td>' + replyList[i].MEMBER_EMAIL + '</td>' +
                           '<td>' + replyList[i].MEMBER_NICK + '</td>' +
                           '<td class="replyBox">' + replyList[i].REPLY + '</td>' +
@@ -92,14 +98,20 @@
                           '</tr>';
               }
                $('#rows').append(html);
-          }
-          startPage++;
-          }
-          catch(error) {
-              console.error(error);
-          }
+               ++startPage;
+               }
+             }
         })
       });
     </script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
