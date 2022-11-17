@@ -55,6 +55,9 @@
     margin-top : 5px;
     overflow-y: auto;
 }
+.currentNotifi::-webkit-scrollbar {
+    display: none;
+}
 
 #currentNotifi_contents{
     display: flex;

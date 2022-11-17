@@ -40,8 +40,8 @@
     <update id="delMember">
         UPDATE MEMBER
         SET MEMBER_QUITED = CURRENT_DATE
-        , MEMBER_QUITED_REASON = #{MEMBER_QUITED_REASON}
-        WHERE MEMBER_EMAIL = #{MEMBER_EMAIL}
+        , MEMBER_QUITED_REASON = #{member_quited_reason}
+        WHERE MEMBER_EMAIL = #{member_email}
     </update>
 
     <insert id="kakaoUserInsert" parameterType="java.util.HashMap">
