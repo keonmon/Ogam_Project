@@ -158,14 +158,20 @@ public class User_MyPageController {
         init(response);
         PrintWriter out = response.getWriter();
 
-        if(pwd == 0) {
-            out.println("<script>alert('비밀번호가 일치하지 않아요!'); location.href='/MyPage'</script>");
-            out.flush();
+        Object accessToken = request.getSession().getAttribute("accessToken");
+
+        if(accessToken != null) {
+            memberMapper.delMember((String)request.getSession().getAttribute("loginUser"),member_email);
+            return "redirect:/kakaoUnlink";
+        } else {
+            if(pwd == 0) {
+                out.println("<script>alert('비밀번호가 일치하지 않아요!'); location.href='/MyPage'</script>");
+                out.flush();
+            }
+            memberMapper.delMember(member_quited_reason, member_email);
+
+            return "redirect:/kakaoUnlink";
         }
-        memberMapper.delMember(member_quited_reason, member_email);
-
-        return "redirect:/kakaoUnlink";
     }
-
 
 }
