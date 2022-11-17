@@ -71,7 +71,7 @@ public class User_BlockController {
                     return "redirect:/blockPage";
                 }
                 if (blockService.doubleBlock(new Block(loginUser.toString(), block_email)) == 1) {
-                    out.println("<script>alert('이미 차단한 유저입니다''); location.href='/blockPage'</script>");
+                    out.println("<script>alert('이미 차단한 유저입니다'); location.href='/blockPage'</script>");
                     out.flush();
                 } else {
                     blockService.blockPlus(new Block(0, loginUser.toString(), block_email));
