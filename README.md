@@ -39,7 +39,7 @@
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=for-the-badge&logo=jquery&logoColor=white)
-![Chart.js](https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
+![Chart.js](https://img.shields.io/badge/googleCharts-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white)
 
 ### VSC
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
@@ -60,7 +60,7 @@
 - 이용자 간 **차단 기능**
 - 관리자 (통계 조회, 신고, 공지, 회원 등 관리 )
 - 카카오 로그인 API
-- Chart JS
+- google charts를 이용한 감정 통계
 - FullCalendar
 
 
