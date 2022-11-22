@@ -1,24 +1,28 @@
 
 
+# 오늘의 감정
+[오늘의 감정_프로젝트 소개](https://github.com/keonmon/Ogam_Project/files/10065466/_4._.GO.pdf)
+- 자신의 **감정을 이모지를 통해 표현**하고, 짧은 글과 이미지로 **기록할 수 있는 서비스**를 제공한다.
+  - 감정일기란? : 하루 동안 있었던 본인의 감정 변화를 생각하고 기록하는 것
 
-# Ogam_Project
-- 오감 프로젝트
 
-## 오늘의 감정
 <img src="https://user-images.githubusercontent.com/89569867/202481149-2df61270-f6b5-4020-9b21-1b7a10d18510.png" style="width:650px;"/>
 
-- 자신의 **감정을 이모지를 통해 표현**하고, 짧은 글과 이미지로 **기록할 수 있는 서비스**를 제공한다.
-  - (감정일기 : 하루 동안 있었던 본인의 감정 변화를 생각하고 기록하는 것)
 
 ---
 
 ## 프로젝트 참여 멤버
-- [이건희](https://github.com/keonmon) (팀장)
-- [이호준](https://github.com/Leehojun12)
-- [안선미](https://github.com/ackdongclub)
-- [이용성](https://github.com/Yongs08)
-- [정혜빈](https://github.com/happinessbbin)
-
+### 가보자GO!! 팀
+- [이건희](https://github.com/keonmon) 
+  - 팀장 : 프로젝트 총괄, 메인 대시보드, 일기 작성, 일기 조회, 카카오 API
+- [이호준](https://github.com/Leehojun12) 
+  - 친구 목록, 알림 기능, 공지, 차단기능
+- [안선미](https://github.com/ackdongclub) 
+  - 관리자 대시보드, 관리 목록 무한스크롤 기능, 사용자 프로필 수정
+- [이용성](https://github.com/Yongs08) 
+  - 로그인, 회원가입
+- [정혜빈](https://github.com/happinessbbin) 
+  - 사용자 관리 목록, 게시물 관리목록
 
 ## ERD
 ![UCAMP_4팀](https://user-images.githubusercontent.com/89569867/202463136-fe3840ec-eec0-4e16-ad3f-d303a3d456bc.png)
